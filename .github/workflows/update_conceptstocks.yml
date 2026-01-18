@@ -1,0 +1,73 @@
+name: Update Concept Stocks
+
+on:
+  schedule:
+    # Daily update (Mon-Fri) for daily series
+    - cron: "15 22 * * 1-5"
+    # Weekly update (Fri) for weekly series
+    - cron: "45 22 * * 5"
+    # Monthly update (1st day) for monthly series
+    - cron: "15 23 1 * *"
+  workflow_dispatch:
+    inputs:
+      cadence:
+        description: "Cadence to update"
+        required: true
+        default: "daily"
+        type: choice
+        options:
+          - daily
+          - weekly
+          - monthly
+          - all
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Update data
+        env:
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
+        run: |
+          if [ -z "$ALPHAVANTAGE_API_KEY" ]; then
+            echo "Missing ALPHAVANTAGE_API_KEY secret" >&2
+            exit 1
+          fi
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            CADENCE="${{ inputs.cadence }}"
+          else
+            # Determine cadence based on cron schedule
+            CRON_EXPR="${{ github.event.schedule }}"
+            if [ "$CRON_EXPR" = "15 22 * * 1-5" ]; then
+              CADENCE="daily"
+            elif [ "$CRON_EXPR" = "45 22 * * 5" ]; then
+              CADENCE="weekly"
+            elif [ "$CRON_EXPR" = "15 23 1 * *" ]; then
+              CADENCE="monthly"
+            else
+              CADENCE="daily"
+            fi
+          fi
+
+          python3 scripts/update_conceptstocks.py --all --cadence "$CADENCE"
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add raw_conceptstock_daily.csv raw_conceptstock_weekly.csv raw_conceptstock_monthly.csv
+          git commit -m "Update concept stock ${CADENCE} data"
+          git push

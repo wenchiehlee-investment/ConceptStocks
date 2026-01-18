@@ -36,6 +36,7 @@ Common columns:
 - Weekly/Monthly: full series is returned; replace or merge by `交易週` / `交易月份`.
 - Store the latest date per ticker to avoid unnecessary rewrites.
 - Script: `scripts/update_conceptstocks.py` supports `--ticker` or `--all` and recomputes `漲跌_價格_元` / `漲跌_pct` per ticker after merge.
+- Automation: `.github/workflows/update_conceptstocks.yml` runs scheduled updates and commits CSV changes.
 
 ## Rate Limits and Reliability
 - Free tier: ~25 requests/day, 1 request/second burst limit.

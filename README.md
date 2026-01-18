@@ -34,6 +34,7 @@ Notes:
 - Daily (free tier) returns the most recent 100 points; weekly/monthly return full history.
 - OpenAI is private (no ticker). The NVDA sample is used as the first review example.
 - Configure the API key in `.env` (see `.env.example`) as `ALPHAVANTAGE_API_KEY`.
+- For GitHub Actions, set a repository secret named `ALPHAVANTAGE_API_KEY`.
 
 ### Updating data
 Use the updater script to refresh a single ticker or all tickers. Examples:
