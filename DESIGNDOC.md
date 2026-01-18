@@ -14,16 +14,17 @@ Generate US concept stock price series (daily, weekly, monthly) with a consisten
   - `TIME_SERIES_DAILY` (compact for daily incremental refresh)
   - `TIME_SERIES_WEEKLY` (native weekly series)
   - `TIME_SERIES_MONTHLY` (native monthly series)
+- API key: stored in `.env` as `ALPHAVANTAGE_API_KEY` (see `.env.example`).
 
 ## Output Schema
 Common columns:
+- Metadata prefix: `stock_code`, `company_name`
 - Date key: `交易日期` (daily), `交易週` (weekly), `交易月份` (monthly)
-- `代號` (ticker)
-- `名稱` (company name)
 - `開盤_價格_元`
 - `收盤_價格_元`
 - `漲跌_價格_元`
 - `漲跌_pct`
+- Metadata suffix: `file_type`, `source_file`, `download_success`, `download_timestamp`, `process_timestamp`, `stage1_process_timestamp`
 
 ## Calculations
 - `漲跌_價格_元 = 本期收盤 - 上期收盤`
@@ -34,6 +35,7 @@ Common columns:
 - Daily: call `TIME_SERIES_DAILY` with `outputsize=compact` (latest ~100 points). Merge new rows by `交易日期`.
 - Weekly/Monthly: full series is returned; replace or merge by `交易週` / `交易月份`.
 - Store the latest date per ticker to avoid unnecessary rewrites.
+- Script: `scripts/update_conceptstocks.py` supports `--ticker` or `--all` and recomputes `漲跌_價格_元` / `漲跌_pct` per ticker after merge.
 
 ## Rate Limits and Reliability
 - Free tier: ~25 requests/day, 1 request/second burst limit.

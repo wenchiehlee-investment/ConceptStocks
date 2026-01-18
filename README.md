@@ -26,12 +26,20 @@ Output files:
 - `raw_conceptstock_monthly.csv`
 
 Schema (all required):
-- `交易日期` / `交易週` / `交易月份`
-- `代號`, `名稱`
-- `開盤_價格_元`, `收盤_價格_元`, `漲跌_價格_元`, `漲跌_pct`
+- Common columns (match GoodInfo raw CSVs): `stock_code`, `company_name`, plus metadata suffix `file_type`, `source_file`, `download_success`, `download_timestamp`, `process_timestamp`, `stage1_process_timestamp`
+- Date column: `交易日期` / `交易週` / `交易月份`
+- Price columns: `開盤_價格_元`, `收盤_價格_元`, `漲跌_價格_元`, `漲跌_pct`
 
 Notes:
 - Daily (free tier) returns the most recent 100 points; weekly/monthly return full history.
 - OpenAI is private (no ticker). The NVDA sample is used as the first review example.
+- Configure the API key in `.env` (see `.env.example`) as `ALPHAVANTAGE_API_KEY`.
+
+### Updating data
+Use the updater script to refresh a single ticker or all tickers. Examples:
+```
+python3 scripts/update_conceptstocks.py --ticker NVDA --cadence all
+python3 scripts/update_conceptstocks.py --all --cadence weekly
+```
 
 If you add new concept columns, keep the naming pattern `X概念` and update this list.
