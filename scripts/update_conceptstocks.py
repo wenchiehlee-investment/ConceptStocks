@@ -22,6 +22,21 @@ DEFAULT_TICKERS = {
     "ORCL": "Oracle Corporation",
 }
 
+# Mapping from concept column name (in concept.csv) to (Ticker, Company Name)
+CONCEPT_TO_TICKER = {
+    "nVidia概念": ("NVDA", "NVIDIA Corporation"),
+    "Google概念": ("GOOG", "Alphabet Inc. Class C"),
+    "Amazon概念": ("AMZN", "Amazon.com, Inc."),
+    "Meta概念": ("META", "Meta Platforms, Inc."),
+    "Microsoft概念": ("MSFT", "Microsoft Corporation"),
+    "AMD概念": ("AMD", "Advanced Micro Devices, Inc."),
+    "Apple概念": ("AAPL", "Apple Inc."),
+    "Oracle概念": ("ORCL", "Oracle Corporation"),
+    "Micro概念": ("MU", "Micron Technology, Inc."),
+    "SanDisk概念": ("WDC", "Western Digital Corporation"),
+    # OpenAI is private
+}
+
 ENDPOINTS = {
     "daily": "TIME_SERIES_DAILY",
     "weekly": "TIME_SERIES_WEEKLY",
@@ -301,6 +316,32 @@ def sync_concepts(out_dir: str):
     print(f"Generated {out_path} with {len(concept_cols)} concept columns.")
 
 
+def load_dynamic_tickers(out_dir: str) -> Dict[str, str]:
+    """
+    Reads concept.csv headers to find active concepts and returns corresponding tickers
+    from CONCEPT_TO_TICKER mapping.
+    """
+    path = os.path.join(out_dir, "concept.csv")
+    if not os.path.exists(path):
+        return {}
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            headers = next(reader)
+    except Exception as e:
+        print(f"Warning: Could not read {path}: {e}", file=sys.stderr)
+        return {}
+
+    dynamic_tickers = {}
+    for col in headers:
+        if col in CONCEPT_TO_TICKER:
+            ticker, name = CONCEPT_TO_TICKER[col]
+            dynamic_tickers[ticker] = name
+    
+    return dynamic_tickers
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Update concept stock daily/weekly/monthly CSVs from Alpha Vantage",
@@ -345,11 +386,20 @@ def main() -> int:
     if args.ticker:
         ticker = args.ticker.upper()
         if ticker not in DEFAULT_TICKERS:
-            print(f"Unknown ticker {ticker}. Add it to DEFAULT_TICKERS.", file=sys.stderr)
-            return 1
-        tickers = {ticker: DEFAULT_TICKERS[ticker]}
+            # Check dynamic tickers too in case user asks for one specifically
+            dyn = load_dynamic_tickers(args.out_dir)
+            if ticker in dyn:
+                 tickers = {ticker: dyn[ticker]}
+            else:
+                print(f"Unknown ticker {ticker}. Add it to DEFAULT_TICKERS or CONCEPT_TO_TICKER.", file=sys.stderr)
+                return 1
+        else:
+            tickers = {ticker: DEFAULT_TICKERS[ticker]}
     else:
-        tickers = DEFAULT_TICKERS
+        tickers = DEFAULT_TICKERS.copy()
+        dynamic_tickers = load_dynamic_tickers(args.out_dir)
+        tickers.update(dynamic_tickers)
+        print(f"Active tickers: {', '.join(sorted(tickers.keys()))}")
 
     cadences = ["daily", "weekly", "monthly"] if args.cadence == "all" else [args.cadence]
 
