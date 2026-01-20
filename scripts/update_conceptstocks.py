@@ -257,6 +257,50 @@ def update_for_ticker(ticker: str, name: str, cadence: str, api_key: str, out_di
     write_csv(out_path, cadence, merged)
 
 
+def sync_concepts(out_dir: str):
+    url = "https://raw.githubusercontent.com/wenchiehlee-investment/Python-Actions.GoodInfo.CompanyInfo/refs/heads/main/raw_companyinfo.csv"
+    print(f"Fetching company info from {url}...")
+    
+    # Use urllib to fetch the CSV
+    try:
+        with urllib.request.urlopen(url) as resp:
+            content = resp.read().decode("utf-8-sig")
+    except Exception as e:
+        print(f"Error fetching CSV: {e}", file=sys.stderr)
+        # Fallback to curl
+        result = subprocess.check_output(["curl", "-sSL", url])
+        content = result.decode("utf-8-sig")
+
+    lines = content.splitlines()
+    reader = csv.DictReader(lines)
+    fieldnames = reader.fieldnames
+    if not fieldnames:
+        print("Empty CSV or invalid header", file=sys.stderr)
+        return
+
+    concept_cols = [c for c in fieldnames if c.endswith("概念")]
+    # Standardize column names for concept.csv
+    # Use 'stock_code' and 'company_name' to match the other CSVs
+    output_fields = ["stock_code", "company_name"] + concept_cols
+    
+    out_path = os.path.join(out_dir, "concept.csv")
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=output_fields)
+        writer.writeheader()
+        for row in reader:
+            # Check if any concept column is '1'
+            has_concept = any(row.get(c) == "1" for c in concept_cols)
+            if has_concept:
+                out_row = {
+                    "stock_code": row.get("\ufeff代號") or row.get("代號"),
+                    "company_name": row.get("名稱"),
+                }
+                for c in concept_cols:
+                    out_row[c] = row.get(c)
+                writer.writerow(out_row)
+    print(f"Generated {out_path} with {len(concept_cols)} concept columns.")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Update concept stock daily/weekly/monthly CSVs from Alpha Vantage",
@@ -264,6 +308,7 @@ def parse_args() -> argparse.Namespace:
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--ticker", help="Single ticker to update (e.g., NVDA)")
     group.add_argument("--all", action="store_true", help="Update all configured tickers")
+    group.add_argument("--sync-concepts", action="store_true", help="Fetch company info and update concept.csv")
     parser.add_argument(
         "--cadence",
         choices=["daily", "weekly", "monthly", "all"],
@@ -286,6 +331,10 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+
+    if args.sync_concepts:
+        sync_concepts(args.out_dir)
+        return 0
 
     env = load_env(os.path.join(os.getcwd(), ".env"))
     api_key = env.get("ALPHAVANTAGE_API_KEY") or os.environ.get("ALPHAVANTAGE_API_KEY")

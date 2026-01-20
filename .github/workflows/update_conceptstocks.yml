@@ -2,6 +2,8 @@ name: Update Concept Stocks
 
 on:
   schedule:
+    # Weekly sync of concept mappings (Sunday)
+    - cron: "0 0 * * 0"
     # Daily update (Mon-Fri) for daily series
     - cron: "15 22 * * 1-5"
     # Weekly update (Fri) for weekly series
@@ -11,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       cadence:
-        description: "Cadence to update"
+        description: "Cadence to update (use 'sync' to only update concept.csv)"
         required: true
         default: "daily"
         type: choice
@@ -20,9 +22,41 @@ on:
           - weekly
           - monthly
           - all
+          - sync
 
 jobs:
+  sync:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.cadence == 'sync' || (github.event_name == 'schedule' && github.event.schedule == '0 0 * * 0')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Sync concepts
+        run: |
+          python3 scripts/update_conceptstocks.py --sync-concepts
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add concept.csv
+          git commit -m "Update concept mappings"
+          git push
+
   update:
+    if: github.event_name != 'workflow_dispatch' || github.event.inputs.cadence != 'sync'
     runs-on: ubuntu-latest
     permissions:
       contents: write
