@@ -33,7 +33,7 @@ CONCEPT_TO_TICKER = {
     "Apple概念": ("AAPL", "Apple Inc."),
     "Oracle概念": ("ORCL", "Oracle Corporation"),
     "Micro概念": ("MU", "Micron Technology, Inc."),
-    "SanDisk概念": ("WDC", "Western Digital Corporation"),
+    "SanDisk概念": ("SNDK", "SanDisk Corporation"),
     # OpenAI is private
 }
 
