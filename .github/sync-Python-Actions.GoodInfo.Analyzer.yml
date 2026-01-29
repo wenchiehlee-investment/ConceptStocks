@@ -1,0 +1,11 @@
+#.github/sync-Python-Actions.GoodInfo.Analyzer.yml
+group:
+  - files:
+      - source: raw_conceptstock_daily.csv
+        dest:   data/stage1_raw/raw_conceptstock_daily.csv
+      - source: raw_conceptstock_weekly.csv
+        dest:   data/stage1_raw/raw_conceptstock_weekly.csv
+      - source: raw_conceptstock_monthly.csv
+        dest:   data/stage1_raw/raw_conceptstock_monthly.csv
+    repos: |
+        wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer
