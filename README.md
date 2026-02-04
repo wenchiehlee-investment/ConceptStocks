@@ -6,16 +6,22 @@ Working space for ConceptStocks.
 This repository uses the GoodInfo company dataset to tag **concept themes**. A company is considered a **「概念股」** for a theme when the corresponding concept column is marked as `1`. The free-text column `相關概念` lists the concepts as a semicolon-separated string and mirrors these binary flags.
 
 ### Concept columns (end with 「概念」)
-- `相關概念`
-- `nVidia概念`
-- `Google概念`
-- `Amazon概念`
-- `Meta概念`
-- `OpenAI概念`
-- `Microsoft概念`
-- `AMD概念`
-- `Apple概念`
-- `Oracle概念`
+
+| 概念欄位 | 公司名稱 | Ticker | CIK |
+|----------|----------|--------|-----|
+| nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 |
+| Google概念 | Alphabet Inc. | GOOGL | 0001652044 |
+| Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 |
+| Meta概念 | Meta Platforms Inc. | META | 0001326801 |
+| OpenAI概念 | OpenAI | 私人公司 | N/A |
+| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 |
+| AMD概念 | Advanced Micro Devices | AMD | 0000002488 |
+| Apple概念 | Apple Inc. | AAPL | 0000320193 |
+| Oracle概念 | Oracle Corporation | ORCL | 0001341439 |
+| Micro概念 | Micron Technology | MU | 0000723125 |
+| SanDisk概念 | Western Digital | WDC | 0000106040 |
+
+Additional column: `相關概念` (semicolon-separated list of concepts)
 
 ## Concept stock price samples (US)
 We are producing native **daily / weekly / monthly** price series for US concept stocks. The first review sample is NVDA (NVIDIA Corporation) using Alpha Vantage.

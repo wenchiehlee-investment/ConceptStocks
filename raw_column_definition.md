@@ -84,3 +84,49 @@ Every raw CSV file includes these standard metadata columns in **specific positi
 | `收盤_價格_元` | float | Close price (USD) | `4. close` | Native monthly close |
 | `漲跌_價格_元` | float | Price change (USD) | Derived | `收盤_價格_元 - 上一月收盤_價格_元` |
 | `漲跌_pct` | float | Price change (%) | Derived | `漲跌_價格_元 / 上一月收盤_價格_元` |
+
+---
+
+## raw_concept_company_revenue.csv (Concept Stock Company Segment Revenue) [Planned]
+**No:** 53
+**Source:** Financial Modeling Prep (FMP) or SEC EDGAR XBRL
+**Extraction Strategy:** Fetch product/geographic segment revenue from FMP API or parse SEC XBRL filings.
+
+### Columns
+
+| Column | Type | Description | Source Field | Notes |
+|--------|------|-------------|--------------|-------|
+| `symbol` | string | Stock ticker | API response | e.g., `MSFT`, `NVDA` |
+| `date` | date | Fiscal period end date | API response | `YYYY-MM-DD` |
+| `period` | string | Period type | API response | `annual` or `quarter` |
+| `segment_name` | string | Segment name | API response | e.g., `Intelligent Cloud` |
+| `segment_type` | string | Segment category | API response | `product` or `geography` |
+| `revenue` | float | Revenue (USD) | API response | Raw value in USD |
+| `revenue_yoy_pct` | float | Year-over-year growth | Derived | Decimal format (0.29 = 29%) |
+| `currency` | string | Currency code | API response | Always `USD` |
+| `source` | string | Data source | System | `FMP` or `SEC` |
+
+---
+
+## raw_concept_company_income.csv (Concept Stock Company Income Statement) [Planned]
+**No:** 54
+**Source:** Financial Modeling Prep (FMP) or SEC EDGAR XBRL
+**Extraction Strategy:** Fetch income statement data from FMP API or parse SEC XBRL filings.
+
+### Columns
+
+| Column | Type | Description | Source Field | Notes |
+|--------|------|-------------|--------------|-------|
+| `symbol` | string | Stock ticker | API response | e.g., `MSFT`, `NVDA` |
+| `date` | date | Fiscal period end date | API response | `YYYY-MM-DD` |
+| `period` | string | Period type | API response | `annual` or `quarter` |
+| `total_revenue` | float | Total revenue (USD) | API response | Top-line revenue |
+| `gross_profit` | float | Gross profit (USD) | API response | Revenue - COGS |
+| `operating_income` | float | Operating income (USD) | API response | EBIT |
+| `net_income` | float | Net income (USD) | API response | Bottom-line profit |
+| `eps` | float | Earnings per share | API response | Diluted EPS |
+| `gross_margin` | float | Gross margin | Derived | `gross_profit / total_revenue` |
+| `operating_margin` | float | Operating margin | Derived | `operating_income / total_revenue` |
+| `net_margin` | float | Net margin | Derived | `net_income / total_revenue` |
+| `currency` | string | Currency code | API response | Always `USD` |
+| `source` | string | Data source | System | `FMP` or `SEC` |
