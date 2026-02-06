@@ -24,6 +24,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 | Lenovo概念 | Lenovo Group | 0992.HK | 香港上市 | - |
 
 > 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 13 個）
+> 概念 metadata：`concept_metadata.csv`
 
 
 Additional column: `相關概念` (semicolon-separated list of concepts)

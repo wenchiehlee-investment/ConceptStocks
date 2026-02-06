@@ -45,22 +45,6 @@ CONCEPT_TO_TICKER = {
     # OpenAI is private
 }
 
-# Full concept info: (Ticker, Company Name, CIK, Quarterly Segments)
-CONCEPT_INFO = {
-    "nVidia概念": ("NVDA", "NVIDIA Corporation", "0001045810", "Data Center, Gaming, Automotive, Professional Visualization"),
-    "Google概念": ("GOOGL", "Alphabet Inc.", "0001652044", "Google Cloud, Google Services"),
-    "Amazon概念": ("AMZN", "Amazon.com Inc.", "0001018724", "AWS, North America, International"),
-    "Meta概念": ("META", "Meta Platforms Inc.", "0001326801", "Family of Apps, Reality Labs"),
-    "OpenAI概念": ("-", "OpenAI", "私人公司", "-"),
-    "Microsoft概念": ("MSFT", "Microsoft Corporation", "0000789019", "Intelligent Cloud, More Personal Computing, Productivity and Business Processes"),
-    "AMD概念": ("AMD", "Advanced Micro Devices", "0000002488", "Data Center, Client, Gaming, Embedded"),
-    "Apple概念": ("AAPL", "Apple Inc.", "0000320193", "iPhone, Mac, iPad, Services, Wearables"),
-    "Oracle概念": ("ORCL", "Oracle Corporation", "0001341439", "Cloud services, Hardware, Services"),
-    "Micro概念": ("MU", "Micron Technology", "0000723125", "Cloud Memory, Mobile and Client, Core Data Center"),
-    "SanDisk概念": ("WDC", "Western Digital", "0000106040", "Cloud, Client, Consumer, Flash, HDD"),
-    "Qualcomm概念": ("QCOM", "Qualcomm Inc.", "0000804328", "-"),
-    "Lenovo概念": ("0992.HK", "Lenovo Group", "香港上市", "-"),
-}
 
 ENDPOINTS = {
     "daily": "TIME_SERIES_DAILY",
@@ -299,6 +283,32 @@ def update_for_ticker(ticker: str, name: str, cadence: str, api_key: str, out_di
     write_csv(out_path, cadence, merged)
 
 
+def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str]]:
+    """Load concept metadata from concept_metadata.csv."""
+    metadata_path = os.path.join(out_dir, "concept_metadata.csv")
+    metadata = {}
+
+    if not os.path.exists(metadata_path):
+        return metadata
+
+    try:
+        with open(metadata_path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                concept = row.get("概念欄位", "")
+                if concept:
+                    metadata[concept] = (
+                        row.get("Ticker", "-"),
+                        row.get("公司名稱", "-"),
+                        row.get("CIK", "-"),
+                        row.get("季度區段", "-"),
+                    )
+    except Exception as e:
+        print(f"  Warning: Could not read {metadata_path}: {e}")
+
+    return metadata
+
+
 def update_readme_concepts(out_dir: str, concept_cols: List[str]):
     """Update README.md with the dynamic concept list from concept.csv."""
     readme_path = os.path.join(out_dir, "README.md")
@@ -310,6 +320,9 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
     with open(readme_path, "r", encoding="utf-8") as f:
         content = f.read()
 
+    # Load metadata from concept_metadata.csv
+    metadata = load_concept_metadata(out_dir)
+
     # Build the new concept table
     table_lines = [
         "| 概念欄位 | 公司名稱 | Ticker | CIK | 季度區段 |",
@@ -317,8 +330,8 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
     ]
 
     for col in concept_cols:
-        if col in CONCEPT_INFO:
-            ticker, name, cik, segments = CONCEPT_INFO[col]
+        if col in metadata:
+            ticker, name, cik, segments = metadata[col]
             table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {segments} |")
         else:
             # Unknown concept - add with placeholders
@@ -326,6 +339,7 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
 
     table_lines.append("")
     table_lines.append(f"> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 {len(concept_cols)} 個）")
+    table_lines.append(f"> 概念 metadata：`concept_metadata.csv`")
 
     new_table = "\n".join(table_lines)
 
