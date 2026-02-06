@@ -31,7 +31,7 @@ DEFAULT_TICKERS = {
 # Mapping from concept column name (in concept.csv) to (Ticker, Company Name)
 CONCEPT_TO_TICKER = {
     "nVidia概念": ("NVDA", "NVIDIA Corporation"),
-    "Google概念": ("GOOG", "Alphabet Inc. Class C"),
+    "Google概念": ("GOOGL", "Alphabet Inc."),
     "Amazon概念": ("AMZN", "Amazon.com, Inc."),
     "Meta概念": ("META", "Meta Platforms, Inc."),
     "Microsoft概念": ("MSFT", "Microsoft Corporation"),
@@ -39,8 +39,27 @@ CONCEPT_TO_TICKER = {
     "Apple概念": ("AAPL", "Apple Inc."),
     "Oracle概念": ("ORCL", "Oracle Corporation"),
     "Micro概念": ("MU", "Micron Technology, Inc."),
-    "SanDisk概念": ("SNDK", "SanDisk Corporation"),
+    "SanDisk概念": ("WDC", "Western Digital Corporation"),
+    "Qualcomm概念": ("QCOM", "Qualcomm Inc."),
+    "Lenovo概念": ("0992.HK", "Lenovo Group"),
     # OpenAI is private
+}
+
+# Full concept info: (Ticker, Company Name, CIK, Quarterly Segments)
+CONCEPT_INFO = {
+    "nVidia概念": ("NVDA", "NVIDIA Corporation", "0001045810", "Data Center, Gaming, Automotive, Professional Visualization"),
+    "Google概念": ("GOOGL", "Alphabet Inc.", "0001652044", "Google Cloud, Google Services"),
+    "Amazon概念": ("AMZN", "Amazon.com Inc.", "0001018724", "AWS, North America, International"),
+    "Meta概念": ("META", "Meta Platforms Inc.", "0001326801", "Family of Apps, Reality Labs"),
+    "OpenAI概念": ("-", "OpenAI", "私人公司", "-"),
+    "Microsoft概念": ("MSFT", "Microsoft Corporation", "0000789019", "Intelligent Cloud, More Personal Computing, Productivity and Business Processes"),
+    "AMD概念": ("AMD", "Advanced Micro Devices", "0000002488", "Data Center, Client, Gaming, Embedded"),
+    "Apple概念": ("AAPL", "Apple Inc.", "0000320193", "iPhone, Mac, iPad, Services, Wearables"),
+    "Oracle概念": ("ORCL", "Oracle Corporation", "0001341439", "Cloud services, Hardware, Services"),
+    "Micro概念": ("MU", "Micron Technology", "0000723125", "Cloud Memory, Mobile and Client, Core Data Center"),
+    "SanDisk概念": ("WDC", "Western Digital", "0000106040", "Cloud, Client, Consumer, Flash, HDD"),
+    "Qualcomm概念": ("QCOM", "Qualcomm Inc.", "0000804328", "-"),
+    "Lenovo概念": ("0992.HK", "Lenovo Group", "香港上市", "-"),
 }
 
 ENDPOINTS = {
@@ -280,10 +299,55 @@ def update_for_ticker(ticker: str, name: str, cadence: str, api_key: str, out_di
     write_csv(out_path, cadence, merged)
 
 
+def update_readme_concepts(out_dir: str, concept_cols: List[str]):
+    """Update README.md with the dynamic concept list from concept.csv."""
+    readme_path = os.path.join(out_dir, "README.md")
+
+    if not os.path.exists(readme_path):
+        print(f"  README.md not found at {readme_path}, skipping update")
+        return
+
+    with open(readme_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Build the new concept table
+    table_lines = [
+        "| 概念欄位 | 公司名稱 | Ticker | CIK | 季度區段 |",
+        "|----------|----------|--------|-----|----------|",
+    ]
+
+    for col in concept_cols:
+        if col in CONCEPT_INFO:
+            ticker, name, cik, segments = CONCEPT_INFO[col]
+            table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {segments} |")
+        else:
+            # Unknown concept - add with placeholders
+            table_lines.append(f"| {col} | - | - | - | - |")
+
+    table_lines.append("")
+    table_lines.append(f"> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 {len(concept_cols)} 個）")
+
+    new_table = "\n".join(table_lines)
+
+    # Find and replace the concept table section
+    # Pattern: from "### Concept columns" to the next "##" or "Additional column"
+    pattern = r"(### Concept columns \(end with 「概念」\)\n\n).*?((?=\nAdditional column:|\n## ))"
+    replacement = r"\1" + new_table + "\n\n"
+
+    new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+    if new_content != content:
+        with open(readme_path, "w", encoding="utf-8") as f:
+            f.write(new_content)
+        print(f"  Updated README.md with {len(concept_cols)} concept columns")
+    else:
+        print(f"  README.md concept table unchanged")
+
+
 def sync_concepts(out_dir: str):
     url = "https://raw.githubusercontent.com/wenchiehlee-investment/Python-Actions.GoodInfo.CompanyInfo/refs/heads/main/raw_companyinfo.csv"
     print(f"Fetching company info from {url}...")
-    
+
     # Use urllib to fetch the CSV
     try:
         with urllib.request.urlopen(url) as resp:
@@ -305,7 +369,7 @@ def sync_concepts(out_dir: str):
     # Standardize column names for concept.csv
     # Use 'stock_code' and 'company_name' to match the other CSVs
     output_fields = ["stock_code", "company_name"] + concept_cols
-    
+
     out_path = os.path.join(out_dir, "concept.csv")
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=output_fields)
@@ -322,6 +386,9 @@ def sync_concepts(out_dir: str):
                     out_row[c] = row.get(c)
                 writer.writerow(out_row)
     print(f"Generated {out_path} with {len(concept_cols)} concept columns.")
+
+    # Update README.md with the concept list
+    update_readme_concepts(out_dir, concept_cols)
 
 
 def load_dynamic_tickers(out_dir: str) -> Dict[str, str]:

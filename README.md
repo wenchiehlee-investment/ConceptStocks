@@ -25,6 +25,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 > 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 13 個）
 
+
 Additional column: `相關概念` (semicolon-separated list of concepts)
 
 ## Concept stock price samples (US)
