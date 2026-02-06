@@ -1161,16 +1161,25 @@ class SECEdgarClient:
             "OEM and Other",
         ]
 
-        # Pattern: "Data Center revenue of $41.1 billion" or "Gaming revenue was $4.3 billion"
+        # Pattern variations:
+        # FY2025+: "Data Center revenue of $41.1 billion" or "Gaming revenue was $4.3 billion"
+        # FY2024:  "Gaming — Third-quarter revenue was $2.86 billion"
         for seg_name in nvda_segments:
-            # Escape special characters and create flexible pattern
             seg_pattern = re.escape(seg_name)
-            pattern = re.compile(
+            # Try multiple patterns
+            patterns = [
+                # Direct: "Gaming revenue of/was $X billion"
                 seg_pattern + r'\s+revenue\s+(?:of|was)\s+\$\s*([\d,]+(?:\.\d+)?)\s*(billion|million)',
-                re.IGNORECASE
-            )
+                # With quarter prefix: "Gaming — Third-quarter revenue was $X billion"
+                seg_pattern + r'[^.]*?(?:quarter|Q\d)\s+revenue\s+(?:of|was)\s+\$\s*([\d,]+(?:\.\d+)?)\s*(billion|million)',
+            ]
 
-            match = pattern.search(content)
+            match = None
+            for p in patterns:
+                match = re.search(p, content, re.IGNORECASE)
+                if match:
+                    break
+
             if match:
                 amount = float(match.group(1).replace(",", ""))
                 unit = match.group(2).lower()

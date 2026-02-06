@@ -295,44 +295,72 @@ MU,"Micron Technology, Inc.",2026,Q1,Automotive and Embedded,1720000000.0,2025-1
 MU,"Micron Technology, Inc.",2026,Q1,Cloud Memory,5284000000.0,2025-12-17,False
 MU,"Micron Technology, Inc.",2026,Q1,Core Data Center,2379000000.0,2025-12-17,False
 MU,"Micron Technology, Inc.",2026,Q1,Mobile and Client,4255000000.0,2025-12-17,False
+NVDA,NVIDIA Corporation,2022,Q2,Automotive,152000000.0,2021-08-18,False
 NVDA,NVIDIA Corporation,2022,Q2,Data Center,2370000000.0,2021-08-18,False
 NVDA,NVIDIA Corporation,2022,Q2,Gaming,3060000000.0,2021-08-18,False
+NVDA,NVIDIA Corporation,2022,Q3,Automotive,135000000.0,2021-11-17,False
 NVDA,NVIDIA Corporation,2022,Q3,Data Center,2940000000.0,2021-11-17,False
 NVDA,NVIDIA Corporation,2022,Q3,Gaming,3220000000.0,2021-11-17,False
+NVDA,NVIDIA Corporation,2022,Q4,Automotive,279000000.0,,True
 NVDA,NVIDIA Corporation,2022,Q4,Data Center,5303000000.0,,True
 NVDA,NVIDIA Corporation,2022,Q4,Gaming,6182000000.0,,True
 NVDA,NVIDIA Corporation,2023,Q1,Automotive,138000000.0,2022-05-25,False
+NVDA,NVIDIA Corporation,2023,Q1,Professional Visualization,622000000.0,2022-05-25,False
+NVDA,NVIDIA Corporation,2023,Q2,Automotive,220000000.0,2022-08-24,False
 NVDA,NVIDIA Corporation,2023,Q2,Data Center,3810000000.0,2022-08-24,False
-NVDA,NVIDIA Corporation,2023,Q2,Gaming,2040000000.0,2022-08-08,False
+NVDA,NVIDIA Corporation,2023,Q2,Gaming,2040000000.0,2022-08-24,False
+NVDA,NVIDIA Corporation,2023,Q2,Professional Visualization,496000000.0,2022-08-24,False
+NVDA,NVIDIA Corporation,2023,Q3,Automotive,251000000.0,2022-11-16,False
 NVDA,NVIDIA Corporation,2023,Q3,Data Center,3830000000.0,2022-11-16,False
-NVDA,NVIDIA Corporation,2023,Q4,Automotive,765000000.0,,True
+NVDA,NVIDIA Corporation,2023,Q3,Gaming,1570000000.0,2022-11-16,False
+NVDA,NVIDIA Corporation,2023,Q3,Professional Visualization,200000000.0,2022-11-16,False
+NVDA,NVIDIA Corporation,2023,Q4,Automotive,294000000.0,,True
 NVDA,NVIDIA Corporation,2023,Q4,Data Center,7365000000.0,,True
-NVDA,NVIDIA Corporation,2023,Q4,Gaming,7027000000.0,,True
+NVDA,NVIDIA Corporation,2023,Q4,Gaming,5457000000.0,,True
+NVDA,NVIDIA Corporation,2023,Q4,Professional Visualization,226000000.0,,True
 NVDA,NVIDIA Corporation,2024,Q1,Data Center,4280000000.0000005,2023-05-24,False
+NVDA,NVIDIA Corporation,2024,Q1,Gaming,2240000000.0,2023-05-24,False
+NVDA,NVIDIA Corporation,2024,Q1,Professional Visualization,295000000.0,2023-05-24,False
+NVDA,NVIDIA Corporation,2024,Q2,Automotive,253000000.0,2023-08-23,False
 NVDA,NVIDIA Corporation,2024,Q2,Data Center,10320000000.0,2023-08-23,False
+NVDA,NVIDIA Corporation,2024,Q2,Gaming,2490000000.0,2023-08-23,False
+NVDA,NVIDIA Corporation,2024,Q2,Professional Visualization,379000000.0,2023-08-23,False
+NVDA,NVIDIA Corporation,2024,Q3,Automotive,261000000.0,2023-11-21,False
 NVDA,NVIDIA Corporation,2024,Q3,Data Center,14510000000.0,2023-11-21,False
+NVDA,NVIDIA Corporation,2024,Q3,Gaming,2860000000.0,2023-11-21,False
+NVDA,NVIDIA Corporation,2024,Q3,Professional Visualization,416000000.0,2023-11-21,False
+NVDA,NVIDIA Corporation,2024,Q4,Automotive,577000000.0,,True
 NVDA,NVIDIA Corporation,2024,Q4,Data Center,18415000000.0,,True
+NVDA,NVIDIA Corporation,2024,Q4,Gaming,2857000000.0,,True
+NVDA,NVIDIA Corporation,2024,Q4,Professional Visualization,463000000.0,,True
 NVDA,NVIDIA Corporation,2025,Q1,Automotive,329000000.0,2024-05-22,False
 NVDA,NVIDIA Corporation,2025,Q1,Data Center,22600000000.0,2024-05-22,False
 NVDA,NVIDIA Corporation,2025,Q1,Gaming,2600000000.0,2024-05-22,False
+NVDA,NVIDIA Corporation,2025,Q1,Professional Visualization,427000000.0,2024-05-22,False
 NVDA,NVIDIA Corporation,2025,Q2,Automotive,346000000.0,2024-08-28,False
 NVDA,NVIDIA Corporation,2025,Q2,Data Center,26300000000.0,2024-08-28,False
 NVDA,NVIDIA Corporation,2025,Q2,Gaming,2900000000.0,2024-08-28,False
+NVDA,NVIDIA Corporation,2025,Q2,Professional Visualization,454000000.0,2024-08-28,False
 NVDA,NVIDIA Corporation,2025,Q3,Automotive,449000000.0,2024-11-20,False
 NVDA,NVIDIA Corporation,2025,Q3,Data Center,30800000000.0,2024-11-20,False
 NVDA,NVIDIA Corporation,2025,Q3,Gaming,3300000000.0,2024-11-20,False
+NVDA,NVIDIA Corporation,2025,Q3,Professional Visualization,486000000.0,2024-11-20,False
 NVDA,NVIDIA Corporation,2025,Q4,Automotive,570000000.0,,True
 NVDA,NVIDIA Corporation,2025,Q4,Data Center,35486000000.0,,True
 NVDA,NVIDIA Corporation,2025,Q4,Gaming,2550000000.0,,True
+NVDA,NVIDIA Corporation,2025,Q4,Professional Visualization,511000000.0,,True
 NVDA,NVIDIA Corporation,2026,Q1,Automotive,567000000.0,2025-05-28,False
 NVDA,NVIDIA Corporation,2026,Q1,Data Center,39100000000.0,2025-05-28,False
 NVDA,NVIDIA Corporation,2026,Q1,Gaming,2500000000.0,2025-02-26,False
+NVDA,NVIDIA Corporation,2026,Q1,Professional Visualization,509000000.0,2025-05-28,False
 NVDA,NVIDIA Corporation,2026,Q2,Automotive,586000000.0,2025-08-27,False
 NVDA,NVIDIA Corporation,2026,Q2,Data Center,41100000000.0,2025-08-27,False
 NVDA,NVIDIA Corporation,2026,Q2,Gaming,4300000000.0,2025-08-27,False
+NVDA,NVIDIA Corporation,2026,Q2,Professional Visualization,601000000.0,2025-08-27,False
 NVDA,NVIDIA Corporation,2026,Q3,Automotive,592000000.0,2025-11-19,False
 NVDA,NVIDIA Corporation,2026,Q3,Data Center,51200000000.0,2025-11-19,False
 NVDA,NVIDIA Corporation,2026,Q3,Gaming,4300000000.0,2025-11-19,False
+NVDA,NVIDIA Corporation,2026,Q3,Professional Visualization,760000000.0,2025-11-19,False
 ORCL,Oracle Corporation,2019,Q2,Cloud license and on-premise license,812000000.0,2019-09-13,False
 ORCL,Oracle Corporation,2019,Q2,Cloud services and license support,6805000000.0,2019-09-13,False
 ORCL,Oracle Corporation,2019,Q2,Hardware,815000000.0,2019-09-13,False
