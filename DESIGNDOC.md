@@ -4,8 +4,9 @@
 Generate US concept stock price series (daily, weekly, monthly) with a consistent schema and incremental update workflow.
 
 ## Scope
-- Tickers: NVDA, GOOG/GOOGL, AMZN, META, MSFT, AMD, AAPL, ORCL.
-- OpenAI has no public ticker and is excluded or mapped via proxy rules.
+- Tickers: Dynamically loaded from `concept.csv` (13 concept columns as of 2026-02)
+- See `concept_metadata.csv` for full list with ticker, CIK, and segment info
+- OpenAI has no public ticker and is excluded. Lenovo is HK-listed.
 - Outputs: `raw_conceptstock_daily.csv`, `raw_conceptstock_weekly.csv`, `raw_conceptstock_monthly.csv`.
 
 ## Data Source
@@ -62,19 +63,24 @@ Common columns:
 
 ### Concept Stock Company List (概念股公司清單)
 
-| 概念欄位 | 公司名稱 | Ticker | CIK | 會計年度結束月 |
-|----------|----------|--------|-----|----------------|
-| nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | 1月 |
-| Google概念 | Alphabet Inc. | GOOGL | 0001652044 | 12月 |
-| Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | 12月 |
-| Meta概念 | Meta Platforms Inc. | META | 0001326801 | 12月 |
-| OpenAI概念 | OpenAI | 私人公司 | N/A | N/A |
-| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 | 6月 |
-| AMD概念 | Advanced Micro Devices | AMD | 0000002488 | 12月 |
-| Apple概念 | Apple Inc. | AAPL | 0000320193 | 9月 |
-| Oracle概念 | Oracle Corporation | ORCL | 0001341439 | 5月 |
-| Micro概念 | Micron Technology | MU | 0000723125 | 8月 |
-| SanDisk概念 | Western Digital | WDC | 0000106040 | 6月 |
+> 概念股清單由 `concept_metadata.csv` 維護，透過 `python scripts/update_conceptstocks.py --sync-concepts` 同步更新到 README.md。
+
+完整清單請參見 [README.md](README.md#concept-columns-end-with-概念) 或 `concept_metadata.csv`。
+
+當前支援季度區段資料的公司（10 家）：
+
+| Ticker | 公司名稱 | 資料來源 | 季度區段 |
+|--------|----------|----------|----------|
+| NVDA | NVIDIA Corporation | 8-K | Data Center, Gaming, Automotive, Professional Visualization |
+| GOOGL | Alphabet Inc. | 8-K | Google Cloud, Google Services |
+| AMZN | Amazon.com Inc. | 8-K | AWS, North America, International |
+| META | Meta Platforms Inc. | 8-K | Family of Apps, Reality Labs |
+| MSFT | Microsoft Corporation | 8-K | Intelligent Cloud, More Personal Computing, PBP |
+| AMD | Advanced Micro Devices | 10-Q | Data Center, Client, Gaming, Embedded |
+| AAPL | Apple Inc. | 8-K | iPhone, Mac, iPad, Services, Wearables |
+| ORCL | Oracle Corporation | 10-Q | Cloud services, Hardware, Services |
+| MU | Micron Technology | 8-K | Cloud Memory, Mobile and Client, etc. |
+| WDC | Western Digital | 10-Q | Cloud, Client, Consumer, Flash, HDD |
 
 ### Data Source Comparison (資料來源比較)
 
@@ -407,12 +413,15 @@ group:
 
 ### Action Items (下一步行動)
 
-- [ ] 決定採用方案 A (FMP) 或方案 B (SEC EDGAR)
-- [ ] 註冊 API 帳號並取得 API Key
-- [ ] 建立 `src/external/` 目錄與客戶端程式
-- [ ] 定義 Type 53/54 並更新 `raw_column_definition.md`
-- [ ] 建立 GitHub Actions 定期更新排程
-- [ ] 整合到 Stage 1 Pipeline
+- [x] 決定採用方案 C：混合方案（SEC EDGAR 為主，FMP 為輔）
+- [x] 註冊 API 帳號並取得 API Key（FMP, Alpha Vantage）
+- [x] 建立 `src/external/` 目錄與客戶端程式（sec_edgar_client.py, fmp_client.py, alphavantage_client.py）
+- [x] 定義 Type 53/54 輸出檔案（raw_concept_company_revenue.csv, raw_concept_company_income.csv）
+- [x] 建立 GitHub Actions 定期更新排程（update_company_financials.yml）
+- [x] 新增季度區段資料（concept_stock_quarterly_segments.csv/md）
+- [x] 建立 8-K 新聞稿解析器（NVDA, GOOGL, AMZN, META, MSFT, AAPL, MU）
+- [x] 建立 10-Q 區段解析器（AMD, ORCL, WDC）
+- [ ] 整合到 Stage 1 Pipeline（待同步到 GoodInfo.Analyzer）
 
 ### References (參考資源)
 
