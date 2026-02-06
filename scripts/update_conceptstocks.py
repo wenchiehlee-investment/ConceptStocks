@@ -3,12 +3,18 @@ import argparse
 import csv
 import json
 import os
+import re
 import subprocess
 import sys
 import time
 import urllib.request
 from typing import Dict, List, Tuple
 from datetime import datetime
+
+
+def mask_api_key(url: str) -> str:
+    """Mask API key in URL for safe storage in CSV files."""
+    return re.sub(r'apikey=[^&]+', 'apikey=***MASKED***', url, flags=re.IGNORECASE)
 
 DEFAULT_TICKERS = {
     "NVDA": "NVIDIA Corporation",
@@ -268,7 +274,9 @@ def update_for_ticker(ticker: str, name: str, cadence: str, api_key: str, out_di
 
     out_path = os.path.join(out_dir, OUTPUT_FILES[cadence])
     existing = read_existing(out_path, cadence)
-    merged = merge_and_recalc(existing, new_rows, ticker, name, cadence, function, url)
+    # Mask API key in URL before storing in CSV
+    masked_url = mask_api_key(url)
+    merged = merge_and_recalc(existing, new_rows, ticker, name, cadence, function, masked_url)
     write_csv(out_path, cadence, merged)
 
 
