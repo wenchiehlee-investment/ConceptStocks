@@ -14,8 +14,8 @@ This directory contains quarterly earnings reference images for cross-referencin
 | 4 | `MS-2026Q2.jpg` | Microsoft (MSFT) | Q2 FY2026 | CONSISTENT | [microsoft2026Q2.md](microsoft2026Q2.md) |
 | 5 | `MS-2026Q2-1.jpg` | Microsoft (MSFT) | Q2 FY2026 | CONSISTENT | [microsoft2026Q2.md](microsoft2026Q2.md) |
 | 6 | `apple2026Q1.webp` | Apple (AAPL) | Q1 FY2026 | CONSISTENT | [apple2026Q1.md](apple2026Q1.md) |
-| 7 | `Oracle-revenue.webp` | Oracle (ORCL) | FY23-FY26 | Q1-Q3 OK, Q4 ISSUE | [oracle-revenue-breakdown.md](oracle-revenue-breakdown.md) |
-| 8 | `Oracle-2023Q4.webp` | Oracle (ORCL) | Q4 FY2023 | Q4 MISMATCH | [oracle2023Q4.md](oracle2023Q4.md) |
+| 7 | `Oracle-revenue.webp` | Oracle (ORCL) | FY23-FY26 | CONSISTENT | [oracle-revenue-breakdown.md](oracle-revenue-breakdown.md) |
+| 8 | `Oracle-2023Q4.webp` | Oracle (ORCL) | Q4 FY2023 | CONSISTENT | [oracle2023Q4.md](oracle2023Q4.md) |
 | 9 | `Oracle forecast revenue.webp` | Oracle (ORCL) | FY25-FY30 | FORECAST | [oracle-oci-forecast.md](oracle-oci-forecast.md) |
 
 ## Summary of Comparison
@@ -68,28 +68,29 @@ All 4 matched companies (NVDA, ORCL, MSFT, AAPL) show data **consistent** with b
 - Growth trends are reasonable (all trending above FY2025 averages)
 - QCOM is not in our concept stock list (no comparison possible)
 
-## Oracle Data Quality Issue (2026-02-07)
+## Oracle Data Quality Fix (2026-02-07)
 
-### Problem: Q4 Calculation Mismatch
+### Issue Resolved: Q4 Calculation Now Correct
 
-After fixing the 10-Q fiscal quarter determination (Oracle Q1 was being mislabeled as Q2), we discovered a data quality issue:
+Two bugs were fixed:
 
-| Source | FY2023 Cloud services |
-|--------|----------------------|
-| Our annual data | $39.4B |
-| Image quarterly sum | $35.3B |
-| **Difference** | **$4.1B** |
+1. **10-Q fiscal quarter mislabeling**: Oracle Q1 was being labeled as Q2 due to filing month assumption
+   - **Fix**: Use `report_date` + `FISCAL_YEAR_END_MONTH` lookup to calculate correct quarter
 
-This causes our calculated Q4 to be inflated:
-- Our calculated Q4 FY2023: $13.4B
-- Image shows Q4 FY2023: $9.3B
+2. **10-K year column overlap**: Parser was extracting values from wrong year columns
+   - **Fix**: Search only FORWARD from each year's header column, preventing overlap
 
-### Root Cause
+### Verification
 
-The 10-K HTML parser may have a fiscal year offset issue. The $39.4B labeled as FY2023 might actually be FY2024 data.
+| Source | FY2023 Cloud services | Status |
+|--------|----------------------|--------|
+| Our annual data | $35.3B | ✅ |
+| Image quarterly sum | $35.3B | ✅ |
+| Our Q4 FY2023 | $9.4B | ✅ |
+| Image Q4 FY2023 | $9.3B | ✅ |
 
 ### Current Status
 
-- **Q1-Q3 quarterly data**: FIXED and CONSISTENT with images
-- **Q4 calculated data**: INCORRECT due to annual data mismatch
-- **Investigation needed**: Review 10-K HTML parsing for fiscal year determination
+- **All quarterly data**: CONSISTENT with reference images
+- **All annual data**: CONSISTENT with reference images
+- **Q4 calculated data**: CORRECT

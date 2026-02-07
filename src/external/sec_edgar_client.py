@@ -751,14 +751,23 @@ class SECEdgarClient:
                     continue
 
                 # Extract values for each year
-                for year_col, year in year_positions:
+                # Sort by column position (leftmost first) to establish boundaries
+                sorted_year_positions = sorted(year_positions, key=lambda x: x[0])
+
+                for i, (year_col, year) in enumerate(sorted_year_positions):
                     # Find numeric value after the segment name
                     # Values often have "$" in a separate cell
                     value = None
 
-                    # Search in cells after name_col_idx, near year_col position
-                    search_start = max(name_col_idx + 1, year_col - 2)
-                    search_end = min(len(row), year_col + 3)
+                    # Search from year column forward, up to next year's column
+                    # This prevents picking up values from adjacent years
+                    search_start = max(name_col_idx + 1, year_col)
+                    if i + 1 < len(sorted_year_positions):
+                        # Stop before the next year's column
+                        next_year_col = sorted_year_positions[i + 1][0]
+                        search_end = next_year_col
+                    else:
+                        search_end = min(len(row), year_col + 5)
 
                     for idx in range(search_start, search_end):
                         if idx >= len(row):
