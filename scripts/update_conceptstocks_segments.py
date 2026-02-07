@@ -47,6 +47,48 @@ SEC_ONLY = ['ORCL', 'MU', 'WDC']
 # Display order
 DISPLAY_ORDER = ['NVDA', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AMD', 'AAPL', 'ORCL', 'MU', 'WDC']
 
+# Segment name normalization mapping
+# Maps variant names to canonical names for consistent trend tracking
+SEGMENT_NAME_MAP = {
+    # GOOGL
+    'YouTube Advertising Revenue': 'YouTube Ads',
+    'Google Subscriptions, Platforms, And Devices': 'Google Subscriptions',
+    'Google Subscriptions\n, Platforms, And Devices': 'Google Subscriptions',
+    "Google Subscriptions\n": 'Google Subscriptions',
+    'Google Network Members\' Properties': 'Google Network',
+    'Google Properties': 'Google Search & Other',
+    'Other Bets Revenues': 'Other Bets',
+    # MSFT
+    'Xbox': 'Gaming',
+    'Microsoft Three Six Five Commercial Products And Cloud Services': 'Microsoft 365 Commercial',
+    'Microsoft Three Six Five Consumer Products and Cloud Services': 'Microsoft 365 Consumer',
+    'Microsoft Office System': 'Microsoft Office',
+    'Consulting And Product Support Services': 'Enterprise Services',
+    # AMD
+    'Computing and Graphics': 'Client',
+    'Graphics and Visual Solutions': 'Gaming',
+    'Enterprise, Embedded and Semi-Custom': 'Embedded',
+    'Client and Gaming': 'Client',  # Combined segment
+    # AAPL
+    'Service': 'Services',
+    # MU
+    'CMBU': 'Cloud Memory',
+    'MCBU': 'Mobile and Client',
+    'CDBU': 'Core Data Center',
+    'AEBU': 'Automotive and Edge',
+    'CNBU': 'Compute and Networking',
+    'MBU': 'Mobile',
+    'EBU': 'Embedded',
+    'SBU': 'Storage',
+}
+
+
+def normalize_segment_name(name: str) -> str:
+    """Normalize segment name to canonical form."""
+    # Clean up whitespace
+    name = ' '.join(name.split())
+    return SEGMENT_NAME_MAP.get(name, name)
+
 
 def fmt_revenue(val):
     """Format revenue value for display."""
@@ -62,15 +104,49 @@ def fmt_revenue(val):
         return f"{sign}${abs_val:,.0f}"
 
 
-def load_segment_data(csv_path: str) -> dict:
+def load_override_data(csv_path: str) -> dict:
     """
-    Load segment revenue data from CSV file.
+    Load manual override data for missing segments.
+
+    Returns:
+        Dict: {(symbol, fiscal_year, segment_name): revenue}
+    """
+    if not os.path.exists(csv_path):
+        return {}
+
+    overrides = {}
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            symbol = row.get('symbol')
+            fy = int(row.get('fiscal_year') or 0)
+            seg_name = normalize_segment_name(row.get('segment_name', ''))
+            seg_type = row.get('segment_type', 'product')
+            revenue = float(row.get('revenue') or 0)
+
+            if symbol and fy and seg_name and revenue > 0:
+                key = (symbol, fy, seg_type, seg_name)
+                overrides[key] = revenue
+
+    return overrides
+
+
+def load_segment_data(csv_path: str, override_path: str = None) -> dict:
+    """
+    Load segment revenue data from CSV file with optional overrides.
 
     Returns:
         Dict: {symbol: {segment_type: {segment_name: {year: revenue}}}}
     """
     if not os.path.exists(csv_path):
         return {}
+
+    # Load manual overrides first
+    overrides = {}
+    if override_path:
+        overrides = load_override_data(override_path)
+        if overrides:
+            print(f"  Loaded {len(overrides)} manual override records")
 
     # Structure: symbol -> segment_type -> segment_name -> year -> revenue
     data = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
@@ -90,7 +166,22 @@ def load_segment_data(csv_path: str) -> dict:
                 continue
 
             if seg_name and revenue > 0:
-                data[symbol][seg_type][seg_name][fy] = revenue
+                # Normalize segment name for consistent tracking
+                seg_name = normalize_segment_name(seg_name)
+                # Merge if same normalized name exists
+                if fy in data[symbol][seg_type][seg_name]:
+                    # Keep the larger value (in case of duplicates)
+                    data[symbol][seg_type][seg_name][fy] = max(
+                        data[symbol][seg_type][seg_name][fy], revenue
+                    )
+                else:
+                    data[symbol][seg_type][seg_name][fy] = revenue
+
+    # Apply manual overrides (fill gaps, don't replace existing data)
+    for (symbol, fy, seg_type, seg_name), revenue in overrides.items():
+        if fy not in data[symbol][seg_type][seg_name]:
+            data[symbol][seg_type][seg_name][fy] = revenue
+            print(f"    Applied override: {symbol} FY{fy} {seg_name}")
 
     return dict(data)
 
@@ -106,6 +197,7 @@ def generate_markdown(data: dict, years: int = 5) -> str:
     lines.append("> Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)")
     lines.append(f"> Coverage: {years} fiscal years")
     lines.append("> Format: Segment-centric with years as columns (suitable for trend charts)")
+    lines.append("> Note: Segment names are normalized for consistent trend tracking (e.g., 'YouTube Ads' = 'YouTube Advertising Revenue')")
     lines.append("")
 
     # Summary table
@@ -288,10 +380,11 @@ def main() -> int:
     print("Generating annual segment revenue report...")
     print(f"  Years: {args.years}")
 
-    # Load annual segment data from CSV
+    # Load annual segment data from CSV with manual overrides
     csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
+    override_path = os.path.join(args.out_dir, "segment_overrides.csv")
     print(f"  Loading segment data from {csv_path}")
-    data = load_segment_data(csv_path)
+    data = load_segment_data(csv_path, override_path=override_path)
 
     if not data:
         print("  Warning: No segment data found. Run update_company_financials.py first.")
