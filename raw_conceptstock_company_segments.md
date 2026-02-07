@@ -1,12 +1,13 @@
-# Concept Stock Segment Revenue
+# Annual Product Segment Revenue
 
-> Last updated: 2026-02-06
-> Data sources: FMP (annual segments), SEC EDGAR 10-K/10-Q (segment parsing)
-> Coverage: 5 fiscal years + quarterly data
+> Last updated: 2026-02-07
+> Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
+> Coverage: 5 fiscal years
+> Format: Segment-centric with years as columns (suitable for trend charts)
 
 ## Summary (Latest Fiscal Year)
 
-| Symbol | Company | FY | Top Product Segment | Revenue | Source |
+| Symbol | Company | FY | Top Segment | Revenue | Source |
 |--------|---------|----|--------------------|---------|--------|
 | NVDA | NVIDIA Corporation | FY2025 | Data Center | $115.2B | FMP |
 | GOOGL | Alphabet Inc. | FY2025 | Google Search & Other | $224.5B | FMP |
@@ -23,842 +24,862 @@
 
 ## NVDA - NVIDIA Corporation
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### Data Center
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Data Center | $115.2B | 88.3% |
-| Gaming | $11.3B | 8.7% |
-| Professional Visualization | $1.9B | 1.4% |
-| Automotive | $1.7B | 1.3% |
-| OEM And Other | $389.0M | 0.3% |
-| **Total** | **$130.5B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $6.7B | $10.6B | $15.0B | $47.5B | $115.2B |
+| Change | - | $3.9B | $4.4B | $32.5B | $67.7B |
+| YoY % | - | +58% | +41% | +217% | +142% |
 
-#### Quarterly Segments
+#### Gaming
 
-| Segment | Q1 | Q2 | Q3 |
-|---------|------|------|------|
-| United States | $20.7B | $23.5B | $39.2B |
-| Taiwan | $7.2B | $8.5B | $13.8B |
-| Singapore | $9.0B | $10.2B | - |
-| China (including Hong Kong) | $5.5B | $3.7B | $8.1B |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $12.5B | $9.1B | $10.4B | $11.3B |
+| Change | - | - | -$3.4B | $1.4B | $903M |
+| YoY % | - | - | -27% | +15% | +9% |
 
+#### Professional Visualization
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $1.1B | $2.1B | $1.5B | $1.6B | $1.9B |
+| Change | - | $1.1B | -$567M | $9M | $325M |
+| YoY % | - | +100% | -27% | +1% | +21% |
 
-#### Annual Product Segments
+#### Automotive
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Data Center | $47.5B | 78.0% |
-| Gaming | $10.4B | 17.1% |
-| Professional Visualization | $1.6B | 2.5% |
-| Automotive | $1.1B | 1.8% |
-| OEM And Other | $306.0M | 0.5% |
-| **Total** | **$60.9B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $536M | $566M | $903M | $1.1B | $1.7B |
+| Change | - | $30M | $337M | $188M | $603M |
+| YoY % | - | +6% | +60% | +21% | +55% |
 
-#### Quarterly Segments
+#### OEM And Other
 
-| Segment | Q1 | Q2 | Q3 |
-|---------|------|------|------|
-| United States | $20.7B | $23.5B | $39.2B |
-| Taiwan | $7.2B | $15.7B | $30.3B |
-| Singapore | $9.0B | $19.2B | $7.7B |
-| China (including Hong Kong) | $5.5B | $8.3B | $16.6B |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $631M | $1.2B | $455M | $306M | $389M |
+| Change | - | $531M | -$707M | -$149M | $83M |
+| YoY % | - | +84% | -61% | -33% | +27% |
 
+### Geographic Segments
 
-### Fiscal Year 2023
+#### TAIWAN, PROVINCE OF CHINA
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $4.5B | $8.5B | $7.0B | $13.4B | $20.6B |
+| Change | - | $4.0B | -$1.6B | $6.4B | $7.2B |
+| YoY % | - | +89% | -18% | +92% | +53% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Data Center | $15.0B | 55.6% |
-| Gaming | $9.1B | 33.6% |
-| Professional Visualization | $1.5B | 5.7% |
-| Automotive | $903.0M | 3.3% |
-| OEM And Other | $455.0M | 1.7% |
-| **Total** | **$27.0B** | |
+#### CHINA
 
-#### Quarterly Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $3.9B | $7.1B | $5.8B | $10.3B | $17.1B |
+| Change | - | $3.2B | -$1.3B | $4.5B | $6.8B |
+| YoY % | - | +83% | -19% | +78% | +66% |
 
-| Segment | Q3 |
-|---------|------|
-| Singapore | $17.4B |
-| Taiwan | $15.3B |
-| United States | $14.8B |
-| China (including Hong Kong) | $11.6B |
+#### UNITED STATES
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $3.2B | $4.3B | $8.3B | $27.0B | - |
+| Change | - | $1.1B | $3.9B | $18.7B | - |
+| YoY % | - | +35% | +91% | +225% | - |
 
-### Fiscal Year 2022
+#### Other Americas
 
-#### Annual Product Segments
-
-| Segment | Revenue | % |
-|---------|---------|---|
-| Gaming | $12.5B | 46.3% |
-| Data Center | $10.6B | 39.4% |
-| Professional Visualization | $2.1B | 7.8% |
-| OEM And Other | $1.2B | 4.3% |
-| Automotive | $566.0M | 2.1% |
-| **Total** | **$26.9B** | |
-
-
-### Fiscal Year 2021
-
-#### Annual Product Segments
-
-| Segment | Revenue | % |
-|---------|---------|---|
-| Data Center | $6.7B | 75.1% |
-| Professional Visualization | $1.1B | 11.8% |
-| OEM And Other | $631.0M | 7.1% |
-| Automotive | $536.0M | 6.0% |
-| **Total** | **$8.9B** | |
-
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $833M | $6.9B | $5.9B | $10.2B | $7.9B |
+| Change | - | $6.1B | -$999M | $4.3B | -$2.4B |
+| YoY % | - | +730% | -14% | +73% | -23% |
 
 ---
 
 ## GOOGL - Alphabet Inc.
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### Google Search & Other
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Google Search & Other | $224.5B | 63.5% |
-| Google Cloud | $58.7B | 16.6% |
-| YouTube Advertising Revenue | $40.4B | 11.4% |
-| Google Network | $29.8B | 8.4% |
-| **Total** | **$353.4B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $149.0B | $162.4B | $175.0B | $198.1B | $224.5B |
+| Change | - | $13.5B | $12.6B | $23.1B | $26.4B |
+| YoY % | - | +9% | +8% | +13% | +13% |
 
+#### Google Network
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $31.7B | $32.8B | $31.3B | $30.4B | $29.8B |
+| Change | - | $1.1B | -$1.5B | -$953M | -$567M |
+| YoY % | - | +3% | -4% | -3% | -2% |
 
-#### Annual Product Segments
+#### Google Cloud
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Google Search & Other | $198.1B | 56.6% |
-| Google Cloud | $43.2B | 12.4% |
-| Google Subscriptions, Platforms, And Devices | $40.3B | 11.5% |
-| YouTube Ads | $36.1B | 10.3% |
-| Google Network | $30.4B | 8.7% |
-| Other Bets | $1.6B | 0.5% |
-| **Total** | **$349.8B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $19.2B | $26.3B | - | $43.2B | $58.7B |
+| Change | - | $7.1B | - | $16.9B | $15.5B |
+| YoY % | - | +37% | - | +64% | +36% |
 
+#### Google Subscriptions, Platforms, And Devices
 
-### Fiscal Year 2023
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $28.0B | $29.1B | - | $40.3B | - |
+| Change | - | $1.0B | - | $11.3B | - |
+| YoY % | - | +4% | - | +39% | - |
 
-#### Annual Product Segments
+#### YouTube Ads
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Google Search & Other | $175.0B | 73.1% |
-| YouTube Ads | $31.5B | 13.2% |
-| Google Network | $31.3B | 13.1% |
-| Other Bets | $1.5B | 0.6% |
-| **Total** | **$239.4B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $29.2B | $31.5B | $36.1B | - |
+| Change | - | - | $2.3B | $4.6B | - |
+| YoY % | - | - | +8% | +15% | - |
 
+#### Other Bets
 
-### Fiscal Year 2022
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $753M | $1.1B | $1.5B | $1.6B | - |
+| Change | - | $315M | $459M | $121M | - |
+| YoY % | - | +42% | +43% | +8% | - |
 
-#### Annual Product Segments
+### Geographic Segments
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Google Search & Other | $162.4B | 57.8% |
-| Google Network | $32.8B | 11.7% |
-| YouTube Ads | $29.2B | 10.4% |
-| Google Subscriptions, Platforms, And Devices | $29.1B | 10.3% |
-| Google Cloud | $26.3B | 9.4% |
-| Other Bets | $1.1B | 0.4% |
-| **Total** | **$280.9B** | |
+#### UNITED STATES
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $117.9B | $134.8B | $146.3B | $170.4B | $194.2B |
+| Change | - | $17.0B | $11.5B | $24.2B | $23.8B |
+| YoY % | - | +14% | +9% | +17% | +14% |
 
-### Fiscal Year 2021
+#### EMEA
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $79.1B | $82.1B | $91.0B | $102.1B | $117.2B |
+| Change | - | $3.0B | $9.0B | $11.1B | $15.0B |
+| YoY % | - | +4% | +11% | +12% | +15% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Google Search & Other | $149.0B | 65.1% |
-| Google Network | $31.7B | 13.9% |
-| Google Subscriptions, Platforms, And Devices | $28.0B | 12.3% |
-| Google Cloud | $19.2B | 8.4% |
-| Other Bets | $753.0M | 0.3% |
-| **Total** | **$228.6B** | |
+#### Asia Pacific
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $46.1B | $47.0B | $51.5B | $56.8B | $67.7B |
+| Change | - | $901M | $4.5B | $5.3B | $10.9B |
+| YoY % | - | +2% | +10% | +10% | +19% |
+
+#### Americas Excluding United States
+
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $14.4B | $17.0B | $18.3B | $20.4B | $23.9B |
+| Change | - | $2.6B | $1.3B | $2.1B | $3.5B |
+| YoY % | - | +18% | +8% | +11% | +17% |
 
 ---
 
 ## AMZN - Amazon.com, Inc.
 
-### Fiscal Year 2024
+### Product Segments
 
-#### Annual Product Segments
+#### Online Stores
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Online Stores | $247.0B | 38.7% |
-| Third-Party Seller Services | $156.1B | 24.5% |
-| Amazon Web Services | $107.6B | 16.9% |
-| Advertising Services | $56.2B | 8.8% |
-| Subscription Services | $44.4B | 7.0% |
-| Physical Stores | $21.2B | 3.3% |
-| Other Services | $5.4B | 0.9% |
-| **Total** | **$638.0B** | |
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $197.3B | $222.1B | - | - | $247.0B |
+| Change | - | $24.7B | - | - | $25.0B |
+| YoY % | - | +13% | - | - | +11% |
 
+#### Third-Party Seller Services
 
-### Fiscal Year 2023
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $80.5B | $103.4B | - | $140.1B | $156.1B |
+| Change | - | $22.9B | - | $36.7B | $16.1B |
+| YoY % | - | +28% | - | +35% | +11% |
 
-#### Annual Product Segments
+#### Amazon Web Services
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Third-Party Seller Services | $140.1B | 40.8% |
-| Amazon Web Services | $90.8B | 26.5% |
-| Advertising Services | $46.9B | 13.7% |
-| Subscription Services | $40.2B | 11.7% |
-| Physical Stores | $20.0B | 5.8% |
-| Other Services | $5.0B | 1.4% |
-| **Total** | **$342.9B** | |
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $45.4B | $62.2B | $80.1B | $90.8B | $107.6B |
+| Change | - | $16.8B | $17.9B | $10.7B | $16.8B |
+| YoY % | - | +37% | +29% | +13% | +19% |
 
+#### Subscription Services
 
-### Fiscal Year 2022
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $25.2B | $31.8B | $35.2B | $40.2B | $44.4B |
+| Change | - | $6.6B | $3.5B | $5.0B | $4.2B |
+| YoY % | - | +26% | +11% | +14% | +10% |
 
-#### Annual Product Segments
+#### Advertising Services
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Amazon Web Services | $80.1B | 45.4% |
-| Advertising Services | $37.7B | 21.4% |
-| Subscription Services | $35.2B | 20.0% |
-| Physical Stores | $19.0B | 10.8% |
-| Other Services | $4.2B | 2.4% |
-| **Total** | **$176.3B** | |
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | - | $31.2B | $37.7B | $46.9B | $56.2B |
+| Change | - | - | $6.6B | $9.2B | $9.3B |
+| YoY % | - | - | +21% | +24% | +20% |
 
+#### Physical Stores
 
-### Fiscal Year 2021
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $16.2B | $17.1B | $19.0B | $20.0B | $21.2B |
+| Change | - | $848M | $1.9B | $1.1B | $1.2B |
+| YoY % | - | +5% | +11% | +6% | +6% |
 
-#### Annual Product Segments
+#### Other Services
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Online Stores | $222.1B | 47.3% |
-| Third-Party Seller Services | $103.4B | 22.0% |
-| Amazon Web Services | $62.2B | 13.2% |
-| Subscription Services | $31.8B | 6.8% |
-| Advertising Services | $31.2B | 6.6% |
-| Physical Stores | $17.1B | 3.6% |
-| Other Services | $2.2B | 0.5% |
-| **Total** | **$469.8B** | |
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $21.5B | $2.2B | $4.2B | $5.0B | $5.4B |
+| Change | - | -$19.3B | $2.1B | $711M | $467M |
+| YoY % | - | -90% | +95% | +17% | +9% |
 
+### Geographic Segments
 
-### Fiscal Year 2020
+#### North America Segment
 
-#### Annual Product Segments
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $263.5B | $314.0B | $356.1B | $395.6B | $438.0B |
+| Change | - | $50.5B | $42.1B | $39.5B | $42.4B |
+| YoY % | - | +19% | +13% | +11% | +11% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Online Stores | $197.3B | 51.1% |
-| Third-Party Seller Services | $80.5B | 20.8% |
-| Amazon Web Services | $45.4B | 11.8% |
-| Subscription Services | $25.2B | 6.5% |
-| Other Services | $21.5B | 5.6% |
-| Physical Stores | $16.2B | 4.2% |
-| **Total** | **$386.1B** | |
+#### International Segment
 
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $46.0B | $63.5B | $69.8B | $82.0B | $93.8B |
+| Change | - | $17.5B | $6.3B | $12.2B | $11.9B |
+| YoY % | - | +38% | +10% | +17% | +14% |
+
+#### GERMANY
+
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $29.6B | $37.3B | $33.6B | $37.6B | $40.9B |
+| Change | - | $7.8B | -$3.7B | $4.0B | $3.3B |
+| YoY % | - | +26% | -10% | +12% | +9% |
+
+#### UNITED KINGDOM
+
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $26.5B | $31.9B | $30.1B | $33.6B | $37.9B |
+| Change | - | $5.4B | -$1.8B | $3.5B | $4.3B |
+| YoY % | - | +21% | -6% | +12% | +13% |
+
+#### JAPAN
+
+| FY | 2020 | 2021 | 2022 | 2023 | 2024 |
+|----|----|----|----|----|----|
+| Revenue | $20.5B | $23.1B | $24.4B | $26.0B | $27.4B |
+| Change | - | $2.6B | $1.3B | $1.6B | $1.4B |
+| YoY % | - | +13% | +6% | +7% | +5% |
 
 ---
 
 ## META - Meta Platforms, Inc.
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### Family of Apps
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Family of Apps | $198.8B | 98.9% |
-| Reality Labs | $2.2B | 1.1% |
-| **Total** | **$201.0B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $115.7B | $114.5B | $133.0B | $162.4B | $198.8B |
+| Change | - | -$1.2B | $18.6B | $29.3B | $36.4B |
+| YoY % | - | -1% | +16% | +22% | +22% |
 
+#### Reality Labs
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $2.3B | $2.2B | $1.9B | $2.1B | $2.2B |
+| Change | - | -$115M | -$263M | $250M | $61M |
+| YoY % | - | -5% | -12% | +13% | +3% |
 
-#### Annual Product Segments
+### Geographic Segments
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Family of Apps | $162.4B | 98.7% |
-| Reality Labs | $2.1B | 1.3% |
-| **Total** | **$164.5B** | |
+#### US & Canada
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $51.5B | $50.1B | $52.9B | - | $78.9B |
+| Change | - | -$1.4B | $2.7B | - | $26.0B |
+| YoY % | - | -3% | +5% | - | +49% |
 
-### Fiscal Year 2023
+#### Asia Pacific
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $26.7B | $27.8B | $36.2B | $45.0B | $53.8B |
+| Change | - | $1.0B | $8.4B | $8.9B | $8.8B |
+| YoY % | - | +4% | +30% | +24% | +20% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Family of Apps | $133.0B | 98.6% |
-| Reality Labs | $1.9B | 1.4% |
-| **Total** | **$134.9B** | |
+#### Europe
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $29.1B | $26.7B | $31.2B | $38.4B | $46.6B |
+| Change | - | -$2.4B | $4.5B | $7.2B | $8.2B |
+| YoY % | - | -8% | +17% | +23% | +21% |
 
-### Fiscal Year 2022
+#### Rest Of World
 
-#### Annual Product Segments
-
-| Segment | Revenue | % |
-|---------|---------|---|
-| Family of Apps | $114.5B | 98.1% |
-| Reality Labs | $2.2B | 1.9% |
-| **Total** | **$116.6B** | |
-
-
-### Fiscal Year 2021
-
-#### Annual Product Segments
-
-| Segment | Revenue | % |
-|---------|---------|---|
-| Family of Apps | $115.7B | 98.1% |
-| Reality Labs | $2.3B | 1.9% |
-| **Total** | **$117.9B** | |
-
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $10.6B | $12.0B | $14.7B | $17.9B | $21.7B |
+| Change | - | $1.4B | $2.6B | $3.3B | $3.8B |
+| YoY % | - | +13% | +22% | +22% | +21% |
 
 ---
 
 ## MSFT - Microsoft Corporation
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### Server Products And Tools
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Server Products And Tools | $98.4B | 34.9% |
-| Microsoft Three Six Five Commercial Products And Cloud Services | $87.8B | 31.2% |
-| Gaming | $23.5B | 8.3% |
-| Linked In Corporation | $17.8B | 6.3% |
-| Devices | $17.3B | 6.1% |
-| Search And News Advertising | $13.9B | 4.9% |
-| Dynamics Products And Cloud Services | $7.8B | 2.8% |
-| Enterprise Services | $7.8B | 2.8% |
-| Microsoft Three Six Five Consumer Products and Cloud Services | $7.4B | 2.6% |
-| Other Products And Services | $72.0M | 0.0% |
-| **Total** | **$281.7B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $67.3B | $80.0B | - | $98.4B |
+| Change | - | - | $12.6B | - | $18.5B |
+| YoY % | - | - | +19% | - | +23% |
 
+#### Microsoft Office System
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $39.9B | $44.9B | - | $54.9B | - |
+| Change | - | $5.0B | - | $10.0B | - |
+| YoY % | - | +13% | - | +22% | - |
 
-#### Annual Product Segments
+#### Windows
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Microsoft Office System | $54.9B | 37.2% |
-| Windows | $23.2B | 15.8% |
-| Gaming | $21.5B | 14.6% |
-| Linked In Corporation | $16.4B | 11.1% |
-| Search And News Advertising | $12.6B | 8.5% |
-| Enterprise Services | $7.6B | 5.2% |
-| Dynamics Products And Cloud Services | $6.5B | 4.4% |
-| Devices | $4.7B | 3.2% |
-| Other Products And Services | $45.0M | 0.0% |
-| **Total** | **$147.4B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $24.8B | $21.5B | $23.2B | - |
+| Change | - | - | -$3.3B | $1.7B | - |
+| YoY % | - | - | -13% | +8% | - |
 
+#### Gaming
 
-### Fiscal Year 2023
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $15.4B | $16.2B | $15.5B | $21.5B | $23.5B |
+| Change | - | $860M | -$764M | $6.0B | $2.0B |
+| YoY % | - | +6% | -5% | +39% | +9% |
 
-#### Annual Product Segments
+#### Search And News Advertising
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Server Products And Tools | $80.0B | 49.0% |
-| Windows | $21.5B | 13.2% |
-| Gaming | $15.5B | 9.5% |
-| Linked In Corporation | $15.1B | 9.3% |
-| Search And News Advertising | $12.2B | 7.5% |
-| Enterprise Services | $7.7B | 4.7% |
-| Devices | $5.5B | 3.4% |
-| Dynamics Products And Cloud Services | $5.4B | 3.3% |
-| Other Products And Services | $211.0M | 0.1% |
-| **Total** | **$163.2B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $8.5B | $11.6B | $12.2B | $12.6B | $13.9B |
+| Change | - | $3.1B | $617M | $368M | $1.3B |
+| YoY % | - | +36% | +5% | +3% | +10% |
 
+#### Linked In Corporation
 
-### Fiscal Year 2022
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $10.3B | $13.8B | $15.1B | $16.4B | $17.8B |
+| Change | - | $3.5B | $1.3B | $1.2B | $1.4B |
+| YoY % | - | +34% | +10% | +8% | +9% |
 
-#### Annual Product Segments
+#### Devices
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Server Products And Tools | $67.3B | 34.0% |
-| Microsoft Office System | $44.9B | 22.6% |
-| Windows | $24.8B | 12.5% |
-| Gaming | $16.2B | 8.2% |
-| Linked In Corporation | $13.8B | 7.0% |
-| Search And News Advertising | $11.6B | 5.8% |
-| Enterprise Services | $7.4B | 3.7% |
-| Devices | $7.0B | 3.5% |
-| Other Products And Services | $5.3B | 2.7% |
-| **Total** | **$198.3B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $6.8B | $7.0B | $5.5B | $4.7B | $17.3B |
+| Change | - | $200M | -$1.5B | -$815M | $12.6B |
+| YoY % | - | +3% | -21% | -15% | +268% |
 
+#### Enterprise Services
 
-### Fiscal Year 2021
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $6.9B | $7.4B | $7.7B | $7.6B | $7.8B |
+| Change | - | $464M | $315M | -$128M | $166M |
+| YoY % | - | +7% | +4% | -2% | +2% |
 
-#### Annual Product Segments
+#### Other Products And Services
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Microsoft Office System | $39.9B | 43.2% |
-| Gaming | $15.4B | 16.7% |
-| Linked In Corporation | $10.3B | 11.2% |
-| Search And News Advertising | $8.5B | 9.2% |
-| Enterprise Services | $6.9B | 7.5% |
-| Devices | $6.8B | 7.4% |
-| Other Products And Services | $4.5B | 4.9% |
-| **Total** | **$92.3B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $4.5B | $5.3B | $211M | $45M | $72M |
+| Change | - | $812M | -$5.1B | -$166M | $27M |
+| YoY % | - | +18% | -96% | -79% | +60% |
 
+### Geographic Segments
+
+#### UNITED STATES
+
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $84.0B | $100.2B | $106.7B | $124.7B | $144.5B |
+| Change | - | $16.3B | $6.5B | $18.0B | $19.8B |
+| YoY % | - | +19% | +7% | +17% | +16% |
+
+#### Non Us
+
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $84.1B | $98.1B | $105.2B | $120.4B | $137.2B |
+| Change | - | $13.9B | $7.1B | $15.2B | $16.8B |
+| YoY % | - | +17% | +7% | +14% | +14% |
 
 ---
 
 ## AMD - Advanced Micro Devices, Inc.
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### Data Center
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Data Center | $16.6B | 43.2% |
-| Client and Gaming | $14.6B | 37.7% |
-| Gaming | $3.9B | 10.1% |
-| Embedded | $3.5B | 9.0% |
-| **Total** | **$38.5B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $6.0B | $6.5B | $12.6B | $16.6B |
+| Change | - | - | $453M | $6.1B | $4.1B |
+| YoY % | - | - | +7% | +94% | +32% |
 
+#### Gaming
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $6.8B | $6.2B | $2.6B | $3.9B |
+| Change | - | - | -$593M | -$3.6B | $1.3B |
+| YoY % | - | - | -9% | -58% | +51% |
 
-#### Annual Product Segments
+#### Client
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Data Center | $12.6B | 48.8% |
-| Client | $7.1B | 27.4% |
-| Embedded | $3.6B | 13.8% |
-| Gaming | $2.6B | 10.1% |
-| **Total** | **$25.8B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $6.2B | $4.7B | $7.1B | - |
+| Change | - | - | -$1.6B | $2.4B | - |
+| YoY % | - | - | -25% | +52% | - |
 
+#### Embedded
 
-### Fiscal Year 2023
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $4.6B | $5.3B | $3.6B | $3.5B |
+| Change | - | - | $769M | -$1.8B | -$103M |
+| YoY % | - | - | +17% | -33% | -3% |
 
-#### Annual Product Segments
+### Geographic Segments
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Data Center | $6.5B | 28.6% |
-| Gaming | $6.2B | 27.4% |
-| Embedded | $5.3B | 23.5% |
-| Client | $4.7B | 20.5% |
-| **Total** | **$22.7B** | |
+#### CHINA
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $4.1B | $5.2B | $3.4B | $6.2B | $7.8B |
+| Change | - | $1.1B | -$1.8B | $2.8B | $1.5B |
+| YoY % | - | +27% | -34% | +82% | +24% |
 
-### Fiscal Year 2022
+#### UNITED STATES
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | $8.0B | $7.8B | - | $11.4B |
+| Change | - | - | -$212M | - | $3.5B |
+| YoY % | - | - | -3% | - | +45% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Gaming | $6.8B | 28.8% |
-| Client | $6.2B | 26.3% |
-| Data Center | $6.0B | 25.6% |
-| Embedded | $4.6B | 19.3% |
-| **Total** | **$23.6B** | |
+#### JAPAN
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $2.4B | $4.2B | $4.6B | $1.8B | - |
+| Change | - | $1.8B | $452M | -$2.9B | - |
+| YoY % | - | +75% | +11% | -62% | - |
 
-### Fiscal Year 2021
+#### SINGAPORE
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $1.4B | $1.4B | $2.2B | $3.6B | $4.3B |
+| Change | - | -$9M | $851M | $1.4B | $670M |
+| YoY % | - | -1% | +62% | +62% | +19% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Computing and Graphics | $9.3B | 56.8% |
-| Graphics and Visual Solutions | $7.1B | 43.2% |
-| **Total** | **$16.4B** | |
+#### TAIWAN, PROVINCE OF CHINA
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $2.1B | $2.4B | $1.8B | $3.3B | $5.2B |
+| Change | - | $278M | -$528M | $1.5B | $1.9B |
+| YoY % | - | +13% | -22% | +79% | +57% |
+
+#### Europe
+
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $1.2B | $1.8B | $2.0B | $1.6B | - |
+| Change | - | $524M | $257M | -$405M | - |
+| YoY % | - | +42% | +14% | -20% | - |
+
+#### Other Countries
+
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $572M | $646M | $695M | $554M | $6.1B |
+| Change | - | $74M | $49M | -$141M | $5.5B |
+| YoY % | - | +13% | +8% | -20% | +993% |
 
 ---
 
 ## AAPL - Apple Inc.
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### iPhone
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| iPhone | $209.6B | 50.4% |
-| Service | $109.2B | 26.2% |
-| Wearables, Home and Accessories | $35.7B | 8.6% |
-| Mac | $33.7B | 8.1% |
-| iPad | $28.0B | 6.7% |
-| **Total** | **$416.2B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $192.0B | $205.5B | $200.6B | $201.2B | $209.6B |
+| Change | - | $13.5B | -$4.9B | $600M | $8.4B |
+| YoY % | - | +7% | -2% | +0% | +4% |
 
+#### Service
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $68.4B | $78.1B | $85.2B | $96.2B | $109.2B |
+| Change | - | $9.7B | $7.1B | $11.0B | $13.0B |
+| YoY % | - | +14% | +9% | +13% | +14% |
 
-#### Annual Product Segments
+#### Mac
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| iPhone | $201.2B | 51.4% |
-| Service | $96.2B | 24.6% |
-| Wearables, Home and Accessories | $37.0B | 9.5% |
-| Mac | $30.0B | 7.7% |
-| iPad | $26.7B | 6.8% |
-| **Total** | **$391.0B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $35.2B | $40.2B | $29.4B | $30.0B | $33.7B |
+| Change | - | $5.0B | -$10.8B | $627M | $3.7B |
+| YoY % | - | +14% | -27% | +2% | +12% |
 
+#### iPad
 
-### Fiscal Year 2023
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $31.9B | $29.3B | $28.3B | $26.7B | $28.0B |
+| Change | - | -$2.6B | -$992M | -$1.6B | $1.3B |
+| YoY % | - | -8% | -3% | -6% | +5% |
 
-#### Annual Product Segments
+#### Wearables, Home and Accessories
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| iPhone | $200.6B | 52.3% |
-| Service | $85.2B | 22.2% |
-| Wearables, Home and Accessories | $39.8B | 10.4% |
-| Mac | $29.4B | 7.7% |
-| iPad | $28.3B | 7.4% |
-| **Total** | **$383.3B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $38.4B | $41.2B | $39.8B | $37.0B | $35.7B |
+| Change | - | $2.9B | -$1.4B | -$2.8B | -$1.3B |
+| YoY % | - | +7% | -3% | -7% | -4% |
 
+### Geographic Segments
 
-### Fiscal Year 2022
+#### Americas Segment
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $153.3B | - | $162.6B | $167.0B | $178.4B |
+| Change | - | - | $9.3B | $4.5B | $11.3B |
+| YoY % | - | - | +6% | +3% | +7% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| iPhone | $205.5B | 52.1% |
-| Service | $78.1B | 19.8% |
-| Wearables, Home and Accessories | $41.2B | 10.5% |
-| Mac | $40.2B | 10.2% |
-| iPad | $29.3B | 7.4% |
-| **Total** | **$394.3B** | |
+#### Europe Segment
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $89.3B | $95.1B | $94.3B | $101.3B | $111.0B |
+| Change | - | $5.8B | -$824M | $7.0B | $9.7B |
+| YoY % | - | +7% | -1% | +7% | +10% |
 
-### Fiscal Year 2021
+#### Greater China Segment
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $68.4B | $74.2B | $72.6B | $67.0B | $64.4B |
+| Change | - | $5.8B | -$1.6B | -$5.6B | -$2.6B |
+| YoY % | - | +9% | -2% | -8% | -4% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| iPhone | $192.0B | 52.5% |
-| Service | $68.4B | 18.7% |
-| Wearables, Home and Accessories | $38.4B | 10.5% |
-| Mac | $35.2B | 9.6% |
-| iPad | $31.9B | 8.7% |
-| **Total** | **$365.8B** | |
+#### Rest of Asia Pacific Segment
 
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $26.4B | $29.4B | $29.6B | $30.7B | $33.7B |
+| Change | - | $3.0B | $240M | $1.0B | $3.0B |
+| YoY % | - | +11% | +1% | +4% | +10% |
+
+#### Japan Segment
+
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $28.5B | $26.0B | $24.3B | $25.1B | $28.7B |
+| Change | - | -$2.5B | -$1.7B | $795M | $3.7B |
+| YoY % | - | -9% | -7% | +3% | +15% |
 
 ---
 
 ## ORCL - Oracle Corporation
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### Cloud and license
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Cloud and license | $49.2B | 85.8% |
-| Services | $5.2B | 9.1% |
-| Hardware | $2.9B | 5.1% |
-| **Total** | **$57.4B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $34.1B | $36.1B | $41.1B | $44.5B | $49.2B |
+| Change | - | $2.0B | $5.0B | $3.4B | $4.8B |
+| YoY % | - | +6% | +14% | +8% | +11% |
 
-#### Quarterly Segments
+#### Cloud services and license support
 
-| Segment | Q2 | Q3 | Q4 |
-|---------|------|------|------|
-| Cloud | $7.2B | $8.0B | - |
-| Software | $5.7B | $6.1B | - |
-| Cloud services and license support | - | - | $11.0B |
-| Cloud and software | $3.6B | $4.0B | - |
-| Services | $1.3B | $1.4B | $1.3B |
-| Hardware | $670.0M | $776.0M | $754.0M |
-| Cloud license and on-premise license | - | - | $1.3B |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $30.2B | $35.3B | $39.4B | - | - |
+| Change | - | $5.1B | $4.1B | - | - |
+| YoY % | - | +17% | +12% | - | - |
 
+#### Services
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $3.2B | $5.6B | $5.4B | $5.4B | $5.2B |
+| Change | - | $2.4B | -$163M | - | -$198M |
+| YoY % | - | +75% | -3% | +0% | -4% |
 
-#### Annual Product Segments
+#### Cloud license and on-premise license
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Cloud and license | $44.5B | 84.0% |
-| Services | $5.4B | 10.3% |
-| Hardware | $3.1B | 5.8% |
-| **Total** | **$53.0B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $5.9B | $5.8B | $5.1B | - | - |
+| Change | - | -$99M | -$698M | - | - |
+| YoY % | - | -2% | -12% | - | - |
 
-#### Quarterly Segments
+#### Hardware
 
-| Segment | Q2 | Q3 | Q4 |
-|---------|------|------|------|
-| Cloud services and license support | $10.5B | $10.8B | $32.3B |
-| Cloud | $7.2B | $15.2B | - |
-| Software | $5.7B | $11.6B | - |
-| Cloud and software | $3.6B | $7.6B | - |
-| Services | $1.3B | $2.8B | $3.9B |
-| Cloud license and on-premise license | $870.0M | $1.2B | $3.2B |
-| Hardware | $670.0M | $1.4B | $2.1B |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $3.2B | $3.3B | $3.1B | $3.1B | $2.9B |
+| Change | - | $91M | -$208M | - | -$130M |
+| YoY % | - | +3% | -6% | +0% | -4% |
 
+### Geographic Segments
 
-### Fiscal Year 2023
+#### Americas
 
-#### Annual Product Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $21.8B | $23.7B | $31.2B | $33.1B | $36.3B |
+| Change | - | $1.9B | $7.5B | $1.9B | $3.2B |
+| YoY % | - | +8% | +32% | +6% | +10% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Cloud and license | $41.1B | 43.7% |
-| Cloud services and license support | $39.4B | 41.9% |
-| Services | $5.4B | 5.8% |
-| Cloud license and on-premise license | $5.1B | 5.4% |
-| Hardware | $3.1B | 3.3% |
-| **Total** | **$94.0B** | |
+#### EMEA
 
-#### Quarterly Segments
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $11.9B | $12.0B | $12.1B | $13.0B | $14.0B |
+| Change | - | $117M | $98M | $921M | $995M |
+| YoY % | - | +1% | +1% | +8% | +8% |
 
-| Segment | Q2 | Q3 | Q4 |
-|---------|------|------|------|
-| Cloud services and license support | $10.5B | $21.3B | $29.1B |
-| Services | $1.3B | $2.6B | $4.1B |
-| Cloud license and on-premise license | $870.0M | $2.1B | $3.2B |
-| Hardware | $655.0M | $1.4B | $2.2B |
+#### Asia Pacific
 
-
-### Fiscal Year 2022
-
-#### Annual Product Segments
-
-| Segment | Revenue | % |
-|---------|---------|---|
-| Cloud and license | $36.1B | 41.9% |
-| Cloud services and license support | $35.3B | 41.1% |
-| Cloud license and on-premise license | $5.8B | 6.7% |
-| Services | $5.6B | 6.5% |
-| Hardware | $3.3B | 3.8% |
-| **Total** | **$86.0B** | |
-
-#### Quarterly Segments
-
-| Segment | Q2 | Q3 | Q4 |
-|---------|------|------|------|
-| Cloud services and license support | $9.5B | $19.2B | $25.9B |
-| Services | $1.4B | $2.8B | $4.1B |
-| Cloud license and on-premise license | $809.0M | $2.0B | $3.6B |
-| Hardware | $714.0M | $1.5B | $2.4B |
-
-
-### Fiscal Year 2021
-
-#### Annual Product Segments
-
-| Segment | Revenue | % |
-|---------|---------|---|
-| Cloud and license | $34.1B | 44.6% |
-| Cloud services and license support | $30.2B | 39.4% |
-| Cloud license and on-premise license | $5.9B | 7.7% |
-| Services | $3.2B | 4.2% |
-| Hardware | $3.2B | 4.2% |
-| **Total** | **$76.5B** | |
-
-#### Quarterly Segments
-
-| Segment | Q2 | Q3 | Q4 |
-|---------|------|------|------|
-| Cloud services and license support | $8.4B | $17.0B | $22.6B |
-| Cloud license and on-premise license | $904.0M | $2.3B | $3.3B |
-| Services | $1.4B | $2.8B | $2.4B |
-| Hardware | $763.0M | $1.6B | $2.3B |
-
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $6.8B | $6.8B | $6.6B | $6.8B | $7.0B |
+| Change | - | -$7M | -$131M | $190M | $226M |
+| YoY % | - | -0% | -2% | +3% | +3% |
 
 ---
 
 ## MU - Micron Technology, Inc.
 
-### Fiscal Year 2025
+### Product Segments
 
-#### Annual Product Segments
+#### MCBU
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| CMBU | $13.5B | 36.2% |
-| MCBU | $11.9B | 31.7% |
-| CDBU | $7.2B | 19.3% |
-| AEBU | $4.8B | 12.7% |
-| **Total** | **$37.4B** | |
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | - | $7.4B | $11.7B | $11.9B |
+| Change | - | - | $4.3B | $192M |
+| YoY % | - | - | +58% | +2% |
 
+#### CMBU
 
-### Fiscal Year 2024
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | - | $1.9B | $3.8B | $13.5B |
+| Change | - | - | $1.9B | $9.7B |
+| YoY % | - | - | +103% | +257% |
 
-#### Annual Product Segments
+#### CDBU
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| MCBU | $11.7B | 46.5% |
-| CDBU | $5.0B | 19.9% |
-| AEBU | $4.6B | 18.5% |
-| CMBU | $3.8B | 15.1% |
-| CNBU | $9,513 | 0.0% |
-| MBU | $6,354 | 0.0% |
-| EBU | $4,614 | 0.0% |
-| SBU | $4,592 | 0.0% |
-| Patent cross-license agreement | $200 | 0.0% |
-| **Total** | **$25.1B** | |
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | - | $2.1B | $5.0B | $7.2B |
+| Change | - | - | $2.9B | $2.2B |
+| YoY % | - | - | +135% | +45% |
 
+#### AEBU
 
-### Fiscal Year 2023
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | - | $4.1B | $4.6B | $4.8B |
+| Change | - | - | $492M | $122M |
+| YoY % | - | - | +12% | +3% |
 
-#### Annual Product Segments
+#### CNBU
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| MCBU | $7.4B | 47.6% |
-| AEBU | $4.1B | 26.7% |
-| CDBU | $2.1B | 13.7% |
-| CMBU | $1.9B | 12.1% |
-| CNBU | $9,513 | 0.0% |
-| MBU | $6,354 | 0.0% |
-| EBU | $4,614 | 0.0% |
-| SBU | $4,592 | 0.0% |
-| Patent cross-license agreement | $200 | 0.0% |
-| **Total** | **$15.5B** | |
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | $9,513 | $9,513 | $9,513 | - |
+| Change | - | - | - | - |
+| YoY % | - | +0% | +0% | - |
 
+#### MBU
 
-### Fiscal Year 2022
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | $6,354 | $6,354 | $6,354 | - |
+| Change | - | - | - | - |
+| YoY % | - | +0% | +0% | - |
 
-#### Annual Product Segments
+#### EBU
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| CNBU | $9,513 | 37.6% |
-| MBU | $6,354 | 25.1% |
-| EBU | $4,614 | 18.3% |
-| SBU | $4,592 | 18.2% |
-| Patent cross-license agreement | $200 | 0.8% |
-| **Total** | **$25,273** | |
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | $4,614 | $4,614 | $4,614 | - |
+| Change | - | - | - | - |
+| YoY % | - | +0% | +0% | - |
 
+#### SBU
+
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | $4,592 | $4,592 | $4,592 | - |
+| Change | - | - | - | - |
+| YoY % | - | +0% | +0% | - |
+
+#### Patent cross-license agreement
+
+| FY | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|
+| Revenue | $200 | $200 | $200 | - |
+| Change | - | - | - | - |
+| YoY % | - | +0% | +0% | - |
 
 ---
 
 ## WDC - Western Digital Corporation
 
-### Fiscal Year 2026
+### Product Segments
 
-#### Quarterly Segments
+#### Flash
 
-| Segment | Q4 |
-|---------|------|
-| Cloud | $2.7B |
-| Americas | $1.3B |
-| Asia | $1.1B |
-| Europe, Middle East and Africa | $609.0M |
-| Client | $176.0M |
-| Consumer | $173.0M |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $9.8B | $6.1B | $6.7B | $6.7B | - |
+| Change | - | -$3.7B | $624M | - | - |
+| YoY % | - | -38% | +10% | +0% | - |
 
+#### HDD
 
-### Fiscal Year 2025
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $9.0B | $6.3B | $6.3B | $6.3B | - |
+| Change | - | -$2.8B | $61M | - | - |
+| YoY % | - | -31% | +1% | +0% | - |
 
-#### Annual Product Segments
+#### Cloud
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Cloud | $8.3B | 87.6% |
-| Consumer | $623.0M | 6.5% |
-| Client | $556.0M | 5.8% |
-| **Total** | **$9.5B** | |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | - | $5.1B | $8.3B | $8.3B |
+| Change | - | - | - | $3.3B | - |
+| YoY % | - | - | - | +65% | +0% |
 
-#### Quarterly Segments
+#### Consumer
 
-| Segment | Q1 | Q3 |
-|---------|------|------|
-| Cloud | $2.0B | $2.5B |
-| Americas | $1.2B | $1.1B |
-| Asia | $753.0M | $1.2B |
-| Europe, Middle East and Africa | $359.0M | $543.0M |
-| Consumer | $157.0M | $162.0M |
-| Client | $140.0M | $146.0M |
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | - | $688M | $623M | $623M |
+| Change | - | - | - | -$65M | - |
+| YoY % | - | - | - | -9% | +0% |
 
+#### Client
 
-### Fiscal Year 2024
+| FY | 2021 | 2022 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | - | $577M | $556M | $556M |
+| Change | - | - | - | -$21M | - |
+| YoY % | - | - | - | -4% | +0% |
 
-#### Annual Product Segments
+### Geographic Segments
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Cloud | $8.3B | 37.0% |
-| Flash | $6.7B | 29.7% |
-| HDD | $6.3B | 28.0% |
-| Consumer | $623.0M | 2.8% |
-| Client | $556.0M | 2.5% |
-| **Total** | **$22.5B** | |
+#### Europe, Middle East and Africa
 
-#### Quarterly Segments
+| FY | 2020 | 2021 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $3.1B | $3.1B | $1.1B | $1.5B | $1.5B |
+| Change | - | - | -$2.0B | $469M | - |
+| YoY % | - | +0% | -65% | +44% | +0% |
 
-| Segment | Q1 | Q3 | Q4 |
-|---------|------|------|------|
-| Cloud | $2.0B | $2.5B | $2.7B |
-| Americas | $3.5B | $1.1B | $1.3B |
-| HDD | $1,752 | $2.2B | $2.4B |
-| Asia | $753.0M | $1.2B | $2.3B |
-| Flash | $1,705 | $1.9B | $1.9B |
-| Europe, Middle East and Africa | $1.1B | $543.0M | $1.2B |
-| Consumer | $487.0M | $162.0M | $330.0M |
-| Client | $416.0M | $146.0M | $322.0M |
+#### China
 
+| FY | 2020 | 2021 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $4.3B | $4.3B | - | - | - |
+| Change | - | - | - | - | - |
+| YoY % | - | +0% | - | - | - |
 
-### Fiscal Year 2023
+#### United States
 
-#### Annual Product Segments
+| FY | 2020 | 2021 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $3.8B | $3.8B | - | - | - |
+| Change | - | - | - | - | - |
+| YoY % | - | +0% | - | - | - |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| Flash | $6.7B | 34.6% |
-| HDD | $6.3B | 32.7% |
-| Cloud | $5.1B | 26.1% |
-| Consumer | $688.0M | 3.6% |
-| Client | $577.0M | 3.0% |
-| **Total** | **$19.3B** | |
+#### Americas
 
-#### Quarterly Segments
+| FY | 2020 | 2021 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | - | $2.9B | $4.6B | $4.6B |
+| Change | - | - | - | $1.7B | - |
+| YoY % | - | - | - | +61% | +0% |
 
-| Segment | Q1 | Q3 | Q4 |
-|---------|------|------|------|
-| Flash | $1,705 | $1.9B | $3.8B |
-| HDD | $4,313 | $2.2B | $2.4B |
+#### Hong Kong
 
+| FY | 2020 | 2021 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $3.6B | $3.6B | - | - | - |
+| Change | - | - | - | - | - |
+| YoY % | - | +0% | - | - | - |
 
-### Fiscal Year 2022
+#### Asia
 
-#### Annual Product Segments
+| FY | 2020 | 2021 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | - | - | $2.4B | $3.4B | $3.4B |
+| Change | - | - | - | $1.0B | - |
+| YoY % | - | - | - | +42% | +0% |
 
-| Segment | Revenue | % |
-|---------|---------|---|
-| HDD | $6.3B | 50.8% |
-| Flash | $6.1B | 49.2% |
-| **Total** | **$12.3B** | |
+#### Rest of Asia
 
-#### Quarterly Segments
-
-| Segment | Q1 | Q3 | Q4 |
-|---------|------|------|------|
-| HDD | $4,960 | $1,194 | $2,561 |
-| Flash | $2,243 | $1,556 | $1,665 |
-
+| FY | 2020 | 2021 | 2023 | 2024 | 2025 |
+|----|----|----|----|----|----|
+| Revenue | $1.5B | $1.5B | - | - | - |
+| Change | - | - | - | - | - |
+| YoY % | - | +0% | - | - | - |
 
 ---
