@@ -2,4 +2,10 @@ symbol,fiscal_year,period,segment_name,segment_type,revenue,source,notes
 NVDA,2021,annual,Gaming,product,7759000000,10-K,Missing from FMP - from NVIDIA FY2021 10-K
 GOOGL,2023,annual,Google Cloud,product,33088000000,10-K,Missing from FMP - from Alphabet FY2023 10-K
 GOOGL,2021,annual,YouTube Ads,product,28845000000,10-K,Missing from FMP - from Alphabet FY2021 10-K
-GOOGL,2023,annual,Google Subscriptions,product,34688000000,10-K,Missing from FMP - from Alphabet FY2023 10-K (Subscriptions Platforms and Devices)
+GOOGL,2023,annual,Google Subscriptions,product,34688000000,10-K,Missing from FMP - from Alphabet FY2023 10-K
+GOOGL,2025,annual,Google Subscriptions,product,46204000000,10-K,Estimated - (Total Revenue - Search - Network - Cloud - YouTube)
+GOOGL,2025,annual,Other Bets,product,1873000000,10-K,From Alphabet FY2024 10-K Other Bets revenues
+AMZN,2022,annual,Online Stores,product,220004000000,10-K,Missing from FMP - from Amazon FY2022 10-K
+AMZN,2023,annual,Online Stores,product,231872000000,10-K,Missing from FMP - from Amazon FY2023 10-K
+AMZN,2022,annual,Third-Party Seller Services,product,117716000000,10-K,Missing from FMP - from Amazon FY2022 10-K
+AMZN,2023,annual,Third-Party Seller Services,product,140053000000,10-K,Missing from FMP - from Amazon FY2023 10-K

@@ -64,11 +64,10 @@ SEGMENT_NAME_MAP = {
     'Microsoft Three Six Five Consumer Products and Cloud Services': 'Microsoft 365 Consumer',
     'Microsoft Office System': 'Microsoft Office',
     'Consulting And Product Support Services': 'Enterprise Services',
-    # AMD
-    'Computing and Graphics': 'Client',
-    'Graphics and Visual Solutions': 'Gaming',
-    'Enterprise, Embedded and Semi-Custom': 'Embedded',
-    'Client and Gaming': 'Client',  # Combined segment
+    # AMD - Note: AMD changed segment structure in 2022
+    # Pre-2022: "Computing and Graphics" + "Enterprise, Embedded and Semi-Custom"
+    # Post-2022: "Data Center" + "Client" + "Gaming" + "Embedded"
+    # We don't map old names as they represent different organizational structures
     # AAPL
     'Service': 'Services',
     # MU
