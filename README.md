@@ -28,6 +28,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 > 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 15 個）
 > 概念 metadata：`concept_metadata.csv`
 
+
 ### 財年制度說明
 
 美國公司財年 (Fiscal Year) 以結束年份命名，不一定是曆年制 (1-12月)。

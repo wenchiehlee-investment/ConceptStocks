@@ -283,7 +283,7 @@ def update_for_ticker(ticker: str, name: str, cadence: str, api_key: str, out_di
     write_csv(out_path, cadence, merged)
 
 
-def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str]]:
+def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str, str]]:
     """Load concept metadata from concept_metadata.csv."""
     metadata_path = os.path.join(out_dir, "concept_metadata.csv")
     metadata = {}
@@ -301,7 +301,8 @@ def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str]]:
                         row.get("Ticker", "-"),
                         row.get("公司名稱", "-"),
                         row.get("CIK", "-"),
-                        row.get("季度區段", "-"),
+                        row.get("財年結束", "-"),
+                        row.get("產品區段", "-"),
                     )
     except Exception as e:
         print(f"  Warning: Could not read {metadata_path}: {e}")
@@ -325,17 +326,17 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
 
     # Build the new concept table
     table_lines = [
-        "| 概念欄位 | 公司名稱 | Ticker | CIK | 季度區段 |",
-        "|----------|----------|--------|-----|----------|",
+        "| 概念欄位 | 公司名稱 | Ticker | CIK | 財年結束 | 產品區段 |",
+        "|----------|----------|--------|-----|----------|----------|",
     ]
 
     for col in concept_cols:
         if col in metadata:
-            ticker, name, cik, segments = metadata[col]
-            table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {segments} |")
+            ticker, name, cik, fy_end, segments = metadata[col]
+            table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {fy_end} | {segments} |")
         else:
             # Unknown concept - add with placeholders
-            table_lines.append(f"| {col} | - | - | - | - |")
+            table_lines.append(f"| {col} | - | - | - | - | - |")
 
     table_lines.append("")
     table_lines.append(f"> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 {len(concept_cols)} 個）")
@@ -344,8 +345,8 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
     new_table = "\n".join(table_lines)
 
     # Find and replace the concept table section
-    # Pattern: from "### Concept columns" to the next "##" or "Additional column"
-    pattern = r"(### Concept columns \(end with 「概念」\)\n\n).*?((?=\nAdditional column:|\n## ))"
+    # Pattern: from "### Concept columns" to "### 財年制度說明" (preserve fiscal year explanation)
+    pattern = r"(### Concept columns \(end with 「概念」\)\n\n).*?((?=\n### 財年制度說明|\nAdditional column:|\n## ))"
     replacement = r"\1" + new_table + "\n\n"
 
     new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
