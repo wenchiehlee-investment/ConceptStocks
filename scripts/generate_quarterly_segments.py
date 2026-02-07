@@ -5,7 +5,7 @@ Generate Quarterly Product Segment Data for Charts
 This script generates CSV data suitable for creating quarterly trend charts.
 Only companies with available quarterly product segment data are included.
 
-Output: concept_stock_quarterly_segments.csv
+Output: raw_conceptstock_company_quarterly_segments.csv
 
 Usage:
     python scripts/generate_quarterly_segments.py
@@ -381,7 +381,7 @@ def main():
     print(f"  Total quarterly records: {len(quarterly_data)}")
 
     # Load annual data for Q4 calculation
-    annual_csv = os.path.join(args.out_dir, "raw_concept_company_revenue.csv")
+    annual_csv = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
     annual_data = load_annual_segments(annual_csv, all_symbols)
     print(f"  Loaded {len(annual_data)} annual records for Q4 calculation")
 
@@ -412,11 +412,11 @@ def main():
     print(f"  After deduplication: {len(all_data)} records")
 
     # Write CSV
-    csv_path = os.path.join(args.out_dir, "concept_stock_quarterly_segments.csv")
+    csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.csv")
     generate_csv(all_data, csv_path)
 
     # Write markdown report
-    md_path = os.path.join(args.out_dir, "concept_stock_quarterly_segments.md")
+    md_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.md")
     generate_markdown_report(all_data, md_path)
 
     print("Done!")

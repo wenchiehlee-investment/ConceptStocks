@@ -87,7 +87,7 @@ Every raw CSV file includes these standard metadata columns in **specific positi
 
 ---
 
-## raw_concept_company_revenue.csv (Concept Stock Company Segment Revenue) [Planned]
+## raw_conceptstock_company_revenue.csv (Concept Stock Company Segment Revenue)
 **No:** 53
 **Source:** Financial Modeling Prep (FMP) or SEC EDGAR XBRL
 **Extraction Strategy:** Fetch product/geographic segment revenue from FMP API or parse SEC XBRL filings.
@@ -108,7 +108,7 @@ Every raw CSV file includes these standard metadata columns in **specific positi
 
 ---
 
-## raw_concept_company_income.csv (Concept Stock Company Income Statement) [Planned]
+## raw_conceptstock_company_income.csv (Concept Stock Company Income Statement)
 **No:** 54
 **Source:** Financial Modeling Prep (FMP) or SEC EDGAR XBRL
 **Extraction Strategy:** Fetch income statement data from FMP API or parse SEC XBRL filings.

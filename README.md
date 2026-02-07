@@ -62,8 +62,8 @@ If you add new concept columns, keep the naming pattern `X概念` and update thi
 We collect quarterly product segment revenue from SEC EDGAR filings (10-Q and 8-K press releases).
 
 Output files:
-- `concept_stock_quarterly_segments.csv` - Raw quarterly segment data
-- `concept_stock_quarterly_segments.md` - Human-readable quarterly report
+- `raw_conceptstock_company_quarterly_segments.csv` - Raw quarterly segment data
+- `raw_conceptstock_company_quarterly_segments.md` - Human-readable quarterly report
 
 Data sources by company:
 | Company | Source | Segments |

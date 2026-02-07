@@ -90,13 +90,13 @@ jobs:
           git config user.email "github-actions@users.noreply.github.com"
 
           # Check for changes
-          if git diff --quiet raw_concept_company_*.csv concept_stock_segments.md 2>/dev/null; then
+          if git diff --quiet raw_conceptstock_company_*.csv raw_conceptstock_company_*.md 2>/dev/null; then
             echo "No changes to commit."
             exit 0
           fi
 
           # Add and commit
-          git add raw_concept_company_income.csv raw_concept_company_revenue.csv concept_stock_segments.md
+          git add raw_conceptstock_company_income.csv raw_conceptstock_company_revenue.csv raw_conceptstock_company_segments.md
 
           TIMESTAMP=$(date -u +"%Y-%m-%d")
           git commit -m "Update company financials data ($TIMESTAMP)"

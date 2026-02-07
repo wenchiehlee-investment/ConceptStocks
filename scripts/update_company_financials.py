@@ -8,8 +8,8 @@ Fetches income statements and segment revenue from multiple sources:
 - FMP (cross-check for segments)
 
 Output files:
-- raw_concept_company_income.csv (Type 54)
-- raw_concept_company_revenue.csv (Type 53)
+- raw_conceptstock_company_income.csv (Type 54)
+- raw_conceptstock_company_revenue.csv (Type 53)
 """
 
 import argparse
@@ -29,8 +29,8 @@ from src.external.fmp_client import FMPClient, load_api_key as load_fmp_key
 
 
 # Output file names
-OUTPUT_INCOME = "raw_concept_company_income.csv"
-OUTPUT_REVENUE = "raw_concept_company_revenue.csv"
+OUTPUT_INCOME = "raw_conceptstock_company_income.csv"
+OUTPUT_REVENUE = "raw_conceptstock_company_revenue.csv"
 
 # Income statement CSV schema (Type 54)
 INCOME_FIELDNAMES = [

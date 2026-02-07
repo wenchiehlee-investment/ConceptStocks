@@ -252,7 +252,7 @@ xbrl = latest.xbrl()
 
 ### Planned Output Files (預計輸出檔案)
 
-**Type 53: raw_concept_company_revenue.csv** - 分項營收
+**Type 53: raw_conceptstock_company_revenue.csv** - 分項營收
 
 | 欄位 | 類型 | 說明 | 範例 |
 |------|------|------|------|
@@ -264,7 +264,7 @@ xbrl = latest.xbrl()
 | revenue | float | 營收 (USD) | 32900000000 |
 | revenue_yoy_pct | float | YoY 成長率 | 0.29 |
 
-**Type 54: raw_concept_company_income.csv** - 損益表
+**Type 54: raw_conceptstock_company_income.csv** - 損益表
 
 | 欄位 | 類型 | 說明 | 範例 |
 |------|------|------|------|
@@ -342,7 +342,7 @@ if __name__ == "__main__":
             all_data.append(record)
 
     df = pd.DataFrame(all_data)
-    df.to_csv("raw_concept_company_revenue.csv", index=False)
+    df.to_csv("raw_conceptstock_company_revenue.csv", index=False)
 ```
 
 #### SEC EDGAR Extractor (方案 B)
@@ -403,10 +403,10 @@ class EdgarSegmentExtractor:
 # .github/sync-Python-Actions.GoodInfo.Analyzer.yml
 group:
   - files:
-      - source: data/raw_concept_company_revenue.csv
-        dest:   data/stage1_raw/raw_concept_company_revenue.csv
-      - source: data/raw_concept_company_income.csv
-        dest:   data/stage1_raw/raw_concept_company_income.csv
+      - source: data/raw_conceptstock_company_revenue.csv
+        dest:   data/stage1_raw/raw_conceptstock_company_revenue.csv
+      - source: data/raw_conceptstock_company_income.csv
+        dest:   data/stage1_raw/raw_conceptstock_company_income.csv
     repos: |
         wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer
 ```
@@ -416,9 +416,9 @@ group:
 - [x] 決定採用方案 C：混合方案（SEC EDGAR 為主，FMP 為輔）
 - [x] 註冊 API 帳號並取得 API Key（FMP, Alpha Vantage）
 - [x] 建立 `src/external/` 目錄與客戶端程式（sec_edgar_client.py, fmp_client.py, alphavantage_client.py）
-- [x] 定義 Type 53/54 輸出檔案（raw_concept_company_revenue.csv, raw_concept_company_income.csv）
+- [x] 定義 Type 53/54 輸出檔案（raw_conceptstock_company_revenue.csv, raw_conceptstock_company_income.csv）
 - [x] 建立 GitHub Actions 定期更新排程（update_company_financials.yml）
-- [x] 新增季度區段資料（concept_stock_quarterly_segments.csv/md）
+- [x] 新增季度區段資料（raw_conceptstock_company_quarterly_segments.csv/md）
 - [x] 建立 8-K 新聞稿解析器（NVDA, GOOGL, AMZN, META, MSFT, AAPL, MU）
 - [x] 建立 10-Q 區段解析器（AMD, ORCL, WDC）
 - [ ] 整合到 Stage 1 Pipeline（待同步到 GoodInfo.Analyzer）

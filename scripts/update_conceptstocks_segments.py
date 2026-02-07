@@ -7,7 +7,7 @@ This script generates a formatted markdown report showing:
 - Quarterly segment revenue (from SEC 10-Q filings where available)
 
 Data sources:
-- raw_concept_company_revenue.csv (FMP annual data)
+- raw_conceptstock_company_revenue.csv (FMP annual data)
 - SEC EDGAR 10-K/10-Q parsing for companies without FMP data
 
 Usage:
@@ -346,7 +346,7 @@ def main() -> int:
     print(f"  Years: {args.years}, Include quarterly: {include_quarterly}")
 
     # Load annual segment data from CSV
-    csv_path = os.path.join(args.out_dir, "raw_concept_company_revenue.csv")
+    csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
     print(f"  Loading annual segment data from {csv_path}")
     annual_data = load_segment_data(csv_path, years=args.years)
 
@@ -374,7 +374,7 @@ def main() -> int:
     )
 
     # Write output file
-    output_path = os.path.join(args.out_dir, "concept_stock_segments.md")
+    output_path = os.path.join(args.out_dir, "raw_conceptstock_company_segments.md")
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(markdown_content)
 
