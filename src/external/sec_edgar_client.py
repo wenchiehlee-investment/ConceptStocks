@@ -30,6 +30,9 @@ COMPANY_CIK = {
     "ORCL": "0001341439",
     "MU": "0000723125",
     "WDC": "0000106040",
+    "QCOM": "0000804328",
+    "DELL": "0001571996",
+    "HPQ": "0000047217",
 }
 
 # XBRL concepts for income statement metrics

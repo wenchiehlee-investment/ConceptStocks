@@ -91,6 +91,9 @@ COMPANY_NAMES = {
     "ORCL": "Oracle Corporation",
     "MU": "Micron Technology, Inc.",
     "WDC": "Western Digital Corporation",
+    "QCOM": "Qualcomm Inc.",
+    "DELL": "Dell Technologies Inc.",
+    "HPQ": "HP Inc.",
 }
 
 

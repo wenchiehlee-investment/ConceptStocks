@@ -36,16 +36,46 @@ COMPANY_NAMES = {
     'ORCL': 'Oracle Corporation',
     'MU': 'Micron Technology, Inc.',
     'WDC': 'Western Digital Corporation',
+    'QCOM': 'Qualcomm Inc.',
+    'DELL': 'Dell Technologies Inc.',
+    'HPQ': 'HP Inc.',
 }
 
 # Companies with FMP segment data available
 FMP_SUPPORTED = ['NVDA', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AMD', 'AAPL']
 
 # Companies without FMP segment data (need SEC EDGAR fallback)
-SEC_ONLY = ['ORCL', 'MU', 'WDC']
+SEC_ONLY = ['ORCL', 'MU', 'WDC', 'QCOM', 'DELL', 'HPQ']
 
 # Display order
-DISPLAY_ORDER = ['NVDA', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AMD', 'AAPL', 'ORCL', 'MU', 'WDC']
+DISPLAY_ORDER = ['NVDA', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AMD', 'AAPL', 'ORCL', 'MU', 'WDC', 'QCOM', 'DELL', 'HPQ']
+
+# Segments to skip (parsing errors, duplicates, or non-revenue items)
+SKIP_SEGMENTS = {
+    # QCOM - SEC 10-K parsing issues (values in wrong units or non-revenue items)
+    'EBT',  # Earnings Before Tax - not a revenue segment
+    'Equipment and services',  # Parent segment, overlaps with Handsets+IoT+Automotive
+    'RFFE',  # Sub-segment of Handsets
+    # MU - Old segment names with parsing errors
+    'Compute and Networking',
+    'Patent cross-license agreement',
+    # WDC - Old geographic segments replaced by new structure
+    'China',
+    'Hong Kong',
+    'Rest of Asia',
+    'United States',
+    # Common non-revenue items from SEC 10-K parsing
+    'EBITDA',
+    'Adjusted EBITDA',
+    'Cash flow from operations',
+    'Free cash flow',
+    'Adjusted free cash flow',
+    'Products (a)',  # Footnote reference, not actual segment
+    'Services (b)',  # Footnote reference, not actual segment
+}
+
+# Minimum revenue threshold to filter out parsing errors (values should be > $100M)
+MIN_REVENUE_THRESHOLD = 100_000_000
 
 # Segment name normalization mapping
 # Maps variant names to canonical names for consistent trend tracking
@@ -60,8 +90,8 @@ SEGMENT_NAME_MAP = {
     'Other Bets Revenues': 'Other Bets',
     # MSFT
     'Xbox': 'Gaming',
-    'Microsoft Three Six Five Commercial Products And Cloud Services': 'Microsoft 365 Commercial',
-    'Microsoft Three Six Five Consumer Products and Cloud Services': 'Microsoft 365 Consumer',
+    'Microsoft Three Six Five Commercial Products And Cloud Services': 'Microsoft Office',
+    'Microsoft Three Six Five Consumer Products and Cloud Services': 'Microsoft Office',
     'Microsoft Office System': 'Microsoft Office',
     'Consulting And Product Support Services': 'Enterprise Services',
     # AMD - Note: AMD changed segment structure in 2022
@@ -79,6 +109,8 @@ SEGMENT_NAME_MAP = {
     'MBU': 'Mobile',
     'EBU': 'Embedded',
     'SBU': 'Storage',
+    # QCOM
+    'IoT (internet of things)': 'IoT',
 }
 
 
@@ -176,11 +208,15 @@ def load_segment_data(csv_path: str, override_path: str = None) -> dict:
                 else:
                     data[symbol][seg_type][seg_name][fy] = revenue
 
-    # Apply manual overrides (fill gaps, don't replace existing data)
+    # Apply manual overrides (fill gaps, or replace if override value is higher)
     for (symbol, fy, seg_type, seg_name), revenue in overrides.items():
-        if fy not in data[symbol][seg_type][seg_name]:
+        existing = data[symbol][seg_type][seg_name].get(fy, 0)
+        if existing == 0:
             data[symbol][seg_type][seg_name][fy] = revenue
             print(f"    Applied override: {symbol} FY{fy} {seg_name}")
+        elif revenue > existing * 1.05:  # Override if >5% higher (likely more complete)
+            data[symbol][seg_type][seg_name][fy] = revenue
+            print(f"    Applied override (replaced): {symbol} FY{fy} {seg_name} ({existing/1e9:.1f}B -> {revenue/1e9:.1f}B)")
 
     return dict(data)
 
@@ -195,7 +231,7 @@ def generate_markdown(data: dict, years: int = 5) -> str:
     lines.append(f"> Last updated: {datetime.now().strftime('%Y-%m-%d')}")
     lines.append("> Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)")
     lines.append(f"> Coverage: {years} fiscal years")
-    lines.append("> Format: Segment-centric with years as columns (suitable for trend charts)")
+    lines.append("> Format: Single table per company with segments as rows, years as columns")
     lines.append("> Note: Segment names are normalized for consistent trend tracking (e.g., 'YouTube Ads' = 'YouTube Advertising Revenue')")
     lines.append("")
 
@@ -224,12 +260,14 @@ def generate_markdown(data: dict, years: int = 5) -> str:
 
         latest_fy = max(all_years)
 
-        # Find top segment by revenue in latest year
+        # Find top segment by revenue in latest year (skip problematic segments)
         top_seg = None
         top_rev = 0
         for seg_name, year_data in product_data.items():
+            if seg_name in SKIP_SEGMENTS:
+                continue
             rev = year_data.get(latest_fy, 0)
-            if rev > top_rev:
+            if rev >= MIN_REVENUE_THRESHOLD and rev > top_rev:
                 top_rev = rev
                 top_seg = seg_name
 
@@ -278,74 +316,59 @@ def generate_markdown(data: dict, years: int = 5) -> str:
             sorted_years = sorted(all_years, reverse=True)[:years]
             sorted_years = sorted(sorted_years)  # Ascending for display
 
-            # Sort segments by total revenue (descending)
-            seg_totals = {}
+            # Sort segments by latest year revenue (descending)
+            latest_fy = max(sorted_years)
+            seg_latest_rev = {}
             for seg_name, year_data in type_data.items():
-                seg_totals[seg_name] = sum(year_data.values())
+                seg_latest_rev[seg_name] = year_data.get(latest_fy, 0)
 
-            sorted_segments = sorted(type_data.keys(), key=lambda x: seg_totals.get(x, 0), reverse=True)
+            sorted_segments = sorted(type_data.keys(), key=lambda x: seg_latest_rev.get(x, 0), reverse=True)
+
+            # Filter segments: must have at least 2 years of valid data
+            filtered_segments = []
+            for seg_name in sorted_segments:
+                # Skip known problematic segments
+                if seg_name in SKIP_SEGMENTS:
+                    continue
+
+                year_data = type_data[seg_name]
+                # Count years with valid revenue (above threshold to filter parsing errors)
+                valid_years = [
+                    y for y in sorted_years
+                    if year_data.get(y, 0) >= MIN_REVENUE_THRESHOLD
+                ]
+                if len(valid_years) >= 2:
+                    filtered_segments.append(seg_name)
 
             # Limit to top 10 segments
-            sorted_segments = sorted_segments[:10]
+            filtered_segments = filtered_segments[:10]
+
+            if not filtered_segments:
+                continue
 
             lines.append(f"### {type_label}")
             lines.append("")
 
-            # Generate table for each segment
-            for seg_name in sorted_segments:
+            # Generate single table with all segments as rows
+            # Table header with years
+            header = "| Segment |"
+            for fy in sorted_years:
+                header += f" FY{fy} |"
+            lines.append(header)
+
+            sep = "|---------|" + "-------:|" * len(sorted_years)
+            lines.append(sep)
+
+            # One row per segment
+            for seg_name in filtered_segments:
                 year_data = type_data[seg_name]
-
-                # Skip segments with too few data points
-                valid_years = [y for y in sorted_years if year_data.get(y, 0) > 0]
-                if len(valid_years) < 2:
-                    continue
-
-                lines.append(f"#### {seg_name}")
-                lines.append("")
-
-                # Table header with years
-                header = "| FY |"
-                for fy in sorted_years:
-                    header += f" {fy} |"
-                lines.append(header)
-
-                sep = "|----" + "|----" * len(sorted_years) + "|"
-                lines.append(sep)
-
-                # Revenue row
-                row = "| Revenue |"
+                row = f"| {seg_name} |"
                 for fy in sorted_years:
                     rev = year_data.get(fy, 0)
                     row += f" {fmt_revenue(rev)} |"
                 lines.append(row)
 
-                # YoY change (dollar amount)
-                row = "| Change |"
-                prev_rev = None
-                for fy in sorted_years:
-                    rev = year_data.get(fy, 0)
-                    if prev_rev and prev_rev > 0 and rev > 0:
-                        change = rev - prev_rev
-                        row += f" {fmt_revenue(change) if change >= 0 else fmt_revenue(change)} |"
-                    else:
-                        row += " - |"
-                    prev_rev = rev if rev > 0 else prev_rev
-                lines.append(row)
-
-                # YoY growth (percentage)
-                row = "| YoY % |"
-                prev_rev = None
-                for fy in sorted_years:
-                    rev = year_data.get(fy, 0)
-                    if prev_rev and prev_rev > 0 and rev > 0:
-                        yoy = (rev - prev_rev) / prev_rev * 100
-                        row += f" {yoy:+.0f}% |"
-                    else:
-                        row += " - |"
-                    prev_rev = rev if rev > 0 else prev_rev
-                lines.append(row)
-
-                lines.append("")
+            lines.append("")
 
         lines.append("---")
         lines.append("")

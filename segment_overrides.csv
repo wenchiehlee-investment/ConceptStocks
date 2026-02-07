@@ -9,3 +9,37 @@ AMZN,2022,annual,Online Stores,product,220004000000,10-K,Missing from FMP - from
 AMZN,2023,annual,Online Stores,product,231872000000,10-K,Missing from FMP - from Amazon FY2023 10-K
 AMZN,2022,annual,Third-Party Seller Services,product,117716000000,10-K,Missing from FMP - from Amazon FY2022 10-K
 AMZN,2023,annual,Third-Party Seller Services,product,140053000000,10-K,Missing from FMP - from Amazon FY2023 10-K
+MSFT,2021,annual,Server Products And Tools,product,52589000000,10-K,Missing from FMP - from Microsoft FY2021 10-K
+MSFT,2021,annual,Windows,product,22488000000,10-K,Missing from FMP - from Microsoft FY2021 10-K
+MSFT,2023,annual,Microsoft Office,product,48728000000,10-K,Missing from FMP - from Microsoft FY2023 10-K (Office Commercial + Consumer)
+MSFT,2024,annual,Server Products And Tools,product,91117000000,10-K,Missing from FMP - from Microsoft FY2024 10-K
+MSFT,2025,annual,Windows,product,22312000000,10-K,Estimated from Microsoft FY2025 10-K (Windows products revenue)
+MSFT,2025,annual,Microsoft Office,product,95171000000,10-K,From Microsoft FY2025 (M365 Commercial $87.8B + M365 Consumer $7.4B)
+ORCL,2024,annual,Cloud services and license support,product,43027000000,10-K,Missing from SEC 10-K parser - from Oracle FY2024 10-K
+ORCL,2024,annual,Cloud license and on-premise license,product,5137000000,10-K,Missing from SEC 10-K parser - from Oracle FY2024 10-K
+ORCL,2025,annual,Cloud services and license support,product,47715000000,10-K,From Oracle FY2025 10-K
+ORCL,2025,annual,Cloud license and on-premise license,product,4426000000,10-K,From Oracle FY2025 10-K
+QCOM,2021,annual,Handsets,product,25027000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2022,annual,Handsets,product,22570000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2023,annual,Handsets,product,24863000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2024,annual,Handsets,product,27793000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2025,annual,Handsets,product,30928000000,10-K,From Qualcomm FY2025 10-K
+QCOM,2021,annual,IoT,product,6948000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2022,annual,IoT,product,5940000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2023,annual,IoT,product,5423000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2024,annual,IoT,product,6617000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2025,annual,IoT,product,6181000000,10-K,From Qualcomm FY2025 10-K
+QCOM,2021,annual,Automotive,product,1372000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2022,annual,Automotive,product,1872000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2023,annual,Automotive,product,2910000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2024,annual,Automotive,product,3957000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2025,annual,Automotive,product,4683000000,10-K,From Qualcomm FY2025 10-K
+QCOM,2021,annual,Licensing,product,7029000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2022,annual,Licensing,product,5792000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2023,annual,Licensing,product,6171000000,10-K,SEC parser unit fix (value in millions)
+QCOM,2024,annual,Licensing,product,5606000000,10-K,From Qualcomm FY2024 10-K
+QCOM,2025,annual,Licensing,product,5622000000,10-K,From Qualcomm FY2025 10-K
+AAPL,2022,annual,Americas Segment,geography,169658000000,10-K,Missing from FMP - from Apple FY2022 10-K
+META,2024,annual,US & Canada,geography,64508000000,10-K,Missing from FMP - from Meta FY2024 10-K
+NVDA,2025,annual,UNITED STATES,geography,61409000000,10-K,Estimated from NVIDIA FY2025 10-K
+AMD,2025,annual,Client,product,10611000000,10-K,Estimated from AMD FY2025 (split from Client and Gaming $14.55B)

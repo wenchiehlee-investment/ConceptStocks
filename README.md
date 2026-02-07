@@ -22,8 +22,10 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 | SanDisk概念 | Western Digital | WDC | 0000106040 | Cloud, Client, Consumer, Flash, HDD |
 | Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | - |
 | Lenovo概念 | Lenovo Group | 0992.HK | 香港上市 | - |
+| Dell概念 | - | - | - | - |
+| HP概念 | - | - | - | - |
 
-> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 13 個）
+> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 15 個）
 > 概念 metadata：`concept_metadata.csv`
 
 
