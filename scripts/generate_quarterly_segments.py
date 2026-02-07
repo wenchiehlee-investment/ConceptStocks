@@ -15,9 +15,54 @@ Usage:
 import argparse
 import csv
 import os
+import re
 import sys
 from collections import defaultdict
 from datetime import datetime
+
+
+def load_latest_released_quarter(csv_path: str) -> dict:
+    """
+    Load latest released fiscal quarter for each company from concept_metadata.csv.
+
+    Returns:
+        Dict: {symbol: (fy, quarter)} e.g., {'NVDA': (2026, 3), 'GOOGL': (2025, 4)}
+    """
+    if not os.path.exists(csv_path):
+        return {}
+
+    latest_q = {}
+    try:
+        with open(csv_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                ticker = row.get('Ticker', '')
+                latest_report = row.get('最新財報', '')
+
+                if not ticker or ticker == '-' or not latest_report:
+                    continue
+
+                # Parse "FY2026 Q3" format
+                match = re.match(r'FY(\d{4})\s+Q(\d)', latest_report)
+                if match:
+                    fy = int(match.group(1))
+                    quarter = int(match.group(2))
+                    latest_q[ticker] = (fy, quarter)
+    except Exception as e:
+        print(f"  Warning: Could not read {csv_path}: {e}")
+
+    return latest_q
+
+
+def is_quarter_released(fy: int, quarter: int, latest_fy: int, latest_q: int) -> bool:
+    """Check if a given quarter has been released based on latest released quarter."""
+    if fy < latest_fy:
+        return True
+    elif fy == latest_fy:
+        return quarter <= latest_q
+    else:
+        return False
+
 
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -257,14 +302,18 @@ def generate_csv(data: list, output_path: str):
     print(f"  Wrote {len(data)} records to {output_path}")
 
 
-def generate_markdown_report(data: list, output_path: str):
+def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None):
     """Generate markdown report with quarterly tables."""
+    if latest_q_map is None:
+        latest_q_map = {}
+
     lines = []
 
     lines.append("# Quarterly Product Segment Revenue")
     lines.append("")
     lines.append(f"> Last updated: {datetime.now().strftime('%Y-%m-%d')}")
     lines.append("> Data source: SEC EDGAR 10-Q/10-K filings")
+    lines.append("> Legend: `-` = not yet released, `x` = released but not available")
     lines.append("> Note: Q4 values are calculated as FY - (Q1+Q2+Q3)")
     lines.append("")
 
@@ -290,13 +339,22 @@ def generate_markdown_report(data: list, output_path: str):
             if len(seg_records) < 3:
                 continue
 
+            # Get latest released quarter for this symbol
+            latest_info = latest_q_map.get(symbol)
+            latest_fy = latest_info[0] if latest_info else None
+            latest_q = latest_info[1] if latest_info else None
+
             # Format helper
-            def fmt(v, min_threshold=50_000_000):
-                """Format value, showing '-' for None/0/very small values."""
-                if v is None or v == 0:
-                    return "-"
-                # Show very small calculated Q4 as "-" (likely rounding error)
-                if v < min_threshold:
+            def fmt(v, fy=None, quarter=None, min_threshold=50_000_000):
+                """Format value, showing '-' for not released, 'x' for released but not available."""
+                if v is None or v == 0 or (v < min_threshold and v > 0):
+                    # Determine if released or not
+                    if fy is not None and quarter is not None and latest_fy is not None and latest_q is not None:
+                        q_num = {'Q1': 1, 'Q2': 2, 'Q3': 3, 'Q4': 4}.get(quarter, 0)
+                        if is_quarter_released(fy, q_num, latest_fy, latest_q):
+                            return "x"  # Released but not available
+                        else:
+                            return "-"  # Not yet released
                     return "-"
                 if v >= 1e9:
                     return f"${v/1e9:.1f}B"
@@ -308,10 +366,10 @@ def generate_markdown_report(data: list, output_path: str):
                 fy_records = [r for r in records if r['fiscal_year'] == fy and r['segment_name'] == seg]
                 q_vals = {r['quarter']: r['revenue'] for r in fy_records}
 
-                q1 = fmt(q_vals.get('Q1'))
-                q2 = fmt(q_vals.get('Q2'))
-                q3 = fmt(q_vals.get('Q3'))
-                q4 = fmt(q_vals.get('Q4'))
+                q1 = fmt(q_vals.get('Q1'), fy=fy, quarter='Q1')
+                q2 = fmt(q_vals.get('Q2'), fy=fy, quarter='Q2')
+                q3 = fmt(q_vals.get('Q3'), fy=fy, quarter='Q3')
+                q4 = fmt(q_vals.get('Q4'), fy=fy, quarter='Q4')
 
                 # Skip year if all quarters are empty
                 if q1 == "-" and q2 == "-" and q3 == "-" and q4 == "-":
@@ -320,7 +378,9 @@ def generate_markdown_report(data: list, output_path: str):
                 total = sum(q_vals.get(q, 0) or 0 for q in ['Q1', 'Q2', 'Q3', 'Q4'])
                 fy_val = q_vals.get('FY', total)
 
-                table_rows.append(f"| {fy} | {q1} | {q2} | {q3} | {q4} | {fmt(fy_val, 0)} |")
+                # Total column: just format the value without release check
+                total_fmt = f"${fy_val/1e9:.1f}B" if fy_val >= 1e9 else (f"${fy_val/1e6:.0f}M" if fy_val >= 1e6 else "-")
+                table_rows.append(f"| {fy} | {q1} | {q2} | {q3} | {q4} | {total_fmt} |")
 
             # Skip segment if no valid rows
             if not table_rows:
@@ -365,6 +425,12 @@ def main():
 
     print("Generating quarterly product segment data...")
     print(f"  Years: {args.years}")
+
+    # Load latest released quarter for each company
+    metadata_path = os.path.join(args.out_dir, "concept_metadata.csv")
+    latest_q_map = load_latest_released_quarter(metadata_path)
+    if latest_q_map:
+        print(f"  Loaded latest released quarter for {len(latest_q_map)} companies")
 
     quarters = args.years * 4
     all_symbols = QUARTERLY_PRODUCT_SUPPORTED + QUARTERLY_8K_SUPPORTED
@@ -417,7 +483,7 @@ def main():
 
     # Write markdown report
     md_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.md")
-    generate_markdown_report(all_data, md_path)
+    generate_markdown_report(all_data, md_path, latest_q_map=latest_q_map)
 
     print("Done!")
     return 0

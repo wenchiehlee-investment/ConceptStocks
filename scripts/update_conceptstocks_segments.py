@@ -19,9 +19,50 @@ Usage:
 import argparse
 import csv
 import os
+import re
 import sys
 from collections import defaultdict
 from datetime import datetime
+
+
+def load_latest_released_fy(csv_path: str) -> dict:
+    """
+    Load latest released fiscal year for each company from concept_metadata.csv.
+
+    The 最新財報 column contains values like "FY2026 Q3" or "FY2025 Q4".
+    For annual reports, we consider a FY as released if Q4 is released.
+
+    Returns:
+        Dict: {symbol: latest_released_fy} e.g., {'NVDA': 2025, 'GOOGL': 2025}
+    """
+    if not os.path.exists(csv_path):
+        return {}
+
+    latest_fy = {}
+    try:
+        with open(csv_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                ticker = row.get('Ticker', '')
+                latest_report = row.get('最新財報', '')
+
+                if not ticker or ticker == '-' or not latest_report:
+                    continue
+
+                # Parse "FY2026 Q3" format
+                match = re.match(r'FY(\d{4})\s+Q(\d)', latest_report)
+                if match:
+                    fy = int(match.group(1))
+                    quarter = int(match.group(2))
+                    # For annual data, FY is complete only if Q4 is released
+                    if quarter == 4:
+                        latest_fy[ticker] = fy
+                    else:
+                        latest_fy[ticker] = fy - 1  # Previous FY is complete
+    except Exception as e:
+        print(f"  Warning: Could not read {csv_path}: {e}")
+
+    return latest_fy
 
 
 # Company names
@@ -121,10 +162,27 @@ def normalize_segment_name(name: str) -> str:
     return SEGMENT_NAME_MAP.get(name, name)
 
 
-def fmt_revenue(val):
-    """Format revenue value for display."""
+def fmt_revenue(val, fy: int = None, latest_released_fy: int = None):
+    """
+    Format revenue value for display.
+
+    Args:
+        val: Revenue value
+        fy: Fiscal year of the data
+        latest_released_fy: Latest released fiscal year for the company
+
+    Returns:
+        str: Formatted value, "-" for not yet released, "x" for released but not available
+    """
     if val is None or val == 0:
-        return "-"
+        # Determine if it's "not yet released" or "released but not available"
+        if fy is not None and latest_released_fy is not None:
+            if fy > latest_released_fy:
+                return "-"  # Not yet released
+            else:
+                return "x"  # Released but not available
+        return "-"  # Default to "-" if we don't have FY info
+
     abs_val = abs(val)
     sign = "-" if val < 0 else ""
     if abs_val >= 1e9:
@@ -221,8 +279,18 @@ def load_segment_data(csv_path: str, override_path: str = None) -> dict:
     return dict(data)
 
 
-def generate_markdown(data: dict, years: int = 5) -> str:
-    """Generate markdown content in trend-chart format."""
+def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) -> str:
+    """
+    Generate markdown content in trend-chart format.
+
+    Args:
+        data: Segment revenue data
+        years: Number of years to include
+        latest_fy_map: Dict mapping symbol to latest released fiscal year
+    """
+    if latest_fy_map is None:
+        latest_fy_map = {}
+
     lines = []
 
     # Header
@@ -232,7 +300,8 @@ def generate_markdown(data: dict, years: int = 5) -> str:
     lines.append("> Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)")
     lines.append(f"> Coverage: {years} fiscal years")
     lines.append("> Format: Single table per company with segments as rows, years as columns")
-    lines.append("> Note: Segment names are normalized for consistent trend tracking (e.g., 'YouTube Ads' = 'YouTube Advertising Revenue')")
+    lines.append("> Legend: `-` = not yet released, `x` = released but not available")
+    lines.append("> Note: Segment names are normalized for consistent trend tracking")
     lines.append("")
 
     # Summary table
@@ -360,12 +429,13 @@ def generate_markdown(data: dict, years: int = 5) -> str:
             lines.append(sep)
 
             # One row per segment
+            latest_released = latest_fy_map.get(symbol)
             for seg_name in filtered_segments:
                 year_data = type_data[seg_name]
                 row = f"| {seg_name} |"
                 for fy in sorted_years:
                     rev = year_data.get(fy, 0)
-                    row += f" {fmt_revenue(rev)} |"
+                    row += f" {fmt_revenue(rev, fy=fy, latest_released_fy=latest_released)} |"
                 lines.append(row)
 
             lines.append("")
@@ -402,6 +472,12 @@ def main() -> int:
     print("Generating annual segment revenue report...")
     print(f"  Years: {args.years}")
 
+    # Load latest released FY for each company from concept_metadata.csv
+    metadata_path = os.path.join(args.out_dir, "concept_metadata.csv")
+    latest_fy_map = load_latest_released_fy(metadata_path)
+    if latest_fy_map:
+        print(f"  Loaded latest released FY for {len(latest_fy_map)} companies")
+
     # Load annual segment data from CSV with manual overrides
     csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
     override_path = os.path.join(args.out_dir, "segment_overrides.csv")
@@ -415,7 +491,7 @@ def main() -> int:
 
     # Generate markdown
     print("  Generating markdown...")
-    markdown_content = generate_markdown(data, years=args.years)
+    markdown_content = generate_markdown(data, years=args.years, latest_fy_map=latest_fy_map)
 
     # Write output file
     output_path = os.path.join(args.out_dir, "raw_conceptstock_company_segments.md")
