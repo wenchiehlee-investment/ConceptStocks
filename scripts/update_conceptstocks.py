@@ -326,6 +326,11 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
     # Load metadata from concept_metadata.csv
     metadata = load_concept_metadata(out_dir)
 
+    # Generate current timestamp
+    now = datetime.now()
+    update_time_str = now.strftime("%Y-%m-%d %H:%M:%S CST")
+    update_time_line = f"Update time: {update_time_str}"
+
     # Build the new concept table
     table_lines = [
         "| 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |",
@@ -349,7 +354,7 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
     # Find and replace the concept table section
     # Pattern: from "### Concept columns" to "### 財年制度說明" (preserve fiscal year explanation)
     pattern = r"(### Concept columns \(end with 「概念」\)\n\n).*?((?=\n### 財年制度說明|\nAdditional column:|\n## ))"
-    replacement = r"\1" + new_table + "\n\n"
+    replacement = r"\1" + update_time_line + "\n" + new_table + "\n\n"
 
     new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
 
