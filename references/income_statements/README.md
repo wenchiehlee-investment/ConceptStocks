@@ -1,19 +1,22 @@
 # Income Statement Reference Images
 
-> Last verified: 2026-02-06
+> Last verified: 2026-02-07
 
 This directory contains quarterly earnings reference images for cross-referencing with our annual concept stock data.
 
 ## Image Index
 
-| # | File | Company | Period | Data Match |
-|---|------|---------|--------|-----------|
-| 1 | `nvidia2026Q1.jpg` | NVIDIA (NVDA) | Q1 FY2026 | CONSISTENT |
-| 2 | `29032a0a-..._2741x1540.png` | Oracle (ORCL) | Q2 FY2026 | CONSISTENT |
-| 3 | `625343054_...n.jpg` | Qualcomm (QCOM) | 1Q FY2026 | N/A (not in our list) |
-| 4 | `MS-2026Q2.jpg` | Microsoft (MSFT) | Q2 FY2026 | CONSISTENT |
-| 5 | `MS-2026Q2-1.jpg` | Microsoft (MSFT) | Q2 FY2026 | CONSISTENT |
-| 6 | `apple2026Q1.webp` | Apple (AAPL) | Q1 FY2026 | CONSISTENT |
+| # | File | Company | Period | Data Match | Doc |
+|---|------|---------|--------|-----------|-----|
+| 1 | `nvidia2026Q1.jpg` | NVIDIA (NVDA) | Q1 FY2026 | CONSISTENT | [nvidia2026Q1.md](nvidia2026Q1.md) |
+| 2 | `29032a0a-..._2741x1540.png` | Oracle (ORCL) | Q2 FY2026 | CONSISTENT | [oracle2026Q2.md](oracle2026Q2.md) |
+| 3 | `625343054_...n.jpg` | Qualcomm (QCOM) | 1Q FY2026 | N/A | [qualcomm2026Q1.md](qualcomm2026Q1.md) |
+| 4 | `MS-2026Q2.jpg` | Microsoft (MSFT) | Q2 FY2026 | CONSISTENT | [microsoft2026Q2.md](microsoft2026Q2.md) |
+| 5 | `MS-2026Q2-1.jpg` | Microsoft (MSFT) | Q2 FY2026 | CONSISTENT | [microsoft2026Q2.md](microsoft2026Q2.md) |
+| 6 | `apple2026Q1.webp` | Apple (AAPL) | Q1 FY2026 | CONSISTENT | [apple2026Q1.md](apple2026Q1.md) |
+| 7 | `Oracle-revenue.webp` | Oracle (ORCL) | FY23-FY26 | Q1-Q3 OK, Q4 ISSUE | [oracle-revenue-breakdown.md](oracle-revenue-breakdown.md) |
+| 8 | `Oracle-2023Q4.webp` | Oracle (ORCL) | Q4 FY2023 | Q4 MISMATCH | [oracle2023Q4.md](oracle2023Q4.md) |
+| 9 | `Oracle forecast revenue.webp` | Oracle (ORCL) | FY25-FY30 | FORECAST | [oracle-oci-forecast.md](oracle-oci-forecast.md) |
 
 ## Summary of Comparison
 
@@ -64,3 +67,29 @@ All 4 matched companies (NVDA, ORCL, MSFT, AAPL) show data **consistent** with b
 - Segment structures and proportions align correctly
 - Growth trends are reasonable (all trending above FY2025 averages)
 - QCOM is not in our concept stock list (no comparison possible)
+
+## Oracle Data Quality Issue (2026-02-07)
+
+### Problem: Q4 Calculation Mismatch
+
+After fixing the 10-Q fiscal quarter determination (Oracle Q1 was being mislabeled as Q2), we discovered a data quality issue:
+
+| Source | FY2023 Cloud services |
+|--------|----------------------|
+| Our annual data | $39.4B |
+| Image quarterly sum | $35.3B |
+| **Difference** | **$4.1B** |
+
+This causes our calculated Q4 to be inflated:
+- Our calculated Q4 FY2023: $13.4B
+- Image shows Q4 FY2023: $9.3B
+
+### Root Cause
+
+The 10-K HTML parser may have a fiscal year offset issue. The $39.4B labeled as FY2023 might actually be FY2024 data.
+
+### Current Status
+
+- **Q1-Q3 quarterly data**: FIXED and CONSISTENT with images
+- **Q4 calculated data**: INCORRECT due to annual data mismatch
+- **Investigation needed**: Review 10-K HTML parsing for fiscal year determination
