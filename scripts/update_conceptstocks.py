@@ -301,7 +301,7 @@ def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str, s
                         row.get("Ticker", "-"),
                         row.get("公司名稱", "-"),
                         row.get("CIK", "-"),
-                        row.get("財年結束", "-"),
+                        row.get("最新財季", "-"),
                         row.get("產品區段", "-"),
                     )
     except Exception as e:
@@ -326,14 +326,14 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
 
     # Build the new concept table
     table_lines = [
-        "| 概念欄位 | 公司名稱 | Ticker | CIK | 財年結束 | 產品區段 |",
+        "| 概念欄位 | 公司名稱 | Ticker | CIK | 最新財季 | 產品區段 |",
         "|----------|----------|--------|-----|----------|----------|",
     ]
 
     for col in concept_cols:
         if col in metadata:
-            ticker, name, cik, fy_end, segments = metadata[col]
-            table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {fy_end} | {segments} |")
+            ticker, name, cik, current_q, segments = metadata[col]
+            table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {current_q} | {segments} |")
         else:
             # Unknown concept - add with placeholders
             table_lines.append(f"| {col} | - | - | - | - | - |")

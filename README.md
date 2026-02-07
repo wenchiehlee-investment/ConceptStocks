@@ -7,23 +7,23 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-| 概念欄位 | 公司名稱 | Ticker | CIK | 財年結束 | 產品區段 |
+| 概念欄位 | 公司名稱 | Ticker | CIK | 最新財季 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|
-| nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | 1月 | Data Center, Gaming, Automotive, Professional Visualization |
-| Google概念 | Alphabet Inc. | GOOGL | 0001652044 | 12月 | Google Cloud, Google Services |
-| Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | 12月 | AWS, North America, International |
-| Meta概念 | Meta Platforms Inc. | META | 0001326801 | 12月 | Family of Apps, Reality Labs |
+| nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | FY2027 Q1 | Data Center, Gaming, Automotive, Professional Visualization |
+| Google概念 | Alphabet Inc. | GOOGL | 0001652044 | FY2026 Q1 | Google Cloud, Google Services |
+| Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | FY2026 Q1 | AWS, North America, International |
+| Meta概念 | Meta Platforms Inc. | META | 0001326801 | FY2026 Q1 | Family of Apps, Reality Labs |
 | OpenAI概念 | OpenAI | - | 私人公司 | - | - |
-| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 | 6月 | Intelligent Cloud, More Personal Computing, PBP |
-| AMD概念 | Advanced Micro Devices | AMD | 0000002488 | 12月 | Data Center, Client, Gaming, Embedded |
-| Apple概念 | Apple Inc. | AAPL | 0000320193 | 9月 | iPhone, Mac, iPad, Services, Wearables |
-| Oracle概念 | Oracle Corporation | ORCL | 0001341439 | 5月 | Cloud services, Hardware, Services |
-| Micro概念 | Micron Technology | MU | 0000723125 | 8月 | Cloud Memory, Mobile and Client, Core Data Center |
-| SanDisk概念 | Western Digital | WDC | 0000106040 | 6月 | Cloud, Client, Consumer, Flash, HDD |
-| Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | 9月 | Handsets, IoT, Licensing, Automotive |
-| Lenovo概念 | Lenovo Group | 0992.HK | 香港上市 | 3月 | - |
-| Dell概念 | Dell Technologies | DELL | 0001571996 | 1月 | Servers and networking, Storage |
-| HP概念 | HP Inc. | HPQ | 0000047217 | 10月 | - |
+| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 | FY2026 Q3 | Intelligent Cloud, More Personal Computing, PBP |
+| AMD概念 | Advanced Micro Devices | AMD | 0000002488 | FY2026 Q1 | Data Center, Client, Gaming, Embedded |
+| Apple概念 | Apple Inc. | AAPL | 0000320193 | FY2026 Q2 | iPhone, Mac, iPad, Services, Wearables |
+| Oracle概念 | Oracle Corporation | ORCL | 0001341439 | FY2026 Q3 | Cloud services, Hardware, Services |
+| Micro概念 | Micron Technology | MU | 0000723125 | FY2026 Q2 | Cloud Memory, Mobile and Client, Core Data Center |
+| SanDisk概念 | Western Digital | WDC | 0000106040 | FY2026 Q3 | Cloud, Client, Consumer, Flash, HDD |
+| Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q2 | Handsets, IoT, Licensing, Automotive |
+| Lenovo概念 | Lenovo Group | 0992.HK | 香港上市 | FY2026 Q4 | - |
+| Dell概念 | Dell Technologies | DELL | 0001571996 | FY2027 Q1 | Servers and networking, Storage |
+| HP概念 | HP Inc. | HPQ | 0000047217 | FY2026 Q1 | - |
 
 > 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 15 個）
 > 概念 metadata：`concept_metadata.csv`
@@ -33,10 +33,21 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 美國公司財年 (Fiscal Year) 以結束年份命名，不一定是曆年制 (1-12月)。
 
+**最新財季欄位** (以 2026年2月為例)：
+| 財年結束月 | 公司 | 目前所在財季 |
+|-----------|------|-------------|
+| 1月 | NVDA, DELL | FY2027 Q1 |
+| 5月 | ORCL | FY2026 Q3 |
+| 6月 | MSFT, WDC | FY2026 Q3 |
+| 8月 | MU | FY2026 Q2 |
+| 9月 | AAPL, QCOM | FY2026 Q2 |
+| 10月 | HPQ | FY2026 Q1 |
+| 12月 | GOOGL, AMZN, META, AMD | FY2026 Q1 |
+
 **財年命名規則**：
-- MSFT FY2025 = 2024年7月 ~ 2025年6月 (結束於2025年)
-- AAPL FY2025 = 2024年10月 ~ 2025年9月 (結束於2025年)
-- NVDA FY2025 = 2024年2月 ~ 2025年1月 (結束於2025年)
+- MSFT FY2026 = 2025年7月 ~ 2026年6月 (結束於2026年)
+- AAPL FY2026 = 2025年10月 ~ 2026年9月 (結束於2026年)
+- NVDA FY2027 = 2026年2月 ~ 2027年1月 (結束於2027年)
 
 **52/53週制**：部分公司 (NVDA, DELL, AMD, AAPL, MU, WDC, QCOM) 採用52週制，財年結束日每年略有變動。
 
