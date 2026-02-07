@@ -250,9 +250,15 @@ def calculate_q4(quarterly_data: list, annual_data: list) -> list:
     # Calculate Q4
     for key, q_vals in q_totals.items():
         symbol, fy, seg_name = key
+
+        # Only calculate Q4 if ALL of Q1, Q2, Q3 have data
+        # This prevents inflated Q4 when some quarters are missing
+        if q_vals['Q1'] == 0 or q_vals['Q2'] == 0 or q_vals['Q3'] == 0:
+            continue
+
         q1_q3_sum = q_vals['Q1'] + q_vals['Q2'] + q_vals['Q3']
 
-        if key in fy_totals and q1_q3_sum > 0:
+        if key in fy_totals:
             fy_total = fy_totals[key]
             q4 = fy_total - q1_q3_sum
 
