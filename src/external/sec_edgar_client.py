@@ -35,6 +35,24 @@ COMPANY_CIK = {
     "HPQ": "0000047217",
 }
 
+# Fiscal year end month for each company (used to calculate correct quarter from report date)
+# Q1 ends 3 months after FY start, Q2 ends 6 months after, Q3 ends 9 months after
+FISCAL_YEAR_END_MONTH = {
+    "NVDA": 1,   # Jan - FY ends in January
+    "DELL": 1,   # Jan
+    "ORCL": 5,   # May
+    "MSFT": 6,   # Jun
+    "WDC": 6,    # Jun
+    "MU": 8,     # Aug
+    "AAPL": 9,   # Sep
+    "QCOM": 9,   # Sep
+    "HPQ": 10,   # Oct
+    "GOOGL": 12, # Dec (calendar year)
+    "AMZN": 12,  # Dec
+    "META": 12,  # Dec
+    "AMD": 12,   # Dec
+}
+
 # XBRL concepts for income statement metrics
 INCOME_CONCEPTS = {
     "total_revenue": [
@@ -117,6 +135,61 @@ def parse_money(text: str) -> Optional[float]:
         return -value if negative else value
     except ValueError:
         return None
+
+
+def get_fiscal_quarter_from_report_date(report_date: str, symbol: str) -> Tuple[int, str]:
+    """
+    Calculate fiscal year and quarter from a 10-Q report date.
+
+    Args:
+        report_date: Period end date in YYYY-MM-DD format (e.g., "2024-08-31")
+        symbol: Stock ticker to look up fiscal year end month
+
+    Returns:
+        Tuple of (fiscal_year, quarter) e.g., (2025, "Q1")
+
+    Example for Oracle (FY ends May):
+        - Report date 2024-08-31 (Q1 ends Aug) -> FY2025 Q1
+        - Report date 2024-11-30 (Q2 ends Nov) -> FY2025 Q2
+        - Report date 2025-02-28 (Q3 ends Feb) -> FY2025 Q3
+    """
+    if not report_date or symbol not in FISCAL_YEAR_END_MONTH:
+        return (0, "Q?")
+
+    try:
+        year, month, _ = map(int, report_date.split("-"))
+    except (ValueError, AttributeError):
+        return (0, "Q?")
+
+    fy_end_month = FISCAL_YEAR_END_MONTH[symbol]
+
+    # Calculate months after FY start
+    # FY starts the month after FY end month of previous year
+    # e.g., Oracle FY ends May (5), so FY starts June (6)
+    fy_start_month = (fy_end_month % 12) + 1  # Month after FY end
+
+    # Calculate how many months into the fiscal year the report date is
+    if month >= fy_start_month:
+        # Same calendar year as FY start
+        months_into_fy = month - fy_start_month + 1
+        fiscal_year = year + 1 if fy_end_month < 12 else year
+    else:
+        # Report month is in the year after FY start
+        months_into_fy = (12 - fy_start_month + 1) + month
+        fiscal_year = year if fy_end_month < 12 else year
+
+    # Determine quarter from months into FY
+    # Q1: months 1-3, Q2: months 4-6, Q3: months 7-9, Q4: months 10-12
+    if months_into_fy <= 3:
+        quarter = "Q1"
+    elif months_into_fy <= 6:
+        quarter = "Q2"
+    elif months_into_fy <= 9:
+        quarter = "Q3"
+    else:
+        quarter = "Q4"
+
+    return (fiscal_year, quarter)
 
 
 class SECEdgarClient:
@@ -530,6 +603,7 @@ class SECEdgarClient:
         accessions = recent.get("accessionNumber", [])
         dates = recent.get("filingDate", [])
         primary_docs = recent.get("primaryDocument", [])
+        report_dates = recent.get("reportDate", [])  # Period end date
 
         for i, form in enumerate(forms):
             if form == form_type or form == f"{form_type}/A":
@@ -540,6 +614,7 @@ class SECEdgarClient:
                     "accession": accessions[i] if i < len(accessions) else None,
                     "date": dates[i] if i < len(dates) else None,
                     "primary_doc": primary_docs[i] if i < len(primary_docs) else None,
+                    "report_date": report_dates[i] if i < len(report_dates) else None,
                     "cik": cik,
                 })
 
@@ -935,25 +1010,18 @@ class SECEdgarClient:
                     "united kingdom", "germany", "canada",
                 ]
 
-                # Determine quarter from filing month (approximate)
-                period = "Q?"
-                if filing_date:
-                    month = int(filing_date.split("-")[1]) if "-" in filing_date else 0
-                    # Map filing month to approximate quarter
-                    # Q1 10-Q filed ~May, Q2 ~Aug, Q3 ~Nov
-                    if month in (4, 5, 6):
-                        period = "Q1"
-                    elif month in (7, 8, 9):
-                        period = "Q2"
-                    elif month in (10, 11, 12):
-                        period = "Q3"
-                    else:
-                        period = "Q4"  # Jan-Mar would be Q4 of prev FY
+                # Determine quarter from report_date (period end date)
+                # This correctly handles non-calendar fiscal years (e.g., Oracle ends May)
+                report_date = filing.get("report_date")
+                fiscal_year, period = get_fiscal_quarter_from_report_date(report_date, symbol)
 
                 for seg in segments:
                     seg["symbol"] = symbol
-                    seg["end_date"] = filing_date
+                    seg["end_date"] = report_date or filing_date  # Prefer report_date
                     seg["period"] = period
+                    # Override fiscal_year if we calculated it from report_date
+                    if fiscal_year > 0:
+                        seg["fiscal_year"] = fiscal_year
                     seg["segment_type"] = "product"  # Default
                     if any(geo in seg["segment_name"].lower() for geo in geo_keywords):
                         seg["segment_type"] = "geography"

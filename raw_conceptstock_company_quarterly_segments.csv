@@ -1,48 +1,12 @@
 symbol,company_name,fiscal_year,quarter,segment_name,revenue,end_date,is_calculated
-AAPL,Apple Inc.,2021,Q2,Mac,9102000000.0,2021-04-28,False
-AAPL,Apple Inc.,2021,Q2,Services,16901000000.0,2021-04-28,False
-AAPL,Apple Inc.,2021,Q2,"Wearables, Home and Accessories",7836000000.0,2021-04-28,False
-AAPL,Apple Inc.,2021,Q2,iPad,7807000000.0,2021-04-28,False
-AAPL,Apple Inc.,2021,Q3,Mac,8235000000.0,2021-07-27,False
-AAPL,Apple Inc.,2021,Q3,Services,17486000000.0,2021-07-27,False
-AAPL,Apple Inc.,2021,Q3,"Wearables, Home and Accessories",8775000000.0,2021-07-27,False
-AAPL,Apple Inc.,2021,Q3,iPad,7368000000.0,2021-07-27,False
-AAPL,Apple Inc.,2021,Q4,Mac,9178000000.0,2021-10-28,False
-AAPL,Apple Inc.,2021,Q4,Services,18277000000.0,2021-10-28,False
-AAPL,Apple Inc.,2021,Q4,"Wearables, Home and Accessories",8785000000.0,2021-10-28,False
-AAPL,Apple Inc.,2021,Q4,iPad,8252000000.0,2021-10-28,False
-AAPL,Apple Inc.,2022,Q1,Mac,10852000000.0,2022-01-27,False
-AAPL,Apple Inc.,2022,Q1,Services,19516000000.0,2022-01-27,False
-AAPL,Apple Inc.,2022,Q1,"Wearables, Home and Accessories",14701000000.0,2022-01-27,False
-AAPL,Apple Inc.,2022,Q1,iPad,7248000000.0,2022-01-27,False
-AAPL,Apple Inc.,2022,Q2,Mac,10435000000.0,2022-04-28,False
-AAPL,Apple Inc.,2022,Q2,Services,19821000000.0,2022-04-28,False
-AAPL,Apple Inc.,2022,Q2,"Wearables, Home and Accessories",8806000000.0,2022-04-28,False
-AAPL,Apple Inc.,2022,Q2,iPad,7646000000.0,2022-04-28,False
-AAPL,Apple Inc.,2022,Q3,Mac,7382000000.0,2022-07-28,False
-AAPL,Apple Inc.,2022,Q3,Services,19604000000.0,2022-07-28,False
-AAPL,Apple Inc.,2022,Q3,"Wearables, Home and Accessories",8084000000.0,2022-07-28,False
-AAPL,Apple Inc.,2022,Q3,iPad,7224000000.0,2022-07-28,False
-AAPL,Apple Inc.,2022,Q4,Mac,11508000000.0,,True
-AAPL,Apple Inc.,2022,Q4,Services,19188000000.0,2022-10-27,False
-AAPL,Apple Inc.,2022,Q4,"Wearables, Home and Accessories",9650000000.0,,True
-AAPL,Apple Inc.,2022,Q4,iPad,7174000000.0,,True
-AAPL,Apple Inc.,2023,Q1,Mac,7735000000.0,2023-02-02,False
-AAPL,Apple Inc.,2023,Q1,Services,20766000000.0,2023-02-02,False
-AAPL,Apple Inc.,2023,Q1,"Wearables, Home and Accessories",13482000000.0,2023-02-02,False
-AAPL,Apple Inc.,2023,Q1,iPad,9396000000.0,2023-02-02,False
-AAPL,Apple Inc.,2023,Q2,Mac,7168000000.0,2023-05-04,False
-AAPL,Apple Inc.,2023,Q2,Services,20907000000.0,2023-05-04,False
-AAPL,Apple Inc.,2023,Q2,"Wearables, Home and Accessories",8757000000.0,2023-05-04,False
-AAPL,Apple Inc.,2023,Q2,iPad,6670000000.0,2023-05-04,False
 AAPL,Apple Inc.,2023,Q3,Mac,6840000000.0,2023-08-03,False
 AAPL,Apple Inc.,2023,Q3,Services,21213000000.0,2023-08-03,False
 AAPL,Apple Inc.,2023,Q3,"Wearables, Home and Accessories",8284000000.0,2023-08-03,False
 AAPL,Apple Inc.,2023,Q3,iPad,5791000000.0,2023-08-03,False
-AAPL,Apple Inc.,2023,Q4,Mac,7614000000.0,,True
+AAPL,Apple Inc.,2023,Q4,Mac,7614000000.0,2023-11-02,False
 AAPL,Apple Inc.,2023,Q4,Services,22314000000.0,2023-11-02,False
-AAPL,Apple Inc.,2023,Q4,"Wearables, Home and Accessories",9322000000.0,,True
-AAPL,Apple Inc.,2023,Q4,iPad,6443000000.0,,True
+AAPL,Apple Inc.,2023,Q4,"Wearables, Home and Accessories",9322000000.0,2023-11-02,False
+AAPL,Apple Inc.,2023,Q4,iPad,6443000000.0,2023-11-02,False
 AAPL,Apple Inc.,2024,Q1,Mac,7780000000.0,2024-02-01,False
 AAPL,Apple Inc.,2024,Q1,Services,23117000000.0,2024-02-01,False
 AAPL,Apple Inc.,2024,Q1,"Wearables, Home and Accessories",11953000000.0,2024-02-01,False
@@ -79,88 +43,59 @@ AAPL,Apple Inc.,2026,Q1,Mac,8386000000.0,2026-01-29,False
 AAPL,Apple Inc.,2026,Q1,Services,30013000000.0,2026-01-29,False
 AAPL,Apple Inc.,2026,Q1,"Wearables, Home and Accessories",11493000000.0,2026-01-29,False
 AAPL,Apple Inc.,2026,Q1,iPad,8595000000.0,2026-01-29,False
-AMD,"Advanced Micro Devices, Inc.",2019,Q2,Computing and Graphics,1086000000.0,2019-07-31,False
-AMD,"Advanced Micro Devices, Inc.",2019,Q2,"Enterprise, Embedded and Semi-Custom",670000000.0,2019-07-31,False
-AMD,"Advanced Micro Devices, Inc.",2019,Q3,Computing and Graphics,1276000000.0,2019-10-30,False
-AMD,"Advanced Micro Devices, Inc.",2019,Q3,"Enterprise, Embedded and Semi-Custom",715000000.0,2019-10-30,False
-AMD,"Advanced Micro Devices, Inc.",2020,Q1,Computing and Graphics,1438000000.0,2020-04-29,False
-AMD,"Advanced Micro Devices, Inc.",2020,Q1,"Enterprise, Embedded and Semi-Custom",348000000.0,2020-04-29,False
-AMD,"Advanced Micro Devices, Inc.",2020,Q2,Computing and Graphics,1367000000.0,2020-07-29,False
-AMD,"Advanced Micro Devices, Inc.",2020,Q2,"Enterprise, Embedded and Semi-Custom",591000000.0,2020-07-29,False
-AMD,"Advanced Micro Devices, Inc.",2020,Q3,Computing and Graphics,1667000000.0,2020-10-28,False
-AMD,"Advanced Micro Devices, Inc.",2020,Q3,"Enterprise, Embedded and Semi-Custom",1134000000.0,2020-10-28,False
-AMD,"Advanced Micro Devices, Inc.",2020,Q4,Computing and Graphics,1960000000.0,,True
-AMD,"Advanced Micro Devices, Inc.",2021,Q1,Computing and Graphics,2100000000.0,2021-04-28,False
-AMD,"Advanced Micro Devices, Inc.",2021,Q1,"Enterprise, Embedded and Semi-Custom",1345000000.0,2021-04-28,False
-AMD,"Advanced Micro Devices, Inc.",2021,Q2,Computing and Graphics,2250000000.0,2021-07-28,False
-AMD,"Advanced Micro Devices, Inc.",2021,Q2,"Enterprise, Embedded and Semi-Custom",1600000000.0,2021-07-28,False
-AMD,"Advanced Micro Devices, Inc.",2021,Q3,Computing and Graphics,2398000000.0,2021-10-27,False
-AMD,"Advanced Micro Devices, Inc.",2021,Q3,"Enterprise, Embedded and Semi-Custom",1915000000.0,2021-10-27,False
-AMD,"Advanced Micro Devices, Inc.",2021,Q4,Computing and Graphics,2584000000.0,,True
-AMD,"Advanced Micro Devices, Inc.",2022,Q1,Computing and Graphics,2802000000.0,2022-05-04,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q1,"Enterprise, Embedded and Semi-Custom",2526000000.0,2022-05-04,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q1,Xilinx,559000000.0,2022-05-04,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q2,Client,2152000000.0,2022-08-03,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q2,Data Center,1486000000.0,2022-08-03,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q2,Embedded,1852000000.0,2022-08-03,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q2,Gaming,1655000000.0,2022-08-03,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q3,Client,1692000000.0,2022-11-02,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q3,Data Center,1609000000.0,2022-11-02,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q3,Embedded,3155000000.0,2022-11-02,False
-AMD,"Advanced Micro Devices, Inc.",2022,Q3,Gaming,1631000000.0,2022-11-02,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q1,Client,739000000.0,2023-05-03,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q1,Data Center,1295000000.0,2023-05-03,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q1,Embedded,1562000000.0,2023-05-03,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q1,Gaming,1757000000.0,2023-05-03,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q2,Client,2152000000.0,2023-08-02,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q2,Data Center,1486000000.0,2023-08-02,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q2,Embedded,1459000000.0,2023-08-02,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q2,Gaming,1655000000.0,2023-08-02,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q3,Client,1453000000.0,2023-11-01,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q3,Data Center,1609000000.0,2023-11-01,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q3,Embedded,1303000000.0,2023-11-01,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q3,Gaming,1631000000.0,2023-11-01,False
-AMD,"Advanced Micro Devices, Inc.",2023,Q4,Client,307000000.0,,True
-AMD,"Advanced Micro Devices, Inc.",2023,Q4,Data Center,2106000000.0,,True
-AMD,"Advanced Micro Devices, Inc.",2023,Q4,Embedded,997000000.0,,True
-AMD,"Advanced Micro Devices, Inc.",2023,Q4,Gaming,1169000000.0,,True
-AMD,"Advanced Micro Devices, Inc.",2024,Q1,Client,1368000000.0,2024-05-01,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q1,Data Center,2337000000.0,2024-05-01,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q1,Embedded,846000000.0,2024-05-01,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q1,Gaming,922000000.0,2024-05-01,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q2,Client,1492000000.0,2024-07-31,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q2,Data Center,2834000000.0,2024-07-31,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q2,Embedded,1459000000.0,2024-07-31,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q2,Gaming,1581000000.0,2024-07-31,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q3,Client,1881000000.0,2024-10-30,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q3,Data Center,3549000000.0,2024-10-30,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q3,Embedded,1243000000.0,2024-10-30,False
-AMD,"Advanced Micro Devices, Inc.",2024,Q3,Gaming,1506000000.0,2024-10-30,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q1,Computing and Graphics,2802000000.0,2022-03-26,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q1,"Enterprise, Embedded and Semi-Custom",2526000000.0,2022-03-26,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q1,Xilinx,559000000.0,2022-03-26,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q2,Client,2152000000.0,2022-06-25,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q2,Data Center,1486000000.0,2022-06-25,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q2,Embedded,1852000000.0,2022-06-25,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q2,Gaming,1655000000.0,2022-06-25,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q3,Client,1692000000.0,2022-09-24,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q3,Data Center,1609000000.0,2022-09-24,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q3,Embedded,3155000000.0,2022-09-24,False
+AMD,"Advanced Micro Devices, Inc.",2022,Q3,Gaming,1631000000.0,2022-09-24,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q2,Client,739000000.0,2023-04-01,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q2,Data Center,1295000000.0,2023-04-01,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q2,Embedded,1562000000.0,2023-04-01,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q2,Gaming,1757000000.0,2023-04-01,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q3,Client,1453000000.0,2023-09-30,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q3,Data Center,1609000000.0,2023-09-30,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q3,Embedded,1303000000.0,2023-09-30,False
+AMD,"Advanced Micro Devices, Inc.",2023,Q3,Gaming,1631000000.0,2023-09-30,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q1,Client,1368000000.0,2024-03-30,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q1,Data Center,2337000000.0,2024-03-30,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q1,Embedded,846000000.0,2024-03-30,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q1,Gaming,922000000.0,2024-03-30,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q2,Client,1492000000.0,2024-06-29,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q2,Data Center,2834000000.0,2024-06-29,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q2,Embedded,1459000000.0,2024-06-29,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q2,Gaming,1581000000.0,2024-06-29,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q3,Client,1881000000.0,2024-09-28,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q3,Data Center,3549000000.0,2024-09-28,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q3,Embedded,1243000000.0,2024-09-28,False
+AMD,"Advanced Micro Devices, Inc.",2024,Q3,Gaming,1506000000.0,2024-09-28,False
 AMD,"Advanced Micro Devices, Inc.",2024,Q4,Client,2313000000.0,,True
 AMD,"Advanced Micro Devices, Inc.",2024,Q4,Data Center,3859000000.0,,True
 AMD,"Advanced Micro Devices, Inc.",2024,Q4,Embedded,9000000.0,,True
-AMD,"Advanced Micro Devices, Inc.",2025,Q1,Client,2294000000.0,2025-05-07,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q1,Client and Gaming,2445000000.0,2025-05-07,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q1,Data Center,3674000000.0,2025-05-07,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q1,Embedded,823000000.0,2025-05-07,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q1,Gaming,647000000.0,2025-05-07,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q2,Client,2499000000.0,2025-08-06,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q2,Client and Gaming,2854000000.0,2025-08-06,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q2,Data Center,3395000000.0,2025-08-06,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q2,Embedded,861000000.0,2025-08-06,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q2,Gaming,1122000000.0,2025-08-06,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q3,Client,2750000000.0,2025-11-05,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q3,Client and Gaming,3181000000.0,2025-11-05,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q3,Data Center,4341000000.0,2025-11-05,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q3,Embedded,927000000.0,2025-11-05,False
-AMD,"Advanced Micro Devices, Inc.",2025,Q3,Gaming,1298000000.0,2025-11-05,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q1,Client,2294000000.0,2025-03-29,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q1,Client and Gaming,2445000000.0,2025-03-29,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q1,Data Center,3674000000.0,2025-03-29,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q1,Embedded,823000000.0,2025-03-29,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q1,Gaming,647000000.0,2025-03-29,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q2,Client,2499000000.0,2025-06-28,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q2,Client and Gaming,2854000000.0,2025-06-28,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q2,Data Center,3395000000.0,2025-06-28,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q2,Embedded,861000000.0,2025-06-28,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q2,Gaming,1122000000.0,2025-06-28,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q3,Client,2750000000.0,2025-09-27,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q3,Client and Gaming,3181000000.0,2025-09-27,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q3,Data Center,4341000000.0,2025-09-27,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q3,Embedded,927000000.0,2025-09-27,False
+AMD,"Advanced Micro Devices, Inc.",2025,Q3,Gaming,1298000000.0,2025-09-27,False
 AMD,"Advanced Micro Devices, Inc.",2025,Q4,Client and Gaming,6070000000.0,,True
 AMD,"Advanced Micro Devices, Inc.",2025,Q4,Data Center,5225000000.0,,True
 AMD,"Advanced Micro Devices, Inc.",2025,Q4,Embedded,843000000.0,,True
 AMD,"Advanced Micro Devices, Inc.",2025,Q4,Gaming,843000000.0,,True
-AMZN,"Amazon.com, Inc.",2021,Q3,AWS,20500000000.0,2022-10-27,False
-AMZN,"Amazon.com, Inc.",2021,Q3,International,27700000000.0,2022-10-27,False
-AMZN,"Amazon.com, Inc.",2021,Q3,North America,78800000000.0,2022-10-27,False
 AMZN,"Amazon.com, Inc.",2022,Q1,AWS,21400000000.0,2023-04-27,False
 AMZN,"Amazon.com, Inc.",2022,Q1,International,29100000000.0,2023-04-27,False
 AMZN,"Amazon.com, Inc.",2022,Q1,North America,76900000000.0,2023-04-27,False
@@ -230,33 +165,6 @@ META,"Meta Platforms, Inc.",2025,Q4,Family of Apps,58939000000.0,,True
 META,"Meta Platforms, Inc.",2025,Q4,Reality Labs,955000000.0,,True
 META,"Meta Platforms, Inc.",2026,Q1,Family of Apps,58938000000.0,2026-01-28,False
 META,"Meta Platforms, Inc.",2026,Q1,Reality Labs,955000000.0,2026-01-28,False
-MSFT,Microsoft Corporation,2021,Q4,Intelligent Cloud,17400000000.0,2021-07-27,False
-MSFT,Microsoft Corporation,2021,Q4,More Personal Computing,14100000000.0,2021-07-27,False
-MSFT,Microsoft Corporation,2021,Q4,Productivity and Business Processes,14700000000.0,2021-07-27,False
-MSFT,Microsoft Corporation,2022,Q1,Intelligent Cloud,17000000000.0,2021-10-26,False
-MSFT,Microsoft Corporation,2022,Q1,More Personal Computing,13300000000.0,2021-10-26,False
-MSFT,Microsoft Corporation,2022,Q1,Productivity and Business Processes,15000000000.0,2021-10-26,False
-MSFT,Microsoft Corporation,2022,Q2,Intelligent Cloud,18300000000.0,2022-01-25,False
-MSFT,Microsoft Corporation,2022,Q2,More Personal Computing,17500000000.0,2022-01-25,False
-MSFT,Microsoft Corporation,2022,Q2,Productivity and Business Processes,15900000000.0,2022-01-25,False
-MSFT,Microsoft Corporation,2022,Q3,Intelligent Cloud,19100000000.0,2022-04-26,False
-MSFT,Microsoft Corporation,2022,Q3,More Personal Computing,14500000000.0,2022-04-26,False
-MSFT,Microsoft Corporation,2022,Q3,Productivity and Business Processes,15800000000.0,2022-04-26,False
-MSFT,Microsoft Corporation,2022,Q4,Intelligent Cloud,20900000000.0,2022-07-26,False
-MSFT,Microsoft Corporation,2022,Q4,More Personal Computing,14400000000.0,2022-07-26,False
-MSFT,Microsoft Corporation,2022,Q4,Productivity and Business Processes,16600000000.000002,2022-07-26,False
-MSFT,Microsoft Corporation,2023,Q1,Intelligent Cloud,20300000000.0,2022-10-25,False
-MSFT,Microsoft Corporation,2023,Q1,More Personal Computing,13300000000.0,2022-10-25,False
-MSFT,Microsoft Corporation,2023,Q1,Productivity and Business Processes,16500000000.0,2022-10-25,False
-MSFT,Microsoft Corporation,2023,Q2,Intelligent Cloud,21500000000.0,2023-01-24,False
-MSFT,Microsoft Corporation,2023,Q2,More Personal Computing,14200000000.0,2023-01-24,False
-MSFT,Microsoft Corporation,2023,Q2,Productivity and Business Processes,17000000000.0,2023-01-24,False
-MSFT,Microsoft Corporation,2023,Q3,Intelligent Cloud,22100000000.0,2023-04-25,False
-MSFT,Microsoft Corporation,2023,Q3,More Personal Computing,13300000000.0,2023-04-25,False
-MSFT,Microsoft Corporation,2023,Q3,Productivity and Business Processes,17500000000.0,2023-04-25,False
-MSFT,Microsoft Corporation,2023,Q4,Intelligent Cloud,24000000000.0,2023-07-25,False
-MSFT,Microsoft Corporation,2023,Q4,More Personal Computing,13900000000.0,2023-07-25,False
-MSFT,Microsoft Corporation,2023,Q4,Productivity and Business Processes,18300000000.0,2023-07-25,False
 MSFT,Microsoft Corporation,2024,Q1,Intelligent Cloud,24300000000.0,2023-10-24,False
 MSFT,Microsoft Corporation,2024,Q1,More Personal Computing,13700000000.0,2023-10-24,False
 MSFT,Microsoft Corporation,2024,Q1,Productivity and Business Processes,18600000000.0,2023-10-24,False
@@ -291,29 +199,6 @@ MU,"Micron Technology, Inc.",2026,Q1,Automotive and Embedded,1720000000.0,2025-1
 MU,"Micron Technology, Inc.",2026,Q1,Cloud Memory,5284000000.0,2025-12-17,False
 MU,"Micron Technology, Inc.",2026,Q1,Core Data Center,2379000000.0,2025-12-17,False
 MU,"Micron Technology, Inc.",2026,Q1,Mobile and Client,4255000000.0,2025-12-17,False
-NVDA,NVIDIA Corporation,2022,Q2,Automotive,152000000.0,2021-08-18,False
-NVDA,NVIDIA Corporation,2022,Q2,Data Center,2370000000.0,2021-08-18,False
-NVDA,NVIDIA Corporation,2022,Q2,Gaming,3060000000.0,2021-08-18,False
-NVDA,NVIDIA Corporation,2022,Q3,Automotive,135000000.0,2021-11-17,False
-NVDA,NVIDIA Corporation,2022,Q3,Data Center,2940000000.0,2021-11-17,False
-NVDA,NVIDIA Corporation,2022,Q3,Gaming,3220000000.0,2021-11-17,False
-NVDA,NVIDIA Corporation,2023,Q1,Automotive,138000000.0,2022-05-25,False
-NVDA,NVIDIA Corporation,2023,Q1,Professional Visualization,622000000.0,2022-05-25,False
-NVDA,NVIDIA Corporation,2023,Q2,Automotive,220000000.0,2022-08-24,False
-NVDA,NVIDIA Corporation,2023,Q2,Data Center,3810000000.0,2022-08-24,False
-NVDA,NVIDIA Corporation,2023,Q2,Gaming,2040000000.0,2022-08-24,False
-NVDA,NVIDIA Corporation,2023,Q2,Professional Visualization,496000000.0,2022-08-24,False
-NVDA,NVIDIA Corporation,2023,Q3,Automotive,251000000.0,2022-11-16,False
-NVDA,NVIDIA Corporation,2023,Q3,Data Center,3830000000.0,2022-11-16,False
-NVDA,NVIDIA Corporation,2023,Q3,Gaming,1570000000.0,2022-11-16,False
-NVDA,NVIDIA Corporation,2023,Q3,Professional Visualization,200000000.0,2022-11-16,False
-NVDA,NVIDIA Corporation,2023,Q4,Automotive,294000000.0,,True
-NVDA,NVIDIA Corporation,2023,Q4,Data Center,3620000000.0,2023-02-22,False
-NVDA,NVIDIA Corporation,2023,Q4,Gaming,1830000000.0,2023-02-22,False
-NVDA,NVIDIA Corporation,2023,Q4,Professional Visualization,226000000.0,,True
-NVDA,NVIDIA Corporation,2024,Q1,Data Center,4280000000.0000005,2023-05-24,False
-NVDA,NVIDIA Corporation,2024,Q1,Gaming,2240000000.0,2023-05-24,False
-NVDA,NVIDIA Corporation,2024,Q1,Professional Visualization,295000000.0,2023-05-24,False
 NVDA,NVIDIA Corporation,2024,Q2,Automotive,253000000.0,2023-08-23,False
 NVDA,NVIDIA Corporation,2024,Q2,Data Center,10320000000.0,2023-08-23,False
 NVDA,NVIDIA Corporation,2024,Q2,Gaming,2490000000.0,2023-08-23,False
@@ -322,9 +207,6 @@ NVDA,NVIDIA Corporation,2024,Q3,Automotive,261000000.0,2023-11-21,False
 NVDA,NVIDIA Corporation,2024,Q3,Data Center,14510000000.0,2023-11-21,False
 NVDA,NVIDIA Corporation,2024,Q3,Gaming,2860000000.0,2023-11-21,False
 NVDA,NVIDIA Corporation,2024,Q3,Professional Visualization,416000000.0,2023-11-21,False
-NVDA,NVIDIA Corporation,2024,Q4,Data Center,18415000000.0,,True
-NVDA,NVIDIA Corporation,2024,Q4,Gaming,2857000000.0,,True
-NVDA,NVIDIA Corporation,2024,Q4,Professional Visualization,463000000.0,,True
 NVDA,NVIDIA Corporation,2025,Q1,Automotive,329000000.0,2024-05-22,False
 NVDA,NVIDIA Corporation,2025,Q1,Data Center,22600000000.0,2024-05-22,False
 NVDA,NVIDIA Corporation,2025,Q1,Gaming,2600000000.0,2024-05-22,False
@@ -353,102 +235,76 @@ NVDA,NVIDIA Corporation,2026,Q3,Automotive,592000000.0,2025-11-19,False
 NVDA,NVIDIA Corporation,2026,Q3,Data Center,51200000000.0,2025-11-19,False
 NVDA,NVIDIA Corporation,2026,Q3,Gaming,4300000000.0,2025-11-19,False
 NVDA,NVIDIA Corporation,2026,Q3,Professional Visualization,760000000.0,2025-11-19,False
-ORCL,Oracle Corporation,2019,Q2,Cloud license and on-premise license,812000000.0,2019-09-13,False
-ORCL,Oracle Corporation,2019,Q2,Cloud services and license support,6805000000.0,2019-09-13,False
-ORCL,Oracle Corporation,2019,Q2,Hardware,815000000.0,2019-09-13,False
-ORCL,Oracle Corporation,2019,Q2,Services,786000000.0,2019-09-13,False
-ORCL,Oracle Corporation,2019,Q3,Cloud license and on-premise license,1217000000.0,2019-12-13,False
-ORCL,Oracle Corporation,2019,Q3,Cloud services and license support,6811000000.0,2019-12-13,False
-ORCL,Oracle Corporation,2019,Q3,Hardware,891000000.0,2019-12-13,False
-ORCL,Oracle Corporation,2019,Q3,Services,817000000.0,2019-12-13,False
-ORCL,Oracle Corporation,2020,Q2,Cloud license and on-premise license,886000000.0,2020-09-15,False
-ORCL,Oracle Corporation,2020,Q2,Cloud services and license support,6947000000.0,2020-09-15,False
-ORCL,Oracle Corporation,2020,Q2,Hardware,814000000.0,2020-09-15,False
-ORCL,Oracle Corporation,2020,Q2,Services,720000000.0,2020-09-15,False
-ORCL,Oracle Corporation,2020,Q3,Cloud license and on-premise license,1126000000.0,2020-12-11,False
-ORCL,Oracle Corporation,2020,Q3,Cloud services and license support,7112000000.0,2020-12-11,False
-ORCL,Oracle Corporation,2020,Q3,Hardware,871000000.0,2020-12-11,False
-ORCL,Oracle Corporation,2020,Q3,Services,806000000.0,2020-12-11,False
-ORCL,Oracle Corporation,2020,Q4,Cloud license and on-premise license,1251000000.0,2020-03-13,False
-ORCL,Oracle Corporation,2020,Q4,Cloud services and license support,6930000000.0,2020-03-13,False
-ORCL,Oracle Corporation,2020,Q4,Hardware,915000000.0,2020-03-13,False
-ORCL,Oracle Corporation,2020,Q4,Services,786000000.0,2020-03-13,False
-ORCL,Oracle Corporation,2021,Q2,Cloud license and on-premise license,813000000.0,2021-09-13,False
-ORCL,Oracle Corporation,2021,Q2,Cloud services and license support,7371000000.0,2021-09-13,False
-ORCL,Oracle Corporation,2021,Q2,Hardware,763000000.0,2021-09-13,False
-ORCL,Oracle Corporation,2021,Q2,Services,781000000.0,2021-09-13,False
-ORCL,Oracle Corporation,2021,Q3,Cloud license and on-premise license,1237000000.0,2021-12-10,False
-ORCL,Oracle Corporation,2021,Q3,Cloud services and license support,7554000000.0,2021-12-10,False
-ORCL,Oracle Corporation,2021,Q3,Hardware,844000000.0,2021-12-10,False
-ORCL,Oracle Corporation,2021,Q3,Services,802000000.0,2021-12-10,False
-ORCL,Oracle Corporation,2021,Q4,Cloud license and on-premise license,1276000000.0,2021-03-11,False
-ORCL,Oracle Corporation,2021,Q4,Cloud services and license support,7252000000.0,2021-03-11,False
-ORCL,Oracle Corporation,2021,Q4,Hardware,857000000.0,2021-03-11,False
-ORCL,Oracle Corporation,2021,Q4,Services,778000000.0,2021-03-11,False
-ORCL,Oracle Corporation,2022,Q2,Cloud license and on-premise license,904000000.0,2022-09-13,False
-ORCL,Oracle Corporation,2022,Q2,Cloud services and license support,8417000000.0,2022-09-13,False
-ORCL,Oracle Corporation,2022,Q2,Hardware,763000000.0,2022-09-13,False
-ORCL,Oracle Corporation,2022,Q2,Services,1361000000.0,2022-09-13,False
-ORCL,Oracle Corporation,2022,Q3,Cloud license and on-premise license,1435000000.0,2022-12-13,False
-ORCL,Oracle Corporation,2022,Q3,Cloud services and license support,8598000000.0,2022-12-13,False
-ORCL,Oracle Corporation,2022,Q3,Hardware,850000000.0,2022-12-13,False
-ORCL,Oracle Corporation,2022,Q3,Services,1392000000.0,2022-12-13,False
-ORCL,Oracle Corporation,2022,Q4,Cloud license and on-premise license,1289000000.0,2022-03-11,False
-ORCL,Oracle Corporation,2022,Q4,Cloud services and license support,7637000000.0,2022-03-11,False
-ORCL,Oracle Corporation,2022,Q4,Hardware,820000000.0,2022-03-11,False
-ORCL,Oracle Corporation,2022,Q4,Services,789000000.0,2022-03-11,False
-ORCL,Oracle Corporation,2023,Q2,Cloud license and on-premise license,809000000.0,2023-09-12,False
-ORCL,Oracle Corporation,2023,Q2,Cloud services and license support,9547000000.0,2023-09-12,False
-ORCL,Oracle Corporation,2023,Q2,Hardware,714000000.0,2023-09-12,False
-ORCL,Oracle Corporation,2023,Q2,Services,1383000000.0,2023-09-12,False
-ORCL,Oracle Corporation,2023,Q3,Cloud license and on-premise license,1435000000.0,2023-12-12,False
-ORCL,Oracle Corporation,2023,Q3,Cloud services and license support,9639000000.0,2023-12-12,False
-ORCL,Oracle Corporation,2023,Q3,Hardware,850000000.0,2023-12-12,False
-ORCL,Oracle Corporation,2023,Q3,Services,1392000000.0,2023-12-12,False
-ORCL,Oracle Corporation,2023,Q4,Cloud license and on-premise license,1289000000.0,2023-03-10,False
-ORCL,Oracle Corporation,2023,Q4,Cloud services and license support,8923000000.0,2023-03-10,False
-ORCL,Oracle Corporation,2023,Q4,Hardware,811000000.0,2023-03-10,False
-ORCL,Oracle Corporation,2023,Q4,Services,1376000000.0,2023-03-10,False
-ORCL,Oracle Corporation,2024,Q2,Cloud license and on-premise license,870000000.0,2024-09-10,False
-ORCL,Oracle Corporation,2024,Q2,Cloud services and license support,10519000000.0,2024-09-10,False
-ORCL,Oracle Corporation,2024,Q2,Hardware,655000000.0,2024-09-10,False
-ORCL,Oracle Corporation,2024,Q2,Services,1263000000.0,2024-09-10,False
-ORCL,Oracle Corporation,2024,Q3,Cloud license and on-premise license,1195000000.0,2024-12-10,False
-ORCL,Oracle Corporation,2024,Q3,Cloud services and license support,10806000000.0,2024-12-10,False
-ORCL,Oracle Corporation,2024,Q3,Hardware,756000000.0,2024-12-10,False
-ORCL,Oracle Corporation,2024,Q3,Services,1368000000.0,2024-12-10,False
-ORCL,Oracle Corporation,2024,Q4,Cloud license and on-premise license,1288000000.0,2024-03-12,False
-ORCL,Oracle Corporation,2024,Q4,Cloud services and license support,9963000000.0,2024-03-12,False
-ORCL,Oracle Corporation,2024,Q4,Hardware,811000000.0,2024-03-12,False
-ORCL,Oracle Corporation,2024,Q4,Services,1376000000.0,2024-03-12,False
-ORCL,Oracle Corporation,2025,Q2,Cloud,7186000000.0,2025-09-10,False
-ORCL,Oracle Corporation,2025,Q2,Cloud and software,3607000000.0,2025-09-10,False
-ORCL,Oracle Corporation,2025,Q2,Hardware,670000000.0,2025-09-10,False
-ORCL,Oracle Corporation,2025,Q2,Services,1349000000.0,2025-09-10,False
-ORCL,Oracle Corporation,2025,Q2,Software,5721000000.0,2025-09-10,False
-ORCL,Oracle Corporation,2025,Q3,Cloud,7977000000.0,2025-12-11,False
-ORCL,Oracle Corporation,2025,Q3,Cloud and software,3990000000.0,2025-12-11,False
-ORCL,Oracle Corporation,2025,Q3,Hardware,776000000.0,2025-12-11,False
-ORCL,Oracle Corporation,2025,Q3,Services,1428000000.0,2025-12-11,False
-ORCL,Oracle Corporation,2025,Q3,Software,6064000000.0,2025-12-11,False
-ORCL,Oracle Corporation,2025,Q4,Cloud license and on-premise license,1256000000.0,2025-03-11,False
-ORCL,Oracle Corporation,2025,Q4,Cloud services and license support,11007000000.0,2025-03-11,False
-ORCL,Oracle Corporation,2025,Q4,Hardware,754000000.0,2025-03-11,False
-ORCL,Oracle Corporation,2025,Q4,Services,1307000000.0,2025-03-11,False
-WDC,Western Digital Corporation,2021,Q3,Flash,2490000000.0,2021-11-04,False
-WDC,Western Digital Corporation,2021,Q3,HDD,2561000000.0,2021-11-04,False
-WDC,Western Digital Corporation,2022,Q3,Flash,1722000000.0,2022-11-02,False
-WDC,Western Digital Corporation,2022,Q3,HDD,2014000000.0,2022-11-02,False
-WDC,Western Digital Corporation,2024,Q3,Flash,1884000000.0,2024-10-31,False
-WDC,Western Digital Corporation,2024,Q3,HDD,2211000000.0,2024-10-31,False
-WDC,Western Digital Corporation,2024,Q4,Flash,1876000000.0,2025-01-31,False
-WDC,Western Digital Corporation,2024,Q4,HDD,2409000000.0,2025-01-31,False
-WDC,Western Digital Corporation,2025,Q1,Client,140000000.0,2025-05-02,False
-WDC,Western Digital Corporation,2025,Q1,Cloud,2007000000.0,2025-05-02,False
-WDC,Western Digital Corporation,2025,Q1,Consumer,157000000.0,2025-05-02,False
-WDC,Western Digital Corporation,2025,Q3,Client,146000000.0,2025-10-31,False
-WDC,Western Digital Corporation,2025,Q3,Cloud,2510000000.0,2025-10-31,False
-WDC,Western Digital Corporation,2025,Q3,Consumer,162000000.0,2025-10-31,False
-WDC,Western Digital Corporation,2026,Q4,Client,176000000.0,2026-01-30,False
-WDC,Western Digital Corporation,2026,Q4,Cloud,2673000000.0,2026-01-30,False
-WDC,Western Digital Corporation,2026,Q4,Consumer,173000000.0,2026-01-30,False
+ORCL,Oracle Corporation,2022,Q3,Cloud license and on-premise license,1289000000.0,2022-02-28,False
+ORCL,Oracle Corporation,2022,Q3,Cloud services and license support,7637000000.0,2022-02-28,False
+ORCL,Oracle Corporation,2022,Q3,Hardware,820000000.0,2022-02-28,False
+ORCL,Oracle Corporation,2022,Q3,Services,789000000.0,2022-02-28,False
+ORCL,Oracle Corporation,2023,Q1,Cloud license and on-premise license,904000000.0,2022-08-31,False
+ORCL,Oracle Corporation,2023,Q1,Cloud services and license support,8417000000.0,2022-08-31,False
+ORCL,Oracle Corporation,2023,Q1,Hardware,763000000.0,2022-08-31,False
+ORCL,Oracle Corporation,2023,Q1,Services,1361000000.0,2022-08-31,False
+ORCL,Oracle Corporation,2023,Q2,Cloud license and on-premise license,1435000000.0,2022-11-30,False
+ORCL,Oracle Corporation,2023,Q2,Cloud services and license support,8598000000.0,2022-11-30,False
+ORCL,Oracle Corporation,2023,Q2,Hardware,850000000.0,2022-11-30,False
+ORCL,Oracle Corporation,2023,Q2,Services,1392000000.0,2022-11-30,False
+ORCL,Oracle Corporation,2023,Q3,Cloud license and on-premise license,1289000000.0,2023-02-28,False
+ORCL,Oracle Corporation,2023,Q3,Cloud services and license support,8923000000.0,2023-02-28,False
+ORCL,Oracle Corporation,2023,Q3,Hardware,811000000.0,2023-02-28,False
+ORCL,Oracle Corporation,2023,Q3,Services,1376000000.0,2023-02-28,False
+ORCL,Oracle Corporation,2023,Q4,Cloud license and on-premise license,1453000000.0,,True
+ORCL,Oracle Corporation,2023,Q4,Cloud services and license support,13445000000.0,,True
+ORCL,Oracle Corporation,2023,Q4,Hardware,642000000.0,,True
+ORCL,Oracle Corporation,2023,Q4,Services,1302000000.0,,True
+ORCL,Oracle Corporation,2024,Q1,Cloud license and on-premise license,809000000.0,2023-08-31,False
+ORCL,Oracle Corporation,2024,Q1,Cloud services and license support,9547000000.0,2023-08-31,False
+ORCL,Oracle Corporation,2024,Q1,Hardware,714000000.0,2023-08-31,False
+ORCL,Oracle Corporation,2024,Q1,Services,1383000000.0,2023-08-31,False
+ORCL,Oracle Corporation,2024,Q2,Cloud license and on-premise license,1435000000.0,2023-11-30,False
+ORCL,Oracle Corporation,2024,Q2,Cloud services and license support,9639000000.0,2023-11-30,False
+ORCL,Oracle Corporation,2024,Q2,Hardware,850000000.0,2023-11-30,False
+ORCL,Oracle Corporation,2024,Q2,Services,1392000000.0,2023-11-30,False
+ORCL,Oracle Corporation,2024,Q3,Cloud license and on-premise license,1288000000.0,2024-02-29,False
+ORCL,Oracle Corporation,2024,Q3,Cloud services and license support,9963000000.0,2024-02-29,False
+ORCL,Oracle Corporation,2024,Q3,Hardware,811000000.0,2024-02-29,False
+ORCL,Oracle Corporation,2024,Q3,Services,1376000000.0,2024-02-29,False
+ORCL,Oracle Corporation,2024,Q4,Hardware,691000000.0,,True
+ORCL,Oracle Corporation,2024,Q4,Services,1280000000.0,,True
+ORCL,Oracle Corporation,2025,Q1,Cloud license and on-premise license,870000000.0,2024-08-31,False
+ORCL,Oracle Corporation,2025,Q1,Cloud services and license support,10519000000.0,2024-08-31,False
+ORCL,Oracle Corporation,2025,Q1,Hardware,655000000.0,2024-08-31,False
+ORCL,Oracle Corporation,2025,Q1,Services,1263000000.0,2024-08-31,False
+ORCL,Oracle Corporation,2025,Q2,Cloud license and on-premise license,1195000000.0,2024-11-30,False
+ORCL,Oracle Corporation,2025,Q2,Cloud services and license support,10806000000.0,2024-11-30,False
+ORCL,Oracle Corporation,2025,Q2,Hardware,756000000.0,2024-11-30,False
+ORCL,Oracle Corporation,2025,Q2,Services,1368000000.0,2024-11-30,False
+ORCL,Oracle Corporation,2025,Q3,Cloud license and on-premise license,1256000000.0,2025-02-28,False
+ORCL,Oracle Corporation,2025,Q3,Cloud services and license support,11007000000.0,2025-02-28,False
+ORCL,Oracle Corporation,2025,Q3,Hardware,754000000.0,2025-02-28,False
+ORCL,Oracle Corporation,2025,Q3,Services,1307000000.0,2025-02-28,False
+ORCL,Oracle Corporation,2025,Q4,Hardware,771000000.0,,True
+ORCL,Oracle Corporation,2025,Q4,Services,1295000000.0,,True
+ORCL,Oracle Corporation,2026,Q1,Cloud,7186000000.0,2025-08-31,False
+ORCL,Oracle Corporation,2026,Q1,Cloud and software,3607000000.0,2025-08-31,False
+ORCL,Oracle Corporation,2026,Q1,Hardware,670000000.0,2025-08-31,False
+ORCL,Oracle Corporation,2026,Q1,Services,1349000000.0,2025-08-31,False
+ORCL,Oracle Corporation,2026,Q1,Software,5721000000.0,2025-08-31,False
+ORCL,Oracle Corporation,2026,Q2,Cloud,7977000000.0,2025-11-30,False
+ORCL,Oracle Corporation,2026,Q2,Cloud and software,3990000000.0,2025-11-30,False
+ORCL,Oracle Corporation,2026,Q2,Hardware,776000000.0,2025-11-30,False
+ORCL,Oracle Corporation,2026,Q2,Services,1428000000.0,2025-11-30,False
+ORCL,Oracle Corporation,2026,Q2,Software,6064000000.0,2025-11-30,False
+WDC,Western Digital Corporation,2023,Q1,Flash,1722000000.0,2022-09-30,False
+WDC,Western Digital Corporation,2023,Q1,HDD,2014000000.0,2022-09-30,False
+WDC,Western Digital Corporation,2025,Q1,Flash,1884000000.0,2024-09-27,False
+WDC,Western Digital Corporation,2025,Q1,HDD,2211000000.0,2024-09-27,False
+WDC,Western Digital Corporation,2025,Q2,Flash,1876000000.0,2024-12-27,False
+WDC,Western Digital Corporation,2025,Q2,HDD,2409000000.0,2024-12-27,False
+WDC,Western Digital Corporation,2025,Q3,Client,140000000.0,2025-03-28,False
+WDC,Western Digital Corporation,2025,Q3,Cloud,2007000000.0,2025-03-28,False
+WDC,Western Digital Corporation,2025,Q3,Consumer,157000000.0,2025-03-28,False
+WDC,Western Digital Corporation,2026,Q2,Client,146000000.0,2025-10-03,False
+WDC,Western Digital Corporation,2026,Q2,Cloud,2510000000.0,2025-10-03,False
+WDC,Western Digital Corporation,2026,Q2,Consumer,162000000.0,2025-10-03,False
+WDC,Western Digital Corporation,2026,Q3,Client,176000000.0,2026-01-02,False
+WDC,Western Digital Corporation,2026,Q3,Cloud,2673000000.0,2026-01-02,False
+WDC,Western Digital Corporation,2026,Q3,Consumer,173000000.0,2026-01-02,False
