@@ -283,7 +283,7 @@ def update_for_ticker(ticker: str, name: str, cadence: str, api_key: str, out_di
     write_csv(out_path, cadence, merged)
 
 
-def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str, str]]:
+def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str, str, str, str]]:
     """Load concept metadata from concept_metadata.csv."""
     metadata_path = os.path.join(out_dir, "concept_metadata.csv")
     metadata = {}
@@ -301,7 +301,9 @@ def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str, s
                         row.get("Ticker", "-"),
                         row.get("公司名稱", "-"),
                         row.get("CIK", "-"),
-                        row.get("最新財季", "-"),
+                        row.get("最新財報", "-"),
+                        row.get("即將發布", "-"),
+                        row.get("發布時間", "-"),
                         row.get("產品區段", "-"),
                     )
     except Exception as e:
@@ -326,17 +328,17 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
 
     # Build the new concept table
     table_lines = [
-        "| 概念欄位 | 公司名稱 | Ticker | CIK | 最新財季 | 產品區段 |",
-        "|----------|----------|--------|-----|----------|----------|",
+        "| 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |",
+        "|----------|----------|--------|-----|----------|----------|----------|----------|",
     ]
 
     for col in concept_cols:
         if col in metadata:
-            ticker, name, cik, current_q, segments = metadata[col]
-            table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {current_q} | {segments} |")
+            ticker, name, cik, latest_report, upcoming, release_date, segments = metadata[col]
+            table_lines.append(f"| {col} | {name} | {ticker} | {cik} | {latest_report} | {upcoming} | {release_date} | {segments} |")
         else:
             # Unknown concept - add with placeholders
-            table_lines.append(f"| {col} | - | - | - | - | - |")
+            table_lines.append(f"| {col} | - | - | - | - | - | - | - |")
 
     table_lines.append("")
     table_lines.append(f"> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 {len(concept_cols)} 個）")
