@@ -309,7 +309,7 @@ def generate_csv(data: list, output_path: str):
 
 
 def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None):
-    """Generate markdown report with quarterly tables."""
+    """Generate markdown report with all segments in a single table per company."""
     if latest_q_map is None:
         latest_q_map = {}
 
@@ -336,69 +336,67 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
         records = by_symbol[symbol]
 
         # Get unique segments and years
-        segments = sorted(set(r['segment_name'] for r in records))
+        all_segments = sorted(set(r['segment_name'] for r in records))
         years = sorted(set(r['fiscal_year'] for r in records), reverse=True)[:5]
 
-        for seg in segments:
-            # Skip segments with too few data points (< 3 quarters total)
+        # Filter segments with enough data (>= 3 quarters)
+        segments = []
+        for seg in all_segments:
             seg_records = [r for r in records if r['segment_name'] == seg]
-            if len(seg_records) < 3:
-                continue
+            if len(seg_records) >= 3:
+                segments.append(seg)
 
-            # Get latest released quarter for this symbol
-            latest_info = latest_q_map.get(symbol)
-            latest_fy = latest_info[0] if latest_info else None
-            latest_q = latest_info[1] if latest_info else None
+        if not segments:
+            lines.append("No segment data available.")
+            lines.append("")
+            lines.append("---")
+            lines.append("")
+            continue
 
-            # Format helper
-            def fmt(v, fy=None, quarter=None, min_threshold=50_000_000):
-                """Format value, showing '-' for not released, 'x' for released but not available."""
-                if v is None or v == 0 or (v < min_threshold and v > 0):
-                    # Determine if released or not
-                    if fy is not None and quarter is not None and latest_fy is not None and latest_q is not None:
-                        q_num = {'Q1': 1, 'Q2': 2, 'Q3': 3, 'Q4': 4}.get(quarter, 0)
-                        if is_quarter_released(fy, q_num, latest_fy, latest_q):
-                            return "x"  # Released but not available
-                        else:
-                            return "-"  # Not yet released
-                    return "-"
-                if v >= 1e9:
-                    return f"${v/1e9:.1f}B"
-                return f"${v/1e6:.0f}M"
+        # Get latest released quarter for this symbol
+        latest_info = latest_q_map.get(symbol)
+        latest_fy = latest_info[0] if latest_info else None
+        latest_q = latest_info[1] if latest_info else None
 
-            # Build table rows, skip years with all missing values
-            table_rows = []
-            for fy in years:
-                fy_records = [r for r in records if r['fiscal_year'] == fy and r['segment_name'] == seg]
-                q_vals = {r['quarter']: r['revenue'] for r in fy_records}
+        # Format helper
+        def fmt(v, fy=None, quarter=None, min_threshold=50_000_000):
+            """Format value, showing '-' for not released, 'x' for released but not available."""
+            if v is None or v == 0 or (v < min_threshold and v > 0):
+                if fy is not None and quarter is not None and latest_fy is not None and latest_q is not None:
+                    q_num = {'Q1': 1, 'Q2': 2, 'Q3': 3, 'Q4': 4}.get(quarter, 0)
+                    if is_quarter_released(fy, q_num, latest_fy, latest_q):
+                        return "x"
+                    else:
+                        return "-"
+                return "-"
+            if v >= 1e9:
+                return f"${v/1e9:.1f}B"
+            return f"${v/1e6:.0f}M"
+
+        # Build single table with all segments grouped by FY
+        lines.append("| FY | Segment | Q1 | Q2 | Q3 | Q4 | Total |")
+        lines.append("|----|---------|----|----|----|----|-------|")
+
+        for fy in years:
+            for seg in segments:
+                fy_seg_records = [r for r in records if r['fiscal_year'] == fy and r['segment_name'] == seg]
+                q_vals = {r['quarter']: r['revenue'] for r in fy_seg_records}
 
                 q1 = fmt(q_vals.get('Q1'), fy=fy, quarter='Q1')
                 q2 = fmt(q_vals.get('Q2'), fy=fy, quarter='Q2')
                 q3 = fmt(q_vals.get('Q3'), fy=fy, quarter='Q3')
                 q4 = fmt(q_vals.get('Q4'), fy=fy, quarter='Q4')
 
-                # Skip year if all quarters are empty
+                # Skip row if all quarters are empty/not released
                 if q1 == "-" and q2 == "-" and q3 == "-" and q4 == "-":
                     continue
 
                 total = sum(q_vals.get(q, 0) or 0 for q in ['Q1', 'Q2', 'Q3', 'Q4'])
-                fy_val = q_vals.get('FY', total)
+                total_fmt = f"${total/1e9:.1f}B" if total >= 1e9 else (f"${total/1e6:.0f}M" if total >= 1e6 else "-")
 
-                # Total column: just format the value without release check
-                total_fmt = f"${fy_val/1e9:.1f}B" if fy_val >= 1e9 else (f"${fy_val/1e6:.0f}M" if fy_val >= 1e6 else "-")
-                table_rows.append(f"| {fy} | {q1} | {q2} | {q3} | {q4} | {total_fmt} |")
+                lines.append(f"| {fy} | {seg} | {q1} | {q2} | {q3} | {q4} | {total_fmt} |")
 
-            # Skip segment if no valid rows
-            if not table_rows:
-                continue
-
-            lines.append(f"### {seg}")
-            lines.append("")
-            lines.append("| FY | Q1 | Q2 | Q3 | Q4 | Total |")
-            lines.append("|----|----|----|----|----|----|")
-            lines.extend(table_rows)
-            lines.append("")
-
+        lines.append("")
         lines.append("---")
         lines.append("")
 
