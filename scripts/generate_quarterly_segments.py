@@ -312,7 +312,7 @@ def generate_csv(data: list, output_path: str):
 
 
 def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None):
-    """Generate markdown report with each segment on one line, all years as columns."""
+    """Generate markdown report with each segment on one line, quarters as columns."""
     if latest_q_map is None:
         latest_q_map = {}
 
@@ -322,8 +322,8 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
     lines.append("")
     lines.append(f"> Last updated: {datetime.now().strftime('%Y-%m-%d')}")
     lines.append("> Data source: SEC EDGAR 10-Q/10-K filings")
-    lines.append("> Format: Each cell shows FY Total (Q1/Q2/Q3/Q4)")
-    lines.append("> Legend: `-` = not yet released")
+    lines.append("> Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)")
+    lines.append("> Legend: `-` = not yet released or not available")
     lines.append("> Note: Q4 values are calculated as FY - (Q1+Q2+Q3)")
     lines.append("")
 
@@ -357,63 +357,43 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
             lines.append("")
             continue
 
-        # Get latest released quarter for this symbol
-        latest_info = latest_q_map.get(symbol)
-        latest_fy = latest_info[0] if latest_info else None
-        latest_q = latest_info[1] if latest_info else None
+        # Build list of all quarters (newest first): 26Q4, 26Q3, 26Q2, 26Q1, 25Q4, ...
+        all_quarters = []
+        for fy in years:
+            for q in [4, 3, 2, 1]:
+                all_quarters.append((fy, f"Q{q}"))
 
-        # Format helper for total
-        def fmt_total(v):
+        # Format helper
+        def fmt(v):
             if v is None or v == 0:
                 return "-"
             if v >= 1e9:
                 return f"${v/1e9:.1f}B"
             return f"${v/1e6:.0f}M"
 
-        # Format helper for quarterly breakdown
-        def fmt_quarter(v):
-            if v is None or v == 0:
-                return "-"
-            if v >= 1e9:
-                return f"{v/1e9:.1f}"
-            return f"{v/1e6:.0f}M"
-
-        # Build header with years
+        # Build header with quarters
         header = "| Segment |"
         separator = "|---------|"
-        for fy in years:
-            header += f" FY{fy} |"
+        for fy, q in all_quarters:
+            # Format: 26Q4, 26Q3, etc.
+            header += f" {fy % 100}{q} |"
             separator += "------|"
         lines.append(header)
         lines.append(separator)
 
-        # Build rows - one segment per line with all years
+        # Build rows - one segment per line with all quarters
         for seg in segments:
+            # Build lookup for this segment
+            seg_records = [r for r in records if r['segment_name'] == seg]
+            q_vals = {}
+            for r in seg_records:
+                key = (r['fiscal_year'], r['quarter'])
+                q_vals[key] = r['revenue']
+
             row = f"| {seg} |"
-            for fy in years:
-                fy_seg_records = [r for r in records if r['fiscal_year'] == fy and r['segment_name'] == seg]
-                q_vals = {r['quarter']: r['revenue'] for r in fy_seg_records}
-
-                q1 = q_vals.get('Q1', 0) or 0
-                q2 = q_vals.get('Q2', 0) or 0
-                q3 = q_vals.get('Q3', 0) or 0
-                q4 = q_vals.get('Q4', 0) or 0
-                total = q1 + q2 + q3 + q4
-
-                if total == 0:
-                    row += " - |"
-                else:
-                    # Format: Total (Q1/Q2/Q3/Q4) in billions
-                    total_str = fmt_total(total)
-                    q_parts = []
-                    for q in [q1, q2, q3, q4]:
-                        if q >= 1e9:
-                            q_parts.append(f"{q/1e9:.1f}")
-                        elif q >= 1e6:
-                            q_parts.append(f"{q/1e6:.0f}M")
-                        else:
-                            q_parts.append("-")
-                    row += f" {total_str} ({'/'.join(q_parts)}) |"
+            for fy, q in all_quarters:
+                val = q_vals.get((fy, q), 0)
+                row += f" {fmt(val)} |"
             lines.append(row)
 
         lines.append("")
