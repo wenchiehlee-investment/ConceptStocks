@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-02-07
+> Last updated: 2026-02-08
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -11,19 +11,19 @@
 
 | Symbol | Company | FY | Top Segment | Revenue | Source |
 |--------|---------|----|--------------------|---------|--------|
-| NVDA | NVIDIA Corporation | FY2025 | Data Center | $115.2B | FMP |
-| GOOGL | Alphabet Inc. | FY2025 | Google Search & Other | $224.5B | FMP |
-| AMZN | Amazon.com, Inc. | FY2024 | Online Stores | $247.0B | FMP |
+| NVDA | NVIDIA Corporation | FY2026 | Data Center | $131.4B | FMP |
+| GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
+| AMZN | Amazon.com, Inc. | FY2024 | North America | $414.9B | FMP |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
-| MSFT | Microsoft Corporation | FY2025 | Server Products And Tools | $98.4B | FMP |
+| MSFT | Microsoft Corporation | FY2025 | Productivity and Business Processes | $120.7B | FMP |
 | AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
 | AAPL | Apple Inc. | FY2025 | iPhone | $209.6B | FMP |
 | ORCL | Oracle Corporation | FY2025 | Cloud and license | $49.2B | SEC |
 | MU | Micron Technology, Inc. | FY2025 | Cloud Memory | $13.5B | SEC |
 | WDC | Western Digital Corporation | FY2025 | Cloud | $8.3B | SEC |
 | QCOM | Qualcomm Inc. | FY2025 | Handsets | $30.9B | SEC |
-| DELL | Dell Technologies Inc. | FY2025 | Servers and networking | $27.1B | SEC |
-| HPQ | HP Inc. | FY2025 | N/A | - | SEC |
+| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $41.2B | SEC |
+| HPQ | HP Inc. | FY2025 | Personal Systems | $38.5B | SEC |
 
 ---
 
@@ -31,13 +31,13 @@
 
 ### Product Segments
 
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+| Segment | FY2022 | FY2023 | FY2024 | FY2025 | FY2026 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Data Center | $6.7B | $10.6B | $15.0B | $47.5B | $115.2B |
-| Gaming | $7.8B | $12.5B | $9.1B | $10.4B | $11.3B |
-| Professional Visualization | $1.1B | $2.1B | $1.5B | $1.6B | $1.9B |
-| Automotive | $536M | $566M | $903M | $1.1B | $1.7B |
-| OEM And Other | $631M | $1.2B | $455M | $306M | $389M |
+| Data Center | $10.6B | $15.0B | $47.5B | $115.2B | $131.4B |
+| Gaming | $12.5B | $9.1B | $10.4B | $11.3B | $11.1B |
+| Professional Visualization | $2.1B | $1.5B | $1.6B | $1.9B | $1.9B |
+| Automotive | $566M | $903M | $1.1B | $1.7B | $1.7B |
+| OEM And Other | $1.2B | $455M | $306M | $389M | - |
 
 ### Geographic Segments
 
@@ -80,8 +80,11 @@
 
 | Segment | FY2020 | FY2021 | FY2022 | FY2023 | FY2024 |
 |---------|-------:|-------:|-------:|-------:|-------:|
+| North America | x | x | $340.7B | $377.3B | $414.9B |
 | Online Stores | $197.3B | $222.1B | $220.0B | $231.9B | $247.0B |
 | Third-Party Seller Services | $80.5B | $103.4B | $117.7B | $140.1B | $156.1B |
+| International | x | x | $125.4B | $139.7B | $154.6B |
+| AWS | x | x | $88.0B | $103.0B | $122.0B |
 | Amazon Web Services | $45.4B | $62.2B | $80.1B | $90.8B | $107.6B |
 | Advertising Services | x | $31.2B | $37.7B | $46.9B | $56.2B |
 | Subscription Services | $25.2B | $31.8B | $35.2B | $40.2B | $44.4B |
@@ -126,16 +129,16 @@
 
 | Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
 |---------|-------:|-------:|-------:|-------:|-------:|
+| Productivity and Business Processes | x | $63.3B | $69.3B | $77.7B | $120.7B |
+| Intelligent Cloud | x | $75.3B | $87.9B | $105.4B | $106.3B |
 | Server Products And Tools | $52.6B | $67.3B | $80.0B | $91.1B | $98.4B |
 | Microsoft Office | $39.9B | $44.9B | $48.7B | $54.9B | $95.2B |
+| More Personal Computing | x | $59.7B | $54.7B | $62.1B | $54.8B |
 | Gaming | $15.4B | $16.2B | $15.5B | $21.5B | $23.5B |
 | Windows | $22.5B | $24.8B | $21.5B | $23.2B | $22.3B |
 | Linked In Corporation | $10.3B | $13.8B | $15.1B | $16.4B | $17.8B |
 | Devices | $6.8B | $7.0B | $5.5B | $4.7B | $17.3B |
 | Search And News Advertising | $8.5B | $11.6B | $12.2B | $12.6B | $13.9B |
-| Dynamics Products And Cloud Services | x | x | $5.4B | $6.5B | $7.8B |
-| Enterprise Services | $6.9B | $7.4B | $7.7B | $7.6B | $7.8B |
-| Other Products And Services | $4.5B | $5.3B | $211M | $45M | $72M |
 
 ### Geographic Segments
 
@@ -202,10 +205,10 @@
 | Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Cloud and license | $34.1B | $36.1B | $41.1B | $44.5B | $49.2B |
-| Cloud services and license support | $30.2B | $35.3B | $39.4B | $43.0B | $47.7B |
-| Services | $3.2B | $5.6B | $5.4B | $5.4B | $5.2B |
-| Cloud license and on-premise license | $5.9B | $5.8B | $5.1B | $5.1B | $4.4B |
-| Hardware | $3.2B | $3.3B | $3.1B | $3.1B | $2.9B |
+| Cloud services and license support | $28.7B | $30.2B | $35.3B | $43.0B | $47.7B |
+| Services | $3.0B | $3.2B | $5.6B | $5.4B | $5.2B |
+| Cloud license and on-premise license | $5.4B | $5.9B | $5.8B | $5.1B | $4.4B |
+| Hardware | $3.4B | $3.2B | $3.3B | $3.1B | $2.9B |
 
 ### Geographic Segments
 
@@ -259,6 +262,7 @@
 | Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Handsets | $25.0B | $22.6B | $24.9B | $27.8B | $30.9B |
+| QCT Handsets | x | $18.5B | $16.8B | x | $27.8B |
 | IoT | $6.9B | $5.9B | $5.4B | $6.6B | $6.2B |
 | Licensing | $7.0B | $5.8B | $6.2B | $5.6B | $5.6B |
 | Automotive | $1.4B | $1.9B | $2.9B | $4.0B | $4.7B |
@@ -269,15 +273,24 @@
 
 ### Product Segments
 
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+| Segment | FY2022 | FY2023 | FY2024 | FY2025 | FY2026 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Servers and networking | $17.9B | $17.9B | $17.6B | $17.6B | $27.1B |
-| Storage | $16.4B | $16.5B | $18.0B | $16.3B | $16.5B |
-| Products | $79.8B | $79.2B | $64.4B | $71.4B | x |
-| Services | $21.4B | $23.1B | $24.1B | $24.1B | x |
+| Infrastructure Solutions Group | x | x | x | $75.8B | $41.2B |
+| Client Solutions Group | x | x | x | $84.9B | $37.5B |
+| Servers and networking | $17.9B | $17.6B | $17.6B | $27.1B | - |
+| Storage | $16.5B | $18.0B | $16.3B | $16.5B | - |
+| Products | $79.2B | $64.4B | $71.4B | x | - |
+| Services | $23.1B | $24.1B | $24.1B | x | - |
 
 ---
 
 ## HPQ - HP Inc.
+
+### Product Segments
+
+| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| Personal Systems | $44,011 | $35,684 | $35.7B | $36.2B | $38.5B |
+| Printing | $18,902 | $18,029 | $18.0B | $17.4B | $16.8B |
 
 ---

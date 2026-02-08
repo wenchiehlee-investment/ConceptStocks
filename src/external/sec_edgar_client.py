@@ -1130,8 +1130,9 @@ class SECEdgarClient:
         # Common press release naming patterns (prioritized)
         patterns = [
             r"q\dfy\d{2}pr",      # NVDA style: q2fy26pr.htm
+            r"exhibit99[-_]?1",   # exhibit991earnings8kq3fy26.htm (DELL), hp103125exhibit991q425.htm (HPQ)
+            r"erex99[-_]?1",      # qcom122825erex991.htm (QCOM)
             r"ex99[-_]?1",        # ex99-1.htm, ex991.htm, ex99_1.htm
-            r"exhibit99[-_]?1",
             r"pressrelease",
             r"earnings",
             r"press.*release",
@@ -1205,6 +1206,12 @@ class SECEdgarClient:
             return self._parse_aapl_8k(clean_content)
         elif symbol == "MU":
             return self._parse_mu_8k(clean_content)
+        elif symbol == "DELL":
+            return self._parse_dell_8k(clean_content)
+        elif symbol == "QCOM":
+            return self._parse_qcom_8k(clean_content)
+        elif symbol == "HPQ":
+            return self._parse_hpq_8k(clean_content)
         else:
             return []
 
@@ -1596,6 +1603,177 @@ class SECEdgarClient:
             if match:
                 # Values are in millions
                 revenue = float(match.group(1).replace(",", "")) * 1_000_000
+
+                results.append({
+                    "segment_name": name,
+                    "fiscal_year": fiscal_year,
+                    "period": quarter,
+                    "revenue": revenue,
+                    "segment_type": "product",
+                })
+
+        return results
+
+    def _parse_dell_8k(self, content: str) -> List[Dict[str, Any]]:
+        """Parse Dell 8-K press release for segment revenue.
+
+        Dell reports two main segments:
+        - ISG (Infrastructure Solutions Group): Servers, Storage, Networking
+        - CSG (Client Solutions Group): Commercial PCs, Consumer PCs
+
+        Format:
+        "Infrastructure Solutions Group (ISG) • Record third-quarter revenue: $14.1 billion"
+        "Client Solutions Group (CSG) • Revenue: $12.5 billion"
+        """
+        results = []
+
+        # Extract quarter and year
+        # Format: "Third Quarter Fiscal 2026" or "Q3 Fiscal 2026"
+        fy_match = re.search(
+            r'(First|Second|Third|Fourth)\s+Quarter\s+(?:of\s+)?Fiscal\s+(\d{4})',
+            content, re.IGNORECASE
+        )
+        if not fy_match:
+            # Try Q1/Q2/Q3/Q4 format
+            q_match = re.search(r'Q([1-4])\s+(?:FY|Fiscal\s+)?(\d{2,4})', content, re.IGNORECASE)
+            if q_match:
+                quarter = f"Q{q_match.group(1)}"
+                fy = q_match.group(2)
+                fiscal_year = int(fy) if len(fy) == 4 else 2000 + int(fy)
+            else:
+                return []
+        else:
+            quarter_map = {"first": "Q1", "second": "Q2", "third": "Q3", "fourth": "Q4"}
+            quarter = quarter_map.get(fy_match.group(1).lower(), "Q?")
+            fiscal_year = int(fy_match.group(2))
+
+        # Dell segment patterns
+        # ISG: "Infrastructure Solutions Group (ISG) • ... revenue: $14.1 billion"
+        # CSG: "Client Solutions Group (CSG) • Revenue: $12.5 billion"
+        segment_patterns = [
+            (r'Infrastructure\s+Solutions\s+Group\s*\(ISG\)[^$]*?\$\s*([\d.]+)\s*billion', "Infrastructure Solutions Group"),
+            (r'Client\s+Solutions\s+Group\s*\(CSG\)[^$]*?\$\s*([\d.]+)\s*billion', "Client Solutions Group"),
+        ]
+
+        for pattern, name in segment_patterns:
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                revenue = float(match.group(1)) * 1_000_000_000
+
+                results.append({
+                    "segment_name": name,
+                    "fiscal_year": fiscal_year,
+                    "period": quarter,
+                    "revenue": revenue,
+                    "segment_type": "product",
+                })
+
+        return results
+
+    def _parse_qcom_8k(self, content: str) -> List[Dict[str, Any]]:
+        """Parse Qualcomm 8-K press release for segment revenue.
+
+        Qualcomm reports:
+        - QCT (Qualcomm CDMA Technologies): broken down into Handsets, Automotive, IoT
+        - QTL (Qualcomm Technology Licensing)
+
+        Format (table, values in millions):
+        "Handsets $7,824 $7,574"
+        "Automotive 1,101 961"
+        "IoT (internet of things) 1,688 1,549"
+        """
+        results = []
+
+        # Extract quarter and year
+        # Format: "First Quarter Fiscal 2026"
+        fy_match = re.search(
+            r'(First|Second|Third|Fourth)\s+Quarter\s+(?:of\s+)?Fiscal\s+(\d{4})',
+            content, re.IGNORECASE
+        )
+        if not fy_match:
+            return []
+
+        quarter_map = {"first": "Q1", "second": "Q2", "third": "Q3", "fourth": "Q4"}
+        quarter = quarter_map.get(fy_match.group(1).lower(), "Q?")
+        fiscal_year = int(fy_match.group(2))
+
+        # QCT Revenue Streams - values in millions
+        # Pattern: "Handsets $7,824" or "Handsets 7,824"
+        segment_patterns = [
+            (r'Handsets\s*\$?\s*([\d,]+)\s', "QCT Handsets"),
+            (r'Automotive\s+([\d,]+)\s', "QCT Automotive"),
+            (r'IoT\s*\(?internet\s+of\s+things\)?\s+([\d,]+)\s', "QCT IoT"),
+        ]
+
+        for pattern, name in segment_patterns:
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                # Values are in millions
+                revenue = float(match.group(1).replace(",", "")) * 1_000_000
+
+                # Sanity check: QCOM segments should be at least $500M
+                if revenue >= 500_000_000:
+                    results.append({
+                        "segment_name": name,
+                        "fiscal_year": fiscal_year,
+                        "period": quarter,
+                        "revenue": revenue,
+                        "segment_type": "product",
+                    })
+
+        # Note: QTL (licensing) revenue is not included as it's not a product segment
+        # and the table format makes it hard to extract correctly
+
+        return results
+
+    def _parse_hpq_8k(self, content: str) -> List[Dict[str, Any]]:
+        """Parse HP Inc. 8-K press release for segment revenue.
+
+        HPQ reports two main segments:
+        - Personal Systems (Commercial, Consumer PCs)
+        - Printing (Commercial, Consumer, Supplies)
+
+        Format:
+        "Personal Systems net revenue was $10.4 billion"
+        "Printing net revenue was $4.3 billion"
+        """
+        results = []
+
+        # Extract quarter and year
+        # Format: "Fourth Quarter" near "Fiscal 2025" or "FY25"
+        fy_match = re.search(
+            r'(First|Second|Third|Fourth)\s+Quarter',
+            content, re.IGNORECASE
+        )
+        if not fy_match:
+            return []
+
+        quarter_map = {"first": "Q1", "second": "Q2", "third": "Q3", "fourth": "Q4"}
+        quarter = quarter_map.get(fy_match.group(1).lower(), "Q?")
+
+        # Extract fiscal year
+        fiscal_match = re.search(r'Fiscal\s+(\d{4})', content, re.IGNORECASE)
+        if fiscal_match:
+            fiscal_year = int(fiscal_match.group(1))
+        else:
+            # Try FY25 format
+            fy_short = re.search(r'FY\s*(\d{2})', content, re.IGNORECASE)
+            if fy_short:
+                fiscal_year = 2000 + int(fy_short.group(1))
+            else:
+                return []
+
+        # HPQ segment patterns
+        # Format: "Personal Systems net revenue was $10.4 billion"
+        segment_patterns = [
+            (r'Personal\s+Systems\s+net\s+revenue\s+was\s+\$([\d.]+)\s*billion', "Personal Systems"),
+            (r'Printing\s+net\s+revenue\s+was\s+\$([\d.]+)\s*billion', "Printing"),
+        ]
+
+        for pattern, name in segment_patterns:
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                revenue = float(match.group(1)) * 1_000_000_000
 
                 results.append({
                     "segment_name": name,

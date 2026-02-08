@@ -74,7 +74,7 @@ from src.external.sec_edgar_client import SECEdgarClient, COMPANY_CIK
 QUARTERLY_PRODUCT_SUPPORTED = ['AMD', 'ORCL', 'WDC']
 
 # Companies with quarterly data from 8-K earnings press releases
-QUARTERLY_8K_SUPPORTED = ['NVDA', 'GOOGL', 'MSFT', 'AAPL', 'AMZN', 'META', 'MU']
+QUARTERLY_8K_SUPPORTED = ['NVDA', 'GOOGL', 'MSFT', 'AAPL', 'AMZN', 'META', 'MU', 'DELL', 'QCOM', 'HPQ']
 
 # Company names
 COMPANY_NAMES = {
@@ -88,6 +88,9 @@ COMPANY_NAMES = {
     'ORCL': 'Oracle Corporation',
     'MU': 'Micron Technology, Inc.',
     'WDC': 'Western Digital Corporation',
+    'DELL': 'Dell Technologies Inc.',
+    'QCOM': 'Qualcomm Inc.',
+    'HPQ': 'HP Inc.',
 }
 
 

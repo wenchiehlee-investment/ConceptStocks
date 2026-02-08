@@ -21,10 +21,14 @@
 | 2024 | Services | $23.1B | $23.9B | $24.2B | $25.0B | $96.2B |
 | 2024 | Wearables, Home and Accessories | $12.0B | $7.9B | $8.1B | $9.0B | $37.0B |
 | 2024 | iPad | $7.0B | $5.6B | $7.2B | $7.0B | $26.7B |
-| 2023 | Mac | x | x | $6.8B | $7.6B | $14.5B |
-| 2023 | Services | x | x | $21.2B | $22.3B | $43.5B |
-| 2023 | Wearables, Home and Accessories | x | x | $8.3B | $9.3B | $17.6B |
-| 2023 | iPad | x | x | $5.8B | $6.4B | $12.2B |
+| 2023 | Mac | $7.7B | $7.2B | $6.8B | $7.6B | $29.4B |
+| 2023 | Services | $20.8B | $20.9B | $21.2B | $22.3B | $85.2B |
+| 2023 | Wearables, Home and Accessories | $13.5B | $8.8B | $8.3B | $9.3B | $39.8B |
+| 2023 | iPad | $9.4B | $6.7B | $5.8B | $6.4B | $28.3B |
+| 2022 | Mac | $10.9B | $10.4B | $7.4B | $11.5B | $40.2B |
+| 2022 | Services | $19.5B | $19.8B | $19.6B | $19.2B | $78.1B |
+| 2022 | Wearables, Home and Accessories | $14.7B | $8.8B | $8.1B | $9.7B | $41.2B |
+| 2022 | iPad | $7.2B | $7.6B | $7.2B | $7.2B | $29.3B |
 
 ---
 
@@ -34,24 +38,39 @@
 |----|---------|----|----|----|----|-------|
 | 2025 | Client | $2.3B | $2.5B | $2.8B | x | $7.5B |
 | 2025 | Client and Gaming | $2.4B | $2.9B | $3.2B | $6.1B | $14.6B |
+| 2025 | Computing and Graphics | x | x | x | x | - |
 | 2025 | Data Center | $3.7B | $3.4B | $4.3B | $5.2B | $16.6B |
 | 2025 | Embedded | $823M | $824M | $857M | $950M | $3.5B |
+| 2025 | Enterprise, Embedded and Semi-Custom | x | x | x | x | - |
 | 2025 | Gaming | $647M | $1.1B | $1.3B | $843M | $3.9B |
 | 2024 | Client | $1.4B | $1.5B | $1.9B | $2.3B | $7.1B |
 | 2024 | Client and Gaming | x | x | x | x | - |
+| 2024 | Computing and Graphics | x | x | x | x | - |
 | 2024 | Data Center | $2.3B | $2.8B | $3.5B | $3.9B | $12.6B |
 | 2024 | Embedded | $846M | $861M | $927M | $923M | $3.6B |
+| 2024 | Enterprise, Embedded and Semi-Custom | x | x | x | x | - |
 | 2024 | Gaming | $922M | $648M | $462M | $563M | $2.6B |
 | 2023 | Client | x | $739M | $1.5B | x | $2.2B |
 | 2023 | Client and Gaming | x | x | x | x | - |
+| 2023 | Computing and Graphics | x | x | x | x | - |
 | 2023 | Data Center | x | $1.3B | $1.6B | x | $2.9B |
 | 2023 | Embedded | x | $1.6B | $2.2B | x | $3.7B |
+| 2023 | Enterprise, Embedded and Semi-Custom | x | x | x | x | - |
 | 2023 | Gaming | x | $1.8B | $1.5B | x | $3.3B |
 | 2022 | Client | x | $2.2B | $1.0B | x | $3.2B |
 | 2022 | Client and Gaming | x | x | x | x | - |
+| 2022 | Computing and Graphics | $2.8B | x | x | x | $2.8B |
 | 2022 | Data Center | x | $1.5B | $1.6B | x | $3.1B |
 | 2022 | Embedded | x | $1.3B | $1.3B | x | $2.6B |
+| 2022 | Enterprise, Embedded and Semi-Custom | $2.5B | x | x | x | $2.5B |
 | 2022 | Gaming | x | $1.7B | $1.6B | x | $3.3B |
+| 2021 | Client | x | x | x | x | - |
+| 2021 | Client and Gaming | x | x | x | x | - |
+| 2021 | Computing and Graphics | $2.1B | $2.2B | $2.4B | $2.6B | $9.3B |
+| 2021 | Data Center | x | x | x | x | - |
+| 2021 | Embedded | x | x | x | x | - |
+| 2021 | Enterprise, Embedded and Semi-Custom | $1.3B | $1.6B | $1.9B | x | $4.9B |
+| 2021 | Gaming | x | x | x | x | - |
 
 ---
 
@@ -71,6 +90,22 @@
 | 2022 | AWS | $21.4B | $22.1B | $23.1B | $21.4B | $88.0B |
 | 2022 | International | $29.1B | $29.7B | $32.1B | $34.5B | $125.4B |
 | 2022 | North America | $76.9B | $82.5B | $87.9B | $93.4B | $340.7B |
+| 2021 | AWS | x | x | $20.5B | x | $20.5B |
+| 2021 | International | x | x | $27.7B | x | $27.7B |
+| 2021 | North America | x | x | $78.8B | x | $78.8B |
+
+---
+
+## DELL - Dell Technologies Inc.
+
+| FY | Segment | Q1 | Q2 | Q3 | Q4 | Total |
+|----|---------|----|----|----|----|-------|
+| 2026 | Client Solutions Group | $12.5B | $12.5B | $12.5B | - | $37.5B |
+| 2026 | Infrastructure Solutions Group | $10.3B | $16.8B | $14.1B | - | $41.2B |
+| 2025 | Client Solutions Group | $12.0B | $12.4B | $12.1B | $48.4B | $84.9B |
+| 2025 | Infrastructure Solutions Group | $9.2B | $11.6B | $11.4B | $43.6B | $75.8B |
+| 2024 | Client Solutions Group | x | x | x | $11.7B | $11.7B |
+| 2024 | Infrastructure Solutions Group | x | x | x | $9.3B | $9.3B |
 
 ---
 
@@ -82,6 +117,21 @@
 | 2025 | Google Services | $77.3B | $82.5B | $87.1B | $95.9B | $342.8B |
 | 2024 | Google Cloud | x | x | $11.4B | $12.0B | $23.4B |
 | 2024 | Google Services | x | x | $76.5B | $84.1B | $160.6B |
+
+---
+
+## HPQ - HP Inc.
+
+| FY | Segment | Q1 | Q2 | Q3 | Q4 | Total |
+|----|---------|----|----|----|----|-------|
+| 2025 | Personal Systems | $9.2B | $9.0B | $9.9B | $10.4B | $38.5B |
+| 2025 | Printing | $4.3B | $4.2B | $4.0B | $4.3B | $16.8B |
+| 2024 | Personal Systems | $8.8B | $8.4B | $9.4B | $9.6B | $36.2B |
+| 2024 | Printing | $4.4B | $4.4B | $4.1B | $4.5B | $17.4B |
+| 2023 | Personal Systems | $9.2B | $8.2B | $8.9B | $9.4B | $35.7B |
+| 2023 | Printing | $4.6B | $4.7B | $4.3B | $4.4B | $18.0B |
+| 2022 | Personal Systems | x | x | x | $10.3B | $10.3B |
+| 2022 | Printing | x | x | x | $4.5B | $4.5B |
 
 ---
 
@@ -111,6 +161,12 @@
 | 2024 | Intelligent Cloud | $24.3B | $25.9B | $26.7B | $28.5B | $105.4B |
 | 2024 | More Personal Computing | $13.7B | $16.9B | $15.6B | $15.9B | $62.1B |
 | 2024 | Productivity and Business Processes | $18.6B | $19.2B | $19.6B | $20.3B | $77.7B |
+| 2023 | Intelligent Cloud | $20.3B | $21.5B | $22.1B | $24.0B | $87.9B |
+| 2023 | More Personal Computing | $13.3B | $14.2B | $13.3B | $13.9B | $54.7B |
+| 2023 | Productivity and Business Processes | $16.5B | $17.0B | $17.5B | $18.3B | $69.3B |
+| 2022 | Intelligent Cloud | $17.0B | $18.3B | $19.1B | $20.9B | $75.3B |
+| 2022 | More Personal Computing | $13.3B | $17.5B | $14.5B | $14.4B | $59.7B |
+| 2022 | Productivity and Business Processes | $15.0B | $15.9B | $15.8B | $16.6B | $63.3B |
 
 ---
 
@@ -133,9 +189,17 @@ No segment data available.
 | 2025 | Gaming | $2.6B | $2.9B | $3.3B | $2.5B | $11.3B |
 | 2025 | Professional Visualization | $427M | $454M | $486M | $511M | $1.9B |
 | 2024 | Automotive | x | $253M | $261M | x | $514M |
-| 2024 | Data Center | x | $10.3B | $14.5B | x | $24.8B |
-| 2024 | Gaming | x | $2.5B | $2.9B | x | $5.3B |
-| 2024 | Professional Visualization | x | $379M | $416M | x | $795M |
+| 2024 | Data Center | $4.3B | $10.3B | $14.5B | $18.4B | $47.5B |
+| 2024 | Gaming | $2.2B | $2.5B | $2.9B | $2.9B | $10.4B |
+| 2024 | Professional Visualization | $295M | $379M | $416M | $463M | $1.6B |
+| 2023 | Automotive | $138M | $220M | $251M | $294M | $903M |
+| 2023 | Data Center | x | $3.8B | $3.8B | $3.6B | $11.3B |
+| 2023 | Gaming | x | $2.0B | $1.6B | $1.8B | $5.4B |
+| 2023 | Professional Visualization | $622M | $496M | $200M | $226M | $1.5B |
+| 2022 | Automotive | x | $152M | $135M | x | $287M |
+| 2022 | Data Center | x | $2.4B | $2.9B | x | $5.3B |
+| 2022 | Gaming | x | $3.1B | $3.2B | x | $6.3B |
+| 2022 | Professional Visualization | x | x | x | x | - |
 
 ---
 
@@ -159,10 +223,32 @@ No segment data available.
 | 2023 | Cloud services and license support | $8.4B | $8.6B | $8.9B | $9.4B | $35.3B |
 | 2023 | Hardware | $763M | $850M | $811M | $850M | $3.3B |
 | 2023 | Services | $1.4B | $1.4B | $1.4B | $1.5B | $5.6B |
-| 2022 | Cloud license and on-premise license | x | x | $1.3B | x | $1.3B |
-| 2022 | Cloud services and license support | x | x | $7.6B | x | $7.6B |
-| 2022 | Hardware | x | x | $798M | x | $798M |
-| 2022 | Services | x | x | $789M | x | $789M |
+| 2022 | Cloud license and on-premise license | $813M | $1.2B | $1.3B | $2.5B | $5.9B |
+| 2022 | Cloud services and license support | $7.4B | $7.6B | $7.6B | $7.6B | $30.2B |
+| 2022 | Hardware | $763M | $767M | $798M | $855M | $3.2B |
+| 2022 | Services | $781M | $802M | $789M | $833M | $3.2B |
+
+---
+
+## QCOM - Qualcomm Inc.
+
+| FY | Segment | Q1 | Q2 | Q3 | Q4 | Total |
+|----|---------|----|----|----|----|-------|
+| 2026 | QCT Automotive | $1.1B | - | - | - | $1.1B |
+| 2026 | QCT Handsets | $7.8B | - | - | - | $7.8B |
+| 2026 | QCT IoT | $1.7B | - | - | - | $1.7B |
+| 2025 | QCT Automotive | $961M | $959M | $984M | $1.1B | $4.0B |
+| 2025 | QCT Handsets | $7.6B | $6.9B | $6.3B | $7.0B | $27.8B |
+| 2025 | QCT IoT | x | $1.6B | $1.7B | $1.8B | $5.1B |
+| 2024 | QCT Automotive | x | $603M | $811M | x | $1.4B |
+| 2024 | QCT Handsets | x | $6.2B | $5.9B | x | $12.1B |
+| 2024 | QCT IoT | x | x | x | x | - |
+| 2023 | QCT Automotive | $535M | x | x | x | $535M |
+| 2023 | QCT Handsets | $5.5B | $6.1B | $5.3B | x | $16.8B |
+| 2023 | QCT IoT | x | x | x | x | - |
+| 2022 | QCT Automotive | x | x | x | x | - |
+| 2022 | QCT Handsets | $6.0B | $6.3B | $6.1B | x | $18.5B |
+| 2022 | QCT IoT | x | x | x | x | - |
 
 ---
 

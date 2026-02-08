@@ -220,9 +220,76 @@ def load_override_data(csv_path: str) -> dict:
     return overrides
 
 
-def load_segment_data(csv_path: str, override_path: str = None) -> dict:
+def load_quarterly_as_annual(csv_path: str) -> dict:
+    """
+    Load quarterly segment data and aggregate to annual totals.
+
+    This is used for companies where annual data is missing or uses different
+    segment names (e.g., DELL, HPQ).
+
+    Returns:
+        Dict: {symbol: {segment_type: {segment_name: {year: revenue}}}}
+    """
+    if not os.path.exists(csv_path):
+        return {}
+
+    # Structure: symbol -> segment_type -> segment_name -> year -> quarter -> revenue
+    quarterly = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(dict))))
+
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            symbol = row.get('symbol')
+            fy = int(row.get('fiscal_year') or 0)
+            quarter = row.get('quarter', '')
+            seg_name = row.get('segment_name', '')
+            revenue = float(row.get('revenue') or 0)
+            is_calculated = row.get('is_calculated', 'False') == 'True'
+
+            if not symbol or not fy or not seg_name or not quarter:
+                continue
+
+            # Only include Q1-Q4 data (not FY totals)
+            if quarter not in ('Q1', 'Q2', 'Q3', 'Q4'):
+                continue
+
+            # Skip calculated Q4 values that seem wrong (>50% of FY total estimate)
+            if is_calculated and quarter == 'Q4':
+                # Skip this - we'll calculate from Q1-Q3 if we have all of them
+                continue
+
+            seg_name = normalize_segment_name(seg_name)
+            quarterly[symbol]['product'][seg_name][fy][quarter] = revenue
+
+    # Aggregate to annual totals (only if we have Q1-Q4 or Q1-Q3)
+    annual = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
+
+    for symbol in quarterly:
+        for seg_type in quarterly[symbol]:
+            for seg_name in quarterly[symbol][seg_type]:
+                for fy in quarterly[symbol][seg_type][seg_name]:
+                    q_data = quarterly[symbol][seg_type][seg_name][fy]
+
+                    # Calculate annual total from available quarters
+                    quarters_available = [q for q in ['Q1', 'Q2', 'Q3', 'Q4'] if q_data.get(q, 0) > 0]
+
+                    if len(quarters_available) >= 3:
+                        # Sum available quarters
+                        total = sum(q_data.get(q, 0) for q in quarters_available)
+                        if total > MIN_REVENUE_THRESHOLD:
+                            annual[symbol][seg_type][seg_name][fy] = total
+
+    return dict(annual)
+
+
+def load_segment_data(csv_path: str, override_path: str = None, quarterly_path: str = None) -> dict:
     """
     Load segment revenue data from CSV file with optional overrides.
+
+    Args:
+        csv_path: Path to annual segment revenue CSV
+        override_path: Path to manual override CSV
+        quarterly_path: Path to quarterly segment CSV (for aggregating to annual)
 
     Returns:
         Dict: {symbol: {segment_type: {segment_name: {year: revenue}}}}
@@ -236,6 +303,13 @@ def load_segment_data(csv_path: str, override_path: str = None) -> dict:
         overrides = load_override_data(override_path)
         if overrides:
             print(f"  Loaded {len(overrides)} manual override records")
+
+    # Load quarterly data aggregated to annual (for DELL, HPQ, etc.)
+    quarterly_annual = {}
+    if quarterly_path:
+        quarterly_annual = load_quarterly_as_annual(quarterly_path)
+        if quarterly_annual:
+            print(f"  Loaded quarterly data for {len(quarterly_annual)} companies")
 
     # Structure: symbol -> segment_type -> segment_name -> year -> revenue
     data = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
@@ -275,6 +349,28 @@ def load_segment_data(csv_path: str, override_path: str = None) -> dict:
         elif revenue > existing * 1.05:  # Override if >5% higher (likely more complete)
             data[symbol][seg_type][seg_name][fy] = revenue
             print(f"    Applied override (replaced): {symbol} FY{fy} {seg_name} ({existing/1e9:.1f}B -> {revenue/1e9:.1f}B)")
+
+    # Merge quarterly-aggregated annual data for companies with missing/different segments
+    # Priority: use quarterly data if annual data is missing or uses different segment names
+    QUARTERLY_PRIORITY = ['DELL', 'HPQ']  # Companies where 8-K quarterly data is more accurate
+
+    for symbol in quarterly_annual:
+        for seg_type in quarterly_annual[symbol]:
+            for seg_name in quarterly_annual[symbol][seg_type]:
+                for fy, revenue in quarterly_annual[symbol][seg_type][seg_name].items():
+                    existing = data[symbol][seg_type][seg_name].get(fy, 0)
+
+                    if symbol in QUARTERLY_PRIORITY:
+                        # For these companies, prefer quarterly aggregated data
+                        if existing == 0 or revenue > existing * 0.5:  # Use quarterly if missing or seems valid
+                            data[symbol][seg_type][seg_name][fy] = revenue
+                            if existing == 0:
+                                print(f"    Added from quarterly: {symbol} FY{fy} {seg_name} = ${revenue/1e9:.1f}B")
+                    else:
+                        # For other companies, only fill gaps
+                        if existing == 0:
+                            data[symbol][seg_type][seg_name][fy] = revenue
+                            print(f"    Added from quarterly: {symbol} FY{fy} {seg_name} = ${revenue/1e9:.1f}B")
 
     return dict(data)
 
@@ -478,11 +574,12 @@ def main() -> int:
     if latest_fy_map:
         print(f"  Loaded latest released FY for {len(latest_fy_map)} companies")
 
-    # Load annual segment data from CSV with manual overrides
+    # Load annual segment data from CSV with manual overrides and quarterly aggregation
     csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
     override_path = os.path.join(args.out_dir, "segment_overrides.csv")
+    quarterly_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.csv")
     print(f"  Loading segment data from {csv_path}")
-    data = load_segment_data(csv_path, override_path=override_path)
+    data = load_segment_data(csv_path, override_path=override_path, quarterly_path=quarterly_path)
 
     if not data:
         print("  Warning: No segment data found. Run update_company_financials.py first.")
