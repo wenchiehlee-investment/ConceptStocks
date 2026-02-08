@@ -172,7 +172,16 @@
 
 ## MU - Micron Technology, Inc.
 
-No segment data available.
+| FY | Segment | Q1 | Q2 | Q3 | Q4 | Total |
+|----|---------|----|----|----|----|-------|
+| 2026 | Automotive and Embedded | $1.7B | - | - | - | $1.7B |
+| 2026 | Cloud Memory | $5.3B | - | - | - | $5.3B |
+| 2026 | Core Data Center | $2.4B | - | - | - | $2.4B |
+| 2026 | Mobile and Client | $4.3B | - | - | - | $4.3B |
+| 2025 | Automotive and Embedded | x | x | x | $1.4B | $1.4B |
+| 2025 | Cloud Memory | x | x | x | $4.5B | $4.5B |
+| 2025 | Core Data Center | x | x | x | $1.6B | $1.6B |
+| 2025 | Mobile and Client | x | x | x | $3.8B | $3.8B |
 
 ---
 
@@ -207,26 +216,41 @@ No segment data available.
 
 | FY | Segment | Q1 | Q2 | Q3 | Q4 | Total |
 |----|---------|----|----|----|----|-------|
+| 2026 | Cloud | $7.2B | $8.0B | - | - | $15.2B |
+| 2026 | Cloud and software | $3.6B | $4.0B | - | - | $7.6B |
 | 2026 | Cloud license and on-premise license | x | x | - | - | - |
 | 2026 | Cloud services and license support | x | x | - | - | - |
 | 2026 | Hardware | $670M | $776M | - | - | $1.4B |
 | 2026 | Services | $1.3B | $1.4B | - | - | $2.8B |
+| 2026 | Software | $5.7B | $5.9B | - | - | $11.6B |
+| 2025 | Cloud | x | x | x | x | - |
+| 2025 | Cloud and software | x | x | x | x | - |
 | 2025 | Cloud license and on-premise license | $870M | $1.2B | $1.1B | x | $3.2B |
 | 2025 | Cloud services and license support | $10.5B | $10.8B | $11.0B | x | $32.3B |
 | 2025 | Hardware | $655M | $728M | $703M | $850M | $2.9B |
 | 2025 | Services | $1.3B | $1.3B | $1.3B | $1.3B | $5.2B |
+| 2025 | Software | x | x | x | x | - |
+| 2024 | Cloud | x | x | x | x | - |
+| 2024 | Cloud and software | x | x | x | x | - |
 | 2024 | Cloud license and on-premise license | $809M | $1.2B | $1.3B | x | $3.2B |
 | 2024 | Cloud services and license support | $9.5B | $9.6B | $10.0B | x | $29.1B |
 | 2024 | Hardware | $714M | $756M | $754M | $842M | $3.1B |
 | 2024 | Services | $1.4B | $1.4B | $1.3B | $1.4B | $5.4B |
+| 2024 | Software | x | x | x | x | - |
+| 2023 | Cloud | x | x | x | x | - |
+| 2023 | Cloud and software | x | x | x | x | - |
 | 2023 | Cloud license and on-premise license | $904M | $1.4B | $1.3B | $2.2B | $5.8B |
 | 2023 | Cloud services and license support | $8.4B | $8.6B | $8.9B | $9.4B | $35.3B |
 | 2023 | Hardware | $763M | $850M | $811M | $850M | $3.3B |
 | 2023 | Services | $1.4B | $1.4B | $1.4B | $1.5B | $5.6B |
+| 2023 | Software | x | x | x | x | - |
+| 2022 | Cloud | x | x | x | x | - |
+| 2022 | Cloud and software | x | x | x | x | - |
 | 2022 | Cloud license and on-premise license | $813M | $1.2B | $1.3B | $2.5B | $5.9B |
 | 2022 | Cloud services and license support | $7.4B | $7.6B | $7.6B | $7.6B | $30.2B |
 | 2022 | Hardware | $763M | $767M | $798M | $855M | $3.2B |
 | 2022 | Services | $781M | $802M | $789M | $833M | $3.2B |
+| 2022 | Software | x | x | x | x | - |
 
 ---
 

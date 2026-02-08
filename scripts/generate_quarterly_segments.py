@@ -342,11 +342,11 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
         all_segments = sorted(set(r['segment_name'] for r in records))
         years = sorted(set(r['fiscal_year'] for r in records), reverse=True)[:5]
 
-        # Filter segments with enough data (>= 3 quarters)
+        # Filter segments with enough data (>= 2 quarters)
         segments = []
         for seg in all_segments:
             seg_records = [r for r in records if r['segment_name'] == seg]
-            if len(seg_records) >= 3:
+            if len(seg_records) >= 2:
                 segments.append(seg)
 
         if not segments:

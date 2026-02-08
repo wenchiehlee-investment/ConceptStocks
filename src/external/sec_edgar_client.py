@@ -1132,6 +1132,7 @@ class SECEdgarClient:
             r"q\dfy\d{2}pr",      # NVDA style: q2fy26pr.htm
             r"exhibit99[-_]?1",   # exhibit991earnings8kq3fy26.htm (DELL), hp103125exhibit991q425.htm (HPQ)
             r"erex99[-_]?1",      # qcom122825erex991.htm (QCOM)
+            r"ex99[-_]?1.*press", # a2025q4ex991-pressrelease.htm (MU)
             r"ex99[-_]?1",        # ex99-1.htm, ex991.htm, ex99_1.htm
             r"pressrelease",
             r"earnings",
@@ -1574,9 +1575,10 @@ class SECEdgarClient:
         """
         results = []
 
-        # Extract quarter and year
+        # Extract quarter and year - multiple formats:
+        # "First Quarter of Fiscal 2026" or "FOURTH QUARTER AND FULL YEAR OF FISCAL 2025"
         fy_match = re.search(
-            r'(First|Second|Third|Fourth)\s+Quarter\s+(?:of\s+)?Fiscal\s+(\d{4})',
+            r'(First|Second|Third|Fourth)\s+Quarter\s+(?:and\s+Full\s+Year\s+)?(?:of\s+)?Fiscal\s+(\d{4})',
             content, re.IGNORECASE
         )
         if not fy_match:
