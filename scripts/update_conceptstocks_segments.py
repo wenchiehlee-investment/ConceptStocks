@@ -88,8 +88,8 @@ FMP_SUPPORTED = ['NVDA', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AMD', 'AAPL']
 # Companies without FMP segment data (need SEC EDGAR fallback)
 SEC_ONLY = ['ORCL', 'MU', 'WDC', 'QCOM', 'DELL', 'HPQ']
 
-# Display order
-DISPLAY_ORDER = ['NVDA', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AMD', 'AAPL', 'ORCL', 'MU', 'WDC', 'QCOM', 'DELL', 'HPQ']
+# Display order (A-Z alphabetical)
+DISPLAY_ORDER = ['AAPL', 'AMD', 'AMZN', 'DELL', 'GOOGL', 'HPQ', 'META', 'MSFT', 'MU', 'NVDA', 'ORCL', 'QCOM', 'WDC']
 
 # Segments to skip (parsing errors, duplicates, or non-revenue items)
 SKIP_SEGMENTS = {

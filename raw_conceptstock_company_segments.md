@@ -11,66 +11,68 @@
 
 | Symbol | Company | FY | Top Segment | Revenue | Source |
 |--------|---------|----|--------------------|---------|--------|
-| NVDA | NVIDIA Corporation | FY2026 | Data Center | $131.4B | FMP |
-| GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
+| AAPL | Apple Inc. | FY2025 | iPhone | $209.6B | FMP |
+| AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
 | AMZN | Amazon.com, Inc. | FY2024 | North America | $414.9B | FMP |
+| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $41.2B | SEC |
+| GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
+| HPQ | HP Inc. | FY2025 | Personal Systems | $38.5B | SEC |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
 | MSFT | Microsoft Corporation | FY2025 | Productivity and Business Processes | $120.7B | FMP |
-| AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
-| AAPL | Apple Inc. | FY2025 | iPhone | $209.6B | FMP |
-| ORCL | Oracle Corporation | FY2025 | Cloud and license | $49.2B | SEC |
 | MU | Micron Technology, Inc. | FY2025 | Cloud Memory | $13.5B | SEC |
-| WDC | Western Digital Corporation | FY2025 | Cloud | $8.3B | SEC |
+| NVDA | NVIDIA Corporation | FY2026 | Data Center | $131.4B | FMP |
+| ORCL | Oracle Corporation | FY2025 | Cloud and license | $49.2B | SEC |
 | QCOM | Qualcomm Inc. | FY2025 | Handsets | $30.9B | SEC |
-| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $41.2B | SEC |
-| HPQ | HP Inc. | FY2025 | Personal Systems | $38.5B | SEC |
+| WDC | Western Digital Corporation | FY2025 | Cloud | $8.3B | SEC |
 
 ---
 
-## NVDA - NVIDIA Corporation
-
-### Product Segments
-
-| Segment | FY2022 | FY2023 | FY2024 | FY2025 | FY2026 |
-|---------|-------:|-------:|-------:|-------:|-------:|
-| Data Center | $10.6B | $15.0B | $47.5B | $115.2B | $131.4B |
-| Gaming | $12.5B | $9.1B | $10.4B | $11.3B | $11.1B |
-| Professional Visualization | $2.1B | $1.5B | $1.6B | $1.9B | $1.9B |
-| Automotive | $566M | $903M | $1.1B | $1.7B | $1.7B |
-| OEM And Other | $1.2B | $455M | $306M | $389M | - |
-
-### Geographic Segments
-
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
-|---------|-------:|-------:|-------:|-------:|-------:|
-| UNITED STATES | $3.2B | $4.3B | $8.3B | $27.0B | $61.4B |
-| TAIWAN, PROVINCE OF CHINA | $4.5B | $8.5B | $7.0B | $13.4B | $20.6B |
-| CHINA | $3.9B | $7.1B | $5.8B | $10.3B | $17.1B |
-| Other Americas | $833M | $6.9B | $5.9B | $10.2B | $7.9B |
-
----
-
-## GOOGL - Alphabet Inc.
+## AAPL - Apple Inc.
 
 ### Product Segments
 
 | Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Google Search & Other | $149.0B | $162.4B | $175.0B | $198.1B | $224.5B |
-| Google Cloud | $19.2B | $26.3B | $33.1B | $43.2B | $58.7B |
-| Google Subscriptions | $28.0B | $29.1B | $34.7B | $40.3B | $46.2B |
-| YouTube Ads | $28.8B | $29.2B | $31.5B | $36.1B | $40.4B |
-| Google Network | $31.7B | $32.8B | $31.3B | $30.4B | $29.8B |
-| Other Bets | $753M | $1.1B | $1.5B | $1.6B | $1.9B |
+| iPhone | $192.0B | $205.5B | $200.6B | $201.2B | $209.6B |
+| Services | $68.4B | $78.1B | $85.2B | $96.2B | $109.2B |
+| Wearables, Home and Accessories | $38.4B | $41.2B | $39.8B | $37.0B | $35.7B |
+| Mac | $35.2B | $40.2B | $29.4B | $30.0B | $33.7B |
+| iPad | $31.9B | $29.3B | $28.3B | $26.7B | $28.0B |
 
 ### Geographic Segments
 
 | Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| UNITED STATES | $117.9B | $134.8B | $146.3B | $170.4B | $194.2B |
-| EMEA | $79.1B | $82.1B | $91.0B | $102.1B | $117.2B |
-| Asia Pacific | $46.1B | $47.0B | $51.5B | $56.8B | $67.7B |
-| Americas Excluding United States | $14.4B | $17.0B | $18.3B | $20.4B | $23.9B |
+| Americas Segment | $153.3B | $169.7B | $162.6B | $167.0B | $178.4B |
+| Europe Segment | $89.3B | $95.1B | $94.3B | $101.3B | $111.0B |
+| Greater China Segment | $68.4B | $74.2B | $72.6B | $67.0B | $64.4B |
+| Rest of Asia Pacific Segment | $26.4B | $29.4B | $29.6B | $30.7B | $33.7B |
+| Japan Segment | $28.5B | $26.0B | $24.3B | $25.1B | $28.7B |
+
+---
+
+## AMD - Advanced Micro Devices, Inc.
+
+### Product Segments
+
+| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| Data Center | x | $6.0B | $6.5B | $12.6B | $16.6B |
+| Client | x | $6.2B | $4.7B | $7.1B | $10.6B |
+| Gaming | x | $6.8B | $6.2B | $2.6B | $3.9B |
+| Embedded | x | $4.6B | $5.3B | $3.6B | $3.5B |
+
+### Geographic Segments
+
+| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| UNITED STATES | x | $8.0B | $7.8B | x | $11.4B |
+| CHINA | $4.1B | $5.2B | $3.4B | $6.2B | $7.8B |
+| Other Countries | $572M | $646M | $695M | $554M | $6.1B |
+| TAIWAN, PROVINCE OF CHINA | $2.1B | $2.4B | $1.8B | $3.3B | $5.2B |
+| SINGAPORE | $1.4B | $1.4B | $2.2B | $3.6B | $4.3B |
+| Europe | $1.2B | $1.8B | $2.0B | $1.6B | x |
+| JAPAN | $2.4B | $4.2B | $4.6B | $1.8B | x |
 
 ---
 
@@ -100,6 +102,56 @@
 | GERMANY | $29.6B | $37.3B | $33.6B | $37.6B | $40.9B |
 | UNITED KINGDOM | $26.5B | $31.9B | $30.1B | $33.6B | $37.9B |
 | JAPAN | $20.5B | $23.1B | $24.4B | $26.0B | $27.4B |
+
+---
+
+## DELL - Dell Technologies Inc.
+
+### Product Segments
+
+| Segment | FY2022 | FY2023 | FY2024 | FY2025 | FY2026 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| Infrastructure Solutions Group | x | x | x | $75.8B | $41.2B |
+| Client Solutions Group | x | x | x | $84.9B | $37.5B |
+| Servers and networking | $17.9B | $17.6B | $17.6B | $27.1B | - |
+| Storage | $16.5B | $18.0B | $16.3B | $16.5B | - |
+| Products | $79.2B | $64.4B | $71.4B | x | - |
+| Services | $23.1B | $24.1B | $24.1B | x | - |
+
+---
+
+## GOOGL - Alphabet Inc.
+
+### Product Segments
+
+| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| Google Search & Other | $149.0B | $162.4B | $175.0B | $198.1B | $224.5B |
+| Google Cloud | $19.2B | $26.3B | $33.1B | $43.2B | $58.7B |
+| Google Subscriptions | $28.0B | $29.1B | $34.7B | $40.3B | $46.2B |
+| YouTube Ads | $28.8B | $29.2B | $31.5B | $36.1B | $40.4B |
+| Google Network | $31.7B | $32.8B | $31.3B | $30.4B | $29.8B |
+| Other Bets | $753M | $1.1B | $1.5B | $1.6B | $1.9B |
+
+### Geographic Segments
+
+| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| UNITED STATES | $117.9B | $134.8B | $146.3B | $170.4B | $194.2B |
+| EMEA | $79.1B | $82.1B | $91.0B | $102.1B | $117.2B |
+| Asia Pacific | $46.1B | $47.0B | $51.5B | $56.8B | $67.7B |
+| Americas Excluding United States | $14.4B | $17.0B | $18.3B | $20.4B | $23.9B |
+
+---
+
+## HPQ - HP Inc.
+
+### Product Segments
+
+| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| Personal Systems | $44,011 | $35,684 | $35.7B | $36.2B | $38.5B |
+| Printing | $18,902 | $18,029 | $18.0B | $17.4B | $16.8B |
 
 ---
 
@@ -149,52 +201,39 @@
 
 ---
 
-## AMD - Advanced Micro Devices, Inc.
+## MU - Micron Technology, Inc.
 
 ### Product Segments
 
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
-|---------|-------:|-------:|-------:|-------:|-------:|
-| Data Center | x | $6.0B | $6.5B | $12.6B | $16.6B |
-| Client | x | $6.2B | $4.7B | $7.1B | $10.6B |
-| Gaming | x | $6.8B | $6.2B | $2.6B | $3.9B |
-| Embedded | x | $4.6B | $5.3B | $3.6B | $3.5B |
-
-### Geographic Segments
-
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
-|---------|-------:|-------:|-------:|-------:|-------:|
-| UNITED STATES | x | $8.0B | $7.8B | x | $11.4B |
-| CHINA | $4.1B | $5.2B | $3.4B | $6.2B | $7.8B |
-| Other Countries | $572M | $646M | $695M | $554M | $6.1B |
-| TAIWAN, PROVINCE OF CHINA | $2.1B | $2.4B | $1.8B | $3.3B | $5.2B |
-| SINGAPORE | $1.4B | $1.4B | $2.2B | $3.6B | $4.3B |
-| Europe | $1.2B | $1.8B | $2.0B | $1.6B | x |
-| JAPAN | $2.4B | $4.2B | $4.6B | $1.8B | x |
+| Segment | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|
+| Cloud Memory | x | $1.9B | $3.8B | $13.5B |
+| Mobile and Client | x | $7.4B | $11.7B | $11.9B |
+| Core Data Center | x | $2.1B | $5.0B | $7.2B |
+| Automotive and Edge | x | $4.1B | $4.6B | $4.8B |
 
 ---
 
-## AAPL - Apple Inc.
+## NVDA - NVIDIA Corporation
 
 ### Product Segments
 
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+| Segment | FY2022 | FY2023 | FY2024 | FY2025 | FY2026 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| iPhone | $192.0B | $205.5B | $200.6B | $201.2B | $209.6B |
-| Services | $68.4B | $78.1B | $85.2B | $96.2B | $109.2B |
-| Wearables, Home and Accessories | $38.4B | $41.2B | $39.8B | $37.0B | $35.7B |
-| Mac | $35.2B | $40.2B | $29.4B | $30.0B | $33.7B |
-| iPad | $31.9B | $29.3B | $28.3B | $26.7B | $28.0B |
+| Data Center | $10.6B | $15.0B | $47.5B | $115.2B | $131.4B |
+| Gaming | $12.5B | $9.1B | $10.4B | $11.3B | $11.1B |
+| Professional Visualization | $2.1B | $1.5B | $1.6B | $1.9B | $1.9B |
+| Automotive | $566M | $903M | $1.1B | $1.7B | $1.7B |
+| OEM And Other | $1.2B | $455M | $306M | $389M | - |
 
 ### Geographic Segments
 
 | Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Americas Segment | $153.3B | $169.7B | $162.6B | $167.0B | $178.4B |
-| Europe Segment | $89.3B | $95.1B | $94.3B | $101.3B | $111.0B |
-| Greater China Segment | $68.4B | $74.2B | $72.6B | $67.0B | $64.4B |
-| Rest of Asia Pacific Segment | $26.4B | $29.4B | $29.6B | $30.7B | $33.7B |
-| Japan Segment | $28.5B | $26.0B | $24.3B | $25.1B | $28.7B |
+| UNITED STATES | $3.2B | $4.3B | $8.3B | $27.0B | $61.4B |
+| TAIWAN, PROVINCE OF CHINA | $4.5B | $8.5B | $7.0B | $13.4B | $20.6B |
+| CHINA | $3.9B | $7.1B | $5.8B | $10.3B | $17.1B |
+| Other Americas | $833M | $6.9B | $5.9B | $10.2B | $7.9B |
 
 ---
 
@@ -220,16 +259,16 @@
 
 ---
 
-## MU - Micron Technology, Inc.
+## QCOM - Qualcomm Inc.
 
 ### Product Segments
 
-| Segment | FY2022 | FY2023 | FY2024 | FY2025 |
-|---------|-------:|-------:|-------:|-------:|
-| Cloud Memory | x | $1.9B | $3.8B | $13.5B |
-| Mobile and Client | x | $7.4B | $11.7B | $11.9B |
-| Core Data Center | x | $2.1B | $5.0B | $7.2B |
-| Automotive and Edge | x | $4.1B | $4.6B | $4.8B |
+| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| Handsets | $25.0B | $22.6B | $24.9B | $27.8B | $30.9B |
+| IoT | $6.9B | $5.9B | $5.4B | $6.6B | $6.2B |
+| Licensing | $7.0B | $5.8B | $6.2B | $5.6B | $5.6B |
+| Automotive | $1.4B | $1.9B | $2.9B | $4.0B | $4.7B |
 
 ---
 
@@ -252,44 +291,5 @@
 | Americas | x | x | $2.9B | $4.6B | $4.6B |
 | Asia | x | x | $2.4B | $3.4B | $3.4B |
 | Europe, Middle East and Africa | $3.1B | $3.1B | $1.1B | $1.5B | $1.5B |
-
----
-
-## QCOM - Qualcomm Inc.
-
-### Product Segments
-
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
-|---------|-------:|-------:|-------:|-------:|-------:|
-| Handsets | $25.0B | $22.6B | $24.9B | $27.8B | $30.9B |
-| IoT | $6.9B | $5.9B | $5.4B | $6.6B | $6.2B |
-| Licensing | $7.0B | $5.8B | $6.2B | $5.6B | $5.6B |
-| Automotive | $1.4B | $1.9B | $2.9B | $4.0B | $4.7B |
-
----
-
-## DELL - Dell Technologies Inc.
-
-### Product Segments
-
-| Segment | FY2022 | FY2023 | FY2024 | FY2025 | FY2026 |
-|---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | x | x | x | $75.8B | $41.2B |
-| Client Solutions Group | x | x | x | $84.9B | $37.5B |
-| Servers and networking | $17.9B | $17.6B | $17.6B | $27.1B | - |
-| Storage | $16.5B | $18.0B | $16.3B | $16.5B | - |
-| Products | $79.2B | $64.4B | $71.4B | x | - |
-| Services | $23.1B | $24.1B | $24.1B | x | - |
-
----
-
-## HPQ - HP Inc.
-
-### Product Segments
-
-| Segment | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 |
-|---------|-------:|-------:|-------:|-------:|-------:|
-| Personal Systems | $44,011 | $35,684 | $35.7B | $36.2B | $38.5B |
-| Printing | $18,902 | $18,029 | $18.0B | $17.4B | $16.8B |
 
 ---
