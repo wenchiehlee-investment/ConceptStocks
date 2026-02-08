@@ -312,7 +312,7 @@ def generate_csv(data: list, output_path: str):
 
 
 def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None):
-    """Generate markdown report with all segments in a single table per company."""
+    """Generate markdown report with each segment on one line, all years as columns."""
     if latest_q_map is None:
         latest_q_map = {}
 
@@ -322,7 +322,8 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
     lines.append("")
     lines.append(f"> Last updated: {datetime.now().strftime('%Y-%m-%d')}")
     lines.append("> Data source: SEC EDGAR 10-Q/10-K filings")
-    lines.append("> Legend: `-` = not yet released, `x` = released but not available")
+    lines.append("> Format: Each cell shows FY Total (Q1/Q2/Q3/Q4)")
+    lines.append("> Legend: `-` = not yet released")
     lines.append("> Note: Q4 values are calculated as FY - (Q1+Q2+Q3)")
     lines.append("")
 
@@ -361,43 +362,59 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
         latest_fy = latest_info[0] if latest_info else None
         latest_q = latest_info[1] if latest_info else None
 
-        # Format helper
-        def fmt(v, fy=None, quarter=None, min_threshold=50_000_000):
-            """Format value, showing '-' for not released, 'x' for released but not available."""
-            if v is None or v == 0 or (v < min_threshold and v > 0):
-                if fy is not None and quarter is not None and latest_fy is not None and latest_q is not None:
-                    q_num = {'Q1': 1, 'Q2': 2, 'Q3': 3, 'Q4': 4}.get(quarter, 0)
-                    if is_quarter_released(fy, q_num, latest_fy, latest_q):
-                        return "x"
-                    else:
-                        return "-"
+        # Format helper for total
+        def fmt_total(v):
+            if v is None or v == 0:
                 return "-"
             if v >= 1e9:
                 return f"${v/1e9:.1f}B"
             return f"${v/1e6:.0f}M"
 
-        # Build single table with all segments grouped by FY
-        lines.append("| FY | Segment | Q1 | Q2 | Q3 | Q4 | Total |")
-        lines.append("|----|---------|----|----|----|----|-------|")
+        # Format helper for quarterly breakdown
+        def fmt_quarter(v):
+            if v is None or v == 0:
+                return "-"
+            if v >= 1e9:
+                return f"{v/1e9:.1f}"
+            return f"{v/1e6:.0f}M"
 
+        # Build header with years
+        header = "| Segment |"
+        separator = "|---------|"
         for fy in years:
-            for seg in segments:
+            header += f" FY{fy} |"
+            separator += "------|"
+        lines.append(header)
+        lines.append(separator)
+
+        # Build rows - one segment per line with all years
+        for seg in segments:
+            row = f"| {seg} |"
+            for fy in years:
                 fy_seg_records = [r for r in records if r['fiscal_year'] == fy and r['segment_name'] == seg]
                 q_vals = {r['quarter']: r['revenue'] for r in fy_seg_records}
 
-                q1 = fmt(q_vals.get('Q1'), fy=fy, quarter='Q1')
-                q2 = fmt(q_vals.get('Q2'), fy=fy, quarter='Q2')
-                q3 = fmt(q_vals.get('Q3'), fy=fy, quarter='Q3')
-                q4 = fmt(q_vals.get('Q4'), fy=fy, quarter='Q4')
+                q1 = q_vals.get('Q1', 0) or 0
+                q2 = q_vals.get('Q2', 0) or 0
+                q3 = q_vals.get('Q3', 0) or 0
+                q4 = q_vals.get('Q4', 0) or 0
+                total = q1 + q2 + q3 + q4
 
-                # Skip row if all quarters are empty/not released
-                if q1 == "-" and q2 == "-" and q3 == "-" and q4 == "-":
-                    continue
-
-                total = sum(q_vals.get(q, 0) or 0 for q in ['Q1', 'Q2', 'Q3', 'Q4'])
-                total_fmt = f"${total/1e9:.1f}B" if total >= 1e9 else (f"${total/1e6:.0f}M" if total >= 1e6 else "-")
-
-                lines.append(f"| {fy} | {seg} | {q1} | {q2} | {q3} | {q4} | {total_fmt} |")
+                if total == 0:
+                    row += " - |"
+                else:
+                    # Format: Total (Q1/Q2/Q3/Q4) in billions
+                    total_str = fmt_total(total)
+                    q_parts = []
+                    for q in [q1, q2, q3, q4]:
+                        if q >= 1e9:
+                            q_parts.append(f"{q/1e9:.1f}")
+                        elif q >= 1e6:
+                            q_parts.append(f"{q/1e6:.0f}M")
+                        else:
+                            q_parts.append("-")
+                    row += f" {total_str} ({'/'.join(q_parts)}) |"
+            lines.append(row)
 
         lines.append("")
         lines.append("---")
