@@ -344,7 +344,7 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
     lines.append(f"> Last updated: {datetime.now().strftime('%Y-%m-%d')}")
     lines.append("> Data source: SEC EDGAR 10-Q/10-K filings")
     lines.append("> Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)")
-    lines.append("> Legend: `-` = not yet released or not available")
+    lines.append("> Legend: `-` = not yet released, `x` = released but not available")
     lines.append("> Note: Q4 values are calculated as FY - (Q1+Q2+Q3)")
     lines.append("")
 
@@ -384,9 +384,21 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
             for q in [4, 3, 2, 1]:
                 all_quarters.append((fy, f"Q{q}"))
 
-        # Format helper
-        def fmt(v):
+        # Get latest released quarter for this symbol
+        latest_info = latest_q_map.get(symbol)
+        latest_fy = latest_info[0] if latest_info else None
+        latest_q_num = latest_info[1] if latest_info else None
+
+        # Format helper with "-" for not released, "x" for released but not available
+        def fmt(v, fy=None, q=None):
             if v is None or v == 0:
+                # Determine if released or not
+                if fy is not None and q is not None and latest_fy is not None and latest_q_num is not None:
+                    q_num = int(q[1]) if q.startswith('Q') else 0
+                    if is_quarter_released(fy, q_num, latest_fy, latest_q_num):
+                        return "x"  # Released but not available
+                    else:
+                        return "-"  # Not yet released
                 return "-"
             if v >= 1e9:
                 return f"${v/1e9:.1f}B"
@@ -414,7 +426,7 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
             row = f"| {seg} |"
             for fy, q in all_quarters:
                 val = q_vals.get((fy, q), 0)
-                row += f" {fmt(val)} |"
+                row += f" {fmt(val, fy=fy, q=q)} |"
             lines.append(row)
 
         lines.append("")

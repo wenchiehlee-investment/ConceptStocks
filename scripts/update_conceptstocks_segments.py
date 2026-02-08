@@ -477,9 +477,8 @@ def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) ->
             if not all_years:
                 continue
 
-            # Sort years and limit to requested number
+            # Sort years and limit to requested number (newest first)
             sorted_years = sorted(all_years, reverse=True)[:years]
-            sorted_years = sorted(sorted_years)  # Ascending for display
 
             # Sort segments by latest year revenue (descending)
             latest_fy = max(sorted_years)
