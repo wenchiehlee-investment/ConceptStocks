@@ -93,6 +93,27 @@ COMPANY_NAMES = {
     'HPQ': 'HP Inc.',
 }
 
+# Segment name normalization map (quarterly -> annual standard name)
+# This ensures consistency between quarterly and annual reports
+SEGMENT_NAME_MAP = {
+    # QCOM - remove QCT prefix to match annual report
+    'QCT Handsets': 'Handsets',
+    'QCT Automotive': 'Automotive',
+    'QCT IoT': 'IoT',
+    # MU - normalize abbreviations to match annual report
+    'Automotive and Embedded': 'Automotive and Edge',
+    # ORCL - keep original names (quarterly and annual use same names)
+    # AMD - keep old segment names as-is (different org structure pre-2022)
+    # MSFT - keep full names as-is (Intelligent Cloud, More Personal Computing, etc.)
+    # GOOGL - keep Google Services/Cloud as-is (8-K specific grouping)
+    # AMZN - keep AWS/International/North America as-is (8-K specific grouping)
+}
+
+
+def normalize_segment_name(name: str) -> str:
+    """Normalize segment name for consistency between quarterly and annual reports."""
+    return SEGMENT_NAME_MAP.get(name, name)
+
 
 def fetch_quarterly_segments(symbols: list, quarters: int = 20) -> list:
     """
@@ -127,7 +148,7 @@ def fetch_quarterly_segments(symbols: list, quarters: int = 20) -> list:
                     'company_name': COMPANY_NAMES.get(symbol, symbol),
                     'fiscal_year': seg.get('fiscal_year'),
                     'quarter': seg.get('period', 'Q?'),
-                    'segment_name': seg.get('segment_name'),
+                    'segment_name': normalize_segment_name(seg.get('segment_name', '')),
                     'revenue': revenue,
                     'end_date': seg.get('end_date'),
                 })
@@ -176,7 +197,7 @@ def fetch_8k_segments(symbols: list, quarters: int = 20) -> list:
                     'company_name': COMPANY_NAMES.get(symbol, symbol),
                     'fiscal_year': seg.get('fiscal_year'),
                     'quarter': seg.get('period', 'Q?'),
-                    'segment_name': seg.get('segment_name'),
+                    'segment_name': normalize_segment_name(seg.get('segment_name', '')),
                     'revenue': revenue,
                     'end_date': seg.get('end_date'),
                 })

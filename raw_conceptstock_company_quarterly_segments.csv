@@ -322,11 +322,11 @@ MSFT,Microsoft Corporation,2026,Q1,Productivity and Business Processes,330000000
 MSFT,Microsoft Corporation,2026,Q2,Intelligent Cloud,32900000000.0,2026-01-28,False
 MSFT,Microsoft Corporation,2026,Q2,More Personal Computing,14300000000.0,2026-01-28,False
 MSFT,Microsoft Corporation,2026,Q2,Productivity and Business Processes,34100000000.0,2026-01-28,False
-MU,"Micron Technology, Inc.",2025,Q4,Automotive and Embedded,1434000000.0,2025-09-23,False
+MU,"Micron Technology, Inc.",2025,Q4,Automotive and Edge,1434000000.0,2025-09-23,False
 MU,"Micron Technology, Inc.",2025,Q4,Cloud Memory,4543000000.0,2025-09-23,False
 MU,"Micron Technology, Inc.",2025,Q4,Core Data Center,1577000000.0,2025-09-23,False
 MU,"Micron Technology, Inc.",2025,Q4,Mobile and Client,3760000000.0,2025-09-23,False
-MU,"Micron Technology, Inc.",2026,Q1,Automotive and Embedded,1720000000.0,2025-12-17,False
+MU,"Micron Technology, Inc.",2026,Q1,Automotive and Edge,1720000000.0,2025-12-17,False
 MU,"Micron Technology, Inc.",2026,Q1,Cloud Memory,5284000000.0,2025-12-17,False
 MU,"Micron Technology, Inc.",2026,Q1,Core Data Center,2379000000.0,2025-12-17,False
 MU,"Micron Technology, Inc.",2026,Q1,Mobile and Client,4255000000.0,2025-12-17,False
@@ -494,31 +494,31 @@ ORCL,Oracle Corporation,2026,Q2,Cloud and software,3990000000.0,2025-11-30,False
 ORCL,Oracle Corporation,2026,Q2,Hardware,776000000.0,2025-11-30,False
 ORCL,Oracle Corporation,2026,Q2,Services,1428000000.0,2025-11-30,False
 ORCL,Oracle Corporation,2026,Q2,Software,5877000000.0,2025-11-30,False
-QCOM,Qualcomm Inc.,2022,Q1,QCT Handsets,5983000000.0,2022-02-02,False
-QCOM,Qualcomm Inc.,2022,Q2,QCT Handsets,6325000000.0,2022-04-27,False
-QCOM,Qualcomm Inc.,2022,Q3,QCT Handsets,6149000000.0,2022-07-27,False
-QCOM,Qualcomm Inc.,2023,Q1,QCT Automotive,535000000.0,2023-11-01,False
-QCOM,Qualcomm Inc.,2023,Q1,QCT Handsets,5456000000.0,2023-11-01,False
-QCOM,Qualcomm Inc.,2023,Q2,QCT Handsets,6105000000.0,2023-05-03,False
-QCOM,Qualcomm Inc.,2023,Q3,QCT Handsets,5255000000.0,2023-08-02,False
-QCOM,Qualcomm Inc.,2024,Q2,QCT Automotive,603000000.0,2024-05-01,False
-QCOM,Qualcomm Inc.,2024,Q2,QCT Handsets,6180000000.0,2024-05-01,False
-QCOM,Qualcomm Inc.,2024,Q3,QCT Automotive,811000000.0,2024-07-31,False
-QCOM,Qualcomm Inc.,2024,Q3,QCT Handsets,5899000000.0,2024-07-31,False
-QCOM,Qualcomm Inc.,2025,Q1,QCT Automotive,961000000.0,2025-02-05,False
-QCOM,Qualcomm Inc.,2025,Q1,QCT Handsets,7574000000.0,2025-02-05,False
-QCOM,Qualcomm Inc.,2025,Q2,QCT Automotive,959000000.0,2025-04-30,False
-QCOM,Qualcomm Inc.,2025,Q2,QCT Handsets,6929000000.0,2025-04-30,False
-QCOM,Qualcomm Inc.,2025,Q2,QCT IoT,1581000000.0,2025-04-30,False
-QCOM,Qualcomm Inc.,2025,Q3,QCT Automotive,984000000.0,2025-07-30,False
-QCOM,Qualcomm Inc.,2025,Q3,QCT Handsets,6328000000.0,2025-07-30,False
-QCOM,Qualcomm Inc.,2025,Q3,QCT IoT,1681000000.0,2025-07-30,False
-QCOM,Qualcomm Inc.,2025,Q4,QCT Automotive,1053000000.0,2025-11-05,False
-QCOM,Qualcomm Inc.,2025,Q4,QCT Handsets,6961000000.0,2025-11-05,False
-QCOM,Qualcomm Inc.,2025,Q4,QCT IoT,1807000000.0,2025-11-05,False
-QCOM,Qualcomm Inc.,2026,Q1,QCT Automotive,1101000000.0,2026-02-04,False
-QCOM,Qualcomm Inc.,2026,Q1,QCT Handsets,7824000000.0,2026-02-04,False
-QCOM,Qualcomm Inc.,2026,Q1,QCT IoT,1688000000.0,2026-02-04,False
+QCOM,Qualcomm Inc.,2022,Q1,Handsets,5983000000.0,2022-02-02,False
+QCOM,Qualcomm Inc.,2022,Q2,Handsets,6325000000.0,2022-04-27,False
+QCOM,Qualcomm Inc.,2022,Q3,Handsets,6149000000.0,2022-07-27,False
+QCOM,Qualcomm Inc.,2023,Q1,Automotive,535000000.0,2023-11-01,False
+QCOM,Qualcomm Inc.,2023,Q1,Handsets,5456000000.0,2023-11-01,False
+QCOM,Qualcomm Inc.,2023,Q2,Handsets,6105000000.0,2023-05-03,False
+QCOM,Qualcomm Inc.,2023,Q3,Handsets,5255000000.0,2023-08-02,False
+QCOM,Qualcomm Inc.,2024,Q2,Automotive,603000000.0,2024-05-01,False
+QCOM,Qualcomm Inc.,2024,Q2,Handsets,6180000000.0,2024-05-01,False
+QCOM,Qualcomm Inc.,2024,Q3,Automotive,811000000.0,2024-07-31,False
+QCOM,Qualcomm Inc.,2024,Q3,Handsets,5899000000.0,2024-07-31,False
+QCOM,Qualcomm Inc.,2025,Q1,Automotive,961000000.0,2025-02-05,False
+QCOM,Qualcomm Inc.,2025,Q1,Handsets,7574000000.0,2025-02-05,False
+QCOM,Qualcomm Inc.,2025,Q2,Automotive,959000000.0,2025-04-30,False
+QCOM,Qualcomm Inc.,2025,Q2,Handsets,6929000000.0,2025-04-30,False
+QCOM,Qualcomm Inc.,2025,Q2,IoT,1581000000.0,2025-04-30,False
+QCOM,Qualcomm Inc.,2025,Q3,Automotive,984000000.0,2025-07-30,False
+QCOM,Qualcomm Inc.,2025,Q3,Handsets,6328000000.0,2025-07-30,False
+QCOM,Qualcomm Inc.,2025,Q3,IoT,1681000000.0,2025-07-30,False
+QCOM,Qualcomm Inc.,2025,Q4,Automotive,1053000000.0,2025-11-05,False
+QCOM,Qualcomm Inc.,2025,Q4,Handsets,6961000000.0,2025-11-05,False
+QCOM,Qualcomm Inc.,2025,Q4,IoT,1807000000.0,2025-11-05,False
+QCOM,Qualcomm Inc.,2026,Q1,Automotive,1101000000.0,2026-02-04,False
+QCOM,Qualcomm Inc.,2026,Q1,Handsets,7824000000.0,2026-02-04,False
+QCOM,Qualcomm Inc.,2026,Q1,IoT,1688000000.0,2026-02-04,False
 WDC,Western Digital Corporation,2023,Q1,Flash,1722000000.0,2022-09-30,False
 WDC,Western Digital Corporation,2023,Q1,HDD,2014000000.0,2022-09-30,False
 WDC,Western Digital Corporation,2025,Q1,Flash,1884000000.0,2024-09-27,False
