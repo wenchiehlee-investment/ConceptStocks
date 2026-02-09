@@ -1,6 +1,6 @@
 # Quarterly Product Segment Revenue
 
-> Last updated: 2026-02-08
+> Last updated: 2026-02-09
 > Data source: SEC EDGAR 10-Q/10-K filings
 > Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)
 > Legend: `-` = not yet released, `x` = released but not available
@@ -10,10 +10,11 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 | 22Q4 | 22Q3 | 22Q2 | 22Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| iPhone | - | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 | Mac | - | - | - | $8.4B | $8.7B | $8.0B | $7.9B | $9.0B | $7.7B | $7.0B | $7.5B | $7.8B | $7.6B | $6.8B | $7.2B | $7.7B | $11.5B | $7.4B | $10.4B | $10.9B |
+| iPad | - | - | - | $8.6B | $7.0B | $6.6B | $6.4B | $8.1B | $7.0B | $7.2B | $5.6B | $7.0B | $6.4B | $5.8B | $6.7B | $9.4B | $7.2B | $7.2B | $7.6B | $7.2B |
 | Services | - | - | - | $30.0B | $28.8B | $27.4B | $26.6B | $26.3B | $25.0B | $24.2B | $23.9B | $23.1B | $22.3B | $21.2B | $20.9B | $20.8B | $19.2B | $19.6B | $19.8B | $19.5B |
 | Wearables, Home and Accessories | - | - | - | $11.5B | $9.0B | $7.4B | $7.5B | $11.7B | $9.0B | $8.1B | $7.9B | $12.0B | $9.3B | $8.3B | $8.8B | $13.5B | $9.7B | $8.1B | $8.8B | $14.7B |
-| iPad | - | - | - | $8.6B | $7.0B | $6.6B | $6.4B | $8.1B | $7.0B | $7.2B | $5.6B | $7.0B | $6.4B | $5.8B | $6.7B | $9.4B | $7.2B | $7.2B | $7.6B | $7.2B |
 
 ---
 
@@ -21,13 +22,13 @@
 
 | Segment | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 | 22Q4 | 22Q3 | 22Q2 | 22Q1 | 21Q4 | 21Q3 | 21Q2 | 21Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Client | x | $2.8B | $2.5B | $2.3B | $2.3B | $1.9B | $1.5B | $1.4B | x | $1.5B | $739M | x | x | $1.0B | $2.2B | x | x | x | x | x |
-| Client and Gaming | $6.1B | $3.2B | $2.9B | $2.4B | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
-| Computing and Graphics | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | $2.8B | $2.6B | $2.4B | $2.2B | $2.1B |
 | Data Center | $5.2B | $4.3B | $3.4B | $3.7B | $3.9B | $3.5B | $2.8B | $2.3B | x | $1.6B | $1.3B | x | x | $1.6B | $1.5B | x | x | x | x | x |
-| Embedded | $950M | $857M | $824M | $823M | $923M | $927M | $861M | $846M | x | $2.2B | $1.6B | x | x | $1.3B | $1.3B | x | x | x | x | x |
-| Enterprise, Embedded and Semi-Custom | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | $2.5B | x | $1.9B | $1.6B | $1.3B |
+| Client | x | $2.8B | $2.5B | $2.3B | $2.3B | $1.9B | $1.5B | $1.4B | x | $1.5B | $739M | x | x | $1.0B | $2.2B | x | x | x | x | x |
 | Gaming | $843M | $1.3B | $1.1B | $647M | $563M | $462M | $648M | $922M | x | $1.5B | $1.8B | x | x | $1.6B | $1.7B | x | x | x | x | x |
+| Embedded | $950M | $857M | $824M | $823M | $923M | $927M | $861M | $846M | x | $2.2B | $1.6B | x | x | $1.3B | $1.3B | x | x | x | x | x |
+| Computing and Graphics | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | $2.8B | $2.6B | $2.4B | $2.2B | $2.1B |
+| Enterprise, Embedded and Semi-Custom | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | $2.5B | x | $1.9B | $1.6B | $1.3B |
+| Client and Gaming | $6.1B | $3.2B | $2.9B | $2.4B | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -35,9 +36,16 @@
 
 | Segment | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 | 22Q4 | 22Q3 | 22Q2 | 22Q1 | 21Q4 | 21Q3 | 21Q2 | 21Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
-| AWS | $35.6B | x | x | x | $28.8B | $33.0B | $30.9B | $29.3B | $24.2B | $27.5B | $26.3B | $25.0B | $21.4B | $23.1B | $22.1B | $21.4B | x | $20.5B | x | x |
-| International | $50.7B | x | x | x | $43.4B | $40.9B | $36.8B | $33.5B | $40.2B | $35.9B | $31.7B | $31.9B | $34.5B | $32.1B | $29.7B | $29.1B | x | $27.7B | x | x |
 | North America | $127.1B | x | x | x | $115.6B | $106.3B | $100.1B | $92.9B | $105.5B | $95.5B | $90.0B | $86.3B | $93.4B | $87.9B | $82.5B | $76.9B | x | $78.8B | x | x |
+| International | $50.7B | x | x | x | $43.4B | $40.9B | $36.8B | $33.5B | $40.2B | $35.9B | $31.7B | $31.9B | $34.5B | $32.1B | $29.7B | $29.1B | x | $27.7B | x | x |
+| AWS | $35.6B | x | x | x | $28.8B | $33.0B | $30.9B | $29.3B | $24.2B | $27.5B | $26.3B | $25.0B | $21.4B | $23.1B | $22.1B | $21.4B | x | $20.5B | x | x |
+| Online Stores | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Third-Party Seller Services | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Advertising Services | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Subscription Services | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Physical Stores | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Amazon Web Services | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Other Services | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -45,8 +53,12 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Client Solutions Group | - | $12.5B | $12.5B | $12.5B | $48.4B | $12.1B | $12.4B | $12.0B | $11.7B | x | x | x |
 | Infrastructure Solutions Group | - | $14.1B | $16.8B | $10.3B | $43.6B | $11.4B | $11.6B | $9.2B | $9.3B | x | x | x |
+| Client Solutions Group | - | $12.5B | $12.5B | $12.5B | $48.4B | $12.1B | $12.4B | $12.0B | $11.7B | x | x | x |
+| Servers and networking | - | x | x | x | x | x | x | x | x | x | x | x |
+| Storage | - | x | x | x | x | x | x | x | x | x | x | x |
+| Products | - | x | x | x | x | x | x | x | x | x | x | x |
+| Services | - | x | x | x | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -56,6 +68,11 @@
 |---------|------|------|------|------|------|------|------|------|
 | Google Cloud | $17.6B | $15.2B | $13.6B | $12.3B | $12.0B | $11.4B | x | x |
 | Google Services | $95.9B | $87.1B | $82.5B | $77.3B | $84.1B | $76.5B | x | x |
+| Google Search & Other | x | x | x | x | x | x | x | x |
+| YouTube Ads | x | x | x | x | x | x | x | x |
+| Google Subscriptions | x | x | x | x | x | x | x | x |
+| Google Network | x | x | x | x | x | x | x | x |
+| Other Bets | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -82,8 +99,15 @@
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 | 22Q4 | 22Q3 | 22Q2 | 22Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
 | Intelligent Cloud | - | - | $32.9B | $30.9B | $29.9B | $26.8B | $25.5B | $24.1B | $28.5B | $26.7B | $25.9B | $24.3B | $24.0B | $22.1B | $21.5B | $20.3B | $20.9B | $19.1B | $18.3B | $17.0B |
-| More Personal Computing | - | - | $14.3B | $13.8B | $13.5B | $13.4B | $14.7B | $13.2B | $15.9B | $15.6B | $16.9B | $13.7B | $13.9B | $13.3B | $14.2B | $13.3B | $14.4B | $14.5B | $17.5B | $13.3B |
 | Productivity and Business Processes | - | - | $34.1B | $33.0B | $33.1B | $29.9B | $29.4B | $28.3B | $20.3B | $19.6B | $19.2B | $18.6B | $18.3B | $17.5B | $17.0B | $16.5B | $16.6B | $15.8B | $15.9B | $15.0B |
+| More Personal Computing | - | - | $14.3B | $13.8B | $13.5B | $13.4B | $14.7B | $13.2B | $15.9B | $15.6B | $16.9B | $13.7B | $13.9B | $13.3B | $14.2B | $13.3B | $14.4B | $14.5B | $17.5B | $13.3B |
+| Server Products And Tools | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Microsoft Office | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Gaming | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Windows | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Linked In Corporation | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Search And News Advertising | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Devices | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -91,10 +115,10 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 |
 |---------|------|------|------|------|------|------|------|------|
-| Automotive and Edge | - | - | - | $1.7B | $1.4B | x | x | x |
 | Cloud Memory | - | - | - | $5.3B | $4.5B | x | x | x |
-| Core Data Center | - | - | - | $2.4B | $1.6B | x | x | x |
 | Mobile and Client | - | - | - | $4.3B | $3.8B | x | x | x |
+| Core Data Center | - | - | - | $2.4B | $1.6B | x | x | x |
+| Automotive and Edge | - | - | - | $1.7B | $1.4B | x | x | x |
 
 ---
 
@@ -102,10 +126,11 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 | 22Q4 | 22Q3 | 22Q2 | 22Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Automotive | - | $592M | $586M | $567M | $570M | $449M | $346M | $329M | x | $261M | $253M | x | $294M | $251M | $220M | $138M | x | $135M | $152M | x |
 | Data Center | - | $51.2B | $41.1B | $39.1B | $35.5B | $30.8B | $26.3B | $22.6B | $18.4B | $14.5B | $10.3B | $4.3B | $3.6B | $3.8B | $3.8B | x | x | $2.9B | $2.4B | x |
 | Gaming | - | $4.3B | $4.3B | $2.5B | $2.5B | $3.3B | $2.9B | $2.6B | $2.9B | $2.9B | $2.5B | $2.2B | $1.8B | $1.6B | $2.0B | x | x | $3.2B | $3.1B | x |
 | Professional Visualization | - | $760M | $601M | $509M | $511M | $486M | $454M | $427M | $463M | $416M | $379M | $295M | $226M | $200M | $496M | $622M | x | x | x | x |
+| Automotive | - | $592M | $586M | $567M | $570M | $449M | $346M | $329M | x | $261M | $253M | x | $294M | $251M | $220M | $138M | x | $135M | $152M | x |
+| OEM And Other | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -113,13 +138,14 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 | 22Q4 | 22Q3 | 22Q2 | 22Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Cloud | - | - | $8.0B | $7.2B | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
-| Cloud and software | - | - | $4.0B | $3.6B | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
-| Cloud license and on-premise license | - | - | x | x | x | $1.1B | $1.2B | $870M | x | $1.3B | $1.2B | $809M | $2.2B | $1.3B | $1.4B | $904M | $2.5B | $1.3B | $1.2B | $813M |
 | Cloud services and license support | - | - | x | x | x | $11.0B | $10.8B | $10.5B | x | $10.0B | $9.6B | $9.5B | $9.4B | $8.9B | $8.6B | $8.4B | $7.6B | $7.6B | $7.6B | $7.4B |
+| Cloud license and on-premise license | - | - | x | x | x | $1.1B | $1.2B | $870M | x | $1.3B | $1.2B | $809M | $2.2B | $1.3B | $1.4B | $904M | $2.5B | $1.3B | $1.2B | $813M |
 | Hardware | - | - | $776M | $670M | $850M | $703M | $728M | $655M | $842M | $754M | $756M | $714M | $850M | $811M | $850M | $763M | $855M | $798M | $767M | $763M |
 | Services | - | - | $1.4B | $1.3B | $1.3B | $1.3B | $1.3B | $1.3B | $1.4B | $1.3B | $1.4B | $1.4B | $1.5B | $1.4B | $1.4B | $1.4B | $833M | $789M | $802M | $781M |
+| Cloud | - | - | $8.0B | $7.2B | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 | Software | - | - | $5.9B | $5.7B | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Cloud and software | - | - | $4.0B | $3.6B | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Cloud and license | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -127,9 +153,10 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 | 22Q4 | 22Q3 | 22Q2 | 22Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Automotive | - | - | - | $1.1B | $1.1B | $984M | $959M | $961M | x | $811M | $603M | x | x | x | x | $535M | x | x | x | x |
 | Handsets | - | - | - | $7.8B | $7.0B | $6.3B | $6.9B | $7.6B | x | $5.9B | $6.2B | x | x | $5.3B | $6.1B | $5.5B | x | $6.1B | $6.3B | $6.0B |
+| Automotive | - | - | - | $1.1B | $1.1B | $984M | $959M | $961M | x | $811M | $603M | x | x | x | x | $535M | x | x | x | x |
 | IoT | - | - | - | $1.7B | $1.8B | $1.7B | $1.6B | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Licensing | - | - | - | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
 
 ---
 
@@ -137,8 +164,8 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|
-| Client | - | $176M | $146M | x | x | $137M | x | x | x | x | x | x |
 | Cloud | - | $2.7B | $2.5B | x | x | $2.0B | x | x | x | x | x | x |
+| Client | - | $176M | $146M | x | x | $137M | x | x | x | x | x | x |
 | Consumer | - | $168M | $162M | x | x | $150M | x | x | x | x | x | x |
 | Flash | - | - | x | x | x | x | $1.9B | $1.9B | x | x | x | $1.7B |
 | HDD | - | - | x | x | x | x | $2.4B | $2.2B | x | x | x | $2.0B |

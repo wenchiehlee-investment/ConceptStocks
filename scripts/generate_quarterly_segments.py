@@ -68,6 +68,7 @@ def is_quarter_released(fy: int, quarter: int, latest_fy: int, latest_q: int) ->
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.external.sec_edgar_client import SECEdgarClient, COMPANY_CIK
+from src.segment_config import UNIFIED_PRODUCT_SEGMENTS
 
 
 # Companies with quarterly product segment data available from 10-Q parsing
@@ -360,18 +361,22 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
 
         records = by_symbol[symbol]
 
-        # Get unique segments and years
-        all_segments = sorted(set(r['segment_name'] for r in records))
+        # Get years from data
         years = sorted(set(r['fiscal_year'] for r in records), reverse=True)[:5]
 
-        # Filter segments with enough data (>= 2 quarters)
-        segments = []
-        for seg in all_segments:
-            seg_records = [r for r in records if r['segment_name'] == seg]
-            if len(seg_records) >= 2:
-                segments.append(seg)
+        # Use unified segment list for consistency with annual report
+        if symbol in UNIFIED_PRODUCT_SEGMENTS:
+            segments = UNIFIED_PRODUCT_SEGMENTS[symbol]
+        else:
+            # Fallback: use segments from data
+            all_segments = sorted(set(r['segment_name'] for r in records))
+            segments = []
+            for seg in all_segments:
+                seg_records = [r for r in records if r['segment_name'] == seg]
+                if len(seg_records) >= 2:
+                    segments.append(seg)
 
-        if not segments:
+        if not segments or not years:
             lines.append("No segment data available.")
             lines.append("")
             lines.append("---")

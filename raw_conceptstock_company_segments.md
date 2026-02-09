@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-02-08
+> Last updated: 2026-02-09
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -34,10 +34,10 @@
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | iPhone | $209.6B | $201.2B | $200.6B | $205.5B | $192.0B |
-| Services | $109.2B | $96.2B | $85.2B | $78.1B | $68.4B |
-| Wearables, Home and Accessories | $35.7B | $37.0B | $39.8B | $41.2B | $38.4B |
 | Mac | $33.7B | $30.0B | $29.4B | $40.2B | $35.2B |
 | iPad | $28.0B | $26.7B | $28.3B | $29.3B | $31.9B |
+| Services | $109.2B | $96.2B | $85.2B | $78.1B | $68.4B |
+| Wearables, Home and Accessories | $35.7B | $37.0B | $39.8B | $41.2B | $38.4B |
 
 ### Geographic Segments
 
@@ -61,6 +61,9 @@
 | Client | $10.6B | $7.1B | $4.7B | $6.2B | x |
 | Gaming | $3.9B | $2.6B | $6.2B | $6.8B | x |
 | Embedded | $3.5B | $3.6B | $5.3B | $4.6B | x |
+| Computing and Graphics | x | x | x | x | $9.3B |
+| Enterprise, Embedded and Semi-Custom | x | x | x | x | $4.9B |
+| Client and Gaming | $14.6B | x | x | x | x |
 
 ### Geographic Segments
 
@@ -83,14 +86,14 @@
 | Segment | FY2024 | FY2023 | FY2022 | FY2021 | FY2020 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | North America | $414.9B | $377.3B | $340.7B | x | x |
-| Online Stores | $247.0B | $231.9B | $220.0B | $222.1B | $197.3B |
-| Third-Party Seller Services | $156.1B | $140.1B | $117.7B | $103.4B | $80.5B |
 | International | $154.6B | $139.7B | $125.4B | x | x |
 | AWS | $122.0B | $103.0B | $88.0B | x | x |
-| Amazon Web Services | $107.6B | $90.8B | $80.1B | $62.2B | $45.4B |
+| Online Stores | $247.0B | $231.9B | $220.0B | $222.1B | $197.3B |
+| Third-Party Seller Services | $156.1B | $140.1B | $117.7B | $103.4B | $80.5B |
 | Advertising Services | $56.2B | $46.9B | $37.7B | $31.2B | x |
 | Subscription Services | $44.4B | $40.2B | $35.2B | $31.8B | $25.2B |
 | Physical Stores | $21.2B | $20.0B | $19.0B | $17.1B | $16.2B |
+| Amazon Web Services | $107.6B | $90.8B | $80.1B | $62.2B | $45.4B |
 | Other Services | $5.4B | $5.0B | $4.2B | $2.2B | $21.5B |
 
 ### Geographic Segments
@@ -126,10 +129,11 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Google Search & Other | $224.5B | $198.1B | $175.0B | $162.4B | $149.0B |
 | Google Cloud | $58.7B | $43.2B | $33.1B | $26.3B | $19.2B |
-| Google Subscriptions | $46.2B | $40.3B | $34.7B | $29.1B | $28.0B |
+| Google Services | $342.8B | x | x | x | x |
+| Google Search & Other | $224.5B | $198.1B | $175.0B | $162.4B | $149.0B |
 | YouTube Ads | $40.4B | $36.1B | $31.5B | $29.2B | $28.8B |
+| Google Subscriptions | $46.2B | $40.3B | $34.7B | $29.1B | $28.0B |
 | Google Network | $29.8B | $30.4B | $31.3B | $32.8B | $31.7B |
 | Other Bets | $1.9B | $1.6B | $1.5B | $1.1B | $753M |
 
@@ -181,16 +185,16 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Productivity and Business Processes | $120.7B | $77.7B | $69.3B | $63.3B | x |
 | Intelligent Cloud | $106.3B | $105.4B | $87.9B | $75.3B | x |
+| Productivity and Business Processes | $120.7B | $77.7B | $69.3B | $63.3B | x |
+| More Personal Computing | $54.8B | $62.1B | $54.7B | $59.7B | x |
 | Server Products And Tools | $98.4B | $91.1B | $80.0B | $67.3B | $52.6B |
 | Microsoft Office | $95.2B | $54.9B | $48.7B | $44.9B | $39.9B |
-| More Personal Computing | $54.8B | $62.1B | $54.7B | $59.7B | x |
 | Gaming | $23.5B | $21.5B | $15.5B | $16.2B | $15.4B |
 | Windows | $22.3B | $23.2B | $21.5B | $24.8B | $22.5B |
 | Linked In Corporation | $17.8B | $16.4B | $15.1B | $13.8B | $10.3B |
-| Devices | $17.3B | $4.7B | $5.5B | $7.0B | $6.8B |
 | Search And News Advertising | $13.9B | $12.6B | $12.2B | $11.6B | $8.5B |
+| Devices | $17.3B | $4.7B | $5.5B | $7.0B | $6.8B |
 
 ### Geographic Segments
 
@@ -243,11 +247,14 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Cloud and license | $49.2B | $44.5B | $41.1B | $36.1B | $34.1B |
 | Cloud services and license support | $47.7B | $43.0B | $35.3B | $30.2B | $28.7B |
-| Services | $5.2B | $5.4B | $5.6B | $3.2B | $3.0B |
 | Cloud license and on-premise license | $4.4B | $5.1B | $5.8B | $5.9B | $5.4B |
 | Hardware | $2.9B | $3.1B | $3.3B | $3.2B | $3.4B |
+| Services | $5.2B | $5.4B | $5.6B | $3.2B | $3.0B |
+| Cloud | x | x | x | x | x |
+| Software | x | x | x | x | x |
+| Cloud and software | x | x | x | x | x |
+| Cloud and license | $49.2B | $44.5B | $41.1B | $36.1B | $34.1B |
 
 ### Geographic Segments
 
@@ -266,9 +273,9 @@
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Handsets | $30.9B | $27.8B | $24.9B | $22.6B | $25.0B |
+| Automotive | $4.7B | $4.0B | $2.9B | $1.9B | $1.4B |
 | IoT | $6.2B | $6.6B | $5.4B | $5.9B | $6.9B |
 | Licensing | $5.6B | $5.6B | $6.2B | $5.8B | $7.0B |
-| Automotive | $4.7B | $4.0B | $2.9B | $1.9B | $1.4B |
 
 ---
 
@@ -279,8 +286,8 @@
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Cloud | $8.3B | $8.3B | $5.1B | x | x |
-| Consumer | $623M | $623M | $688M | x | x |
 | Client | $556M | $556M | $577M | x | x |
+| Consumer | $623M | $623M | $688M | x | x |
 | Flash | x | $6.7B | $6.7B | $6.1B | $9.8B |
 | HDD | x | $6.3B | $6.3B | $6.3B | $9.0B |
 

@@ -24,6 +24,11 @@ import sys
 from collections import defaultdict
 from datetime import datetime
 
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.segment_config import UNIFIED_PRODUCT_SEGMENTS
+
 
 def load_latest_released_fy(csv_path: str) -> dict:
     """
@@ -486,26 +491,37 @@ def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) ->
             for seg_name, year_data in type_data.items():
                 seg_latest_rev[seg_name] = year_data.get(latest_fy, 0)
 
-            sorted_segments = sorted(type_data.keys(), key=lambda x: seg_latest_rev.get(x, 0), reverse=True)
-
-            # Filter segments: must have at least 2 years of valid data
-            filtered_segments = []
-            for seg_name in sorted_segments:
-                # Skip known problematic segments
-                if seg_name in SKIP_SEGMENTS:
-                    continue
-
-                year_data = type_data[seg_name]
-                # Count years with valid revenue (above threshold to filter parsing errors)
-                valid_years = [
-                    y for y in sorted_years
-                    if year_data.get(y, 0) >= MIN_REVENUE_THRESHOLD
-                ]
-                if len(valid_years) >= 2:
+            # For product segments, use unified segment list
+            if seg_type == 'product' and symbol in UNIFIED_PRODUCT_SEGMENTS:
+                # Use unified segments, ordered by revenue
+                unified_segs = UNIFIED_PRODUCT_SEGMENTS[symbol]
+                filtered_segments = []
+                for seg_name in unified_segs:
+                    if seg_name in SKIP_SEGMENTS:
+                        continue
                     filtered_segments.append(seg_name)
+            else:
+                # For geographic segments, use existing logic
+                sorted_segments = sorted(type_data.keys(), key=lambda x: seg_latest_rev.get(x, 0), reverse=True)
 
-            # Limit to top 10 segments
-            filtered_segments = filtered_segments[:10]
+                # Filter segments: must have at least 2 years of valid data
+                filtered_segments = []
+                for seg_name in sorted_segments:
+                    # Skip known problematic segments
+                    if seg_name in SKIP_SEGMENTS:
+                        continue
+
+                    year_data = type_data.get(seg_name, {})
+                    # Count years with valid revenue (above threshold to filter parsing errors)
+                    valid_years = [
+                        y for y in sorted_years
+                        if year_data.get(y, 0) >= MIN_REVENUE_THRESHOLD
+                    ]
+                    if len(valid_years) >= 2:
+                        filtered_segments.append(seg_name)
+
+                # Limit to top 10 segments
+                filtered_segments = filtered_segments[:10]
 
             if not filtered_segments:
                 continue
@@ -526,7 +542,7 @@ def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) ->
             # One row per segment
             latest_released = latest_fy_map.get(symbol)
             for seg_name in filtered_segments:
-                year_data = type_data[seg_name]
+                year_data = type_data.get(seg_name, {})
                 row = f"| {seg_name} |"
                 for fy in sorted_years:
                     rev = year_data.get(fy, 0)
