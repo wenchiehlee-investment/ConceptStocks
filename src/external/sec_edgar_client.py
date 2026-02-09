@@ -1213,6 +1213,8 @@ class SECEdgarClient:
             return self._parse_qcom_8k(clean_content)
         elif symbol == "HPQ":
             return self._parse_hpq_8k(clean_content)
+        elif symbol == "ORCL":
+            return self._parse_orcl_8k(clean_content)
         else:
             return []
 
@@ -1623,16 +1625,23 @@ class SECEdgarClient:
         - ISG (Infrastructure Solutions Group): Servers, Storage, Networking
         - CSG (Client Solutions Group): Commercial PCs, Consumer PCs
 
-        Format:
+        Format (Q1-Q3):
         "Infrastructure Solutions Group (ISG) • Record third-quarter revenue: $14.1 billion"
         "Client Solutions Group (CSG) • Revenue: $12.5 billion"
+
+        Format (Q4 - includes both full-year and quarterly):
+        "Infrastructure Solutions Group (ISG)
+         • Full-year revenue: $43.6 billion
+         • Fourth-quarter revenue: $11.4 billion"
+
+        IMPORTANT: For Q4 reports, must match "Fourth-quarter revenue" NOT "Full-year revenue"
         """
         results = []
 
         # Extract quarter and year
         # Format: "Third Quarter Fiscal 2026" or "Q3 Fiscal 2026"
         fy_match = re.search(
-            r'(First|Second|Third|Fourth)\s+Quarter\s+(?:of\s+)?Fiscal\s+(\d{4})',
+            r'(First|Second|Third|Fourth)\s+Quarter\s+(?:(?:and\s+Full[- ]Year\s+)?)?(?:of\s+)?Fiscal\s+(\d{4})',
             content, re.IGNORECASE
         )
         if not fy_match:
@@ -1649,26 +1658,65 @@ class SECEdgarClient:
             quarter = quarter_map.get(fy_match.group(1).lower(), "Q?")
             fiscal_year = int(fy_match.group(2))
 
-        # Dell segment patterns
-        # ISG: "Infrastructure Solutions Group (ISG) • ... revenue: $14.1 billion"
-        # CSG: "Client Solutions Group (CSG) • Revenue: $12.5 billion"
-        segment_patterns = [
-            (r'Infrastructure\s+Solutions\s+Group\s*\(ISG\)[^$]*?\$\s*([\d.]+)\s*billion', "Infrastructure Solutions Group"),
-            (r'Client\s+Solutions\s+Group\s*\(CSG\)[^$]*?\$\s*([\d.]+)\s*billion', "Client Solutions Group"),
+        # Quarter word for pattern matching
+        quarter_word_map = {"Q1": "First", "Q2": "Second", "Q3": "Third", "Q4": "Fourth"}
+        quarter_word = quarter_word_map.get(quarter, "")
+
+        # Dell segment patterns - specifically look for quarterly revenue, not full-year
+        # Pattern 1: "Fourth-quarter revenue: $11.4 billion" (Q4 reports)
+        # Pattern 2: "Record third-quarter revenue: $14.1 billion" (Q1-Q3 reports)
+        # Pattern 3: "Revenue: $12.5 billion" (fallback for simpler format)
+        segment_configs = [
+            ("Infrastructure Solutions Group", "ISG"),
+            ("Client Solutions Group", "CSG"),
         ]
 
-        for pattern, name in segment_patterns:
-            match = re.search(pattern, content, re.IGNORECASE)
-            if match:
-                revenue = float(match.group(1)) * 1_000_000_000
+        for seg_name, seg_abbr in segment_configs:
+            # Find the segment section
+            seg_pattern = rf'{seg_name}\s*\({seg_abbr}\)'
+            seg_match = re.search(seg_pattern, content, re.IGNORECASE)
+            if not seg_match:
+                continue
 
-                results.append({
-                    "segment_name": name,
-                    "fiscal_year": fiscal_year,
-                    "period": quarter,
-                    "revenue": revenue,
-                    "segment_type": "product",
-                })
+            # Get the section after the segment header (up to next segment or 500 chars)
+            section_start = seg_match.end()
+            section = content[section_start:section_start + 800]
+
+            # Try to find quarterly revenue (not full-year)
+            # Pattern 1: "Fourth-quarter revenue: $11.4 billion" (Q4 reports)
+            quarterly_pattern = rf'{quarter_word}[- ]quarter\s+revenue[:\s]+\$\s*([\d.]+)\s*billion'
+            q_match = re.search(quarterly_pattern, section, re.IGNORECASE)
+
+            if q_match:
+                revenue = float(q_match.group(1)) * 1_000_000_000
+            else:
+                # Pattern 2: "Record third-quarter revenue: $14.1 billion"
+                record_pattern = rf'Record\s+{quarter_word}[- ]quarter\s+revenue[:\s]+\$\s*([\d.]+)\s*billion'
+                r_match = re.search(record_pattern, section, re.IGNORECASE)
+                if r_match:
+                    revenue = float(r_match.group(1)) * 1_000_000_000
+                else:
+                    # Pattern 3: "revenue of $11.4 billion" (Q1-Q3 simple format)
+                    of_pattern = r'revenue\s+of\s+\$\s*([\d.]+)\s*billion'
+                    o_match = re.search(of_pattern, section, re.IGNORECASE)
+                    if o_match:
+                        revenue = float(o_match.group(1)) * 1_000_000_000
+                    else:
+                        # Pattern 4: Simple "revenue: $X billion" (but NOT "Full-year")
+                        simple_pattern = r'(?<!Full[- ]year\s)revenue[:\s]+\$\s*([\d.]+)\s*billion'
+                        s_match = re.search(simple_pattern, section, re.IGNORECASE)
+                        if s_match:
+                            revenue = float(s_match.group(1)) * 1_000_000_000
+                        else:
+                            continue
+
+            results.append({
+                "segment_name": seg_name,
+                "fiscal_year": fiscal_year,
+                "period": quarter,
+                "revenue": revenue,
+                "segment_type": "product",
+            })
 
         return results
 
@@ -1777,6 +1825,108 @@ class SECEdgarClient:
             if match:
                 revenue = float(match.group(1)) * 1_000_000_000
 
+                results.append({
+                    "segment_name": name,
+                    "fiscal_year": fiscal_year,
+                    "period": quarter,
+                    "revenue": revenue,
+                    "segment_type": "product",
+                })
+
+        return results
+
+    def _parse_orcl_8k(self, content: str) -> List[Dict[str, Any]]:
+        """Parse Oracle 8-K press release for segment revenue.
+
+        Oracle reports segments:
+        - Cloud services and license support (text format, billions)
+        - Cloud license and on-premise license (text format, billions)
+        - Hardware (table format, millions)
+        - Services (table format, millions)
+
+        Note: FY2026+ uses different segment names (Cloud, Software, Cloud and software).
+        """
+        results = []
+
+        # Extract quarter and fiscal year
+        # Pattern: "Fiscal Year 2026 Second Quarter" or "Fiscal 2025 Fourth Quarter"
+        # Or: "Q4 TOTAL" with "Fiscal 2025" mentioned separately
+        fy_match = re.search(
+            r'Fiscal\s+(?:Year\s+)?(\d{4})\s+(First|Second|Third|Fourth)\s+Quarter',
+            content, re.IGNORECASE
+        )
+        if not fy_match:
+            # Try alternative pattern
+            fy_match = re.search(
+                r'(First|Second|Third|Fourth)\s+Quarter\s+(?:of\s+)?Fiscal\s+(?:Year\s+)?(\d{4})',
+                content, re.IGNORECASE
+            )
+            if fy_match:
+                quarter_word = fy_match.group(1)
+                fiscal_year = int(fy_match.group(2))
+            else:
+                return []
+        else:
+            fiscal_year = int(fy_match.group(1))
+            quarter_word = fy_match.group(2)
+
+        quarter_map = {"first": "Q1", "second": "Q2", "third": "Q3", "fourth": "Q4"}
+        quarter = quarter_map.get(quarter_word.lower(), "Q?")
+
+        # ORCL press releases have text format:
+        # "Cloud services and license support revenues were up 14% to $11.7 billion"
+        # "Cloud license and on-premise license revenues were up 7% to $870 million"
+        # Hardware and Services are in table format with percentages
+
+        seen_segments = set()
+
+        # Text patterns for Cloud segments (in billions or millions)
+        # IMPORTANT: Match full segment name first to avoid matching shorter variants
+        text_patterns = [
+            # Full name patterns - must match complete segment name
+            (r'Cloud\s+services\s+and\s+license\s+support\s+revenues?\s+(?:were?\s+)?(?:up|down)?[^.]*?to\s+\$\s*([\d.]+)\s*(billion|million)', "Cloud services and license support"),
+            (r'Cloud\s+license\s+and\s+on-premise\s+license\s+revenues?\s+(?:were?\s+)?(?:up|down)?[^.]*?to\s+\$\s*([\d.]+)\s*(billion|million)', "Cloud license and on-premise license"),
+            # FY2026+ new segment names - be specific to avoid matching substrings
+            (r'(?<!\w)Cloud\s+revenues?\s+(?:were?\s+)?(?:up|down)?[^.]*?to\s+\$\s*([\d.]+)\s*(billion|million)', "Cloud"),
+            (r'(?<!\w)Software\s+revenues?\s+(?:were?\s+)?(?:up|down)?[^.]*?to\s+\$\s*([\d.]+)\s*(billion|million)', "Software"),
+        ]
+
+        for pattern, name in text_patterns:
+            if name in seen_segments:
+                continue
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                value = float(match.group(1))
+                unit = match.group(2).lower()
+                if unit == "billion":
+                    revenue = value * 1_000_000_000
+                else:  # million
+                    revenue = value * 1_000_000
+                seen_segments.add(name)
+                results.append({
+                    "segment_name": name,
+                    "fiscal_year": fiscal_year,
+                    "period": quarter,
+                    "revenue": revenue,
+                    "segment_type": "product",
+                })
+
+        # Table format for Hardware and Services (in millions)
+        # Look for table rows like "Hardware   850   5%   842   6%"
+        # The first number after segment name is current quarter
+        simple_table_patterns = [
+            (r'(?<!\w)Hardware\s+\$?\s*([\d,]+)\s+\d+%', "Hardware"),
+            (r'(?<!\w)Services\s+\$?\s*([\d,]+)\s+\d+%', "Services"),
+        ]
+
+        for pattern, name in simple_table_patterns:
+            if name in seen_segments:
+                continue
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                # Values are in millions in the table
+                revenue = float(match.group(1).replace(",", "")) * 1_000_000
+                seen_segments.add(name)
                 results.append({
                     "segment_name": name,
                     "fiscal_year": fiscal_year,

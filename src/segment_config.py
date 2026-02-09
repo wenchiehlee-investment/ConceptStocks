@@ -92,15 +92,16 @@ UNIFIED_PRODUCT_SEGMENTS = {
         'OEM And Other',
     ],
     'ORCL': [
+        # Pre-FY2026 segments
         'Cloud services and license support',
         'Cloud license and on-premise license',
         'Hardware',
         'Services',
-        # New segments (FY2026+)
+        # FY2026+ segments (Oracle changed reporting structure)
         'Cloud',
         'Software',
-        'Cloud and software',
-        'Cloud and license',
+        # Note: "Cloud and software" and "Cloud and license" are subtotals/aggregates
+        # that should NOT be added to the sum. They are excluded from this list.
     ],
     'QCOM': [
         'Handsets',

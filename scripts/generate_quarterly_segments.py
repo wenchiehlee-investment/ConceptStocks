@@ -75,7 +75,8 @@ from src.segment_config import UNIFIED_PRODUCT_SEGMENTS
 QUARTERLY_PRODUCT_SUPPORTED = ['AMD', 'ORCL', 'WDC']
 
 # Companies with quarterly data from 8-K earnings press releases
-QUARTERLY_8K_SUPPORTED = ['NVDA', 'GOOGL', 'MSFT', 'AAPL', 'AMZN', 'META', 'MU', 'DELL', 'QCOM', 'HPQ']
+# Note: ORCL is in both 10-Q and 8-K lists - 10-Q for Q1-Q3, 8-K for Q4
+QUARTERLY_8K_SUPPORTED = ['NVDA', 'GOOGL', 'MSFT', 'AAPL', 'AMZN', 'META', 'MU', 'DELL', 'QCOM', 'HPQ', 'ORCL']
 
 # Company names
 COMPANY_NAMES = {
@@ -137,6 +138,10 @@ def fetch_quarterly_segments(symbols: list, quarters: int = 20) -> list:
             # Filter to product segments with reasonable revenue
             # Revenue < $10M is likely a parsing error (unit conversion issue)
             MIN_REVENUE = 10_000_000  # $10M minimum for real segment revenue
+
+            # ORCL has aggregate segments that should be excluded to avoid double-counting
+            ORCL_EXCLUDED_SEGMENTS = {'Cloud and software', 'Cloud and license'}
+
             for seg in segments:
                 if seg.get('segment_type') != 'product':
                     continue
@@ -144,12 +149,18 @@ def fetch_quarterly_segments(symbols: list, quarters: int = 20) -> list:
                 if revenue < MIN_REVENUE:
                     continue
 
+                segment_name = normalize_segment_name(seg.get('segment_name', ''))
+
+                # Skip ORCL aggregate segments
+                if symbol == 'ORCL' and segment_name in ORCL_EXCLUDED_SEGMENTS:
+                    continue
+
                 results.append({
                     'symbol': symbol,
                     'company_name': COMPANY_NAMES.get(symbol, symbol),
                     'fiscal_year': seg.get('fiscal_year'),
                     'quarter': seg.get('period', 'Q?'),
-                    'segment_name': normalize_segment_name(seg.get('segment_name', '')),
+                    'segment_name': segment_name,
                     'revenue': revenue,
                     'end_date': seg.get('end_date'),
                 })
@@ -550,7 +561,8 @@ def main():
         print(f"  Loaded latest released quarter for {len(latest_q_map)} companies")
 
     quarters = args.years * 4
-    all_symbols = QUARTERLY_PRODUCT_SUPPORTED + QUARTERLY_8K_SUPPORTED
+    # Combine symbol lists, removing duplicates (ORCL is in both 10-Q and 8-K lists)
+    all_symbols = list(dict.fromkeys(QUARTERLY_PRODUCT_SUPPORTED + QUARTERLY_8K_SUPPORTED))
 
     # Fetch quarterly data from 10-Q (AMD, ORCL, WDC)
     quarterly_data = fetch_quarterly_segments(QUARTERLY_PRODUCT_SUPPORTED, quarters=quarters)

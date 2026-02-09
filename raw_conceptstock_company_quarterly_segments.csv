@@ -201,8 +201,8 @@ DELL,Dell Technologies Inc.,2025,Q2,Client Solutions Group,12400000000.0,2024-08
 DELL,Dell Technologies Inc.,2025,Q2,Infrastructure Solutions Group,11600000000.0,2024-08-29,False
 DELL,Dell Technologies Inc.,2025,Q3,Client Solutions Group,12100000000.0,2024-11-26,False
 DELL,Dell Technologies Inc.,2025,Q3,Infrastructure Solutions Group,11400000000.0,2024-11-26,False
-DELL,Dell Technologies Inc.,2025,Q4,Client Solutions Group,48400000000.0,2025-02-27,False
-DELL,Dell Technologies Inc.,2025,Q4,Infrastructure Solutions Group,43600000000.0,2025-02-27,False
+DELL,Dell Technologies Inc.,2025,Q4,Client Solutions Group,11900000000.0,2025-02-27,False
+DELL,Dell Technologies Inc.,2025,Q4,Infrastructure Solutions Group,11400000000.0,2025-02-27,False
 DELL,Dell Technologies Inc.,2026,Q1,Client Solutions Group,12500000000.0,2025-05-29,False
 DELL,Dell Technologies Inc.,2026,Q1,Infrastructure Solutions Group,10300000000.0,2025-05-29,False
 DELL,Dell Technologies Inc.,2026,Q2,Client Solutions Group,12500000000.0,2025-08-28,False
@@ -432,12 +432,12 @@ ORCL,Oracle Corporation,2022,Q2,Cloud license and on-premise license,1237000000.
 ORCL,Oracle Corporation,2022,Q2,Cloud services and license support,7554000000.0,2021-11-30,False
 ORCL,Oracle Corporation,2022,Q2,Hardware,767000000.0,2021-11-30,False
 ORCL,Oracle Corporation,2022,Q2,Services,802000000.0,2021-11-30,False
-ORCL,Oracle Corporation,2022,Q3,Cloud license and on-premise license,1289000000.0,2022-02-28,False
+ORCL,Oracle Corporation,2022,Q3,Cloud license and on-premise license,1300000000.0,2022-03-10,False
 ORCL,Oracle Corporation,2022,Q3,Cloud services and license support,7637000000.0,2022-02-28,False
 ORCL,Oracle Corporation,2022,Q3,Hardware,798000000.0,2022-02-28,False
 ORCL,Oracle Corporation,2022,Q3,Services,789000000.0,2022-02-28,False
-ORCL,Oracle Corporation,2022,Q4,Cloud license and on-premise license,2539000000.0,,True
-ORCL,Oracle Corporation,2022,Q4,Cloud services and license support,7612000000.0,,True
+ORCL,Oracle Corporation,2022,Q4,Cloud license and on-premise license,2528000000.0,,True
+ORCL,Oracle Corporation,2022,Q4,Cloud services and license support,7649000000.0,,True
 ORCL,Oracle Corporation,2022,Q4,Hardware,855000000.0,,True
 ORCL,Oracle Corporation,2022,Q4,Services,833000000.0,,True
 ORCL,Oracle Corporation,2023,Q1,Cloud license and on-premise license,904000000.0,2022-08-31,False
@@ -445,36 +445,38 @@ ORCL,Oracle Corporation,2023,Q1,Cloud services and license support,8417000000.0,
 ORCL,Oracle Corporation,2023,Q1,Hardware,763000000.0,2022-08-31,False
 ORCL,Oracle Corporation,2023,Q1,Services,1361000000.0,2022-08-31,False
 ORCL,Oracle Corporation,2023,Q2,Cloud license and on-premise license,1435000000.0,2022-11-30,False
-ORCL,Oracle Corporation,2023,Q2,Cloud services and license support,8598000000.0,2022-11-30,False
+ORCL,Oracle Corporation,2023,Q2,Cloud services and license support,8600000000.0,2022-12-12,False
 ORCL,Oracle Corporation,2023,Q2,Hardware,850000000.0,2022-11-30,False
 ORCL,Oracle Corporation,2023,Q2,Services,1392000000.0,2022-11-30,False
-ORCL,Oracle Corporation,2023,Q3,Cloud license and on-premise license,1288000000.0,2023-02-28,False
+ORCL,Oracle Corporation,2023,Q3,Cloud license and on-premise license,1300000000.0,2023-03-09,False
 ORCL,Oracle Corporation,2023,Q3,Cloud services and license support,8923000000.0,2023-02-28,False
 ORCL,Oracle Corporation,2023,Q3,Hardware,811000000.0,2023-02-28,False
 ORCL,Oracle Corporation,2023,Q3,Services,1376000000.0,2023-02-28,False
-ORCL,Oracle Corporation,2023,Q4,Cloud license and on-premise license,2152000000.0,,True
-ORCL,Oracle Corporation,2023,Q4,Cloud services and license support,9369000000.0,,True
+ORCL,Oracle Corporation,2023,Q4,Cloud license and on-premise license,2179000000.0,,True
+ORCL,Oracle Corporation,2023,Q4,Cloud services and license support,9407000000.0,,True
 ORCL,Oracle Corporation,2023,Q4,Hardware,850000000.0,,True
 ORCL,Oracle Corporation,2023,Q4,Services,1465000000.0,,True
 ORCL,Oracle Corporation,2024,Q1,Cloud license and on-premise license,809000000.0,2023-08-31,False
 ORCL,Oracle Corporation,2024,Q1,Cloud services and license support,9547000000.0,2023-08-31,False
 ORCL,Oracle Corporation,2024,Q1,Hardware,714000000.0,2023-08-31,False
 ORCL,Oracle Corporation,2024,Q1,Services,1383000000.0,2023-08-31,False
-ORCL,Oracle Corporation,2024,Q2,Cloud license and on-premise license,1178000000.0,2023-11-30,False
+ORCL,Oracle Corporation,2024,Q2,Cloud license and on-premise license,1200000000.0,2023-12-11,False
 ORCL,Oracle Corporation,2024,Q2,Cloud services and license support,9639000000.0,2023-11-30,False
 ORCL,Oracle Corporation,2024,Q2,Hardware,756000000.0,2023-11-30,False
 ORCL,Oracle Corporation,2024,Q2,Services,1368000000.0,2023-11-30,False
-ORCL,Oracle Corporation,2024,Q3,Cloud license and on-premise license,1256000000.0,2024-02-29,False
-ORCL,Oracle Corporation,2024,Q3,Cloud services and license support,9963000000.0,2024-02-29,False
+ORCL,Oracle Corporation,2024,Q3,Cloud license and on-premise license,1300000000.0,2024-03-11,False
+ORCL,Oracle Corporation,2024,Q3,Cloud services and license support,10000000000.0,2024-03-11,False
 ORCL,Oracle Corporation,2024,Q3,Hardware,754000000.0,2024-02-29,False
 ORCL,Oracle Corporation,2024,Q3,Services,1307000000.0,2024-02-29,False
+ORCL,Oracle Corporation,2024,Q4,Cloud license and on-premise license,1800000000.0,2024-06-11,False
+ORCL,Oracle Corporation,2024,Q4,Cloud services and license support,10200000000.0,2024-06-11,False
 ORCL,Oracle Corporation,2024,Q4,Hardware,842000000.0,,True
 ORCL,Oracle Corporation,2024,Q4,Services,1373000000.0,,True
 ORCL,Oracle Corporation,2025,Q1,Cloud license and on-premise license,870000000.0,2024-08-31,False
 ORCL,Oracle Corporation,2025,Q1,Cloud services and license support,10519000000.0,2024-08-31,False
 ORCL,Oracle Corporation,2025,Q1,Hardware,655000000.0,2024-08-31,False
 ORCL,Oracle Corporation,2025,Q1,Services,1263000000.0,2024-08-31,False
-ORCL,Oracle Corporation,2025,Q2,Cloud license and on-premise license,1195000000.0,2024-11-30,False
+ORCL,Oracle Corporation,2025,Q2,Cloud license and on-premise license,1200000000.0,2024-12-09,False
 ORCL,Oracle Corporation,2025,Q2,Cloud services and license support,10806000000.0,2024-11-30,False
 ORCL,Oracle Corporation,2025,Q2,Hardware,728000000.0,2024-11-30,False
 ORCL,Oracle Corporation,2025,Q2,Services,1330000000.0,2024-11-30,False
@@ -482,18 +484,18 @@ ORCL,Oracle Corporation,2025,Q3,Cloud license and on-premise license,1129000000.
 ORCL,Oracle Corporation,2025,Q3,Cloud services and license support,11007000000.0,2025-02-28,False
 ORCL,Oracle Corporation,2025,Q3,Hardware,703000000.0,2025-02-28,False
 ORCL,Oracle Corporation,2025,Q3,Services,1291000000.0,2025-02-28,False
+ORCL,Oracle Corporation,2025,Q4,Cloud license and on-premise license,2000000000.0,2025-06-11,False
+ORCL,Oracle Corporation,2025,Q4,Cloud services and license support,11700000000.0,2025-06-11,False
 ORCL,Oracle Corporation,2025,Q4,Hardware,850000000.0,,True
 ORCL,Oracle Corporation,2025,Q4,Services,1349000000.0,,True
-ORCL,Oracle Corporation,2026,Q1,Cloud,7186000000.0,2025-08-31,False
-ORCL,Oracle Corporation,2026,Q1,Cloud and software,3607000000.0,2025-08-31,False
+ORCL,Oracle Corporation,2026,Q1,Cloud,7200000000.0,2025-09-09,False
 ORCL,Oracle Corporation,2026,Q1,Hardware,670000000.0,2025-08-31,False
 ORCL,Oracle Corporation,2026,Q1,Services,1349000000.0,2025-08-31,False
 ORCL,Oracle Corporation,2026,Q1,Software,5721000000.0,2025-08-31,False
-ORCL,Oracle Corporation,2026,Q2,Cloud,7977000000.0,2025-11-30,False
-ORCL,Oracle Corporation,2026,Q2,Cloud and software,3990000000.0,2025-11-30,False
+ORCL,Oracle Corporation,2026,Q2,Cloud,8000000000.0,2025-12-10,False
 ORCL,Oracle Corporation,2026,Q2,Hardware,776000000.0,2025-11-30,False
 ORCL,Oracle Corporation,2026,Q2,Services,1428000000.0,2025-11-30,False
-ORCL,Oracle Corporation,2026,Q2,Software,5877000000.0,2025-11-30,False
+ORCL,Oracle Corporation,2026,Q2,Software,5900000000.0,2025-12-10,False
 QCOM,Qualcomm Inc.,2022,Q1,Handsets,5983000000.0,2022-02-02,False
 QCOM,Qualcomm Inc.,2022,Q2,Handsets,6325000000.0,2022-04-27,False
 QCOM,Qualcomm Inc.,2022,Q3,Handsets,6149000000.0,2022-07-27,False
