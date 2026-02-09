@@ -11,11 +11,15 @@ Rate limit: 10 requests/second
 
 import json
 import re
+import ssl
 import time
 import urllib.request
 from html.parser import HTMLParser
 from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime
+
+# Global unverified SSL context for macOS certificate issues
+ssl_context = ssl._create_unverified_context()
 
 
 # Concept stock companies with their CIK numbers
@@ -224,7 +228,7 @@ class SECEdgarClient:
         request.add_header("Accept", "application/json")
 
         try:
-            with urllib.request.urlopen(request, timeout=30) as resp:
+            with urllib.request.urlopen(request, timeout=30, context=ssl_context) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             if e.code == 404:
@@ -642,8 +646,8 @@ class SECEdgarClient:
         request.add_header("User-Agent", self.user_agent)
 
         try:
-            with urllib.request.urlopen(request, timeout=60) as resp:
-                return resp.read().decode("utf-8", errors="ignore")
+            with urllib.request.urlopen(request, timeout=60, context=ssl_context) as resp:
+                return resp.read().decode("utf-8")
         except Exception as e:
             raise RuntimeError(f"Failed to fetch filing document: {e}")
 
@@ -1146,7 +1150,7 @@ class SECEdgarClient:
             index_url = f"https://www.sec.gov/Archives/edgar/data/{cik_clean}/{acc_clean}/{accession}-index.htm"
 
             req = urllib.request.Request(index_url, headers={"User-Agent": self.user_agent})
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=30, context=ssl_context) as resp:
                 content = resp.read().decode("utf-8")
 
             # Find links to potential press release files
@@ -1467,11 +1471,20 @@ class SECEdgarClient:
         """
         results = []
 
-        # Extract quarter and year
+        # Extract quarter and year - look for "Results" nearby to avoid "Outlook"
+        # Most Meta releases start with "Meta Reports Fourth Quarter and Full Year 2025 Results"
         fy_match = re.search(
-            r'(First|Second|Third|Fourth)\s+Quarter\s+(\d{4})',
+            r'(First|Second|Third|Fourth)\s+Quarter\s+(?:and\s+Full\s+Year\s+)?(\d{4})\s+Results',
             content, re.IGNORECASE
         )
+        
+        if not fy_match:
+            # Fallback to general match
+            fy_match = re.search(
+                r'(First|Second|Third|Fourth)\s+Quarter\s+(\d{4})',
+                content, re.IGNORECASE
+            )
+
         if not fy_match:
             return []
 
