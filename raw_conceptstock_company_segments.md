@@ -5,7 +5,7 @@
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
 > Legend: `-` = not yet released, `x` = released but not available
-> Note: Segment names are normalized for consistent trend tracking
+> Cross-check: Total Revenue vs Segment Sum (difference shown if >1%)
 
 ## Summary (Latest Fiscal Year)
 
@@ -38,6 +38,10 @@
 | iPad | $28.0B | $26.7B | $28.3B | $29.3B | $31.9B |
 | Services | $109.2B | $96.2B | $85.2B | $78.1B | $68.4B |
 | Wearables, Home and Accessories | $35.7B | $37.0B | $39.8B | $41.2B | $38.4B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $416.2B | $391.0B | $383.3B | $394.3B | $365.8B |
+| **Total Revenue** | $416.2B | $394.3B | $394.3B | $394.3B | $365.8B |
+| **Difference** | ✓ | ✓ | 2.8% | ✓ | ✓ |
 
 ### Geographic Segments
 
@@ -64,6 +68,10 @@
 | Computing and Graphics | x | x | x | x | $9.3B |
 | Enterprise, Embedded and Semi-Custom | x | x | x | x | $4.9B |
 | Client and Gaming | $14.6B | x | x | x | x |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $49.2B | $25.8B | $22.7B | $23.6B | $14.2B |
+| **Total Revenue** | $34.6B | $25.8B | $23.6B | $23.6B | $16.4B |
+| **Difference** | 41.9% | ✓ | 3.9% | ✓ | 13.6% |
 
 ### Geographic Segments
 
@@ -95,6 +103,10 @@
 | Physical Stores | $21.2B | $20.0B | $19.0B | $17.1B | $16.2B |
 | Amazon Web Services | $107.6B | $90.8B | $80.1B | $62.2B | $45.4B |
 | Other Services | $5.4B | $5.0B | $4.2B | $2.2B | $21.5B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $1329.5B | $1194.8B | $1068.1B | $469.8B | $386.1B |
+| **Total Revenue** | $638.0B | $574.8B | $514.0B | $469.8B | $386.1B |
+| **Difference** | 108.4% | 107.9% | 107.8% | ✓ | ✓ |
 
 ### Geographic Segments
 
@@ -120,6 +132,10 @@
 | Storage | - | $16.5B | $16.3B | $18.0B | $16.5B |
 | Products | - | x | $71.4B | $64.4B | $79.2B |
 | Services | - | x | $24.1B | $24.1B | $23.1B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $78.7B | $204.3B | $129.5B | $124.0B | $136.7B |
+| **Total Revenue** | - | x | x | x | x |
+| **Difference** | - | - | - | - | - |
 
 ---
 
@@ -136,6 +152,10 @@
 | Google Subscriptions | $46.2B | $40.3B | $34.7B | $29.1B | $28.0B |
 | Google Network | $29.8B | $30.4B | $31.3B | $32.8B | $31.7B |
 | Other Bets | $1.9B | $1.6B | $1.5B | $1.1B | $753M |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $744.3B | $349.8B | $307.2B | $280.9B | $257.5B |
+| **Total Revenue** | $402.8B | $350.0B | $307.4B | $282.8B | $257.6B |
+| **Difference** | 84.8% | ✓ | ✓ | ✓ | ✓ |
 
 ### Geographic Segments
 
@@ -156,6 +176,10 @@
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Personal Systems | $38.5B | $36.2B | $35.7B | $35,684 | $44,011 |
 | Printing | $16.8B | $17.4B | $18.0B | $18,029 | $18,902 |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $55.3B | $53.6B | $53.7B | $53,713 | $62,913 |
+| **Total Revenue** | x | x | x | x | x |
+| **Difference** | - | - | - | - | - |
 
 ---
 
@@ -167,6 +191,10 @@
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Family of Apps | $198.8B | $162.4B | $133.0B | $114.5B | $115.7B |
 | Reality Labs | $2.2B | $2.1B | $1.9B | $2.2B | $2.3B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $201.0B | $164.5B | $134.9B | $116.6B | $117.9B |
+| **Total Revenue** | $201.0B | $164.5B | $134.9B | $117.9B | $117.9B |
+| **Difference** | ✓ | ✓ | ✓ | 1.1% | ✓ |
 
 ### Geographic Segments
 
@@ -195,6 +223,10 @@
 | Linked In Corporation | $17.8B | $16.4B | $15.1B | $13.8B | $10.3B |
 | Search And News Advertising | $13.9B | $12.6B | $12.2B | $11.6B | $8.5B |
 | Devices | $17.3B | $4.7B | $5.5B | $7.0B | $6.8B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $570.2B | $469.6B | $410.4B | $383.9B | $155.9B |
+| **Total Revenue** | $281.7B | $245.1B | $211.9B | $198.3B | $168.1B |
+| **Difference** | 102.4% | 91.6% | 93.7% | 93.6% | 7.2% |
 
 ### Geographic Segments
 
@@ -215,6 +247,10 @@
 | Mobile and Client | $11.9B | $11.7B | $7.4B | x |
 | Core Data Center | $7.2B | $5.0B | $2.1B | x |
 | Automotive and Edge | $4.8B | $4.6B | $4.1B | x |
+|---------|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $37.4B | $25.1B | $15.5B | x |
+| **Total Revenue** | $37.4B | $30.8B | $30.8B | $30.8B |
+| **Difference** | ✓ | 18.5% | 49.5% | - |
 
 ---
 
@@ -229,6 +265,10 @@
 | Professional Visualization | $1.9B | $1.9B | $1.6B | $1.5B | $2.1B |
 | Automotive | $1.7B | $1.7B | $1.1B | $903M | $566M |
 | OEM And Other | - | $389M | $306M | $455M | $1.2B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $146.1B | $130.5B | $60.9B | $27.0B | $26.9B |
+| **Total Revenue** | - | $130.5B | $60.9B | $27.0B | $26.9B |
+| **Difference** | - | ✓ | ✓ | ✓ | ✓ |
 
 ### Geographic Segments
 
@@ -255,6 +295,10 @@
 | Software | x | x | x | x | x |
 | Cloud and software | x | x | x | x | x |
 | Cloud and license | $49.2B | $44.5B | $41.1B | $36.1B | $34.1B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $109.5B | $101.1B | $91.0B | $78.5B | $74.6B |
+| **Total Revenue** | $57.4B | $53.0B | $50.0B | $42.4B | $40.5B |
+| **Difference** | 90.8% | 90.9% | 82.2% | 84.9% | 84.2% |
 
 ### Geographic Segments
 
@@ -276,6 +320,10 @@
 | Automotive | $4.7B | $4.0B | $2.9B | $1.9B | $1.4B |
 | IoT | $6.2B | $6.6B | $5.4B | $5.9B | $6.9B |
 | Licensing | $5.6B | $5.6B | $6.2B | $5.8B | $7.0B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $47.4B | $44.0B | $39.4B | $36.2B | $40.4B |
+| **Total Revenue** | x | x | x | x | x |
+| **Difference** | - | - | - | - | - |
 
 ---
 
@@ -290,6 +338,10 @@
 | Consumer | $623M | $623M | $688M | x | x |
 | Flash | x | $6.7B | $6.7B | $6.1B | $9.8B |
 | HDD | x | $6.3B | $6.3B | $6.3B | $9.0B |
+|---------|-------:|-------:|-------:|-------:|-------:|
+| **Segment Sum** | $9.5B | $22.5B | $19.3B | $12.3B | $18.8B |
+| **Total Revenue** | $9.5B | $18.8B | $18.8B | $18.8B | $16.9B |
+| **Difference** | ✓ | 19.8% | 2.8% | 34.5% | 11.1% |
 
 ### Geographic Segments
 

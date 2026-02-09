@@ -212,6 +212,41 @@ def fetch_8k_segments(symbols: list, quarters: int = 20) -> list:
     return results
 
 
+def load_quarterly_total_revenue(csv_path: str) -> dict:
+    """
+    Load quarterly total revenue from income statement CSV.
+
+    Returns:
+        Dict: {(symbol, fiscal_year, quarter): total_revenue}
+    """
+    if not os.path.exists(csv_path):
+        return {}
+
+    totals = {}
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            symbol = row.get('symbol')
+            period = row.get('period', '')
+
+            # Map period to quarter format
+            if period == 'FY':
+                continue  # Skip annual, we want quarterly
+            elif period in ('Q1', 'Q2', 'Q3', 'Q4'):
+                quarter = period
+            else:
+                continue
+
+            fy = int(row.get('fiscal_year') or 0)
+            revenue = float(row.get('total_revenue') or 0)
+
+            if symbol and fy and revenue > 0:
+                key = (symbol, fy, quarter)
+                totals[key] = revenue
+
+    return totals
+
+
 def load_annual_segments(csv_path: str, symbols: list) -> list:
     """
     Load annual segment data from CSV to fill Q4 gaps.
@@ -333,10 +368,12 @@ def generate_csv(data: list, output_path: str):
     print(f"  Wrote {len(data)} records to {output_path}")
 
 
-def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None):
+def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None, total_revenue_map: dict = None):
     """Generate markdown report with each segment on one line, quarters as columns."""
     if latest_q_map is None:
         latest_q_map = {}
+    if total_revenue_map is None:
+        total_revenue_map = {}
 
     lines = []
 
@@ -346,6 +383,7 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
     lines.append("> Data source: SEC EDGAR 10-Q/10-K filings")
     lines.append("> Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)")
     lines.append("> Legend: `-` = not yet released, `x` = released but not available")
+    lines.append("> Cross-check: Total Revenue vs Segment Sum (difference shown if >1%)")
     lines.append("> Note: Q4 values are calculated as FY - (Q1+Q2+Q3)")
     lines.append("")
 
@@ -420,6 +458,9 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
         lines.append(separator)
 
         # Build rows - one segment per line with all quarters
+        # Track segment sums for each quarter
+        segment_sums = {(fy, q): 0 for fy, q in all_quarters}
+
         for seg in segments:
             # Build lookup for this segment
             seg_records = [r for r in records if r['segment_name'] == seg]
@@ -431,8 +472,42 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
             row = f"| {seg} |"
             for fy, q in all_quarters:
                 val = q_vals.get((fy, q), 0)
+                if val and val > 0:
+                    segment_sums[(fy, q)] += val
                 row += f" {fmt(val, fy=fy, q=q)} |"
             lines.append(row)
+
+        # Add separator before totals
+        lines.append("|---------|" + "------|" * len(all_quarters))
+
+        # Segment Sum row
+        row = "| **Segment Sum** |"
+        for fy, q in all_quarters:
+            val = segment_sums[(fy, q)]
+            row += f" {fmt(val, fy=fy, q=q)} |"
+        lines.append(row)
+
+        # Total Revenue row
+        row = "| **Total Revenue** |"
+        for fy, q in all_quarters:
+            total = total_revenue_map.get((symbol, fy, q), 0)
+            row += f" {fmt(total, fy=fy, q=q)} |"
+        lines.append(row)
+
+        # Difference row
+        row = "| **Difference** |"
+        for fy, q in all_quarters:
+            total = total_revenue_map.get((symbol, fy, q), 0)
+            seg_sum = segment_sums[(fy, q)]
+            if total > 0 and seg_sum > 0:
+                diff_pct = abs(total - seg_sum) / total * 100
+                if diff_pct > 1:
+                    row += f" {diff_pct:.0f}% |"
+                else:
+                    row += " ✓ |"
+            else:
+                row += " - |"
+        lines.append(row)
 
         lines.append("")
         lines.append("---")
@@ -523,9 +598,15 @@ def main():
     csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.csv")
     generate_csv(all_data, csv_path)
 
+    # Load quarterly total revenue for cross-check
+    income_path = os.path.join(args.out_dir, "raw_conceptstock_company_income.csv")
+    total_revenue_map = load_quarterly_total_revenue(income_path)
+    if total_revenue_map:
+        print(f"  Loaded quarterly total revenue for {len(total_revenue_map)} company-quarters")
+
     # Write markdown report
     md_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.md")
-    generate_markdown_report(all_data, md_path, latest_q_map=latest_q_map)
+    generate_markdown_report(all_data, md_path, latest_q_map=latest_q_map, total_revenue_map=total_revenue_map)
 
     print("Done!")
     return 0

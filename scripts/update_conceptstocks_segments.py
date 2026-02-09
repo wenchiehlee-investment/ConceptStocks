@@ -198,6 +198,35 @@ def fmt_revenue(val, fy: int = None, latest_released_fy: int = None):
         return f"{sign}${abs_val:,.0f}"
 
 
+def load_total_revenue(csv_path: str) -> dict:
+    """
+    Load total company revenue from income statement CSV.
+
+    Returns:
+        Dict: {(symbol, fiscal_year): total_revenue}
+    """
+    if not os.path.exists(csv_path):
+        return {}
+
+    totals = {}
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            symbol = row.get('symbol')
+            period = row.get('period', '')
+            if period != 'FY':
+                continue
+
+            fy = int(row.get('fiscal_year') or 0)
+            revenue = float(row.get('total_revenue') or 0)
+
+            if symbol and fy and revenue > 0:
+                key = (symbol, fy)
+                totals[key] = revenue
+
+    return totals
+
+
 def load_override_data(csv_path: str) -> dict:
     """
     Load manual override data for missing segments.
@@ -380,7 +409,7 @@ def load_segment_data(csv_path: str, override_path: str = None, quarterly_path: 
     return dict(data)
 
 
-def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) -> str:
+def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None, total_revenue_map: dict = None) -> str:
     """
     Generate markdown content in trend-chart format.
 
@@ -388,9 +417,12 @@ def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) ->
         data: Segment revenue data
         years: Number of years to include
         latest_fy_map: Dict mapping symbol to latest released fiscal year
+        total_revenue_map: Dict mapping (symbol, fy) to total company revenue
     """
     if latest_fy_map is None:
         latest_fy_map = {}
+    if total_revenue_map is None:
+        total_revenue_map = {}
 
     lines = []
 
@@ -402,7 +434,7 @@ def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) ->
     lines.append(f"> Coverage: {years} fiscal years")
     lines.append("> Format: Single table per company with segments as rows, years as columns")
     lines.append("> Legend: `-` = not yet released, `x` = released but not available")
-    lines.append("> Note: Segment names are normalized for consistent trend tracking")
+    lines.append("> Cross-check: Total Revenue vs Segment Sum (difference shown if >1%)")
     lines.append("")
 
     # Summary table
@@ -541,12 +573,48 @@ def generate_markdown(data: dict, years: int = 5, latest_fy_map: dict = None) ->
 
             # One row per segment
             latest_released = latest_fy_map.get(symbol)
+            segment_sums = {fy: 0 for fy in sorted_years}
+
             for seg_name in filtered_segments:
                 year_data = type_data.get(seg_name, {})
                 row = f"| {seg_name} |"
                 for fy in sorted_years:
                     rev = year_data.get(fy, 0)
+                    if rev and rev > 0:
+                        segment_sums[fy] += rev
                     row += f" {fmt_revenue(rev, fy=fy, latest_released_fy=latest_released)} |"
+                lines.append(row)
+
+            # Add separator before totals (only for product segments)
+            if seg_type == 'product':
+                lines.append("|---------|" + "-------:|" * len(sorted_years))
+
+                # Segment Sum row
+                row = "| **Segment Sum** |"
+                for fy in sorted_years:
+                    row += f" {fmt_revenue(segment_sums[fy], fy=fy, latest_released_fy=latest_released)} |"
+                lines.append(row)
+
+                # Total Revenue row
+                row = "| **Total Revenue** |"
+                for fy in sorted_years:
+                    total = total_revenue_map.get((symbol, fy), 0)
+                    row += f" {fmt_revenue(total, fy=fy, latest_released_fy=latest_released)} |"
+                lines.append(row)
+
+                # Difference row (only show if there's a significant difference)
+                row = "| **Difference** |"
+                for fy in sorted_years:
+                    total = total_revenue_map.get((symbol, fy), 0)
+                    seg_sum = segment_sums[fy]
+                    if total > 0 and seg_sum > 0:
+                        diff_pct = abs(total - seg_sum) / total * 100
+                        if diff_pct > 1:
+                            row += f" {diff_pct:.1f}% |"
+                        else:
+                            row += " ✓ |"
+                    else:
+                        row += " - |"
                 lines.append(row)
 
             lines.append("")
@@ -601,9 +669,15 @@ def main() -> int:
     else:
         print(f"  Loaded data for {len(data)} companies")
 
+    # Load total revenue for cross-check
+    income_path = os.path.join(args.out_dir, "raw_conceptstock_company_income.csv")
+    total_revenue_map = load_total_revenue(income_path)
+    if total_revenue_map:
+        print(f"  Loaded total revenue for {len(total_revenue_map)} company-years")
+
     # Generate markdown
     print("  Generating markdown...")
-    markdown_content = generate_markdown(data, years=args.years, latest_fy_map=latest_fy_map)
+    markdown_content = generate_markdown(data, years=args.years, latest_fy_map=latest_fy_map, total_revenue_map=total_revenue_map)
 
     # Write output file
     output_path = os.path.join(args.out_dir, "raw_conceptstock_company_segments.md")
