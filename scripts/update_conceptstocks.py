@@ -30,6 +30,7 @@ DEFAULT_TICKERS = {
 
 # Mapping from concept column name (in concept.csv) to (Ticker, Company Name)
 CONCEPT_TO_TICKER = {
+    "TSMC概念": ("TSM", "Taiwan Semiconductor"),
     "nVidia概念": ("NVDA", "NVIDIA Corporation"),
     "Google概念": ("GOOGL", "Alphabet Inc."),
     "Amazon概念": ("AMZN", "Amazon.com, Inc."),
@@ -41,7 +42,7 @@ CONCEPT_TO_TICKER = {
     "Micro概念": ("MU", "Micron Technology, Inc."),
     "SanDisk概念": ("WDC", "Western Digital Corporation"),
     "Qualcomm概念": ("QCOM", "Qualcomm Inc."),
-    "Lenovo概念": ("0992.HK", "Lenovo Group"),
+    "Lenovo概念": ("LNVGY", "Lenovo Group"),
     # OpenAI is private
 }
 
@@ -500,13 +501,20 @@ def main() -> int:
 
     cadences = ["daily", "weekly", "monthly"] if args.cadence == "all" else [args.cadence]
 
+    errors = []
     for cadence in cadences:
         for i, (ticker, name) in enumerate(tickers.items()):
             if i > 0 or cadence != cadences[0]:
                 time.sleep(args.sleep)
-            update_for_ticker(ticker, name, cadence, api_key, args.out_dir)
-            print(f"Updated {cadence} for {ticker}")
+            try:
+                update_for_ticker(ticker, name, cadence, api_key, args.out_dir)
+                print(f"Updated {cadence} for {ticker}")
+            except Exception as e:
+                print(f"Warning: Failed to update {cadence} for {ticker}: {e}", file=sys.stderr)
+                errors.append(f"{ticker}/{cadence}")
 
+    if errors:
+        print(f"Failed tickers: {', '.join(errors)}", file=sys.stderr)
     return 0
 
 

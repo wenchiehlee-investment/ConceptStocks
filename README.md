@@ -10,6 +10,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 Update time: 2026-02-07 20:48:07 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
+| TSMC概念 | Taiwan Semiconductor | TSM | 美國ADR | - | - | - | - |
 | nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Data Center, Gaming, Automotive, Professional Visualization |
 | Google概念 | Alphabet Inc. | GOOGL | 0001652044 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Google Cloud, Google Services |
 | Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | AWS, North America, International |
@@ -22,11 +23,11 @@ Update time: 2026-02-07 20:48:07 CST
 | Micro概念 | Micron Technology | MU | 0000723125 | FY2026 Q1 | FY2026 Q2 | 2026年3月 | Cloud Memory, Mobile and Client, Core Data Center |
 | SanDisk概念 | Western Digital | WDC | 0000106040 | FY2026 Q2 | FY2026 Q3 | 2026年4月 | Cloud, Client, Consumer, Flash, HDD |
 | Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
-| Lenovo概念 | Lenovo Group | 0992.HK | 香港上市 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
+| Lenovo概念 | Lenovo Group | LNVGY | 美國ADR | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
 | Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Servers and networking, Storage |
 | HP概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
 
-> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 15 個）
+> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 16 個）
 > 概念 metadata：`concept_metadata.csv`
 
 
