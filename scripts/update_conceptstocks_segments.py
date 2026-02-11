@@ -659,7 +659,7 @@ def main() -> int:
 
     # Load annual segment data from CSV with manual overrides and quarterly aggregation
     csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
-    override_path = os.path.join(args.out_dir, "segment_overrides.csv")
+    override_path = os.path.join(args.out_dir, "raw_conceptstock_company_segment_overrides.csv")
     quarterly_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.csv")
     print(f"  Loading segment data from {csv_path}")
     data = load_segment_data(csv_path, override_path=override_path, quarterly_path=quarterly_path)

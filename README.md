@@ -134,7 +134,7 @@ python scripts/generate_quarterly_segments.py --years 5
   │ └──────┬──────────────┬───────────┘                     │
   │        ▼              ▼              SEC 8-K/10-Q       │
   │ income.csv      revenue.csv        (press releases)     │
-  │ (Type 54)       (Type 53)               │               │
+  │ (Type 34)       (Type 33)               │               │
   │        │              │    ┌─────────────┘              │
   │        │              │    ▼                            │
   │        │   ┌──────────────────────────┐                 │
@@ -158,8 +158,8 @@ python scripts/generate_quarterly_segments.py --years 5
   │        ▼              ▼                                 │
   │ ┌──────────────────────────────┐                        │
   │ │ update_conceptstocks_        │                        │
-  │ │   segments.py                │                        │
-  │ └──────────┬───────────────────┘                        │
+  │ │   segments.py                │◄── segment_overrides   │
+  │ └──────────┬───────────────────┘    .csv (手動補丁)     │
   │            ▼                                            │
   │     segments.md  ← 年度報告                             │
   └─────────────────────────────────────────────────────────┘
@@ -170,8 +170,9 @@ python scripts/generate_quarterly_segments.py --years 5
 | `income.csv` | CSV (中間資料) | 損益表，提供 Total Revenue 交叉驗證 |
 | `revenue.csv` | CSV (中間資料) | 年度分項營收原始資料 |
 | `quarterly_segments.csv` | CSV (中間資料) | 季度分項營收原始資料 |
+| `segment_overrides.csv` | CSV (手動補丁) | 填補 FMP/SEC 自動解析缺失或錯誤的年度分項資料 |
 | **`quarterly_segments.md`** | **.md (最終報告)** | 季度產品分項趨勢表 |
 | **`segments.md`** | **.md (最終報告)** | 年度產品分項趨勢表 |
 
 > 所有檔案前綴為 `raw_conceptstock_company_`，上表省略。
-> 3 個 `.csv` 會同步到 `Python-Actions.GoodInfo.Analyzer`。2 個 `.md` 是人讀的報告，review OK 代表 CSV 也 OK。
+> 4 個 `.csv` 是生成 2 個 `.md` 報告的完整輸入。`.csv` 會同步到 `Python-Actions.GoodInfo.Analyzer`，review `.md` OK 代表 CSV 也 OK。

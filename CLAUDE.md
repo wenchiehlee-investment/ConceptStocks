@@ -65,8 +65,8 @@ python scripts/update_company_financials.py --all --type all --source all
 - `raw_conceptstock_monthly.csv` - 月線資料（完整歷史）
 
 **公司財務資料：**
-- `raw_conceptstock_company_income.csv` - 損益表（Type 54）
-- `raw_conceptstock_company_revenue.csv` - 分項營收（Type 53）
+- `raw_conceptstock_company_income.csv` - 損益表（Type 34）
+- `raw_conceptstock_company_revenue.csv` - 分項營收（Type 33）
 - `raw_conceptstock_company_segments.md` - 年度分項營收報告
 - `raw_conceptstock_company_quarterly_segments.csv` - 季度產品分項資料
 - `raw_conceptstock_company_quarterly_segments.md` - 季度產品分項報告
