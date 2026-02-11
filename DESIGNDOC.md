@@ -456,16 +456,29 @@ class EdgarSegmentExtractor:
 
 ### GitHub Sync Configuration (同步設定)
 
-如果建立獨立 repo 存放概念股公司資料，可使用以下同步設定：
+同步所有 ConceptStocks CSV（No. 30-36）到 GoodInfo repo：
 
 ```yaml
 # .github/sync-Python-Actions.GoodInfo.Analyzer.yml
 group:
   - files:
-      - source: data/raw_conceptstock_company_revenue.csv
+      # No. 30-32: Concept stock prices
+      - source: raw_conceptstock_daily.csv
+        dest:   data/stage1_raw/raw_conceptstock_daily.csv
+      - source: raw_conceptstock_weekly.csv
+        dest:   data/stage1_raw/raw_conceptstock_weekly.csv
+      - source: raw_conceptstock_monthly.csv
+        dest:   data/stage1_raw/raw_conceptstock_monthly.csv
+      # No. 33-34: Company financials
+      - source: raw_conceptstock_company_revenue.csv
         dest:   data/stage1_raw/raw_conceptstock_company_revenue.csv
-      - source: data/raw_conceptstock_company_income.csv
+      - source: raw_conceptstock_company_income.csv
         dest:   data/stage1_raw/raw_conceptstock_company_income.csv
+      # No. 35-36: Quarterly segments & overrides
+      - source: raw_conceptstock_company_quarterly_segments.csv
+        dest:   data/stage1_raw/raw_conceptstock_company_quarterly_segments.csv
+      - source: raw_conceptstock_company_segment_overrides.csv
+        dest:   data/stage1_raw/raw_conceptstock_company_segment_overrides.csv
     repos: |
         wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer
 ```
