@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-02-09
+> Last updated: 2026-02-11
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -126,16 +126,16 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | $41.2B | $75.8B | x | x | x |
-| Client Solutions Group | $37.5B | $84.9B | x | x | x |
+| Infrastructure Solutions Group | $41.2B | $43.6B | x | x | x |
+| Client Solutions Group | $37.5B | $48.4B | x | x | x |
 | Servers and networking | - | $27.1B | $17.6B | $17.6B | $17.9B |
 | Storage | - | $16.5B | $16.3B | $18.0B | $16.5B |
 | Products | - | x | $71.4B | $64.4B | $79.2B |
 | Services | - | x | $24.1B | $24.1B | $23.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $78.7B | $204.3B | $129.5B | $124.0B | $136.7B |
-| **Total Revenue** | - | x | x | x | x |
-| **Difference** | - | - | - | - | - |
+| **Segment Sum** | $78.7B | $135.6B | $129.5B | $124.0B | $136.7B |
+| **Total Revenue** | - | $102.3B | $102.3B | $102.3B | $101.2B |
+| **Difference** | - | 32.5% | 26.5% | 21.2% | 35.1% |
 
 ---
 
@@ -178,8 +178,8 @@
 | Printing | $16.8B | $17.4B | $18.0B | $18,029 | $18,902 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | **Segment Sum** | $55.3B | $53.6B | $53.7B | $53,713 | $62,913 |
-| **Total Revenue** | x | x | x | x | x |
-| **Difference** | - | - | - | - | - |
+| **Total Revenue** | $55.3B | $62.9B | $63.5B | $63.5B | $63.5B |
+| **Difference** | ✓ | 14.8% | 15.4% | 100.0% | 100.0% |
 
 ---
 
@@ -293,12 +293,10 @@
 | Services | $5.2B | $5.4B | $5.6B | $3.2B | $3.0B |
 | Cloud | x | x | x | x | x |
 | Software | x | x | x | x | x |
-| Cloud and software | x | x | x | x | x |
-| Cloud and license | $49.2B | $44.5B | $41.1B | $36.1B | $34.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $109.5B | $101.1B | $91.0B | $78.5B | $74.6B |
+| **Segment Sum** | $60.3B | $56.7B | $50.0B | $42.4B | $40.5B |
 | **Total Revenue** | $57.4B | $53.0B | $50.0B | $42.4B | $40.5B |
-| **Difference** | 90.8% | 90.9% | 82.2% | 84.9% | 84.2% |
+| **Difference** | 5.1% | 7.0% | ✓ | ✓ | ✓ |
 
 ### Geographic Segments
 

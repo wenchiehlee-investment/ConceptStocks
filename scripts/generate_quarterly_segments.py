@@ -545,7 +545,30 @@ def parse_args():
         default=5,
         help="Number of years to include"
     )
+    parser.add_argument(
+        "--from-csv",
+        action="store_true",
+        help="Generate .md from existing .csv without calling SEC APIs"
+    )
     return parser.parse_args()
+
+
+def load_from_csv(csv_path: str) -> list:
+    """Load quarterly segment data from existing CSV file."""
+    if not os.path.exists(csv_path):
+        print(f"  Error: {csv_path} not found", file=sys.stderr)
+        return []
+    data = []
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row['fiscal_year'] = int(row['fiscal_year'])
+            q = row['quarter']
+            row['quarter'] = q if q.startswith('Q') else f"Q{q}"
+            row['revenue'] = float(row['revenue'])
+            row['is_calculated'] = row.get('is_calculated', '').lower() == 'true'
+            data.append(row)
+    return data
 
 
 def main():
@@ -560,55 +583,63 @@ def main():
     if latest_q_map:
         print(f"  Loaded latest released quarter for {len(latest_q_map)} companies")
 
-    quarters = args.years * 4
-    # Combine symbol lists, removing duplicates (ORCL is in both 10-Q and 8-K lists)
-    all_symbols = list(dict.fromkeys(QUARTERLY_PRODUCT_SUPPORTED + QUARTERLY_8K_SUPPORTED))
-
-    # Fetch quarterly data from 10-Q (AMD, ORCL, WDC)
-    quarterly_data = fetch_quarterly_segments(QUARTERLY_PRODUCT_SUPPORTED, quarters=quarters)
-    print(f"  10-Q records: {len(quarterly_data)}")
-
-    # Fetch quarterly data from 8-K (NVDA, etc.)
-    quarterly_8k = fetch_8k_segments(QUARTERLY_8K_SUPPORTED, quarters=quarters)
-    print(f"  8-K records: {len(quarterly_8k)}")
-    quarterly_data.extend(quarterly_8k)
-
-    print(f"  Total quarterly records: {len(quarterly_data)}")
-
-    # Load annual data for Q4 calculation
-    annual_csv = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
-    annual_data = load_annual_segments(annual_csv, all_symbols)
-    print(f"  Loaded {len(annual_data)} annual records for Q4 calculation")
-
-    # Calculate Q4 values
-    q4_data = calculate_q4(quarterly_data, annual_data)
-    print(f"  Calculated {len(q4_data)} Q4 records")
-
-    # Combine all data
-    all_data = quarterly_data + q4_data
-
-    # Deduplicate: prefer calculated Q4 over parsed Q4, or higher revenue
-    seen = {}
-    for r in all_data:
-        key = (r['symbol'], r['fiscal_year'], r['quarter'], r['segment_name'])
-        if key not in seen:
-            seen[key] = r
-        else:
-            existing = seen[key]
-            # Prefer calculated Q4 (more reliable)
-            if r.get('is_calculated') and not existing.get('is_calculated'):
-                seen[key] = r
-            elif not r.get('is_calculated') and existing.get('is_calculated'):
-                pass  # Keep existing calculated value
-            elif r['revenue'] > existing['revenue']:
-                # Same type, prefer higher revenue
-                seen[key] = r
-    all_data = list(seen.values())
-    print(f"  After deduplication: {len(all_data)} records")
-
-    # Write CSV
     csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.csv")
-    generate_csv(all_data, csv_path)
+
+    if args.from_csv:
+        # --- Mode: CSV → .md only (no API calls) ---
+        print("  Mode: --from-csv (reading existing CSV, no API calls)")
+        all_data = load_from_csv(csv_path)
+        print(f"  Loaded {len(all_data)} records from CSV")
+    else:
+        # --- Mode: API → CSV + .md ---
+        quarters = args.years * 4
+        # Combine symbol lists, removing duplicates (ORCL is in both 10-Q and 8-K lists)
+        all_symbols = list(dict.fromkeys(QUARTERLY_PRODUCT_SUPPORTED + QUARTERLY_8K_SUPPORTED))
+
+        # Fetch quarterly data from 10-Q (AMD, ORCL, WDC)
+        quarterly_data = fetch_quarterly_segments(QUARTERLY_PRODUCT_SUPPORTED, quarters=quarters)
+        print(f"  10-Q records: {len(quarterly_data)}")
+
+        # Fetch quarterly data from 8-K (NVDA, etc.)
+        quarterly_8k = fetch_8k_segments(QUARTERLY_8K_SUPPORTED, quarters=quarters)
+        print(f"  8-K records: {len(quarterly_8k)}")
+        quarterly_data.extend(quarterly_8k)
+
+        print(f"  Total quarterly records: {len(quarterly_data)}")
+
+        # Load annual data for Q4 calculation
+        annual_csv = os.path.join(args.out_dir, "raw_conceptstock_company_revenue.csv")
+        annual_data = load_annual_segments(annual_csv, all_symbols)
+        print(f"  Loaded {len(annual_data)} annual records for Q4 calculation")
+
+        # Calculate Q4 values
+        q4_data = calculate_q4(quarterly_data, annual_data)
+        print(f"  Calculated {len(q4_data)} Q4 records")
+
+        # Combine all data
+        all_data = quarterly_data + q4_data
+
+        # Deduplicate: prefer calculated Q4 over parsed Q4, or higher revenue
+        seen = {}
+        for r in all_data:
+            key = (r['symbol'], r['fiscal_year'], r['quarter'], r['segment_name'])
+            if key not in seen:
+                seen[key] = r
+            else:
+                existing = seen[key]
+                # Prefer calculated Q4 (more reliable)
+                if r.get('is_calculated') and not existing.get('is_calculated'):
+                    seen[key] = r
+                elif not r.get('is_calculated') and existing.get('is_calculated'):
+                    pass  # Keep existing calculated value
+                elif r['revenue'] > existing['revenue']:
+                    # Same type, prefer higher revenue
+                    seen[key] = r
+        all_data = list(seen.values())
+        print(f"  After deduplication: {len(all_data)} records")
+
+        # Write CSV
+        generate_csv(all_data, csv_path)
 
     # Load quarterly total revenue for cross-check
     income_path = os.path.join(args.out_dir, "raw_conceptstock_company_income.csv")
