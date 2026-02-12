@@ -13,16 +13,9 @@ on:
   workflow_dispatch:
     inputs:
       cadence:
-        description: "Cadence to update (use 'sync' to only update concept.csv)"
+        description: "Cadence to update: daily|weekly|monthly|all|sync"
         required: true
         default: "daily"
-        type: choice
-        options:
-          - daily
-          - weekly
-          - monthly
-          - all
-          - sync
 
 jobs:
   sync:
