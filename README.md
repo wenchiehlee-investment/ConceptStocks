@@ -7,10 +7,10 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-02-07 20:48:07 CST
+Update time: 2026-02-12 21:06:05 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
-| TSMC概念 | Taiwan Semiconductor | TSM | 美國ADR | - | - | - | - |
+| TSMC概念 | - | - | - | - | - | - | - |
 | nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Data Center, Gaming, Automotive, Professional Visualization |
 | Google概念 | Alphabet Inc. | GOOGL | 0001652044 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Google Cloud, Google Services |
 | Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | AWS, North America, International |
@@ -23,7 +23,7 @@ Update time: 2026-02-07 20:48:07 CST
 | Micro概念 | Micron Technology | MU | 0000723125 | FY2026 Q1 | FY2026 Q2 | 2026年3月 | Cloud Memory, Mobile and Client, Core Data Center |
 | SanDisk概念 | Western Digital | WDC | 0000106040 | FY2026 Q2 | FY2026 Q3 | 2026年4月 | Cloud, Client, Consumer, Flash, HDD |
 | Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
-| Lenovo概念 | Lenovo Group | LNVGY | 美國ADR | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
+| Lenovo概念 | Lenovo Group ADR | LNVGY | 香港上市 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
 | Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Servers and networking, Storage |
 | HP概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
 
@@ -76,16 +76,24 @@ Schema (all required):
 - Price columns: `開盤_價格_元`, `收盤_價格_元`, `漲跌_價格_元`, `漲跌_pct`
 
 Notes:
-- Daily (free tier) returns the most recent 100 points; weekly/monthly return full history.
+- Provider options: `--provider alphavantage` (default) or `--provider yahoo`.
+- Alpha Vantage daily defaults to recent 100 points (`--daily-outputsize compact`), and supports full history with `--daily-outputsize full`.
+- If your Alpha Vantage plan does not allow `outputsize=full`, the script automatically falls back to `compact`.
+- Yahoo provider can request explicit daily date ranges with `--start-date` / `--end-date`.
+- For non-US concept listings, updater normalizes to US query tickers (for example, Lenovo uses `LNVGY`; TSMC uses `TSM`).
 - OpenAI is private (no ticker). The NVDA sample is used as the first review example.
-- Configure the API key in `.env` (see `.env.example`) as `ALPHAVANTAGE_API_KEY`.
-- For GitHub Actions, set a repository secret named `ALPHAVANTAGE_API_KEY`.
+- Configure the API key in `.env` (see `.env.example`) as `ALPHAVANTAGE_API_KEY` when using Alpha Vantage or verification mode.
+- For GitHub Actions, set a repository secret named `ALPHAVANTAGE_API_KEY` when needed.
 
 ### Updating data
 Use the updater script to refresh a single ticker or all tickers. Examples:
 ```
 python3 scripts/update_conceptstocks.py --ticker NVDA --cadence all
 python3 scripts/update_conceptstocks.py --all --cadence weekly
+python3 scripts/update_conceptstocks.py --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12
+python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12
+python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12 --verify-against-alphavantage
+python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12 --verify-against-alphavantage --verify-strict --verify-close-tolerance 0.05 --verify-report yahoo_alpha_verify_2025-02-01_2026-02-12.csv
 ```
 
 If you add new concept columns, keep the naming pattern `X概念` and update this list.
@@ -116,63 +124,3 @@ Data sources by company:
 ```bash
 python scripts/generate_quarterly_segments.py --years 5
 ```
-
-## Data Pipeline Architecture
-
-資料管線分為兩階段：**API → CSV**（抓取）和 **CSV → .md**（報告生成）。
-
-```
-  ┌─ API → CSV ─────────────────────────────────────────────┐
-  │                                                         │
-  │                  External APIs                          │
-  │        ┌───────────┼───────────┐                        │
-  │    SEC EDGAR      FMP    Alpha Vantage                  │
-  │        │           │          │                         │
-  │        ▼           ▼          ▼                         │
-  │ ┌─────────────────────────────────┐                     │
-  │ │  update_company_financials.py   │                     │
-  │ └──────┬──────────────┬───────────┘                     │
-  │        ▼              ▼              SEC 8-K/10-Q       │
-  │ income.csv      revenue.csv        (press releases)     │
-  │ (Type 34)       (Type 33)               │               │
-  │        │              │    ┌─────────────┘              │
-  │        │              │    ▼                            │
-  │        │   ┌──────────────────────────┐                 │
-  │        │   │ generate_quarterly_      │                 │
-  │        │   │   segments.py            │                 │
-  │        │   └──────────┬───────────────┘                 │
-  │        │              ▼                                 │
-  │        │   quarterly_segments.csv                       │
-  └────────┼──────────────┼─────────────────────────────────┘
-           │              │
-  ┌─ CSV → .md ──────────┼─────────────────────────────────┐
-  │        │              │                                 │
-  │        │   ┌──────────┴───────────────┐                 │
-  │        ├──►│ generate_quarterly_      │                 │
-  │        │   │   segments.py --from-csv │                 │
-  │        │   └──────────┬───────────────┘                 │
-  │        │              ▼                                 │
-  │        │   quarterly_segments.md  ← 季度報告            │
-  │        │              │                                 │
-  │        │              │ (DELL/HPQ 季度→年度彙整)        │
-  │        ▼              ▼                                 │
-  │ ┌──────────────────────────────┐                        │
-  │ │ update_conceptstocks_        │                        │
-  │ │   segments.py                │◄── segment_overrides   │
-  │ └──────────┬───────────────────┘    .csv (手動補丁)     │
-  │            ▼                                            │
-  │     segments.md  ← 年度報告                             │
-  └─────────────────────────────────────────────────────────┘
-```
-
-| 檔案 | 角色 | 說明 |
-|------|------|------|
-| `income.csv` | CSV (中間資料) | 損益表，提供 Total Revenue 交叉驗證 |
-| `revenue.csv` | CSV (中間資料) | 年度分項營收原始資料 |
-| `quarterly_segments.csv` | CSV (中間資料) | 季度分項營收原始資料 |
-| `segment_overrides.csv` | CSV (手動補丁) | 填補 FMP/SEC 自動解析缺失或錯誤的年度分項資料 |
-| **`quarterly_segments.md`** | **.md (最終報告)** | 季度產品分項趨勢表 |
-| **`segments.md`** | **.md (最終報告)** | 年度產品分項趨勢表 |
-
-> 所有檔案前綴為 `raw_conceptstock_company_`，上表省略。
-> 4 個 `.csv` 是生成 2 個 `.md` 報告的完整輸入。`.csv` 會同步到 `Python-Actions.GoodInfo.Analyzer`，review `.md` OK 代表 CSV 也 OK。

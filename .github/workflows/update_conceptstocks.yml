@@ -69,15 +69,14 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
       - name: Update data
         env:
           ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
         run: |
-          if [ -z "$ALPHAVANTAGE_API_KEY" ]; then
-            echo "Missing ALPHAVANTAGE_API_KEY secret" >&2
-            exit 1
-          fi
-
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             CADENCE="${{ inputs.cadence }}"
           else
@@ -94,7 +93,44 @@ jobs:
             fi
           fi
 
-          python3 scripts/update_conceptstocks.py --all --cadence "$CADENCE"
+          echo "CADENCE=$CADENCE" >> "$GITHUB_ENV"
+
+          if [ "$CADENCE" = "daily" ]; then
+            START_DATE=$(python3 - <<'PY'
+import csv
+import os
+from datetime import datetime, timedelta
+
+path = "raw_conceptstock_daily.csv"
+if not os.path.exists(path):
+    print((datetime.utcnow() - timedelta(days=7)).strftime("%Y-%m-%d"))
+else:
+    max_date = None
+    with open(path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            date_str = row.get("交易日期")
+            if not date_str:
+                continue
+            d = datetime.strptime(date_str, "%Y-%m-%d").date()
+            if max_date is None or d > max_date:
+                max_date = d
+    if max_date is None:
+        print((datetime.utcnow() - timedelta(days=7)).strftime("%Y-%m-%d"))
+    else:
+        # Re-fetch from latest known date to include any correction on the most recent bar.
+        print(max_date.strftime("%Y-%m-%d"))
+PY
+)
+            echo "Daily incremental start date: $START_DATE"
+            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date "$START_DATE"
+          else
+            if [ -z "$ALPHAVANTAGE_API_KEY" ]; then
+              echo "Missing ALPHAVANTAGE_API_KEY secret" >&2
+              exit 1
+            fi
+            python3 scripts/update_conceptstocks.py --all --cadence "$CADENCE"
+          fi
 
       - name: Commit and push
         run: |

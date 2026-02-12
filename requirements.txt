@@ -2,3 +2,4 @@
 # For concept stock company financial data (SEC EDGAR, FMP, Alpha Vantage)
 
 requests>=2.28.0
+yfinance>=0.2.40
