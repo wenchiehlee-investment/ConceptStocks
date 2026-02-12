@@ -89,32 +89,7 @@ jobs:
           echo "CADENCE=$CADENCE" >> "$GITHUB_ENV"
 
           if [ "$CADENCE" = "daily" ]; then
-            START_DATE=$(python3 - <<'PY'
-import csv
-import os
-from datetime import datetime, timedelta
-
-path = "raw_conceptstock_daily.csv"
-if not os.path.exists(path):
-    print((datetime.utcnow() - timedelta(days=7)).strftime("%Y-%m-%d"))
-else:
-    max_date = None
-    with open(path, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            date_str = row.get("交易日期")
-            if not date_str:
-                continue
-            d = datetime.strptime(date_str, "%Y-%m-%d").date()
-            if max_date is None or d > max_date:
-                max_date = d
-    if max_date is None:
-        print((datetime.utcnow() - timedelta(days=7)).strftime("%Y-%m-%d"))
-    else:
-        # Re-fetch from latest known date to include any correction on the most recent bar.
-        print(max_date.strftime("%Y-%m-%d"))
-PY
-)
+            START_DATE=$(python3 -c "import csv, os; from datetime import datetime, timedelta; p='raw_conceptstock_daily.csv'; fb=(datetime.utcnow()-timedelta(days=7)).strftime('%Y-%m-%d'); md=max((datetime.strptime(r.get('交易日期'),'%Y-%m-%d').date() for r in csv.DictReader(open(p, newline='', encoding='utf-8')) if r.get('交易日期')), default=None) if os.path.exists(p) else None; print(md.strftime('%Y-%m-%d') if md else fb)")
             echo "Daily incremental start date: $START_DATE"
             python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date "$START_DATE"
           else
