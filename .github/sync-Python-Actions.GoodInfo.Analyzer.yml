@@ -23,6 +23,6 @@ group:
         dest:   data/stage1_raw/raw_conceptstock_company_metadata.csv
       # Raw column definition document
       - source: raw_column_definition.md
-        dest:   raw_column_definition_conceptstocks.md
+        dest:   raw_column_definition.md
     repos: |
         wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer
