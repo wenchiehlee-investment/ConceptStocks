@@ -32,7 +32,7 @@ from src.segment_config import UNIFIED_PRODUCT_SEGMENTS
 
 def load_latest_released_fy(csv_path: str) -> dict:
     """
-    Load latest released fiscal year for each company from concept_metadata.csv.
+    Load latest released fiscal year for each company from raw_conceptstock_company_metadata.csv.
 
     The 最新財報 column contains values like "FY2026 Q3" or "FY2025 Q4".
     For annual reports, we consider a FY as released if Q4 is released.
@@ -651,8 +651,8 @@ def main() -> int:
     print("Generating annual segment revenue report...")
     print(f"  Years: {args.years}")
 
-    # Load latest released FY for each company from concept_metadata.csv
-    metadata_path = os.path.join(args.out_dir, "concept_metadata.csv")
+    # Load latest released FY for each company from raw_conceptstock_company_metadata.csv
+    metadata_path = os.path.join(args.out_dir, "raw_conceptstock_company_metadata.csv")
     latest_fy_map = load_latest_released_fy(metadata_path)
     if latest_fy_map:
         print(f"  Loaded latest released FY for {len(latest_fy_map)} companies")

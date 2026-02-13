@@ -3,10 +3,11 @@ source: https://raw.githubusercontent.com/wenchiehlee-investment/ConceptStocks/r
 destination: https://raw.githubusercontent.com/wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer/refs/heads/main/raw_column_definition.md
 ---
 
-# Raw CSV Column Definitions - ConceptStocks v1.1.0
+# Raw CSV Column Definitions - ConceptStocks v1.1.1
 ## Based on Alpha Vantage Time Series Outputs
 
 ### Version History:
+- **v1.1.1** (2026-02-13): Add `raw_conceptstock_company_metadata.csv` definition (No.37); update standalone file notes
 - **v1.1.0** (2026-02-11): Align numbering with GoodInfo (No.30-36); add quarterly_segments (No.35) and segment_overrides (No.36); align common metadata with GoodInfo standard
 - **v1.0.0** (2026-01-18): Initial definitions for concept stock daily/weekly/monthly price series
 
@@ -42,9 +43,10 @@ The common metadata schema follows the same convention as [Python-Actions.GoodIn
 | No. 30-32 (price) | `stock_code` | Yes |
 | No. 33-34 (revenue, income) | `symbol` | Yes |
 | No. 35-36 (quarterly_segments, segment_overrides) | `symbol` | No (standalone files) |
+| No. 37 (company_metadata) | `概念欄位` | No (standalone file) |
 
 > Note: No. 33-34 use `symbol` instead of `stock_code` as Column 1 name but serve the same role.
-> No. 35-36 are standalone CSV files without the common metadata suffix.
+> No. 35-37 are standalone CSV files without the common metadata suffix.
 
 ---
 
@@ -192,3 +194,25 @@ The common metadata schema follows the same convention as [Python-Actions.GoodIn
 
 > Column 1: `stock_code` (`symbol`) — see Common Metadata Columns (no `company_name` column)
 > No common metadata suffix (hand-curated file)
+
+---
+
+## raw_conceptstock_company_metadata.csv (Concept Stock Company Metadata)
+**No:** 37
+**Source:** Concept mapping sync (`--sync-concepts`) and maintained metadata table
+**Extraction Strategy:** Store concept-to-company metadata used for ticker resolution, CIK mapping, report tracking, and README concept table generation.
+
+### Columns
+
+| Column | Type | Description | Source Field | Notes |
+|--------|------|-------------|--------------|-------|
+| `概念欄位` | string | Concept column name | System | e.g., `nVidia概念`, `TSMC概念` |
+| `公司名稱` | string | Company display name | Metadata | e.g., `NVIDIA Corporation` |
+| `Ticker` | string | Query ticker symbol | Metadata | US ticker or ADR preferred; can be `-` for private companies |
+| `CIK` | string | SEC CIK identifier | Metadata | e.g., `0001045810`, or non-SEC marker like `香港上市` |
+| `最新財報` | string | Latest released fiscal report | Metadata | e.g., `FY2026 Q3` |
+| `即將發布` | string | Next expected fiscal report | Metadata | e.g., `FY2026 Q4` |
+| `發布時間` | string | Expected release timing | Metadata | e.g., `2026年4月` |
+| `產品區段` | string | Product segment labels | Metadata | Comma-separated labels or `-` |
+
+> Standalone metadata file (no common metadata suffix).

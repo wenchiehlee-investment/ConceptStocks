@@ -23,7 +23,7 @@ from datetime import datetime
 
 def load_latest_released_quarter(csv_path: str) -> dict:
     """
-    Load latest released fiscal quarter for each company from concept_metadata.csv.
+    Load latest released fiscal quarter for each company from raw_conceptstock_company_metadata.csv.
 
     Returns:
         Dict: {symbol: (fy, quarter)} e.g., {'NVDA': (2026, 3), 'GOOGL': (2025, 4)}
@@ -578,7 +578,7 @@ def main():
     print(f"  Years: {args.years}")
 
     # Load latest released quarter for each company
-    metadata_path = os.path.join(args.out_dir, "concept_metadata.csv")
+    metadata_path = os.path.join(args.out_dir, "raw_conceptstock_company_metadata.csv")
     latest_q_map = load_latest_released_quarter(metadata_path)
     if latest_q_map:
         print(f"  Loaded latest released quarter for {len(latest_q_map)} companies")

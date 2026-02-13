@@ -8,6 +8,8 @@ on:
        - raw_conceptstock_daily.csv
        - raw_conceptstock_weekly.csv
        - raw_conceptstock_monthly.csv
+       - raw_conceptstock_company_metadata.csv
+       - raw_column_definition.md
 
 jobs:
   sync-backup-workflow:

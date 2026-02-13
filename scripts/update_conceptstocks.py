@@ -604,8 +604,8 @@ def update_for_ticker(
 
 
 def load_concept_metadata(out_dir: str) -> Dict[str, Tuple[str, str, str, str, str, str, str]]:
-    """Load concept metadata from concept_metadata.csv."""
-    metadata_path = os.path.join(out_dir, "concept_metadata.csv")
+    """Load concept metadata from raw_conceptstock_company_metadata.csv."""
+    metadata_path = os.path.join(out_dir, "raw_conceptstock_company_metadata.csv")
     metadata = {}
 
     if not os.path.exists(metadata_path):
@@ -643,7 +643,7 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
     with open(readme_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Load metadata from concept_metadata.csv
+    # Load metadata from raw_conceptstock_company_metadata.csv
     metadata = load_concept_metadata(out_dir)
 
     # Generate current timestamp
@@ -667,7 +667,7 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
 
     table_lines.append("")
     table_lines.append(f"> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 {len(concept_cols)} 個）")
-    table_lines.append(f"> 概念 metadata：`concept_metadata.csv`")
+    table_lines.append(f"> 概念 metadata：`raw_conceptstock_company_metadata.csv`")
 
     new_table = "\n".join(table_lines)
 

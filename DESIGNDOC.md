@@ -5,7 +5,7 @@ Generate US concept stock price series (daily, weekly, monthly) with a consisten
 
 ## Scope
 - Tickers: Dynamically loaded from `concept.csv` (13 concept columns as of 2026-02)
-- See `concept_metadata.csv` for full list with ticker, CIK, and segment info
+- See `raw_conceptstock_company_metadata.csv` for full list with ticker, CIK, and segment info
 - OpenAI has no public ticker and is excluded. Lenovo is HK-listed.
 - Outputs: `raw_conceptstock_daily.csv`, `raw_conceptstock_weekly.csv`, `raw_conceptstock_monthly.csv`.
 
@@ -63,9 +63,9 @@ Common columns:
 
 ### Concept Stock Company List (概念股公司清單)
 
-> 概念股清單由 `concept_metadata.csv` 維護，透過 `python scripts/update_conceptstocks.py --sync-concepts` 同步更新到 README.md。
+> 概念股清單由 `raw_conceptstock_company_metadata.csv` 維護，透過 `python scripts/update_conceptstocks.py --sync-concepts` 同步更新到 README.md。
 
-完整清單請參見 [README.md](README.md#concept-columns-end-with-概念) 或 `concept_metadata.csv`。
+完整清單請參見 [README.md](README.md#concept-columns-end-with-概念) 或 `raw_conceptstock_company_metadata.csv`。
 
 當前支援季度區段資料的公司（10 家）：
 

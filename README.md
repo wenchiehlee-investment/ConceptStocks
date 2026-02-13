@@ -28,7 +28,7 @@ Update time: 2026-02-12 21:06:05 CST
 | HP概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
 
 > 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 16 個）
-> 概念 metadata：`concept_metadata.csv`
+> 概念 metadata：`raw_conceptstock_company_metadata.csv`
 
 
 ### 財年制度說明
