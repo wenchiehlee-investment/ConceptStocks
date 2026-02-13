@@ -298,7 +298,9 @@ def trim_existing_range(
 ) -> None:
     if cadence != "daily":
         return
-    if start_date is None and end_date is None:
+    # Only trim when an explicit bounded range is requested.
+    # Incremental updates typically pass only --start-date and should retain history.
+    if start_date is None or end_date is None:
         return
 
     date_col = DATE_LABEL[cadence]
