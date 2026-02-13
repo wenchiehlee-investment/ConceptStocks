@@ -1,12 +1,13 @@
 ---
 source: https://raw.githubusercontent.com/wenchiehlee-investment/ConceptStocks/refs/heads/main/raw_column_definition.md
-destination: https://raw.githubusercontent.com/wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer/refs/heads/main/raw_column_definition.md
+destination: https://raw.githubusercontent.com/wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer/refs/heads/main/raw_column_definition_conceptstocks.md
 ---
 
-# Raw CSV Column Definitions - ConceptStocks v1.1.1
+# Raw CSV Column Definitions - ConceptStocks v1.1.2
 ## Based on Alpha Vantage Time Series Outputs
 
 ### Version History:
+- **v1.1.2** (2026-02-13): Keep consistency with Analyzer without overwriting its main `raw_column_definition.md`; sync to `raw_column_definition_conceptstocks.md`
 - **v1.1.1** (2026-02-13): Add `raw_conceptstock_company_metadata.csv` definition (No.37); update standalone file notes
 - **v1.1.0** (2026-02-11): Align numbering with GoodInfo (No.30-36); add quarterly_segments (No.35) and segment_overrides (No.36); align common metadata with GoodInfo standard
 - **v1.0.0** (2026-01-18): Initial definitions for concept stock daily/weekly/monthly price series
