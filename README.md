@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-02-12 21:06:05 CST
+Update time: 2026-02-13 13:31:07 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | - | - | - | - | - | - | - |
@@ -97,6 +97,14 @@ python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily -
 ```
 
 If you add new concept columns, keep the naming pattern `X概念` and update this list.
+
+### Sync concept metadata with Gemini
+Use `raw_companyinfo.csv` concept columns (`*概念`, excluding `相關概念`) as source of truth, then auto-fill metadata via Gemini:
+```bash
+python3 scripts/update_concept_metadata.py
+```
+Environment variable:
+- `GEMINI_API_KEY` (or `GOOGLE_API_KEY`)
 
 ## Quarterly Product Segment Data
 

@@ -63,7 +63,7 @@ Common columns:
 
 ### Concept Stock Company List (概念股公司清單)
 
-> 概念股清單由 `raw_conceptstock_company_metadata.csv` 維護，透過 `python scripts/update_conceptstocks.py --sync-concepts` 同步更新到 README.md。
+> 概念股清單由 `raw_companyinfo.csv` 的 `*概念` 欄位作為來源，透過 `python scripts/update_concept_metadata.py` 產生 `raw_conceptstock_company_metadata.csv`，再由 `python scripts/update_conceptstocks.py --sync-concepts` 同步更新 README.md。
 
 完整清單請參見 [README.md](README.md#concept-columns-end-with-概念) 或 `raw_conceptstock_company_metadata.csv`。
 

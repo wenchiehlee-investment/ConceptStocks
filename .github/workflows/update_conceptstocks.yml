@@ -32,9 +32,19 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
       - name: Sync concepts
         run: |
           python3 scripts/update_conceptstocks.py --sync-concepts
+
+      - name: Update concept metadata
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python3 scripts/update_concept_metadata.py --companyinfo-path raw_companyinfo.csv --keep-extra-concepts
 
       - name: Commit and push
         run: |
@@ -44,8 +54,8 @@ jobs:
           fi
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add concept.csv
-          git commit -m "Update concept mappings"
+          git add concept.csv raw_companyinfo.csv raw_conceptstock_company_metadata.csv README.md
+          git commit -m "Update concept mappings and metadata"
           git push
 
   update:
@@ -92,12 +102,12 @@ jobs:
             START_DATE=$(python3 -c "import csv, os; from datetime import datetime, timedelta; p='raw_conceptstock_daily.csv'; fb=(datetime.utcnow()-timedelta(days=7)).strftime('%Y-%m-%d'); md=max((datetime.strptime(r.get('交易日期'),'%Y-%m-%d').date() for r in csv.DictReader(open(p, newline='', encoding='utf-8')) if r.get('交易日期')), default=None) if os.path.exists(p) else None; print(md.strftime('%Y-%m-%d') if md else fb)")
             echo "Daily incremental start date: $START_DATE"
             python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date "$START_DATE"
+          elif [ "$CADENCE" = "weekly" ]; then
+            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence weekly
+          elif [ "$CADENCE" = "monthly" ]; then
+            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence monthly
           else
-            if [ -z "$ALPHAVANTAGE_API_KEY" ]; then
-              echo "Missing ALPHAVANTAGE_API_KEY secret" >&2
-              exit 1
-            fi
-            python3 scripts/update_conceptstocks.py --all --cadence "$CADENCE"
+            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence "$CADENCE"
           fi
 
       - name: Commit and push

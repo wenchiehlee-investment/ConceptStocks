@@ -171,6 +171,10 @@ def to_float(s: str):
         return None
 
 
+def to_week_ending_friday(d: date) -> date:
+    return d + timedelta(days=(4 - d.weekday()) % 7)
+
+
 def build_rows(series: Dict[str, Dict[str, str]], cadence: str) -> List[Dict[str, object]]:
     items = sorted(series.items(), key=lambda x: x[0])
     rows = []
@@ -187,6 +191,40 @@ def build_rows(series: Dict[str, Dict[str, str]], cadence: str) -> List[Dict[str
             }
         )
     return rows
+
+
+def canonicalize_existing_weekly_ticker_rows(
+    existing: Dict[Tuple[str, str], Dict[str, object]],
+    ticker: str,
+) -> None:
+    date_col = DATE_LABEL["weekly"]
+    touched_rows = []
+    for key, row in list(existing.items()):
+        if key[0] != ticker:
+            continue
+        touched_rows.append((key, row))
+        del existing[key]
+
+    def row_rank(row: Dict[str, object]) -> Tuple[str, str]:
+        return (
+            str(row.get("process_timestamp") or ""),
+            str(row.get("download_timestamp") or ""),
+        )
+
+    for _, row in touched_rows:
+        raw_date = row.get(date_col)
+        try:
+            dt = datetime.strptime(str(raw_date), "%Y-%m-%d").date()
+            canonical_date = to_week_ending_friday(dt).isoformat()
+        except Exception:
+            canonical_date = str(raw_date)
+
+        normalized_row = dict(row)
+        normalized_row[date_col] = canonical_date
+        normalized_key = (ticker, canonical_date)
+        prev = existing.get(normalized_key)
+        if prev is None or row_rank(normalized_row) >= row_rank(prev):
+            existing[normalized_key] = normalized_row
 
 
 def parse_optional_date(value: str, flag_name: str) -> date:
@@ -341,6 +379,31 @@ def filter_rows_by_date(
     return filtered
 
 
+def prune_inactive_tickers(
+    out_dir: str,
+    cadence: str,
+    active_tickers: List[str],
+) -> int:
+    out_path = os.path.join(out_dir, OUTPUT_FILES[cadence])
+    if not os.path.exists(out_path):
+        return 0
+
+    active_set = set(active_tickers)
+    existing = read_existing(out_path, cadence)
+    total_rows = len(existing)
+    date_col = DATE_LABEL[cadence]
+
+    kept_rows = [
+        row for row in existing.values() if (row.get("stock_code") or row.get("代號")) in active_set
+    ]
+    kept_rows.sort(key=lambda x: ((x.get("stock_code") or x.get("代號") or ""), x[date_col]))
+
+    removed = total_rows - len(kept_rows)
+    if removed > 0:
+        write_csv(out_path, cadence, kept_rows)
+    return removed
+
+
 def is_full_outputsize_premium_error(message: str) -> bool:
     text = (message or "").lower()
     return (
@@ -422,8 +485,13 @@ def fetch_rows_from_yahoo(
 
     rows = []
     for idx, row in history.iterrows():
-        date_str = idx.strftime("%Y-%m-%d")
-        date_key = date_str[:7] if cadence == "monthly" else date_str
+        date_obj = idx.date()
+        if cadence == "monthly":
+            date_key = date_obj.strftime("%Y-%m")
+        elif cadence == "weekly":
+            date_key = to_week_ending_friday(date_obj).isoformat()
+        else:
+            date_key = date_obj.isoformat()
         rows.append(
             {
                 "date_key": date_key,
@@ -597,6 +665,8 @@ def update_for_ticker(
 
     out_path = os.path.join(out_dir, OUTPUT_FILES[cadence])
     existing = read_existing(out_path, cadence)
+    if cadence == "weekly":
+        canonicalize_existing_weekly_ticker_rows(existing, ticker)
     trim_existing_range(existing, ticker, cadence, start_date, end_date)
     merged = merge_and_recalc(existing, new_rows, ticker, name, cadence, file_type, source_file)
     write_csv(out_path, cadence, merged)
@@ -700,6 +770,12 @@ def sync_concepts(out_dir: str):
         result = subprocess.check_output(["curl", "-sSL", url])
         content = result.decode("utf-8-sig")
 
+    # Keep a local copy of the upstream source for traceability and downstream jobs.
+    raw_companyinfo_path = os.path.join(out_dir, "raw_companyinfo.csv")
+    with open(raw_companyinfo_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"Updated {raw_companyinfo_path}")
+
     lines = content.splitlines()
     reader = csv.DictReader(lines)
     fieldnames = reader.fieldnames
@@ -707,7 +783,7 @@ def sync_concepts(out_dir: str):
         print("Empty CSV or invalid header", file=sys.stderr)
         return
 
-    concept_cols = [c for c in fieldnames if c.endswith("概念")]
+    concept_cols = [c for c in fieldnames if c.endswith("概念") and c != "相關概念"]
     # Standardize column names for concept.csv
     # Use 'stock_code' and 'company_name' to match the other CSVs
     output_fields = ["stock_code", "company_name"] + concept_cols
@@ -954,6 +1030,11 @@ def main() -> int:
             if verify_summary is not None:
                 verification_rows.append(verify_summary)
             print(f"Updated {cadence} for {ticker}")
+
+        if args.all:
+            removed = prune_inactive_tickers(args.out_dir, cadence, list(tickers.keys()))
+            if removed > 0:
+                print(f"Pruned {removed} inactive rows from {OUTPUT_FILES[cadence]}")
 
     if verification_rows:
         mismatch_tickers = [
