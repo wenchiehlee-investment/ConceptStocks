@@ -17,6 +17,7 @@ This directory contains quarterly earnings reference images for cross-referencin
 | 7 | `Oracle-revenue.webp` | Oracle (ORCL) | FY23-FY26 | CONSISTENT | [oracle-revenue-breakdown.md](oracle-revenue-breakdown.md) |
 | 8 | `Oracle-2023Q4.webp` | Oracle (ORCL) | Q4 FY2023 | CONSISTENT | [oracle2023Q4.md](oracle2023Q4.md) |
 | 9 | `Oracle forecast revenue.webp` | Oracle (ORCL) | FY25-FY30 | FORECAST | [oracle-oci-forecast.md](oracle-oci-forecast.md) |
+| 10 | `7ed002ee-..._2739x1539.png` | TSMC (TSM) | Q4 FY2025 | N/A | [7ed002ee-..._2739x1539.md](7ed002ee-312e-4e70-9b2a-6a2009a21e97_2739x1539.md) |
 
 ## Summary of Comparison
 
@@ -35,6 +36,12 @@ Our data contains **annual (full fiscal year)** figures, while these reference i
 ### QCOM - Qualcomm 1Q FY26
 - Image: Revenue $12.25B, EPS $3.50
 - **NOT in our 10 concept stock companies** - no comparison available
+
+### TSMC - Q4 FY25
+- Image: Revenue $33.7B (+25% Y/Y), HPC 55%, Smartphones 32%, Automotive 5%
+- Gross profit $21.0B (62% margin), Net profit $16.3B (48% margin)
+- **NOT in our concept stock companies** (foundry, not fabless) - no direct comparison
+- HPC growth driven by AI accelerator demand from our tracked companies (NVDA, AMD)
 
 ### MSFT - Microsoft Q2 FY26
 - Image: Revenue $81.3B (Server $30.9B, M365 $24.5B, Gaming $6.0B, etc.)

@@ -37,6 +37,8 @@ COMPANY_CIK = {
     "QCOM": "0000804328",
     "DELL": "0001571996",
     "HPQ": "0000047217",
+    # Foreign private issuers (file 20-F annual / 6-K quarterly)
+    "TSM": "0001046179",   # Taiwan Semiconductor Manufacturing Company (TWSE: 2330)
 }
 
 # Fiscal year end month for each company (used to calculate correct quarter from report date)
@@ -55,9 +57,15 @@ FISCAL_YEAR_END_MONTH = {
     "AMZN": 12,  # Dec
     "META": 12,  # Dec
     "AMD": 12,   # Dec
+    "TSM": 12,   # Dec (calendar year) - TIFRS reporting
 }
 
-# XBRL concepts for income statement metrics
+# Companies that file 6-K (foreign private issuers) instead of 8-K / 10-Q
+# Income statements parsed from 6-K earnings conference presentation (Exhibit 99.2)
+# Platform segment % data is NOT available via text parsing (embedded as chart images)
+FOREIGN_FILERS_6K = {"TSM"}
+
+# XBRL concepts for income statement metrics (US GAAP / XBRL filers only)
 INCOME_CONCEPTS = {
     "total_revenue": [
         "Revenues",
@@ -65,8 +73,47 @@ INCOME_CONCEPTS = {
         "SalesRevenueNet",
         "RevenueFromContractWithCustomerIncludingAssessedTax",
     ],
-    "gross_profit": ["GrossProfit"],
+    "gross_profit": [
+        "GrossProfit",
+        # Note: Some companies (e.g., ORCL) don't file GrossProfit in XBRL.
+        # For those, derive: gross_profit = total_revenue - cost_of_revenue (below).
+    ],
+    "cost_of_revenue": [
+        "CostOfRevenue",
+        "CostOfGoodsAndServicesSold",
+        "CostOfGoodsAndServicesProvided",
+    ],
+    "operating_expenses": [
+        "OperatingExpenses",
+        "ResearchAndDevelopmentExpenseAndSellingGeneralAndAdministrativeExpense",
+    ],
+    "research_and_development": [
+        "ResearchAndDevelopmentExpense",
+        # WDC uses this variant (excludes acquired in-process R&D)
+        "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+    ],
+    "selling_and_marketing": [
+        "SellingAndMarketingExpense",
+        # Fallback: many companies (NVDA, AMD, MU, QCOM, DELL, WDC) only report combined SGA.
+        # SellingAndMarketingExpense is tried first; SGA is used when separate field unavailable.
+        "SellingGeneralAndAdministrativeExpense",
+    ],
+    "general_and_administrative": ["GeneralAndAdministrativeExpense"],
+    "amortization": [
+        "AmortizationOfIntangibleAssets",
+        "FiniteLivedIntangibleAssetsAmortizationExpense",
+    ],
     "operating_income": ["OperatingIncomeLoss"],
+    "other_income": [
+        "NonoperatingIncomeExpense",
+        "OtherNonoperatingIncomeExpense",
+    ],
+    "income_before_tax": [
+        "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+        "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+    ],
+    "tax": ["IncomeTaxExpenseBenefit"],
+    "rpo": ["RevenueRemainingPerformanceObligation"],
     "net_income": ["NetIncomeLoss", "ProfitLoss"],
     "eps": ["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted"],
 }
@@ -372,7 +419,11 @@ class SECEdgarClient:
             elif use_max:
                 best = max(items, key=lambda x: x.get("value") or 0)
             else:
-                best = max(items, key=lambda x: x.get("filed") or "")
+                # For annual non-max: pick item with latest end_date.
+                # 10-K filings include comparative data (prior 2-3 years) all tagged with the
+                # same fy/fp as the current filing. Using filed date (same for all items in one
+                # 10-K) leads to non-deterministic selection. Use end_date to pick current year.
+                best = max(items, key=lambda x: x.get("end_date") or "")
             results.append(best)
 
         # Sort by fiscal year + period descending
@@ -461,6 +512,26 @@ class SECEdgarClient:
                 gross_profit = record.get("gross_profit")
                 operating_income = record.get("operating_income")
                 net_income = record.get("net_income")
+                tax = record.get("tax")
+
+                # Derive gross_profit if not in XBRL but cost_of_revenue is available.
+                if (record.get("gross_profit") is None
+                        and total_revenue is not None
+                        and record.get("cost_of_revenue") is not None):
+                    record["gross_profit"] = total_revenue - record["cost_of_revenue"]
+                    gross_profit = record["gross_profit"]
+
+                # Derive income_before_tax and other_income from components when available.
+                # Using derived values is more accurate than partial XBRL non-operating items
+                # (e.g., ORCL's EquitySecuritiesFvNiRealizedGain is outside NonoperatingIncomeExpense).
+                if (operating_income is not None
+                        and net_income is not None
+                        and tax is not None):
+                    # income_before_tax = net_income + tax (definitionally correct)
+                    if record.get("income_before_tax") is None:
+                        record["income_before_tax"] = net_income + tax
+                    # other_income = income_before_tax - operating_income
+                    record["other_income"] = record["income_before_tax"] - operating_income
 
                 if total_revenue and total_revenue > 0:
                     if gross_profit is not None:
@@ -896,6 +967,224 @@ class SECEdgarClient:
                 best_results[key] = r
 
         return list(best_results.values())
+
+    def get_6k_income_statement(
+        self, symbol: str, quarters: int = 12
+    ) -> List[Dict[str, Any]]:
+        """
+        Get income statement data for foreign private issuers (e.g., TSM) from 6-K filings.
+
+        Parses the earnings conference presentation (Exhibit 99.2) which contains:
+          - Net Revenue (USD billions)
+          - Gross Margin %, Operating Margin %, Net Profit Margin %
+          - Operating Expenses (NT$ billions, converted to USD)
+          - Non-Operating Items (NT$ billions, converted to USD)
+          - Net Income (NT$ billions, converted to USD)
+          - EPS (NT$, not converted)
+
+        NOTE: Platform segment % data (HPC, Smartphones, IoT, etc.) is NOT available
+        via text parsing — it is embedded as chart images in the presentation slides.
+
+        Args:
+            symbol: Stock ticker (must be in FOREIGN_FILERS_6K)
+            quarters: Max number of quarterly filings to scan
+
+        Returns:
+            List of income statement records with keys:
+              fiscal_year, end_date, period, total_revenue, gross_profit,
+              operating_expenses, operating_income, other_income,
+              income_before_tax, tax, net_income, eps,
+              gross_margin, operating_margin, net_margin, revenue_yoy_pct,
+              currency, source
+        """
+        if symbol not in COMPANY_CIK:
+            raise ValueError(f"Unknown symbol: {symbol}. Add CIK to COMPANY_CIK.")
+        if symbol not in FOREIGN_FILERS_6K:
+            raise ValueError(f"{symbol} is not a foreign private issuer. Use get_income_statement().")
+
+        cik = COMPANY_CIK[symbol]
+        filings = self.get_filing_list(cik, "6-K", count=quarters * 4)
+
+        results = []
+        seen_quarters = set()
+
+        for filing in filings:
+            accession = filing.get("accession")
+            filing_date = filing.get("date", "")
+            if not accession:
+                continue
+
+            try:
+                # Find the earnings presentation (Exhibit 99.2) in the 6-K index
+                cik_clean = cik.lstrip("0")
+                acc_clean = accession.replace("-", "")
+                index_url = (
+                    f"https://www.sec.gov/Archives/edgar/data/{cik_clean}/"
+                    f"{acc_clean}/{accession}-index.htm"
+                )
+                req = urllib.request.Request(index_url, headers={"User-Agent": self.user_agent})
+                with urllib.request.urlopen(req, timeout=30, context=ssl_context) as resp:
+                    index_html = resp.read().decode("utf-8", errors="replace")
+
+                # Look for the earnings presentation file (e.g., a4q25presentatione.htm)
+                pres_pattern = re.compile(
+                    r'href="(/Archives/[^"]*(?:presentation[^"]*|presentatione[^"]*)\.htm)"',
+                    re.IGNORECASE,
+                )
+                pres_match = pres_pattern.search(index_html)
+                if not pres_match:
+                    continue
+
+                pres_url = "https://www.sec.gov" + pres_match.group(1)
+                req2 = urllib.request.Request(pres_url, headers={"User-Agent": self.user_agent})
+                with urllib.request.urlopen(req2, timeout=30, context=ssl_context) as resp2:
+                    pres_html = resp2.read().decode("utf-8", errors="replace")
+
+                record = self._parse_6k_presentation(pres_html, symbol, filing_date)
+                if record:
+                    key = (record["fiscal_year"], record["period"])
+                    if key not in seen_quarters:
+                        seen_quarters.add(key)
+                        results.append(record)
+                        print(
+                            f"    Parsed 6-K {filing_date}: "
+                            f"FY{record['fiscal_year']} {record['period']} "
+                            f"revenue=${record['total_revenue']:.2f}B"
+                        )
+
+            except Exception as e:
+                print(f"    Warning: Could not parse 6-K {accession}: {e}")
+                continue
+
+        return sorted(results, key=lambda r: (r["fiscal_year"], r["period"]), reverse=True)
+
+    def _parse_6k_presentation(
+        self, html: str, symbol: str, filing_date: str
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Parse TSM 6-K earnings conference presentation HTML.
+
+        The presentation HTML (Exhibit 99.2) contains a table with:
+          Net Revenue (US$ billions), Gross Margin %, Operating Expenses (NT$B),
+          Operating Margin %, Non-Operating Items (NT$B), Net Income (NT$B),
+          Net Profit Margin %, EPS (NT$), and an exchange rate (USD/NTD).
+
+        Returns a single income statement record dict, or None if parsing fails.
+        """
+        text = self._strip_html(html)
+
+        # Must contain earnings data (skip non-earnings 6-K filings)
+        if "Net Revenue" not in text and "Gross Margin" not in text:
+            return None
+
+        # ── Revenue (USD billions) ────────────────────────────────────────────
+        rev_m = re.search(
+            r"Net Revenue\s*\(US\$\s*billions?\)\s*([\d,]+\.[\d]+)", text
+        )
+        if not rev_m:
+            return None
+        total_revenue_b = float(rev_m.group(1).replace(",", ""))
+
+        # ── Exchange rate (NTD per USD) ───────────────────────────────────────
+        # e.g. "Average Exchange Rate--USD/NTD 31.01 30.6 29.91 32.30"
+        fx_m = re.search(r"Average Exchange Rate[^\d]+([\d]+\.[\d]+)", text)
+        fx_rate = float(fx_m.group(1)) if fx_m else 31.0  # fallback
+
+        # ── Margins (%) ──────────────────────────────────────────────────────
+        def _pct(pattern: str) -> Optional[float]:
+            m = re.search(pattern, text)
+            return float(m.group(1)) / 100 if m else None
+
+        gross_margin = _pct(r"Gross Margin\s+([\d]+\.[\d]+)\s*%")
+        operating_margin = _pct(r"Operating Margin\s+([\d]+\.[\d]+)\s*%")
+        net_margin = _pct(r"Net Profit Margin\s+([\d]+\.[\d]+)\s*%")
+
+        if gross_margin is None or operating_margin is None or net_margin is None:
+            return None
+
+        # ── Derived USD values ────────────────────────────────────────────────
+        gross_profit_b = round(total_revenue_b * gross_margin, 3)
+        operating_income_b = round(total_revenue_b * operating_margin, 3)
+        net_income_b = round(total_revenue_b * net_margin, 3)
+
+        # ── Operating Expenses (NT$B → USD) ──────────────────────────────────
+        opex_m = re.search(r"Operating Expenses\s+\(([\d]+\.[\d]+)\)", text)
+        operating_expenses_b = (
+            round(float(opex_m.group(1)) / fx_rate, 3) if opex_m else None
+        )
+
+        # ── Non-Operating Items (NT$B → USD) ─────────────────────────────────
+        nop_m = re.search(r"Non-Operating Items\s+([\d]+\.[\d]+)", text)
+        other_income_b = (
+            round(float(nop_m.group(1)) / fx_rate, 3) if nop_m else None
+        )
+
+        # ── Income Before Tax & Tax (NT$B → USD) ─────────────────────────────
+        ibt_m = re.search(r"Income before tax\s+([\d,]+\.[\d]+)", text, re.IGNORECASE)
+        income_before_tax_b = (
+            round(float(ibt_m.group(1).replace(",", "")) / fx_rate, 3) if ibt_m else None
+        )
+        tax_b = (
+            round(income_before_tax_b - net_income_b, 3)
+            if income_before_tax_b is not None
+            else None
+        )
+
+        # ── EPS (NT$, kept as-is) ─────────────────────────────────────────────
+        eps_m = re.search(r"EPS\s*\(NT[^)]+\)\s+([\d]+\.[\d]+)", text)
+        eps = float(eps_m.group(1)) if eps_m else None
+
+        # ── Quarter / fiscal year from filing date ────────────────────────────
+        try:
+            fd = datetime.strptime(filing_date, "%Y-%m-%d")
+        except Exception:
+            return None
+
+        # TSM earnings release timing:
+        #   Jan  = Q4 of previous calendar year
+        #   Apr  = Q1 of same calendar year
+        #   Jul  = Q2 of same calendar year
+        #   Oct  = Q3 of same calendar year
+        month = fd.month
+        if month == 1:
+            fiscal_year = fd.year - 1
+            period = "Q4"
+            end_date = f"{fiscal_year}-12-31"
+        elif month in (4, 5):
+            fiscal_year = fd.year
+            period = "Q1"
+            end_date = f"{fiscal_year}-03-31"
+        elif month in (7, 8):
+            fiscal_year = fd.year
+            period = "Q2"
+            end_date = f"{fiscal_year}-06-30"
+        elif month in (10, 11):
+            fiscal_year = fd.year
+            period = "Q3"
+            end_date = f"{fiscal_year}-09-30"
+        else:
+            return None  # Not an earnings release month
+
+        return {
+            "fiscal_year": fiscal_year,
+            "end_date": end_date,
+            "period": period,
+            "total_revenue": total_revenue_b * 1e9,
+            "gross_profit": gross_profit_b * 1e9,
+            "operating_expenses": operating_expenses_b * 1e9 if operating_expenses_b else None,
+            "operating_income": operating_income_b * 1e9,
+            "other_income": other_income_b * 1e9 if other_income_b else None,
+            "income_before_tax": income_before_tax_b * 1e9 if income_before_tax_b else None,
+            "tax": tax_b * 1e9 if tax_b else None,
+            "net_income": net_income_b * 1e9,
+            "eps": eps,
+            "gross_margin": gross_margin,
+            "operating_margin": operating_margin,
+            "net_margin": net_margin,
+            "revenue_yoy_pct": None,  # populated by caller from prior-year record
+            "currency": "USD",
+            "source": "SEC_6K",
+        }
 
     def get_segment_revenue_from_10k(
         self, symbol: str, years: int = 5
@@ -1852,8 +2141,12 @@ class SECEdgarClient:
         """Parse Oracle 8-K press release for segment revenue.
 
         Oracle reports segments:
-        - Cloud services and license support (text format, billions)
-        - Cloud license and on-premise license (text format, billions)
+        - Cloud services and license support (text format, billions) — pre-FY2026
+        - Cloud license and on-premise license (text format, billions) — pre-FY2026
+        - Cloud (text format, billions) — FY2026+
+        - Software (text format, billions) — FY2026+
+        - Cloud Infrastructure/OCI (bullet format) — all quarters
+        - Cloud Application/SaaS (bullet format) — all quarters
         - Hardware (table format, millions)
         - Services (table format, millions)
 
@@ -1896,6 +2189,10 @@ class SECEdgarClient:
         # Text patterns for Cloud segments (in billions or millions)
         # IMPORTANT: Match full segment name first to avoid matching shorter variants
         text_patterns = [
+            # Sub-segment bullet points - present in ALL ORCL 8-Ks (FY2025+)
+            # Format: "Q2 Cloud Infrastructure (IaaS) Revenue $4.1 billion, up 68%"
+            (r'Q\d+\s+Cloud\s+Infrastructure\s+\(IaaS\)\s+Revenue\s+\$\s*([\d.]+)\s*(billion|million)', "Oracle Cloud Infrastructure"),
+            (r'Q\d+\s+Cloud\s+Application\s+\(SaaS\)\s+Revenue\s+\$\s*([\d.]+)\s*(billion|million)', "Cloud Applications"),
             # Full name patterns - must match complete segment name
             (r'Cloud\s+services\s+and\s+license\s+support\s+revenues?\s+(?:were?\s+)?(?:up|down)?[^.]*?to\s+\$\s*([\d.]+)\s*(billion|million)', "Cloud services and license support"),
             (r'Cloud\s+license\s+and\s+on-premise\s+license\s+revenues?\s+(?:were?\s+)?(?:up|down)?[^.]*?to\s+\$\s*([\d.]+)\s*(billion|million)', "Cloud license and on-premise license"),

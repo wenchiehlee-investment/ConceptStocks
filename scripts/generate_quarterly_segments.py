@@ -78,6 +78,13 @@ QUARTERLY_PRODUCT_SUPPORTED = ['AMD', 'ORCL', 'WDC']
 # Note: ORCL is in both 10-Q and 8-K lists - 10-Q for Q1-Q3, 8-K for Q4
 QUARTERLY_8K_SUPPORTED = ['NVDA', 'GOOGL', 'MSFT', 'AAPL', 'AMZN', 'META', 'MU', 'DELL', 'QCOM', 'HPQ', 'ORCL']
 
+# Companies that file 6-K (foreign private issuers) for quarterly earnings.
+# Income statement is parsed via get_6k_income_statement() in sec_edgar_client.
+# IMPORTANT: Platform segment % (e.g., TSM HPC/Smartphones/IoT) is embedded as
+# chart images in the 6-K presentation slides and is NOT parseable from HTML text.
+# Segment % data requires manual entry from TSMC's earnings PDF presentation.
+QUARTERLY_6K_INCOME_SUPPORTED = ['TSM']
+
 # Company names
 COMPANY_NAMES = {
     'NVDA': 'NVIDIA Corporation',
@@ -91,6 +98,7 @@ COMPANY_NAMES = {
     'MU': 'Micron Technology, Inc.',
     'WDC': 'Western Digital Corporation',
     'DELL': 'Dell Technologies Inc.',
+    'TSM': 'Taiwan Semiconductor Manufacturing Company Limited',
     'QCOM': 'Qualcomm Inc.',
     'HPQ': 'HP Inc.',
 }

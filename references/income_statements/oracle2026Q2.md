@@ -9,13 +9,21 @@
 |---------|----------------|-----|
 | Cloud | $8.0B | +34% |
 | - Cloud Applications | $3.9B | +11% |
-| - Oracle Cloud Infrastructure | $4.1B | +46% |
-| Software | $5.9B | +3% |
+| - Oracle Cloud Infrastructure | $4.1B | +68% |
+| Software | $5.9B | -3% |
 | - Software Support | $4.9B | +1% |
 | - Software License | $0.9B | -21% |
-| Hardware | $0.8B | — |
-| Services | $1.4B | — |
+| Hardware | $0.8B | +2% |
+| Services | $1.4B | +7% |
 | **Total Revenue** | **$16.1B** | **+14%** |
+
+## Segment Gross Margins
+
+| Segment | Gross Margin |
+|---------|-------------|
+| Cloud + Software | 71% |
+| Hardware | 72% |
+| Services | 18% |
 
 ## Income Statement
 
@@ -23,11 +31,17 @@
 |--------|-------|
 | Revenue | $16.1B (+14% Y/Y) |
 | Cost of Revenue | $5.4B |
-| Gross Profit | $10.7B (67% margin) |
+| Gross Profit | $10.7B (67% margin, -4pp Y/Y) |
 | Operating Expenses | $6.0B |
+| - R&D | $2.6B |
+| - Sales & Marketing | $2.1B |
+| - Amortization | $0.4B |
+| - G&A | $0.4B |
 | Operating Profit | $4.7B (29% margin) |
-| Net Profit | $6.1B (38% margin) |
-| RPO (Remaining Performance Obligations) | $52.1B (+63% Y/Y) |
+| Net Profit | $6.1B (38% margin, +16pp Y/Y) |
+| RPO (Remaining Performance Obligations) | $523B (+438% Y/Y) |
+
+> ⚠️ **Note**: App Economy Insights infographic shows RPO as "~$52.3B" — this is a 10x display error. Actual Q2 FY2026 8-K press release (filed Dec 10, 2025) states $523B (+438% Y/Y). Net profit margin jump (+16pp) reflects one-time gain from Ampere Computing stake sale.
 
 ## Comparison with Our FY2025 Annual Data
 
@@ -40,4 +54,4 @@
 
 **Note**: Our data uses "Cloud and license" as an aggregate segment. The image breaks this into Cloud ($8.0B) and Software ($5.9B), which together ($13.9B) maps to our "Cloud and license" quarterly average of $12.3B.
 
-**Result: CONSISTENT** - Oracle Cloud Infrastructure (+46% YoY) is driving growth, with total revenue trending above our FY2025 annualized baseline.
+**Result: CONSISTENT** - Oracle Cloud Infrastructure (+68% YoY) is driving growth, with total revenue trending above our FY2025 annualized baseline. Net profit boost reflects one-time Ampere Computing stake sale gain.

@@ -1090,15 +1090,26 @@ def extract_monthly_margin_data(df):
 | `end_date` | date | Fiscal period end date | API response | `YYYY-MM-DD` |
 | `period` | string | Period type | API response | `FY`, `Q1`, `Q2`, `Q3` |
 | `total_revenue` | float | Total revenue (USD) | API response | Top-line revenue |
-| `gross_profit` | float | Gross profit (USD) | API response | Revenue - COGS |
+| `gross_profit` | float | Gross profit (USD) | API response/Derived | Revenue - COGS; derived from `total_revenue - cost_of_revenue` if GrossProfit XBRL unavailable |
+| `cost_of_revenue` | float | Cost of revenue (USD) | API response | XBRL: CostOfRevenue/CostOfGoodsAndServicesSold; `null` if unavailable (e.g., ORCL after FY2011) |
+| `operating_expenses` | float | Total operating expenses (USD) | API response | R&D + SG&A + other opex; `null` if unavailable |
+| `research_and_development` | float | R&D expense (USD) | API response | XBRL: ResearchAndDevelopmentExpense; `null` if unavailable |
+| `selling_and_marketing` | float | Sales & marketing expense (USD) | API response | XBRL: SellingAndMarketingExpense; `null` if unavailable |
+| `general_and_administrative` | float | G&A expense (USD) | API response | XBRL: GeneralAndAdministrativeExpense; `null` if unavailable |
+| `amortization` | float | Amortization of intangibles (USD) | API response | XBRL: AmortizationOfIntangibleAssets; `null` if unavailable |
 | `operating_income` | float | Operating income (USD) | API response | EBIT |
+| `other_income` | float | Non-operating income/expense (USD) | API response | Interest, FX gains/losses, etc.; `null` if unavailable |
+| `income_before_tax` | float | Income before tax (USD) | API response | `null` if unavailable |
+| `tax` | float | Income tax expense (USD) | Derived/API | `income_before_tax - net_income`; positive = expense |
 | `net_income` | float | Net income (USD) | API response | Bottom-line profit |
 | `eps` | float | Earnings per share | API response | Diluted EPS |
+| `rpo` | float | Remaining Performance Obligations (USD) | API response | XBRL: RevenueRemainingPerformanceObligation; contracted future revenue; `null` if unavailable |
 | `gross_margin` | float | Gross margin | Derived | `gross_profit / total_revenue` |
 | `operating_margin` | float | Operating margin | Derived | `operating_income / total_revenue` |
 | `net_margin` | float | Net margin | Derived | `net_income / total_revenue` |
+| `revenue_yoy_pct` | float | Revenue YoY growth rate | Derived | Decimal format (0.25 = 25%); `null` if prior year unavailable |
 | `currency` | string | Currency code | API response | Always `USD` |
-| `source` | string | Data source | System | `SEC`, `AlphaVantage`, `FMP` |
+| `source` | string | Data source | System | `SEC`, `SEC_6K`, `AlphaVantage`, `FMP` |
 | `validation_status` | string | Cross-check result | System | e.g., `SEC_only`, `matched` |
 
 > Column 1-2: `stock_code` (`symbol`), `company_name` — see Common Metadata Columns
@@ -1118,7 +1129,8 @@ def extract_monthly_margin_data(df):
 | `fiscal_year` | integer | Fiscal year | Parsed | e.g., `2026` |
 | `quarter` | string | Fiscal quarter | Parsed | `Q1`, `Q2`, `Q3`, `Q4` |
 | `segment_name` | string | Product segment name | Parsed | e.g., `Data Center`, `Gaming` |
-| `revenue` | float | Segment revenue (USD) | Parsed | Raw value in USD |
+| `revenue` | float | Segment revenue (USD) | Parsed | Raw value in USD; `null` if only % available |
+| `pct_of_revenue` | float | Segment as % of total revenue | Parsed/Derived | Decimal format (0.55 = 55%); `null` if unavailable (e.g., TSM platform % from image slides) |
 | `end_date` | date | Quarter end date | Parsed | `YYYY-MM-DD` |
 | `is_calculated` | boolean | Whether Q4 was calculated | System | `True` if Q4 = FY-(Q1+Q2+Q3) |
 
