@@ -116,6 +116,16 @@ INCOME_CONCEPTS = {
     "rpo": ["RevenueRemainingPerformanceObligation"],
     "net_income": ["NetIncomeLoss", "ProfitLoss"],
     "eps": ["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted"],
+    # Capital expenditure: from cash flow statement (positive = cash outflow).
+    # XBRL 10-Q capex is always YTD cumulative (no standalone ~90-day form).
+    # Post-processing below converts Q2/Q3 YTD → standalone after income_data is built.
+    # use_max=True picks the larger value when both concepts exist (e.g., NVDA/AMZN
+    # use PaymentsToAcquireProductiveAssets as primary capex, not PP&E).
+    "capex": [
+        "PaymentsToAcquirePropertyPlantAndEquipment",
+        "PaymentsToAcquireProductiveAssets",
+        "PaymentsToAcquirePropertyPlantAndEquipmentProductiveAssets",
+    ],
 }
 
 # Default User-Agent (SEC requires identification)
@@ -416,6 +426,7 @@ class SECEdgarClient:
                 min_dur = min(_duration_days(x) for x in items)
                 candidates = [x for x in items if _duration_days(x) == min_dur]
                 best = max(candidates, key=lambda x: x.get("end_date") or "")
+                best = dict(best, duration_days=min_dur)
             elif use_max:
                 best = max(items, key=lambda x: x.get("value") or 0)
             else:
@@ -478,7 +489,7 @@ class SECEdgarClient:
 
                     concept_data = us_gaap[concept]
                     units = concept_data.get("units", {})
-                    use_max = metric_name == "total_revenue"
+                    use_max = metric_name in ("total_revenue", "capex")
 
                     if period_type == "quarterly":
                         period_data = self._extract_quarterly_data(units, use_max=use_max)
@@ -497,8 +508,43 @@ class SECEdgarClient:
                                 "filed": item.get("filed"),
                             }
 
-                        if metric_name not in income_data[key]:
-                            income_data[key][metric_name] = item.get("value")
+                        new_val = item.get("value")
+                        if metric_name == "capex":
+                            # Capex: take MAX across all concepts.
+                            # NVDA/AMZN report primary capex as PaymentsToAcquireProductiveAssets
+                            # (~$3B) and a smaller subset as PaymentsToAcquirePropertyPlantAndEquipment
+                            # (~$0.1B). We want the larger total.
+                            existing = income_data[key].get("capex")
+                            if existing is None or (new_val is not None and new_val > existing):
+                                income_data[key]["capex"] = new_val
+                                # Store duration so YTD→standalone conversion can detect
+                                # whether this Q2/Q3 value is already standalone (~90 days)
+                                # or YTD cumulative (~180/270 days).
+                                income_data[key]["_capex_duration"] = item.get("duration_days", 999)
+                        elif metric_name not in income_data[key]:
+                            income_data[key][metric_name] = new_val
+
+            # Post-process quarterly capex: XBRL 10-Q cash flow items may be YTD
+            # cumulative (Q2 = H1 ~180 days, Q3 = 9M ~270 days) for some companies.
+            # Other companies file standalone quarterly cash flow (~90 days each).
+            # Use _capex_duration to detect: only convert if duration > 100 days.
+            if period_type == "quarterly":
+                fiscal_years = sorted({k[0] for k in income_data.keys()})
+                for fy in fiscal_years:
+                    q1_rec = income_data.get((fy, "Q1"), {})
+                    q2_rec = income_data.get((fy, "Q2"), {})
+                    q3_rec = income_data.get((fy, "Q3"), {})
+                    q1 = q1_rec.get("capex")
+                    q2_ytd = q2_rec.get("capex")
+                    q3_ytd = q3_rec.get("capex")
+                    q2_dur = q2_rec.get("_capex_duration", 0)
+                    q3_dur = q3_rec.get("_capex_duration", 0)
+                    # Only convert if Q2 was a YTD value (~180 days) and Q1 exists
+                    if (fy, "Q2") in income_data and q2_ytd is not None and q1 is not None and q2_dur > 100:
+                        income_data[(fy, "Q2")]["capex"] = q2_ytd - q1
+                    # Only convert if Q3 was a YTD value (~270 days) and Q2 YTD exists
+                    if (fy, "Q3") in income_data and q3_ytd is not None and q2_ytd is not None and q3_dur > 200:
+                        income_data[(fy, "Q3")]["capex"] = q3_ytd - q2_ytd
 
             # Convert to list and calculate margins
             for key in sorted(income_data.keys(), reverse=True):
@@ -543,6 +589,7 @@ class SECEdgarClient:
 
                 record["symbol"] = symbol
                 record["source"] = "SEC"
+                record.pop("_capex_duration", None)  # internal helper, not for output
                 all_results.append(record)
 
         return all_results
