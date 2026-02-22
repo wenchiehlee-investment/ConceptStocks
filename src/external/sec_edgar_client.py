@@ -1546,15 +1546,16 @@ class SECEdgarClient:
 
         # Pattern variations:
         # FY2025+: "Data Center revenue of $41.1 billion" or "Gaming revenue was $4.3 billion"
+        # FY2026 Q1: "Gaming revenue was a record $3.8 billion" (optional qualifier words)
         # FY2024:  "Gaming — Third-quarter revenue was $2.86 billion"
         for seg_name in nvda_segments:
             seg_pattern = re.escape(seg_name)
             # Try multiple patterns
             patterns = [
-                # Direct: "Gaming revenue of/was $X billion"
-                seg_pattern + r'\s+revenue\s+(?:of|was)\s+\$\s*([\d,]+(?:\.\d+)?)\s*(billion|million)',
+                # Direct: "Gaming revenue of/was [optional: a record] $X billion"
+                seg_pattern + r'\s+revenue\s+(?:of|was)(?:\s+\w+){0,3}\s+\$\s*([\d,]+(?:\.\d+)?)\s*(billion|million)',
                 # With quarter prefix: "Gaming — Third-quarter revenue was $X billion"
-                seg_pattern + r'[^.]*?(?:quarter|Q\d)\s+revenue\s+(?:of|was)\s+\$\s*([\d,]+(?:\.\d+)?)\s*(billion|million)',
+                seg_pattern + r'[^.]*?(?:quarter|Q\d)\s+revenue\s+(?:of|was)(?:\s+\w+){0,3}\s+\$\s*([\d,]+(?:\.\d+)?)\s*(billion|million)',
             ]
 
             match = None
@@ -1845,7 +1846,9 @@ class SECEdgarClient:
         # Pattern: "iPhone 46,222 50,231" (current quarter, prior year)
         # Or: "Services 30,013 26,340"
         segment_patterns = [
-            (r'iPhone\s+([\d,]+)\s', "iPhone"),
+            # iPhone row starts with "$" (first item in table section): "iPhone $ 85,269  $ 69,138"
+            # Mac, iPad, Wearables rows do NOT have "$" (subsequent rows): "Mac 8,386  8,987"
+            (r'iPhone\s+\$\s*([\d,]+)', "iPhone"),
             (r'\bMac\s+([\d,]+)\s', "Mac"),
             (r'iPad\s+([\d,]+)\s', "iPad"),
             (r'Wearables,?\s*Home\s+and\s+Accessories\s+([\d,]+)\s', "Wearables, Home and Accessories"),
