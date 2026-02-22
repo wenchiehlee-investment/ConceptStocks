@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-02-15 02:21:43 CST
+Update time: 2026-02-22 02:10:23 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | - | - | - | - |
