@@ -387,7 +387,7 @@ def generate_csv(data: list, output_path: str):
     print(f"  Wrote {len(data)} records to {output_path}")
 
 
-def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None, total_revenue_map: dict = None):
+def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = None, total_revenue_map: dict = None, income_only_symbols: list = None):
     """Generate markdown report with each segment on one line, quarters as columns."""
     if latest_q_map is None:
         latest_q_map = {}
@@ -532,10 +532,123 @@ def generate_markdown_report(data: list, output_path: str, latest_q_map: dict = 
         lines.append("---")
         lines.append("")
 
+    # Income-only companies (foreign private issuers with 6-K income data but
+    # no parseable product segment breakdown)
+    for symbol in (income_only_symbols or []):
+        if symbol in by_symbol:
+            continue  # Already handled above with segment data
+
+        # Collect quarterly total revenue for this symbol
+        sym_revenue = {}
+        for (sym, fy, q), rev in (total_revenue_map or {}).items():
+            if sym == symbol:
+                sym_revenue[(fy, q)] = rev
+
+        if not sym_revenue:
+            continue
+
+        company_name = COMPANY_NAMES.get(symbol, symbol)
+        lines.append(f"## {symbol} - {company_name}")
+        lines.append("")
+        lines.append(
+            "> ⚠️ Platform segment % data (HPC, Smartphones, IoT, Automotive, etc.) is embedded"
+        )
+        lines.append(
+            "> as chart images in the 6-K earnings presentation slides."
+        )
+        lines.append("> Segment % requires manual entry from the PDF presentation.")
+        lines.append("")
+
+        # Determine years and quarters to display
+        years_present = sorted(set(fy for fy, q in sym_revenue.keys()), reverse=True)[:5]
+        if not years_present:
+            lines.append("No revenue data available.")
+            lines.append("")
+            lines.append("---")
+            lines.append("")
+            continue
+
+        all_q_cols = []
+        for fy in years_present:
+            for q in [4, 3, 2, 1]:
+                all_q_cols.append((fy, f"Q{q}"))
+
+        latest_info = (latest_q_map or {}).get(symbol)
+        latest_fy_s = latest_info[0] if latest_info else None
+        latest_q_num_s = latest_info[1] if latest_info else None
+
+        def _fmt_rev(v, fy=None, q=None):
+            if v and v > 0:
+                return f"${v/1e9:.1f}B" if v >= 1e9 else f"${v/1e6:.0f}M"
+            if fy is not None and q is not None and latest_fy_s and latest_q_num_s:
+                q_num = int(q[1]) if q.startswith('Q') else 0
+                return "x" if is_quarter_released(fy, q_num, latest_fy_s, latest_q_num_s) else "-"
+            return "-"
+
+        header = "| Metric |"
+        separator = "|--------|"
+        for fy, q in all_q_cols:
+            header += f" {fy % 100}{q} |"
+            separator += "------|"
+        lines.append(header)
+        lines.append(separator)
+
+        row = "| **Total Revenue** |"
+        for fy, q in all_q_cols:
+            val = sym_revenue.get((fy, q), 0)
+            row += f" {_fmt_rev(val, fy=fy, q=q)} |"
+        lines.append(row)
+
+        lines.append("")
+        lines.append("---")
+        lines.append("")
+
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
 
     print(f"  Wrote markdown report to {output_path}")
+
+
+def fetch_6k_income_totals(symbols: list, quarters: int = 20) -> dict:
+    """
+    Fetch quarterly total revenue from 6-K filings for foreign private issuers.
+
+    Used to populate Total Revenue cross-check rows in the markdown report
+    for companies like TSM that file 6-K instead of 10-K/10-Q.
+
+    Returns:
+        Dict: {(symbol, fiscal_year, quarter): total_revenue}
+    """
+    client = SECEdgarClient()
+    totals = {}
+
+    for symbol in symbols:
+        if symbol not in COMPANY_CIK:
+            print(f"  Warning: {symbol} not in COMPANY_CIK, skipping 6-K fetch")
+            continue
+
+        print(f"  Fetching 6-K income for {symbol}...")
+        try:
+            # TSMC files many non-earnings 6-K forms (monthly financial statements,
+            # material events, etc.) — roughly 20+ per year. We need to scan
+            # enough filings to cover the full date range.
+            # get_6k_income_statement(quarters=N) fetches N*4 filings internally,
+            # so use max(quarters, 48) to guarantee sufficient look-back.
+            scan_count = max(quarters, 48)
+            records = client.get_6k_income_statement(symbol, quarters=scan_count)
+            count = 0
+            for rec in records:
+                fy = rec.get('fiscal_year')
+                period = rec.get('period')
+                revenue = rec.get('total_revenue')
+                if fy and period and revenue:
+                    totals[(symbol, fy, period)] = revenue
+                    count += 1
+            print(f"    Found {count} quarterly income records")
+        except Exception as e:
+            print(f"    Error fetching 6-K for {symbol}: {e}")
+
+    return totals
 
 
 def parse_args():
@@ -593,6 +706,8 @@ def main():
 
     csv_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.csv")
 
+    quarters = args.years * 4
+
     if args.from_csv:
         # --- Mode: CSV → .md only (no API calls) ---
         print("  Mode: --from-csv (reading existing CSV, no API calls)")
@@ -600,7 +715,6 @@ def main():
         print(f"  Loaded {len(all_data)} records from CSV")
     else:
         # --- Mode: API → CSV + .md ---
-        quarters = args.years * 4
         # Combine symbol lists, removing duplicates (ORCL is in both 10-Q and 8-K lists)
         all_symbols = list(dict.fromkeys(QUARTERLY_PRODUCT_SUPPORTED + QUARTERLY_8K_SUPPORTED))
 
@@ -655,9 +769,24 @@ def main():
     if total_revenue_map:
         print(f"  Loaded quarterly total revenue for {len(total_revenue_map)} company-quarters")
 
+    # Fetch 6-K income for foreign private issuers (e.g., TSM).
+    # Provides Total Revenue for the cross-check row in markdown report.
+    # Skipped in --from-csv mode (no API calls); income CSV data used instead.
+    if not args.from_csv and QUARTERLY_6K_INCOME_SUPPORTED:
+        print(f"  Fetching 6-K income for: {', '.join(QUARTERLY_6K_INCOME_SUPPORTED)}")
+        six_k_totals = fetch_6k_income_totals(QUARTERLY_6K_INCOME_SUPPORTED, quarters=quarters)
+        total_revenue_map.update(six_k_totals)
+        if six_k_totals:
+            print(f"  6-K income totals: {len(six_k_totals)} quarterly records added")
+
     # Write markdown report
     md_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.md")
-    generate_markdown_report(all_data, md_path, latest_q_map=latest_q_map, total_revenue_map=total_revenue_map)
+    generate_markdown_report(
+        all_data, md_path,
+        latest_q_map=latest_q_map,
+        total_revenue_map=total_revenue_map,
+        income_only_symbols=QUARTERLY_6K_INCOME_SUPPORTED,
+    )
 
     print("Done!")
     return 0

@@ -23,7 +23,7 @@ from typing import Dict, List, Any, Optional
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.external.sec_edgar_client import SECEdgarClient, COMPANY_CIK
+from src.external.sec_edgar_client import SECEdgarClient, COMPANY_CIK, FOREIGN_FILERS_6K
 from src.external.alphavantage_client import AlphaVantageClient, load_api_key as load_av_key
 from src.external.fmp_client import FMPClient, load_api_key as load_fmp_key
 
@@ -105,6 +105,7 @@ COMPANY_NAMES = {
     "QCOM": "Qualcomm Inc.",
     "DELL": "Dell Technologies Inc.",
     "HPQ": "HP Inc.",
+    "TSM": "Taiwan Semiconductor Manufacturing Company Limited",
 }
 
 
@@ -162,11 +163,29 @@ def fetch_income_sec_edgar(
     client: SECEdgarClient, symbol: str, years: int = 10,
     include_quarterly: bool = False
 ) -> List[Dict[str, Any]]:
-    """Fetch income statement from SEC EDGAR."""
+    """Fetch income statement from SEC EDGAR.
+
+    For foreign private issuers (e.g., TSM) that file 6-K instead of 10-K/10-Q,
+    dispatches to get_6k_income_statement() which parses the earnings conference
+    presentation (Exhibit 99.2). These companies use IFRS, not US-GAAP XBRL.
+    """
     try:
-        data = client.get_income_statement(
-            symbol, years=years, include_quarterly=include_quarterly
-        )
+        if symbol in FOREIGN_FILERS_6K:
+            # Foreign private issuer: parse 6-K earnings presentation
+            # quarters = years * 4 quarters + buffer for non-earnings 6-K filings
+            data = client.get_6k_income_statement(symbol, quarters=years * 4 + 8)
+            source_file = (
+                f"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany"
+                f"&CIK={COMPANY_CIK.get(symbol, '')}&type=6-K&dateb=&owner=include&count=40"
+            )
+        else:
+            data = client.get_income_statement(
+                symbol, years=years, include_quarterly=include_quarterly
+            )
+            source_file = (
+                f"https://data.sec.gov/api/xbrl/companyfacts/CIK{COMPANY_CIK.get(symbol, '')}.json"
+            )
+
         timestamps = get_timestamps()
 
         results = []
@@ -196,11 +215,11 @@ def fetch_income_sec_edgar(
                 "operating_margin": record.get("operating_margin"),
                 "net_margin": record.get("net_margin"),
                 "revenue_yoy_pct": None,
-                "currency": "USD",
-                "source": "SEC",
+                "currency": record.get("currency", "USD"),
+                "source": record.get("source", "SEC"),
                 "validation_status": None,
                 "file_type": "INCOME_STATEMENT",
-                "source_file": f"https://data.sec.gov/api/xbrl/companyfacts/CIK{COMPANY_CIK.get(symbol, '')}.json",
+                "source_file": source_file,
                 "download_success": True,
                 **timestamps,
             })
