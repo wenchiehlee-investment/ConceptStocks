@@ -106,7 +106,7 @@ Use `raw_companyinfo.csv` concept columns (`*概念`, excluding `相關概念`) 
 python3 scripts/update_concept_metadata.py
 ```
 Environment variable:
-- `GEMINI_API_KEY` (or `GOOGLE_API_KEY`)
+- `GEMINI_API_KEY`
 
 ## Quarterly Product Segment Data
 

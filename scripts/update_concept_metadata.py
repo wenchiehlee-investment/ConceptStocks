@@ -369,9 +369,7 @@ def main() -> int:
     env_file_values = load_env_file(os.path.join(os.getcwd(), ".env"))
     api_key = (
         os.environ.get("GEMINI_API_KEY")
-        or os.environ.get("GOOGLE_API_KEY")
         or env_file_values.get("GEMINI_API_KEY")
-        or env_file_values.get("GOOGLE_API_KEY")
         or ""
     ).strip()
 
@@ -401,7 +399,7 @@ def main() -> int:
     unresolved_without_fallback = [c for c in concepts_needing_refresh if c not in CONCEPT_FALLBACKS]
     if unresolved_without_fallback and not api_key:
         print(
-            "Missing GEMINI_API_KEY (or GOOGLE_API_KEY). "
+            "Missing GEMINI_API_KEY. "
             f"Need API for {len(unresolved_without_fallback)} concepts.",
             file=sys.stderr,
         )
