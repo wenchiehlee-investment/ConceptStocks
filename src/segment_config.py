@@ -57,6 +57,16 @@ UNIFIED_PRODUCT_SEGMENTS = {
         'Google Network',
         'Other Bets',
     ],
+    'AVGO': [
+        'Semiconductor solutions',
+        'Infrastructure software',
+    ],
+    'HPE': [
+        'Server',
+        'Networking',
+        'Hybrid Cloud',
+        'Financial Services',
+    ],
     'HPQ': [
         'Personal Systems',
         'Printing',
@@ -115,6 +125,16 @@ UNIFIED_PRODUCT_SEGMENTS = {
         'Consumer',
         'Flash',
         'HDD',
+    ],
+    'TSM': [
+        # Revenue by end market platform (Note 20 of TSMC consolidated financials)
+        # Short canonical names (normalized from full IFRS labels)
+        'HPC',          # High Performance Computing (AI GPUs, HPC chips)
+        'Smartphone',   # Mobile SoCs
+        'IoT',          # Internet of Things
+        'Automotive',   # Automotive chips
+        'DCE',          # Digital Consumer Electronics
+        'Others',       # Remaining end markets
     ],
 }
 

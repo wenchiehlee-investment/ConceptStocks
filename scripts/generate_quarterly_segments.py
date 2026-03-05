@@ -76,14 +76,16 @@ QUARTERLY_PRODUCT_SUPPORTED = ['AMD', 'ORCL', 'WDC']
 
 # Companies with quarterly data from 8-K earnings press releases
 # Note: ORCL is in both 10-Q and 8-K lists - 10-Q for Q1-Q3, 8-K for Q4
-QUARTERLY_8K_SUPPORTED = ['NVDA', 'GOOGL', 'MSFT', 'AAPL', 'AMZN', 'META', 'MU', 'DELL', 'QCOM', 'HPQ', 'ORCL']
+QUARTERLY_8K_SUPPORTED = ['NVDA', 'GOOGL', 'MSFT', 'AAPL', 'AMZN', 'META', 'MU', 'DELL', 'QCOM', 'HPQ', 'ORCL', 'AVGO', 'HPE']
 
 # Companies that file 6-K (foreign private issuers) for quarterly earnings.
-# Income statement is parsed via get_6k_income_statement() in sec_edgar_client.
-# IMPORTANT: Platform segment % (e.g., TSM HPC/Smartphones/IoT) is embedded as
-# chart images in the 6-K presentation slides and is NOT parseable from HTML text.
-# Segment % data requires manual entry from TSMC's earnings PDF presentation.
-QUARTERLY_6K_INCOME_SUPPORTED = ['TSM']
+# Income totals (Total Revenue) come from get_6k_income_statement() (earnings presentations).
+# Platform segment breakdown comes from get_6k_financial_statements() (consolidated FS).
+# Note: the earnings presentation 6-K (Exhibit 99.2) has platform % as chart images only.
+# Platform breakdown IS available as text in the quarterly consolidated financial statements
+# (Exhibit 99.1 of a separate 6-K, filed ~1 month after earnings, filename contains 'consolidated').
+QUARTERLY_6K_INCOME_SUPPORTED = ['TSM']   # Used for fetch_6k_income_totals() cross-check
+QUARTERLY_6K_PLATFORM_SUPPORTED = ['TSM']  # Platform segments from consolidated FS 6-Ks
 
 # Company names
 COMPANY_NAMES = {
@@ -101,6 +103,8 @@ COMPANY_NAMES = {
     'TSM': 'Taiwan Semiconductor Manufacturing Company Limited',
     'QCOM': 'Qualcomm Inc.',
     'HPQ': 'HP Inc.',
+    'AVGO': 'Broadcom Inc.',
+    'HPE': 'Hewlett Packard Enterprise Co.',
 }
 
 # Segment name normalization map (quarterly -> annual standard name)
@@ -112,6 +116,10 @@ SEGMENT_NAME_MAP = {
     'QCT IoT': 'IoT',
     # MU - normalize abbreviations to match annual report
     'Automotive and Embedded': 'Automotive and Edge',
+    # TSM - normalize full platform names to short canonical names
+    'High Performance Computing': 'HPC',
+    'Internet of Things': 'IoT',
+    'Digital Consumer Electronics': 'DCE',
     # ORCL - keep original names (quarterly and annual use same names)
     # AMD - keep old segment names as-is (different org structure pre-2022)
     # MSFT - keep full names as-is (Intelligent Cloud, More Personal Computing, etc.)
@@ -651,6 +659,90 @@ def fetch_6k_income_totals(symbols: list, quarters: int = 20) -> dict:
     return totals
 
 
+def fetch_6k_platform_segments(
+    symbols: list, quarters: int = 20, income_totals: dict = None
+) -> list:
+    """
+    Fetch quarterly platform segment data for TSM from 6-K consolidated financial statements.
+
+    TSM's consolidated financial statements (filed ~1 month after earnings) contain
+    a Note 20 revenue disaggregation table with platform breakdowns in NT$ thousands:
+    HPC, Smartphone, IoT, Automotive, DCE, Others.
+
+    NT$ values are converted to USD using the ratio:
+        USD_segment = NT$K_segment / NT$K_total * USD_total
+    where USD_total comes from the income CSV (loaded via income_totals dict).
+
+    Args:
+        symbols: List of symbols (currently only ['TSM'] supported)
+        quarters: Number of quarters to look back
+        income_totals: Dict {(symbol, fy, 'Q?'): usd_total_revenue} from income CSV
+
+    Returns:
+        List of dicts with: symbol, company_name, fiscal_year, quarter,
+                            segment_name, revenue, end_date
+    """
+    if income_totals is None:
+        income_totals = {}
+
+    client = SECEdgarClient()
+    results = []
+
+    for symbol in symbols:
+        if symbol not in COMPANY_CIK:
+            print(f"  Warning: {symbol} not in COMPANY_CIK, skipping 6-K platform fetch")
+            continue
+
+        print(f"  Fetching 6-K platform segments for {symbol}...")
+        try:
+            # quarters arg here is actually the scan_count (number of 6-K filings)
+            fs_data = client.get_6k_financial_statements(symbol, scan_count=quarters)
+
+            count = 0
+            for (fy, period), rec in fs_data.items():
+                if period == 'FY':
+                    continue  # Skip annual records; Q4 is derived separately
+                platform = rec.get('platform', {})
+                ntdk_total = rec.get('total_rev_ntdk')
+                if not platform or not ntdk_total or ntdk_total <= 0:
+                    continue
+
+                # Look up USD total revenue for this quarter
+                usd_total = income_totals.get((symbol, fy, period))
+                if not usd_total or usd_total <= 0:
+                    continue  # Cannot convert without USD total
+
+                end_date = rec.get('end_date', '')
+
+                for key, ntdk_val in platform.items():
+                    if ntdk_val is None or ntdk_val <= 0:
+                        continue
+                    # FX-free conversion using revenue ratio
+                    usd_val = round(ntdk_val / ntdk_total * usd_total)
+                    if usd_val < 10_000_000:  # $10M minimum
+                        continue
+
+                    seg_name = normalize_segment_name(key)
+                    results.append({
+                        'symbol': symbol,
+                        'company_name': COMPANY_NAMES.get(symbol, symbol),
+                        'fiscal_year': fy,
+                        'quarter': period,
+                        'segment_name': seg_name,
+                        'revenue': usd_val,
+                        'end_date': end_date,
+                        'is_calculated': period == 'Q4',
+                    })
+                    count += 1
+
+            print(f"    Found {count} platform segment records")
+
+        except Exception as e:
+            print(f"    Error fetching 6-K platform segments for {symbol}: {e}")
+
+    return results
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Generate quarterly product segment data for charts"
@@ -760,7 +852,8 @@ def main():
         all_data = list(seen.values())
         print(f"  After deduplication: {len(all_data)} records")
 
-        # Write CSV
+        # Write CSV (before adding TSM platform data — need income_totals first)
+        # TSM platform data is added below after loading income CSV
         generate_csv(all_data, csv_path)
 
     # Load quarterly total revenue for cross-check
@@ -779,13 +872,37 @@ def main():
         if six_k_totals:
             print(f"  6-K income totals: {len(six_k_totals)} quarterly records added")
 
+    # Fetch 6-K platform segments for TSM from consolidated financial statements.
+    # These are NOT parseable from the earnings presentation (images only).
+    # Platform breakdown is available in the quarterly consolidated FS (Note 20).
+    tsm_platform_symbols_with_data = []
+    if not args.from_csv and QUARTERLY_6K_PLATFORM_SUPPORTED:
+        print(f"  Fetching 6-K platform segments for: {', '.join(QUARTERLY_6K_PLATFORM_SUPPORTED)}")
+        # Use max(quarters*5, 120) to ensure we reach ~2 years back in TSMC's frequent 6-K filings
+        tsm_scan = max(quarters * 5, 120)
+        tsm_segments = fetch_6k_platform_segments(
+            QUARTERLY_6K_PLATFORM_SUPPORTED,
+            quarters=tsm_scan,
+            income_totals=total_revenue_map,
+        )
+        if tsm_segments:
+            all_data = all_data + tsm_segments
+            print(f"  Added {len(tsm_segments)} TSM platform segment records")
+            # Write updated CSV with TSM platform data
+            generate_csv(all_data, csv_path)
+            tsm_platform_symbols_with_data = QUARTERLY_6K_PLATFORM_SUPPORTED
+
+    # Companies still income-only (no segment breakdown)
+    income_only = [s for s in QUARTERLY_6K_INCOME_SUPPORTED
+                   if s not in tsm_platform_symbols_with_data]
+
     # Write markdown report
     md_path = os.path.join(args.out_dir, "raw_conceptstock_company_quarterly_segments.md")
     generate_markdown_report(
         all_data, md_path,
         latest_q_map=latest_q_map,
         total_revenue_map=total_revenue_map,
-        income_only_symbols=QUARTERLY_6K_INCOME_SUPPORTED,
+        income_only_symbols=income_only,
     )
 
     print("Done!")

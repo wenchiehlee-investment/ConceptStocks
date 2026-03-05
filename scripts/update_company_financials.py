@@ -106,6 +106,8 @@ COMPANY_NAMES = {
     "QCOM": "Qualcomm Inc.",
     "DELL": "Dell Technologies Inc.",
     "HPQ": "HP Inc.",
+    "AVGO": "Broadcom Inc.",
+    "HPE": "Hewlett Packard Enterprise Co.",
     "TSM": "Taiwan Semiconductor Manufacturing Company Limited",
 }
 

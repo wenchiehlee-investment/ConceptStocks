@@ -43,7 +43,7 @@ python scripts/update_company_financials.py --all --type all --source all
 # 可用的 type: income, revenue, all
 # 可用的 source: sec-edgar, alphavantage, fmp, all
 # 可用的 period: annual（預設）, quarterly, all
-# 可用的 symbol: NVDA, GOOGL, AMZN, META, MSFT, AMD, AAPL, ORCL, MU, WDC
+# 可用的 symbol: NVDA, GOOGL, AMZN, META, MSFT, AMD, AAPL, ORCL, MU, WDC, QCOM, DELL, HPQ, AVGO, HPE, TSM
 ```
 
 ## Architecture

@@ -85,16 +85,18 @@ COMPANY_NAMES = {
     'QCOM': 'Qualcomm Inc.',
     'DELL': 'Dell Technologies Inc.',
     'HPQ': 'HP Inc.',
+    'AVGO': 'Broadcom Inc.',
+    'HPE': 'Hewlett Packard Enterprise Co.',
 }
 
 # Companies with FMP segment data available
 FMP_SUPPORTED = ['NVDA', 'GOOGL', 'AMZN', 'META', 'MSFT', 'AMD', 'AAPL']
 
 # Companies without FMP segment data (need SEC EDGAR fallback)
-SEC_ONLY = ['ORCL', 'MU', 'WDC', 'QCOM', 'DELL', 'HPQ']
+SEC_ONLY = ['ORCL', 'MU', 'WDC', 'QCOM', 'DELL', 'HPQ', 'AVGO', 'HPE']
 
 # Display order (A-Z alphabetical)
-DISPLAY_ORDER = ['AAPL', 'AMD', 'AMZN', 'DELL', 'GOOGL', 'HPQ', 'META', 'MSFT', 'MU', 'NVDA', 'ORCL', 'QCOM', 'WDC']
+DISPLAY_ORDER = ['AAPL', 'AMD', 'AMZN', 'AVGO', 'DELL', 'GOOGL', 'HPE', 'HPQ', 'META', 'MSFT', 'MU', 'NVDA', 'ORCL', 'QCOM', 'WDC']
 
 # Segments to skip (parsing errors, duplicates, or non-revenue items)
 SKIP_SEGMENTS = {
@@ -114,10 +116,16 @@ SKIP_SEGMENTS = {
     'EBITDA',
     'Adjusted EBITDA',
     'Cash flow from operations',
+    'Cash flow provided by operations',
     'Free cash flow',
     'Adjusted free cash flow',
+    'Non-service net periodic benefit credit',
     'Products (a)',  # Footnote reference, not actual segment
     'Services (b)',  # Footnote reference, not actual segment
+    # AVGO - 10-K XBRL uses generic revenue types instead of operating segments
+    # Prefer quarterly 8-K segments: "Semiconductor solutions" / "Infrastructure software"
+    'Products',
+    'Subscriptions and services',
 }
 
 # Minimum revenue threshold to filter out parsing errors (values should be > $100M)
@@ -386,7 +394,7 @@ def load_segment_data(csv_path: str, override_path: str = None, quarterly_path: 
 
     # Merge quarterly-aggregated annual data for companies with missing/different segments
     # Priority: use quarterly data if annual data is missing or uses different segment names
-    QUARTERLY_PRIORITY = ['DELL', 'HPQ']  # Companies where 8-K quarterly data is more accurate
+    QUARTERLY_PRIORITY = ['DELL', 'HPQ', 'AVGO', 'HPE']  # Companies where 8-K quarterly data is more accurate
 
     for symbol in quarterly_annual:
         for seg_type in quarterly_annual[symbol]:

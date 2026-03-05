@@ -37,6 +37,8 @@ COMPANY_CIK = {
     "QCOM": "0000804328",
     "DELL": "0001571996",
     "HPQ": "0000047217",
+    "AVGO": "0001730168",  # Broadcom Inc.
+    "HPE": "0001645590",   # Hewlett Packard Enterprise Co.
     # Foreign private issuers (file 20-F annual / 6-K quarterly)
     "TSM": "0001046179",   # Taiwan Semiconductor Manufacturing Company (TWSE: 2330)
 }
@@ -53,6 +55,8 @@ FISCAL_YEAR_END_MONTH = {
     "AAPL": 9,   # Sep
     "QCOM": 9,   # Sep
     "HPQ": 10,   # Oct
+    "AVGO": 10,  # Oct (FY ends last Sunday of Oct/early Nov)
+    "HPE": 10,   # Oct (FY ends Oct 31)
     "GOOGL": 12, # Dec (calendar year)
     "AMZN": 12,  # Dec
     "META": 12,  # Dec
@@ -1074,20 +1078,38 @@ class SECEdgarClient:
                     index_html = resp.read().decode("utf-8", errors="replace")
 
                 # Look for the earnings presentation file (e.g., a4q25presentatione.htm)
+                # and the Exhibit 99.1 press release as fallback (e.g., *withguidancexfinal.htm).
+                # Some quarters (Q2 FY2025) have an image-only presentation — fall back to 99.1.
                 pres_pattern = re.compile(
                     r'href="(/Archives/[^"]*(?:presentation[^"]*|presentatione[^"]*)\.htm)"',
                     re.IGNORECASE,
                 )
+                ex991_pattern = re.compile(
+                    r'href="(/Archives/[^"]*withguidance[^"]*\.htm)"',
+                    re.IGNORECASE,
+                )
                 pres_match = pres_pattern.search(index_html)
-                if not pres_match:
+                ex991_match = ex991_pattern.search(index_html)
+                if not pres_match and not ex991_match:
                     continue
 
-                pres_url = "https://www.sec.gov" + pres_match.group(1)
-                req2 = urllib.request.Request(pres_url, headers={"User-Agent": self.user_agent})
-                with urllib.request.urlopen(req2, timeout=30, context=ssl_context) as resp2:
-                    pres_html = resp2.read().decode("utf-8", errors="replace")
+                # Try presentation first; fall back to press release if parsing fails.
+                candidates = []
+                if pres_match:
+                    candidates.append(pres_match.group(1))
+                if ex991_match and ex991_match.group(1) not in candidates:
+                    candidates.append(ex991_match.group(1))
 
-                record = self._parse_6k_presentation(pres_html, symbol, filing_date)
+                record = None
+                for candidate_path in candidates:
+                    cand_url = "https://www.sec.gov" + candidate_path
+                    req2 = urllib.request.Request(cand_url, headers={"User-Agent": self.user_agent})
+                    with urllib.request.urlopen(req2, timeout=30, context=ssl_context) as resp2:
+                        pres_html = resp2.read().decode("utf-8", errors="replace")
+                    record = self._parse_6k_presentation(pres_html, symbol, filing_date)
+                    if record:
+                        break
+
                 if record:
                     key = (record["fiscal_year"], record["period"])
                     if key not in seen_quarters:
@@ -1103,7 +1125,323 @@ class SECEdgarClient:
                 print(f"    Warning: Could not parse 6-K {accession}: {e}")
                 continue
 
+        # Merge R&D/G&A from quarterly consolidated financial statements.
+        # Use at least 120 to cover ~2 years of TSMC's frequent 6-K filings.
+        try:
+            fs_data = self.get_6k_financial_statements(symbol, scan_count=max(len(filings) * 2, 120))
+            for rec in results:
+                key = (rec["fiscal_year"], rec["period"])
+                fs_rec = fs_data.get(key)
+                if not fs_rec:
+                    continue
+                ntdk_total = fs_rec.get("total_rev_ntdk")
+                usd_total = rec.get("total_revenue")  # in USD (dollars)
+                if not ntdk_total or not usd_total or ntdk_total <= 0 or usd_total <= 0:
+                    continue
+                # Convert NT$K → USD using ratio (avoids explicit FX rate)
+                ratio = usd_total / ntdk_total  # USD per NT$K
+                for field, ntdk_key in [
+                    ("research_and_development", "r_and_d_ntdk"),
+                    ("general_and_administrative", "g_and_a_ntdk"),
+                    ("selling_and_marketing", "marketing_ntdk"),
+                ]:
+                    val_ntdk = fs_rec.get(ntdk_key)
+                    if val_ntdk is not None:
+                        rec[field] = round(val_ntdk * ratio)
+        except Exception as e:
+            print(f"    Warning: Could not merge R&D/G&A for {symbol}: {e}")
+
         return sorted(results, key=lambda r: (r["fiscal_year"], r["period"]), reverse=True)
+
+    def get_6k_financial_statements(
+        self, symbol: str, scan_count: int = 120
+    ) -> Dict[tuple, Dict[str, Any]]:
+        """
+        Parse TSM quarterly consolidated financial statements from 6-K filings.
+
+        Finds 6-K filings containing quarterly/annual consolidated financial
+        statements (documents with 'consolidated' in their filename). These are
+        filed separately from earnings presentations (Exhibit 99.2) and contain:
+          - R&D, G&A, Marketing operating expense breakdown (NT$ thousands)
+          - Revenue by platform: HPC, Smartphone, IoT, Automotive, DCE, Others
+
+        Filing timing (TSMC):
+          - May   → Q1 financial statements (3M ended Mar 31)
+          - Aug   → Q2 financial statements (6M ended Jun 30)
+          - Nov   → Q3 financial statements (9M ended Sep 30)
+          - Feb   → Annual financial statements (year ended Dec 31)
+
+        Q4 records are derived as: FY_annual - 9M_cumulative.
+
+        Returns:
+            Dict keyed by (fiscal_year, period) where period ∈ {Q1,Q2,Q3,Q4,FY}.
+            Each value is a dict with NT$K amounts and a 'platform' sub-dict.
+        """
+        cik = COMPANY_CIK.get(symbol)
+        if not cik:
+            return {}
+        cik_clean = cik.lstrip("0")
+
+        filings = self.get_filing_list(cik, "6-K", count=scan_count)
+
+        quarterly_recs: Dict[tuple, Dict] = {}
+        annual_recs: Dict[int, Dict] = {}
+
+        for filing in filings:
+            accession = filing.get("accession")
+            filing_date = filing.get("date", "")
+            if not accession:
+                continue
+
+            acc_clean = accession.replace("-", "")
+            try:
+                # Fetch the filing index to find the financial statements document
+                index_url = (
+                    f"https://www.sec.gov/Archives/edgar/data/{cik_clean}/"
+                    f"{acc_clean}/{accession}-index.htm"
+                )
+                req = urllib.request.Request(
+                    index_url, headers={"User-Agent": self.user_agent}
+                )
+                with urllib.request.urlopen(req, timeout=30, context=ssl_context) as resp:
+                    index_html = resp.read().decode("utf-8", errors="replace")
+
+                # Look for consolidated financial statements document.
+                # TSMC filenames vary: "consolidated", "consolidatd" (Q1 FY2025 typo),
+                # "consolidatedfina", "consolidatedreport" — match on "consolidat" prefix.
+                fs_match = re.search(
+                    r'href="(/Archives/[^"]*consolidat[^"]*\.htm)"',
+                    index_html,
+                    re.IGNORECASE,
+                )
+                if not fs_match:
+                    continue
+
+                fs_url = "https://www.sec.gov" + fs_match.group(1)
+                req2 = urllib.request.Request(
+                    fs_url, headers={"User-Agent": self.user_agent}
+                )
+                with urllib.request.urlopen(req2, timeout=60, context=ssl_context) as resp2:
+                    fs_html = resp2.read().decode("utf-8", errors="replace")
+
+                text = self._strip_html(fs_html)
+                # Normalize non-breaking spaces (\xa0) introduced by html.unescape
+                # for &nbsp;, and re-normalize whitespace.
+                text = text.replace("\xa0", " ")
+                text = re.sub(r"\s+", " ", text)
+
+                # Must contain R&D and platform data to be a valid financial statements doc
+                if "Research and development" not in text:
+                    continue
+                if "High Performance Computing" not in text:
+                    continue
+
+                # Determine fiscal year and period from filing date
+                try:
+                    fd = datetime.strptime(filing_date, "%Y-%m-%d")
+                except Exception:
+                    continue
+
+                month = fd.month
+                if month in (10, 11):
+                    period, fiscal_year = "Q3", fd.year
+                    end_date = f"{fiscal_year}-09-30"
+                    is_annual = False
+                elif month in (7, 8):
+                    period, fiscal_year = "Q2", fd.year
+                    end_date = f"{fiscal_year}-06-30"
+                    is_annual = False
+                elif month in (4, 5):
+                    period, fiscal_year = "Q1", fd.year
+                    end_date = f"{fiscal_year}-03-31"
+                    is_annual = False
+                elif month in (1, 2, 3):
+                    period = "FY"
+                    fiscal_year = fd.year - 1
+                    end_date = f"{fiscal_year}-12-31"
+                    is_annual = True
+                else:
+                    continue
+
+                # Helper: extract (col)th NT$K value after label (0-indexed).
+                # TSMC 2024 operating expense rows include interspersed % columns:
+                # e.g. "Research and development 52,783,826 7 51,137,762 9 146,950,466 7"
+                # where 7, 9, 7 are percentages (small integers). Filtering to only
+                # numbers > 1000 skips percentages and correctly indexes actual amounts.
+                # Note 20 platform rows do NOT have % columns — same logic still works.
+                def ntdk(label: str, col: int = 0) -> Optional[int]:
+                    m = re.search(re.escape(label) + r"((?:\s+[\d,]+)+)", text)
+                    if not m:
+                        return None
+                    raw = [int(n.replace(",", "")) for n in re.findall(r"[\d,]+", m.group(1))]
+                    # Filter to large NT$K values (> 1,000 NT$K ≈ NT$1B), skipping %
+                    large = [n for n in raw if n > 1000]
+                    return large[col] if col < len(large) else None
+
+                # NET REVENUE row format in TSMC consolidated FS:
+                #   "NET REVENUE (Notes 20, 31 and 37) $ 989,918,318 100 $ 759,692,143 100 $ ..."
+                # Pattern: optional (Notes ...), then $ amount % $ amount % ...
+                net_rev_m = re.search(
+                    r"NET REVENUE\s*(?:\([^)]+\))?\s*\$\s*([\d,]+)", text
+                )
+                if net_rev_m is None:
+                    continue
+                total_rev = int(net_rev_m.group(1).replace(",", ""))
+
+                rd = ntdk("Research and development", 0)
+                ga = ntdk("General and administrative", 0)
+
+                # "Marketing" is short — search only after G&A to avoid false matches.
+                # Use filtered large-number approach (same as ntdk) to skip % columns
+                # present in older TSMC documents.
+                ga_pos = text.find("General and administrative")
+                mkt = None
+                _mkt_large: list = []  # store for cumulative reuse
+                if ga_pos >= 0:
+                    # Allow "-" tokens in addition to numbers: zero-value percentage
+                    # columns in TSMC 2024 docs show "-" instead of "0" for <0.5%
+                    # (e.g. "Marketing 3,404,487 1 2,572,905 - 9,463,070 1 7,615,158 -")
+                    mkt_m = re.search(
+                        r"Marketing((?:\s+(?:[\d,]+|-))+)", text[ga_pos: ga_pos + 600]
+                    )
+                    if mkt_m:
+                        raw_mkt = [
+                            int(n.replace(",", ""))
+                            for n in re.findall(r"[\d,]+", mkt_m.group(1))
+                        ]
+                        _mkt_large = [n for n in raw_mkt if n > 1000]
+                        mkt = _mkt_large[0] if _mkt_large else None
+
+                # Platform breakdown (Note 20): search within HPC-anchored block.
+                # Note: HPC row has "$" prefix before each amount, other rows do not.
+                # Format: "High Performance Computing $ 558,592,346 $ 389,309,409 $ ..."
+                #         "Smartphone 296,745,654 257,495,611 780,316,588 ..."
+                hpc_pos = text.find("High Performance Computing")
+                platform: Dict[str, Optional[int]] = {}
+                cum_platform: Dict[str, Optional[int]] = {}
+                if hpc_pos >= 0:
+                    pblock = text[hpc_pos: hpc_pos + 1200]
+                    # Number token: optional "$" then digits with commas
+                    _num = r"(?:\$\s*)?([\d,]+)"
+                    for key, label in [
+                        ("HPC", "High Performance Computing"),
+                        ("Smartphone", "Smartphone"),
+                        ("IoT", "Internet of Things"),
+                        ("Automotive", "Automotive"),
+                        ("DCE", "Digital Consumer Electronics"),
+                        ("Others", "Others"),
+                    ]:
+                        pm = re.search(
+                            re.escape(label)
+                            + r"\s+" + _num
+                            + r"(?:\s+" + _num + r")?"
+                            + r"(?:\s+" + _num + r")?"
+                            + r"(?:\s+" + _num + r")?",
+                            pblock,
+                        )
+                        if pm:
+                            vals = [
+                                int(g.replace(",", ""))
+                                for g in pm.groups()
+                                if g is not None
+                            ]
+                            platform[key] = vals[0] if vals else None
+                            # For quarterly: col[2] = cumulative; for annual: col[0] = FY total
+                            cum_platform[key] = vals[2] if len(vals) > 2 else vals[0]
+
+                rec: Dict[str, Any] = {
+                    "fiscal_year": fiscal_year,
+                    "period": period,
+                    "end_date": end_date,
+                    "total_rev_ntdk": total_rev,
+                    "r_and_d_ntdk": rd,
+                    "g_and_a_ntdk": ga,
+                    "marketing_ntdk": mkt,
+                    "platform": platform,
+                }
+
+                if is_annual:
+                    if fiscal_year not in annual_recs:
+                        annual_recs[fiscal_year] = rec
+                        print(
+                            f"    Parsed 6-K FS {filing_date}: FY{fiscal_year} annual "
+                            f"R&D={rd}K G&A={ga}K"
+                        )
+                else:
+                    # Also capture cumulative column for Q4 derivation.
+                    # NET REVENUE row: "$ Q3_amt % $ Q3-PY_amt % $ 9M_amt % $ 9M-PY_amt %"
+                    # (3rd $ value = 9M cumulative)
+                    # NET REVENUE cumulative (3rd $ value).
+                    # 2024 docs: "$ Q_val 100 $ Q-PY_val 100 $ CUM_val 100 ..."  (with % cols)
+                    # 2025 docs: "$ Q_val $ Q-PY_val $ CUM_val ..."  (no % cols)
+                    # Make the trailing \d+ (percentage) optional so both formats match.
+                    cum_rev_m = re.search(
+                        r"NET REVENUE[^$]*\$\s*[\d,]+\s+(?:\d+\s+)?\$\s*[\d,]+\s+(?:\d+\s+)?\$\s*([\d,]+)",
+                        text,
+                    )
+                    cum_total = int(cum_rev_m.group(1).replace(",", "")) if cum_rev_m else None
+                    cum_rd = ntdk("Research and development", 2)
+                    cum_ga = ntdk("General and administrative", 2)
+                    # Reuse _mkt_large (already filtered for large numbers) to get
+                    # cumulative value at index 2 (Q, Q-PY, CUM, CUM-PY ordering).
+                    cum_mkt = _mkt_large[2] if len(_mkt_large) > 2 else None
+
+                    rec["cum_total_ntdk"] = cum_total
+                    rec["cum_r_and_d_ntdk"] = cum_rd
+                    rec["cum_g_and_a_ntdk"] = cum_ga
+                    rec["cum_marketing_ntdk"] = cum_mkt
+                    rec["cum_platform"] = cum_platform
+
+                    q_key = (fiscal_year, period)
+                    if q_key not in quarterly_recs:
+                        quarterly_recs[q_key] = rec
+                        print(
+                            f"    Parsed 6-K FS {filing_date}: FY{fiscal_year} {period} "
+                            f"R&D={rd}K G&A={ga}K "
+                            f"HPC={platform.get('HPC')}K"
+                        )
+
+            except Exception:
+                continue
+
+        # Derive Q4 = Annual FY - 9M cumulative
+        for fy, annual in annual_recs.items():
+            q3_rec = quarterly_recs.get((fy, "Q3"))
+            if q3_rec and q3_rec.get("cum_total_ntdk"):
+
+                def _diff(a_key: str, c_key: str) -> Optional[int]:
+                    a_val = annual.get(a_key)
+                    c_val = q3_rec.get(c_key)
+                    if a_val is not None and c_val is not None:
+                        return max(0, a_val - c_val)
+                    return None
+
+                q4_platform: Dict[str, Optional[int]] = {}
+                for k in ("HPC", "Smartphone", "IoT", "Automotive", "DCE", "Others"):
+                    a_val = annual["platform"].get(k) or 0
+                    c_val = q3_rec["cum_platform"].get(k) or 0
+                    q4_platform[k] = max(0, a_val - c_val)
+
+                q4_rec: Dict[str, Any] = {
+                    "fiscal_year": fy,
+                    "period": "Q4",
+                    "end_date": f"{fy}-12-31",
+                    "total_rev_ntdk": _diff("total_rev_ntdk", "cum_total_ntdk"),
+                    "r_and_d_ntdk": _diff("r_and_d_ntdk", "cum_r_and_d_ntdk"),
+                    "g_and_a_ntdk": _diff("g_and_a_ntdk", "cum_g_and_a_ntdk"),
+                    "marketing_ntdk": _diff("marketing_ntdk", "cum_marketing_ntdk"),
+                    "platform": q4_platform,
+                }
+                quarterly_recs[(fy, "Q4")] = q4_rec
+                print(
+                    f"    Derived Q4 FY{fy}: R&D={q4_rec['r_and_d_ntdk']}K "
+                    f"G&A={q4_rec['g_and_a_ntdk']}K"
+                )
+
+            # Also store annual record as FY period
+            quarterly_recs[(fy, "FY")] = annual
+
+        return quarterly_recs
 
     def _parse_6k_presentation(
         self, html: str, symbol: str, filing_date: str
@@ -1120,14 +1458,33 @@ class SECEdgarClient:
         """
         text = self._strip_html(html)
 
-        # Must contain earnings data (skip non-earnings 6-K filings)
-        if "Net Revenue" not in text and "Gross Margin" not in text:
+        # Must contain earnings data (skip non-earnings 6-K filings).
+        # Accept either:
+        #   Presentation format (Exhibit 99.2): contains "Net Revenue" or "Gross Margin"
+        #   Press release format (Exhibit 99.1): "revenue was $X billion" + "gross margin for..."
+        text_lower = text.lower()
+        is_press_release = (
+            "net revenue" not in text_lower
+            and "revenue was $" in text_lower
+            and "gross margin for the quarter was" in text_lower
+        )
+        if (
+            "net revenue" not in text_lower
+            and "gross margin" not in text_lower
+            and not is_press_release
+        ):
             return None
 
         # ── Revenue (USD billions) ────────────────────────────────────────────
-        rev_m = re.search(
-            r"Net Revenue\s*\(US\$\s*billions?\)\s*([\d,]+\.[\d]+)", text
-        )
+        if is_press_release:
+            # e.g. "second quarter revenue was $30.07 billion"
+            rev_m = re.search(
+                r"revenue was \$(\d+\.?\d*) billion", text, re.IGNORECASE
+            )
+        else:
+            rev_m = re.search(
+                r"Net Revenue\s*\(US\$\s*billions?\)\s*([\d,]+\.[\d]+)", text
+            )
         if not rev_m:
             return None
         total_revenue_b = float(rev_m.group(1).replace(",", ""))
@@ -1139,12 +1496,19 @@ class SECEdgarClient:
 
         # ── Margins (%) ──────────────────────────────────────────────────────
         def _pct(pattern: str) -> Optional[float]:
-            m = re.search(pattern, text)
+            m = re.search(pattern, text, re.IGNORECASE)
             return float(m.group(1)) / 100 if m else None
 
-        gross_margin = _pct(r"Gross Margin\s+([\d]+\.[\d]+)\s*%")
-        operating_margin = _pct(r"Operating Margin\s+([\d]+\.[\d]+)\s*%")
-        net_margin = _pct(r"Net Profit Margin\s+([\d]+\.[\d]+)\s*%")
+        if is_press_release:
+            # e.g. "Gross margin for the quarter was 58.6%, operating margin was 49.6%,
+            #        and net profit margin was 42.7%"
+            gross_margin = _pct(r"Gross margin for the quarter was\s+([\d.]+)%")
+            operating_margin = _pct(r"operating margin was\s+([\d.]+)%")
+            net_margin = _pct(r"net profit margin was\s+([\d.]+)%")
+        else:
+            gross_margin = _pct(r"Gross Margin\s+([\d]+\.[\d]+)\s*%")
+            operating_margin = _pct(r"Operating Margin\s+([\d]+\.[\d]+)\s*%")
+            net_margin = _pct(r"Net Profit Margin\s+([\d]+\.[\d]+)\s*%")
 
         if gross_margin is None or operating_margin is None or net_margin is None:
             return None
@@ -1474,6 +1838,8 @@ class SECEdgarClient:
             r"erex99[-_]?1",      # qcom122825erex991.htm (QCOM)
             r"ex99[-_]?1.*press", # a2025q4ex991-pressrelease.htm (MU)
             r"ex99[-_]?1",        # ex99-1.htm, ex991.htm, ex99_1.htm
+            r"ex[-_]?991",        # ex-991x1242025x8k.htm (HPE)
+            r"x8kxex99",          # avgo-11022025x8kxex99.htm (AVGO)
             r"pressrelease",
             r"earnings",
             r"press.*release",
@@ -1555,6 +1921,10 @@ class SECEdgarClient:
             return self._parse_hpq_8k(clean_content)
         elif symbol == "ORCL":
             return self._parse_orcl_8k(clean_content)
+        elif symbol == "AVGO":
+            return self._parse_avgo_8k(clean_content)
+        elif symbol == "HPE":
+            return self._parse_hpe_8k(clean_content)
         else:
             return []
 
@@ -2177,6 +2547,125 @@ class SECEdgarClient:
             if match:
                 revenue = float(match.group(1)) * 1_000_000_000
 
+                results.append({
+                    "segment_name": name,
+                    "fiscal_year": fiscal_year,
+                    "period": quarter,
+                    "revenue": revenue,
+                    "segment_type": "product",
+                })
+
+        return results
+
+    def _parse_avgo_8k(self, content: str) -> List[Dict[str, Any]]:
+        """Parse Broadcom (AVGO) 8-K press release for segment revenue.
+
+        AVGO reports two segments in a table (values in millions):
+          Net revenue by segment (Dollars in millions) Q4 25 Q4 24 Change
+          Semiconductor solutions  $ 11,072  61 %  $ 8,230  59 %  +35 %
+          Infrastructure software    6,943   39      5,824   41    +19 %
+          Total net revenue         $ 18,015 100 %  $14,054 100 %
+
+        Fiscal year end: late October / early November (month 10/11).
+        Quarter extracted from table header "Q{N} {2-digit-year}".
+        """
+        results = []
+
+        # Extract quarter and fiscal year from table header
+        # Pattern: "Net revenue by segment ... Q{N} {2d-year}"
+        table_match = re.search(
+            r'Net revenue by segment[^Q]{0,50}Q(\d)\s+(\d{2})',
+            content, re.IGNORECASE
+        )
+        if not table_match:
+            # Fallback: extract from title "Third Quarter Fiscal Year 2025"
+            title_match = re.search(
+                r'(First|Second|Third|Fourth)\s+Quarter(?:\s+and\s+Fiscal\s+Year|\s+Fiscal\s+Year)?\s+(?:Fiscal\s+Year\s+)?(\d{4})',
+                content, re.IGNORECASE
+            )
+            if not title_match:
+                return []
+            quarter_map = {"first": "Q1", "second": "Q2", "third": "Q3", "fourth": "Q4"}
+            quarter = quarter_map.get(title_match.group(1).lower(), "Q?")
+            fiscal_year = int(title_match.group(2))
+        else:
+            quarter = f"Q{table_match.group(1)}"
+            fiscal_year = 2000 + int(table_match.group(2))
+
+        # Parse segment rows (values in millions)
+        # "Semiconductor solutions $ 11,072 61 %" → first dollar-preceded number
+        # "Infrastructure software   6,943  39"   → first plain number (no $)
+        segment_patterns = [
+            (r'Semiconductor\s+solutions\s+\$\s*([\d,]+)', "Semiconductor solutions"),
+            (r'Infrastructure\s+software\s+\$?\s*([\d,]+)', "Infrastructure software"),
+        ]
+
+        for pattern, name in segment_patterns:
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                revenue = float(match.group(1).replace(",", "")) * 1_000_000
+                results.append({
+                    "segment_name": name,
+                    "fiscal_year": fiscal_year,
+                    "period": quarter,
+                    "revenue": revenue,
+                    "segment_type": "product",
+                })
+
+        return results
+
+    def _parse_hpe_8k(self, content: str) -> List[Dict[str, Any]]:
+        """Parse Hewlett Packard Enterprise (HPE) 8-K press release for segment revenue.
+
+        HPE uses narrative format (values in billions or millions):
+          "Fourth Quarter Fiscal 2025 Segment Results"
+          "Server revenue was $4.5 billion, down 5%..."
+          "Networking revenue was $2.8 billion, up 150%..."   # renamed from Intelligent Edge in Q3 FY2025
+          "Hybrid Cloud revenue was $1.4 billion, down 12%..."
+          "Financial Services revenue was $889 million, flat..."
+
+        Fiscal year end: October 31.
+        """
+        results = []
+
+        # Extract quarter and fiscal year
+        # Pattern: "Fourth Quarter Fiscal 2025 Segment Results"
+        fy_match = re.search(
+            r'(First|Second|Third|Fourth)\s+Quarter\s+Fiscal\s+(\d{4})\s+Segment\s+Results',
+            content, re.IGNORECASE
+        )
+        if not fy_match:
+            # Fallback: "(First|Second|Third|Fourth) Quarter" + "Fiscal {YEAR}"
+            q_match = re.search(r'(First|Second|Third|Fourth)\s+Quarter', content, re.IGNORECASE)
+            fy_match2 = re.search(r'Fiscal\s+(\d{4})', content, re.IGNORECASE)
+            if not q_match or not fy_match2:
+                return []
+            quarter_word = q_match.group(1)
+            fiscal_year = int(fy_match2.group(1))
+        else:
+            quarter_word = fy_match.group(1)
+            fiscal_year = int(fy_match.group(2))
+
+        quarter_map = {"first": "Q1", "second": "Q2", "third": "Q3", "fourth": "Q4"}
+        quarter = quarter_map.get(quarter_word.lower(), "Q?")
+
+        # Segment patterns: narrative "Name revenue was $X billion/million"
+        # "Networking" was called "Intelligent Edge" before Q3 FY2025 — normalize to "Networking"
+        # Allow optional footnote markers like "(4)" between segment name and "revenue"
+        fn = r'(?:\s*\(\d+\))?'  # optional footnote marker
+        segment_patterns = [
+            (r'Server' + fn + r'\s+revenue\s+was\s+\$([\d.]+)\s*(billion|million)', "Server"),
+            (r'(?:Networking|Intelligent\s+Edge)' + fn + r'\s+revenue\s+was\s+\$([\d.]+)\s*(billion|million)', "Networking"),
+            (r'Hybrid\s+Cloud' + fn + r'\s+revenue\s+was\s+\$([\d.]+)\s*(billion|million)', "Hybrid Cloud"),
+            (r'Financial\s+Services' + fn + r'\s+revenue\s+was\s+\$([\d.]+)\s*(billion|million)', "Financial Services"),
+        ]
+
+        for pattern, name in segment_patterns:
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                amount = float(match.group(1))
+                unit = match.group(2).lower()
+                revenue = amount * 1_000_000_000 if unit == "billion" else amount * 1_000_000
                 results.append({
                     "segment_name": name,
                     "fiscal_year": fiscal_year,

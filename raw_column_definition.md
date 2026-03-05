@@ -1328,6 +1328,7 @@ def extract_monthly_margin_data(df):
 | `主要業務` | Detailed description of the company's main operations | GoodInfo |
 | `TSMC概念` | Mark "1" if part of TSMC supply chain/concept | GoodInfo / Gemini AI Analysis |
 | `nVidia概念` | Mark "1" if part of Nvidia supply chain/concept | GoodInfo / Gemini AI Analysis |
+| `Broadcom概念` | Mark "1" if part of Broadcom (AVGO) supply chain/concept | GoodInfo / Gemini AI Analysis |
 | `Google概念` | Mark "1" if part of Google supply chain/concept | GoodInfo / Gemini AI Analysis |
 | `Amazon概念` | Mark "1" if part of Amazon supply chain/concept | GoodInfo / Gemini AI Analysis |
 | `Meta概念` | Mark "1" if part of Meta supply chain/concept | GoodInfo / Gemini AI Analysis |
@@ -1341,7 +1342,8 @@ def extract_monthly_margin_data(df):
 | `Qualcomm概念` | Mark "1" if part of Qualcomm supply chain/concept | GoodInfo / Gemini AI Analysis |
 | `Lenovo概念` | Mark "1" if part of Lenovo supply chain/concept | GoodInfo / Gemini AI Analysis |
 | `Dell概念` | Mark "1" if part of Dell supply chain/concept | GoodInfo / Gemini AI Analysis |
-| `HP概念` | Mark "1" if part of HP supply chain/concept | GoodInfo / Gemini AI Analysis |
+| `HPQ概念` | Mark "1" if part of HP Inc. (HPQ) supply chain/concept | GoodInfo / Gemini AI Analysis |
+| `HPE概念` | Mark "1" if part of Hewlett Packard Enterprise (HPE) supply chain/concept | GoodInfo / Gemini AI Analysis |
 | `相關集團` | Name of the business group the company belongs to | GoodInfo (Group List mapping) |
 
 ### Market Type Values:
