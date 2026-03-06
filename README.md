@@ -7,12 +7,12 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-02-23 13:43:16 CST
+Update time: 2026-03-06 13:48:05 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
 | nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Data Center, Gaming, Automotive, Professional Visualization |
-| Broadcom概念 | - | - | - | - | - | - | - |
+| Broadcom概念 | Broadcom Inc. | AVGO | 0001730168 | FY2025 Q4 | FY2026 Q1 | 2026年3月 | Networking, Server Storage, Broadband, Wireless, Industrial, Infrastructure Software |
 | Google概念 | Alphabet Inc. | GOOGL | 0001652044 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Google Cloud, Google Services |
 | Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | AWS, North America, International |
 | Meta概念 | Meta Platforms Inc. | META | 0001326801 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Family of Apps, Reality Labs |
@@ -26,8 +26,8 @@ Update time: 2026-02-23 13:43:16 CST
 | Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
 | Lenovo概念 | Lenovo Group ADR | LNVGY | 0000932477 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
 | Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Servers and networking, Storage |
-| HPQ概念 | - | - | - | - | - | - | - |
-| HPE概念 | - | - | - | - | - | - | - |
+| HPQ概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
+| HPE概念 | Hewlett Packard Enterprise Co. | HPE | 0001645590 | FY2025 Q4 | FY2026 Q1 | 2026年3月 | Compute, Storage, Intelligent Edge, Financial Services |
 
 > 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 18 個）
 > 概念 metadata：`raw_conceptstock_company_metadata.csv`
