@@ -86,6 +86,12 @@ jobs:
         run: |
           python scripts/update_conceptstocks_segments.py
 
+      - name: Generate quarterly segments
+        env:
+          SEC_EDGAR_USER_AGENT: ${{ secrets.SEC_EDGAR_USER_AGENT || 'ConceptStocks github-actions@users.noreply.github.com' }}
+        run: |
+          python scripts/generate_quarterly_segments.py
+
       - name: Commit and push changes
         run: |
           git config user.name "github-actions"
@@ -98,7 +104,8 @@ jobs:
           fi
 
           # Add and commit
-          git add raw_conceptstock_company_income.csv raw_conceptstock_company_revenue.csv raw_conceptstock_company_segments.md
+          git add raw_conceptstock_company_income.csv raw_conceptstock_company_revenue.csv raw_conceptstock_company_segments.md \
+                  raw_conceptstock_company_quarterly_segments.csv raw_conceptstock_company_quarterly_segments.md
 
           TIMESTAMP=$(date -u +"%Y-%m-%d")
           git commit -m "Update company financials data ($TIMESTAMP)"
