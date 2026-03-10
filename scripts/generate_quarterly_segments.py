@@ -284,7 +284,19 @@ def load_annual_segments(csv_path: str, symbols: list) -> list:
     if not os.path.exists(csv_path):
         return []
 
-    results = []
+    # Deduplicate annual rows: for the same (symbol, fiscal_year, segment_name),
+    # prefer the row whose end_date year matches fiscal_year (i.e. the genuine
+    # year-end date).  SEC 10-K parsers sometimes mis-label the *prior* year's
+    # comparison column with fiscal_year = current year, leaving end_date as the
+    # 10-K *filing* date (next year).  Example: META FY2024 Family of Apps has
+    # two rows – $162.4 B with end_date 2024-12-31 (correct) and $198.8 B with
+    # end_date 2026-01-29 (FY2025 number mislabeled as FY2024).
+    #
+    # Rule: end_date year must be within [-1, +1] of fiscal_year to be valid.
+    # (±1 tolerance covers January fiscal-year-end companies like NVDA whose
+    # FY2026 ends 2026-01-26 → year 2026 = fiscal_year 2026 ✓, and companies
+    # with off-calendar year-ends like MSFT June or AAPL September.)
+    raw = []
     with open(csv_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -299,15 +311,49 @@ def load_annual_segments(csv_path: str, symbols: list) -> list:
             if revenue <= 0:
                 continue
 
-            results.append({
+            fy = int(row.get('fiscal_year', 0))
+            end_date = row.get('end_date', '')
+            end_year = int(end_date[:4]) if len(end_date) >= 4 and end_date[:4].isdigit() else None
+
+            # Skip rows where end_date year is more than 1 year away from fiscal_year
+            # (catches SEC_10K mislabeling current year data as prior year)
+            if end_year is not None and abs(end_year - fy) > 1:
+                continue
+
+            raw.append({
                 'symbol': row['symbol'],
                 'company_name': row.get('company_name', row['symbol']),
-                'fiscal_year': int(row.get('fiscal_year', 0)),
-                'quarter': 'FY',  # Full year
+                'fiscal_year': fy,
+                'quarter': 'FY',
                 'segment_name': row.get('segment_name'),
                 'revenue': revenue,
-                'end_date': row.get('end_date'),
+                'end_date': end_date,
+                '_end_year_match': end_year == fy if end_year else False,
             })
+
+    # Deduplicate: for same (symbol, fiscal_year, segment_name) keep the row
+    # whose end_date year exactly matches fiscal_year; otherwise keep highest revenue.
+    best = {}
+    for r in raw:
+        key = (r['symbol'], r['fiscal_year'], r['segment_name'])
+        if key not in best:
+            best[key] = r
+        else:
+            existing = best[key]
+            # Prefer exact end_year match over non-match
+            if r['_end_year_match'] and not existing['_end_year_match']:
+                best[key] = r
+            elif not r['_end_year_match'] and existing['_end_year_match']:
+                pass  # keep existing
+            else:
+                # Both same quality → keep higher revenue (conservative)
+                if r['revenue'] > existing['revenue']:
+                    best[key] = r
+
+    results = []
+    for r in best.values():
+        r.pop('_end_year_match', None)
+        results.append(r)
 
     return results
 

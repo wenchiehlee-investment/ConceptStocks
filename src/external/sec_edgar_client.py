@@ -1778,8 +1778,15 @@ class SECEdgarClient:
 
         cik = COMPANY_CIK[symbol]
 
-        # Get recent 8-K filings
-        filings = self.get_filing_list(cik, "8-K", count=quarters * 2)
+        # Get recent 8-K filings.
+        # Some companies (e.g. GOOGL) file many non-earnings 8-Ks (material
+        # events, acquisitions, proxy notices) that consume the fetch budget
+        # before reaching older earnings releases.  Use a higher multiplier so
+        # that 'quarters' actual earnings press-releases are reliably found.
+        # GOOGL: ~4 earnings 8-Ks/yr + ~15 other 8-Ks/yr → need ~5× multiplier.
+        HIGH_NONEEARNINGS_8K_SYMBOLS = {"GOOGL", "AMZN", "META"}
+        fetch_multiplier = 5 if symbol in HIGH_NONEEARNINGS_8K_SYMBOLS else 2
+        filings = self.get_filing_list(cik, "8-K", count=quarters * fetch_multiplier)
 
         if not filings:
             return []
