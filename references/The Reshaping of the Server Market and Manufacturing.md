@@ -70,6 +70,7 @@ My reverse analysis has now reached the server manufacturers, and before moving 
 - Wistron
 
 **Design Houses:**
+- alchip
 - GUC (part of TSMC ecosystem)
 
 **GPU/CPUs:**
@@ -126,6 +127,8 @@ Overall, the financials of these companies have been very flat with profit cycle
 
 *(Bar and line chart showing Revenue and Profits for Compute Companies (Less Smartphone). Revenue bars are shown over time with operating and net margin lines overlaid. The overall business of these companies remains relatively flat over time with thin and declining margins.)*
 
+Companies tracked (chart legend): Apple iPad, Apple iPhone, Apple PC, Dell, Dell Server, Gigabyte PC, Gigabyte SA, HPE, HPE Network, IBM, Lenovo PC, Lenovo Server, Samsung SN, Super Micro, Xiaomi
+
 The overall business of these companies remains relatively flat over time. So far, there have been only a limited number of PCs and servers that we need. The margins reflect this, and the operating and net margins have been in decline recently.
 
 Upon closer examination of the server companies, it is not surprising to see that the AI server component of the business is having a significant impact.
@@ -133,8 +136,10 @@ Upon closer examination of the server companies, it is not surprising to see tha
 ### Revenue by Type; Server Companies
 
 *(Two charts side by side:)*
-- *(Left: Stacked bar chart — Revenue by Type, Server Companies, showing AI Server, AI PC, Server, and PC categories stacked over time)*
-- *(Right: Line chart — Revenue by Type, Server Companies, showing trend lines for individual revenue segments with AI server growing rapidly)*
+- *(Left: Stacked bar chart — Revenue by Type, Server Companies. Four revenue categories stacked: **Std. PC**, **AI PC**, **Std. Server**, **AI Server**. AI Server (red) growing rapidly as a share of total.)*
+- *(Right: Line chart — Revenue by Type, Server Companies. Trend lines per category: Std. PC and Std. Server declining; AI PC rising modestly; **AI Server rising sharply** from ~2023 onwards.)*
+
+Companies tracked: AAPL, Dell, Lenovo, HPE, Supermicro (and others per legend)
 
 The shift in business from PC to AI PC and from Server to AI server is evident and more dominant than the headline numbers suggest.
 
