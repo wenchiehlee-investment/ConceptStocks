@@ -12,6 +12,9 @@ from typing import Dict, List
 
 import requests
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "llm"))
+from llm import LLMClient
+
 
 DEFAULT_COMPANYINFO_URL = (
     "https://raw.githubusercontent.com/"
@@ -230,50 +233,9 @@ def normalize_generic(value: str) -> str:
     return v
 
 
-def post_json_with_curl(url: str, payload: Dict[str, object], timeout: int) -> Dict[str, object]:
-    marker = "__HTTP_STATUS__:"
-    cmd = [
-        "curl",
-        "-sS",
-        "--max-time",
-        str(timeout),
-        "-X",
-        "POST",
-        "-H",
-        "Content-Type: application/json",
-        url,
-        "-d",
-        json.dumps(payload, ensure_ascii=False),
-        "-w",
-        f"\n{marker}%{{http_code}}",
-    ]
-    proc = subprocess.run(cmd, capture_output=True, text=True)
-    if proc.returncode != 0:
-        raise RuntimeError(f"Gemini request failed via curl (exit={proc.returncode}).")
-
-    raw = proc.stdout or ""
-    if marker not in raw:
-        raise RuntimeError("Gemini curl response missing HTTP status marker.")
-    body, status_text = raw.rsplit(marker, 1)
-    try:
-        status_code = int(status_text.strip())
-    except Exception:
-        raise RuntimeError("Gemini curl response has invalid HTTP status code.")
-
-    if status_code >= 400:
-        raise RuntimeError(f"Gemini API error {status_code}: {body[:300]}")
-
-    try:
-        return json.loads(body)
-    except json.JSONDecodeError as e:
-        raise RuntimeError(f"Gemini curl JSON parse failed: {e}")
-
-
 def gemini_generate_metadata(
     concept_col: str,
-    api_key: str,
-    model: str,
-    timeout: int = 90,
+    llm_client: "LLMClient",
 ) -> Dict[str, str]:
     prompt = f"""
 你是財務資料整理助手。請只輸出單一 JSON 物件，不要 markdown，不要多餘文字。
@@ -298,42 +260,9 @@ JSON keys（必填）：
 - segments 用簡短逗號分隔
 """.strip()
 
-    url = (
-        f"https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{model}:generateContent?key={api_key}"
-    )
-    payload = {
-        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "temperature": 0.1,
-            "response_mime_type": "application/json",
-        },
-    }
-    try:
-        resp = requests.post(url, json=payload, timeout=timeout)
-    except requests.RequestException as e:
-        # Fallback path: curl often works when Python DNS resolver has issues.
-        data = post_json_with_curl(url=url, payload=payload, timeout=timeout)
-    else:
-        if resp.status_code >= 400:
-            raise RuntimeError(f"Gemini API error {resp.status_code}: {resp.text[:300]}")
-        data = resp.json()
-    candidates = data.get("candidates") or []
-    if not candidates:
-        raise RuntimeError("Gemini response has no candidates.")
-
-    parts = (
-        candidates[0]
-        .get("content", {})
-        .get("parts", [])
-    )
-    text = ""
-    if parts and isinstance(parts[0], dict):
-        text = parts[0].get("text", "")
-
-    obj = extract_json_obj(text)
+    obj = llm_client.generate_json(prompt)
     if not obj:
-        raise RuntimeError(f"Gemini JSON parse failed for {concept_col}: {text[:240]}")
+        raise RuntimeError(f"Gemini JSON parse failed for {concept_col}")
 
     return {
         "公司名稱": normalize_generic(str(obj.get("company_name", ""))),
@@ -366,12 +295,12 @@ def refresh_readme_if_needed(out_dir: str, concept_cols: List[str]) -> None:
 def main() -> int:
     args = parse_args()
 
+    # Inject .env values into os.environ so llm library can pick them up
+    # (also covers GEMINI_API_KEY_1..19 for multi-key rotation)
     env_file_values = load_env_file(os.path.join(os.getcwd(), ".env"))
-    api_key = (
-        os.environ.get("GEMINI_API_KEY")
-        or env_file_values.get("GEMINI_API_KEY")
-        or ""
-    ).strip()
+    for k, v in env_file_values.items():
+        if k.startswith("GEMINI_API_KEY") and k not in os.environ:
+            os.environ[k] = v
 
     try:
         companyinfo_content = load_companyinfo_content(
@@ -397,13 +326,21 @@ def main() -> int:
             concepts_needing_refresh.append(concept)
 
     unresolved_without_fallback = [c for c in concepts_needing_refresh if c not in CONCEPT_FALLBACKS]
-    if unresolved_without_fallback and not api_key:
-        print(
-            "Missing GEMINI_API_KEY. "
-            f"Need API for {len(unresolved_without_fallback)} concepts.",
-            file=sys.stderr,
-        )
-        return 1
+    llm_client = None
+    if unresolved_without_fallback:
+        try:
+            llm_client = LLMClient(
+                providers=["gemini"],
+                model=args.model,
+                app_name="ConceptStocks",
+            )
+        except RuntimeError:
+            print(
+                "Missing GEMINI_API_KEY. "
+                f"Need API for {len(unresolved_without_fallback)} concepts.",
+                file=sys.stderr,
+            )
+            return 1
 
     output_rows: List[Dict[str, str]] = []
     refreshed_count = 0
@@ -421,8 +358,7 @@ def main() -> int:
             try:
                 gem = gemini_generate_metadata(
                     concept_col=concept,
-                    api_key=api_key,
-                    model=args.model,
+                    llm_client=llm_client,
                 )
                 row = {"概念欄位": concept}
                 for k in OUTPUT_FIELDS[1:]:
