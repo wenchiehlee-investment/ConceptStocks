@@ -12,7 +12,13 @@ from typing import Dict, List
 
 import requests
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "llm"))
+for _llm_path in [
+    os.path.join(os.path.dirname(__file__), "..", "..", "llm"),  # local dev (sibling repo)
+    os.path.join(os.path.dirname(__file__), "..", "llm"),        # CI (checked out in repo root)
+]:
+    if os.path.isdir(_llm_path):
+        sys.path.insert(0, os.path.abspath(_llm_path))
+        break
 from llm import LLMClient
 
 
