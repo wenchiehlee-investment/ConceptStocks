@@ -1,9 +1,12 @@
 name: Update Concept Stocks
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - raw_companyinfo.csv  # triggered by file-sync from Python-Actions.GoodInfo.CompanyInfo
   schedule:
-    # Weekly sync of concept mappings (Sunday)
-    - cron: "0 0 * * 0"
     # Daily update (Mon-Fri) for daily series
     - cron: "15 22 * * 1-5"
     # Weekly update (Fri) for weekly series
@@ -19,7 +22,7 @@ on:
 
 jobs:
   sync:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.cadence == 'sync' || (github.event_name == 'schedule' && github.event.schedule == '0 0 * * 0')
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.cadence == 'sync')
     runs-on: ubuntu-latest
     permissions:
       contents: write

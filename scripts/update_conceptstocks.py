@@ -760,24 +760,14 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
 
 
 def sync_concepts(out_dir: str):
-    url = "https://raw.githubusercontent.com/wenchiehlee-investment/Python-Actions.GoodInfo.CompanyInfo/refs/heads/main/raw_companyinfo.csv"
-    print(f"Fetching company info from {url}...")
-
-    # Use urllib to fetch the CSV
-    try:
-        with urllib.request.urlopen(url) as resp:
-            content = resp.read().decode("utf-8-sig")
-    except Exception as e:
-        print(f"Error fetching CSV: {e}", file=sys.stderr)
-        # Fallback to curl
-        result = subprocess.check_output(["curl", "-sSL", url])
-        content = result.decode("utf-8-sig")
-
-    # Keep a local copy of the upstream source for traceability and downstream jobs.
+    # raw_companyinfo.csv is synced here via file-sync from
+    # Python-Actions.GoodInfo.CompanyInfo (sync-Python-Actions.GoodInfo.Analyzer.yml)
     raw_companyinfo_path = os.path.join(out_dir, "raw_companyinfo.csv")
-    with open(raw_companyinfo_path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"Updated {raw_companyinfo_path}")
+    if not os.path.exists(raw_companyinfo_path):
+        print(f"Error: {raw_companyinfo_path} not found.", file=sys.stderr)
+        return
+    with open(raw_companyinfo_path, encoding="utf-8-sig") as f:
+        content = f.read()
 
     lines = content.splitlines()
     reader = csv.DictReader(lines)
