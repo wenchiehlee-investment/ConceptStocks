@@ -739,7 +739,7 @@ def update_readme_concepts(out_dir: str, concept_cols: List[str]):
             table_lines.append(f"| {col} | - | - | - | - | - | - | - |")
 
     table_lines.append("")
-    table_lines.append(f"> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 {len(concept_cols)} 個）")
+    table_lines.append(f"> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 {len(concept_cols)} 個）")
     table_lines.append(f"> 概念 metadata：`raw_conceptstock_company_metadata.csv`")
 
     new_table = "\n".join(table_lines)
@@ -787,26 +787,7 @@ def sync_concepts(out_dir: str):
         return
 
     concept_cols = [c for c in fieldnames if c.endswith("概念") and c != "相關概念"]
-    # Standardize column names for concept.csv
-    # Use 'stock_code' and 'company_name' to match the other CSVs
-    output_fields = ["stock_code", "company_name"] + concept_cols
-
-    out_path = os.path.join(out_dir, "concept.csv")
-    with open(out_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=output_fields)
-        writer.writeheader()
-        for row in reader:
-            # Check if any concept column is '1'
-            has_concept = any(row.get(c) == "1" for c in concept_cols)
-            if has_concept:
-                out_row = {
-                    "stock_code": row.get("\ufeff代號") or row.get("代號"),
-                    "company_name": row.get("名稱"),
-                }
-                for c in concept_cols:
-                    out_row[c] = row.get(c)
-                writer.writerow(out_row)
-    print(f"Generated {out_path} with {len(concept_cols)} concept columns.")
+    print(f"Found {len(concept_cols)} concept columns in raw_companyinfo.csv.")
 
     # Update README.md with the concept list
     update_readme_concepts(out_dir, concept_cols)
@@ -814,15 +795,15 @@ def sync_concepts(out_dir: str):
 
 def load_dynamic_tickers(out_dir: str) -> Dict[str, str]:
     """
-    Reads concept.csv headers to find active concepts and returns corresponding tickers
+    Reads raw_companyinfo.csv headers to find active concepts and returns corresponding tickers
     from CONCEPT_TO_TICKER mapping.
     """
-    path = os.path.join(out_dir, "concept.csv")
+    path = os.path.join(out_dir, "raw_companyinfo.csv")
     if not os.path.exists(path):
         return {}
 
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8-sig") as f:
             reader = csv.reader(f)
             headers = next(reader)
     except Exception as e:

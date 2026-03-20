@@ -29,7 +29,7 @@ Update time: 2026-03-15 02:28:01 CST
 | HPQ概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
 | HPE概念 | Hewlett Packard Enterprise Co. | HPE | 0001645590 | FY2025 Q4 | FY2026 Q1 | 2026年3月 | Compute, Storage, Intelligent Edge, Financial Services |
 
-> 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 18 個）
+> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 18 個）
 > 概念 metadata：`raw_conceptstock_company_metadata.csv`
 >
 > ⚠️ **注意**：本 repo 的 `raw_companyinfo.csv` 是從外部 repo 同步的快取副本，**不是 input source**。
