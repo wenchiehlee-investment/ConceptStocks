@@ -31,6 +31,10 @@ Update time: 2026-03-15 02:28:01 CST
 
 > 概念欄位來源：`concept.csv` 中以「概念」結尾的欄位（共 18 個）
 > 概念 metadata：`raw_conceptstock_company_metadata.csv`
+>
+> ⚠️ **注意**：本 repo 的 `raw_companyinfo.csv` 是從外部 repo 同步的快取副本，**不是 input source**。
+> 真正的 upstream source 是 [`wenchiehlee-investment/Python-Actions.GoodInfo.CompanyInfo`](https://github.com/wenchiehlee-investment/Python-Actions.GoodInfo.CompanyInfo) 的 `raw_companyinfo.csv`。
+> 若要新增「xx概念」欄位，請在外部 repo 修改，本 repo 每週日 GitHub Actions 自動同步。
 
 
 ### 財年制度說明
@@ -101,7 +105,7 @@ python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily -
 If you add new concept columns, keep the naming pattern `X概念` and update this list.
 
 ### Sync concept metadata with Gemini
-Use `raw_companyinfo.csv` concept columns (`*概念`, excluding `相關概念`) as source of truth, then auto-fill metadata via Gemini:
+Use `concept.csv` concept columns (`*概念`) as source of truth (synced from external repo — see note above), then auto-fill metadata via Gemini:
 ```bash
 python3 scripts/update_concept_metadata.py
 ```
