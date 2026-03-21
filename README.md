@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-03-15 02:28:01 CST
+Update time: 2026-03-21 06:37:13 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -31,10 +31,6 @@ Update time: 2026-03-15 02:28:01 CST
 
 > 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 18 個）
 > 概念 metadata：`raw_conceptstock_company_metadata.csv`
->
-> ⚠️ **注意**：本 repo 的 `raw_companyinfo.csv` 是從外部 repo 同步的快取副本，**不是 input source**。
-> 真正的 upstream source 是 [`wenchiehlee-investment/Python-Actions.GoodInfo.CompanyInfo`](https://github.com/wenchiehlee-investment/Python-Actions.GoodInfo.CompanyInfo) 的 `raw_companyinfo.csv`。
-> 若要新增「xx概念」欄位，請在外部 repo 修改，本 repo 每週日 GitHub Actions 自動同步。
 
 
 ### 財年制度說明
