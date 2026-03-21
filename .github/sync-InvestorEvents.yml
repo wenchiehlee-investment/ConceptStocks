@@ -1,0 +1,8 @@
+#.github/sync-InvestorEvents.yml
+group:
+  - files:
+      # No. 37: Company metadata (used as dynamic US_WATCHLIST)
+      - source: raw_conceptstock_company_metadata.csv
+        dest:   raw_conceptstock_company_metadata.csv
+    repos: |
+        wenchiehlee-investment/InvestorEvents
