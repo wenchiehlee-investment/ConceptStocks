@@ -6,3 +6,8 @@ group:
         dest:   raw_conceptstock_company_metadata.csv
     repos: |
         wenchiehlee-investment/InvestorEvents
+  - files:
+      - source: raw_conceptstock_company_metadata.csv
+        dest:   raw_conceptstock_company_metadata.csv
+    repos: |
+        wenchiehlee-money/InvestorConference
