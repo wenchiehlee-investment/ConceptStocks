@@ -1104,6 +1104,7 @@ def extract_monthly_margin_data(df):
 | `net_income` | float | Net income (USD) | API response | Bottom-line profit |
 | `eps` | float | Earnings per share | API response | Diluted EPS |
 | `rpo` | float | Remaining Performance Obligations (USD) | API response | XBRL: RevenueRemainingPerformanceObligation; contracted future revenue; `null` if unavailable |
+| `capex` | float | Capital Expenditure (USD) | API response | XBRL: PaymentsToAcquirePropertyPlantAndEquipment; `null` if unavailable |
 | `gross_margin` | float | Gross margin | Derived | `gross_profit / total_revenue` |
 | `operating_margin` | float | Operating margin | Derived | `operating_income / total_revenue` |
 | `net_margin` | float | Net margin | Derived | `net_income / total_revenue` |
@@ -1130,7 +1131,6 @@ def extract_monthly_margin_data(df):
 | `quarter` | string | Fiscal quarter | Parsed | `Q1`, `Q2`, `Q3`, `Q4` |
 | `segment_name` | string | Product segment name | Parsed | e.g., `Data Center`, `Gaming` |
 | `revenue` | float | Segment revenue (USD) | Parsed | Raw value in USD; `null` if only % available |
-| `pct_of_revenue` | float | Segment as % of total revenue | Parsed/Derived | Decimal format (0.55 = 55%); `null` if unavailable (e.g., TSM platform % from image slides) |
 | `end_date` | date | Quarter end date | Parsed | `YYYY-MM-DD` |
 | `is_calculated` | boolean | Whether Q4 was calculated | System | `True` if Q4 = FY-(Q1+Q2+Q3) |
 
