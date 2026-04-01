@@ -1,4 +1,5 @@
-name: Sync-Python-Actions.GoodInfo.Analyzer
+name: Sync to Analyzer
+
 on:
   workflow_dispatch:
   push:
@@ -14,6 +15,10 @@ on:
        - raw_conceptstock_company_segment_overrides.csv
        - raw_conceptstock_company_metadata.csv
        - raw_column_definition.md
+
+concurrency:
+  group: sync-analyzer
+  cancel-in-progress: false
 
 jobs:
   sync-backup-workflow:
