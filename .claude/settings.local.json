@@ -45,7 +45,8 @@
       "Bash(ls:*)",
       "Bash(git mv:*)",
       "Bash(git pull:*)",
-      "Bash(gh auth:*)"
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)"
     ]
   }
 }

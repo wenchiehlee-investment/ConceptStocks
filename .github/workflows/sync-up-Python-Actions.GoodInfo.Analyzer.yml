@@ -8,6 +8,10 @@ on:
        - raw_conceptstock_daily.csv
        - raw_conceptstock_weekly.csv
        - raw_conceptstock_monthly.csv
+       - raw_conceptstock_company_revenue.csv
+       - raw_conceptstock_company_income.csv
+       - raw_conceptstock_company_quarterly_segments.csv
+       - raw_conceptstock_company_segment_overrides.csv
        - raw_conceptstock_company_metadata.csv
        - raw_column_definition.md
 
