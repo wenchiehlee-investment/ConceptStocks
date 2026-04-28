@@ -1,8 +1,8 @@
-#.github/sync-to-biztrends.yml
-group:
+# .github/sync-to-biztrends.yml
+groups:
   - files:
       # No. 34: Company income statement, including capex used by biztrends.TW CSP index
       - source: raw_conceptstock_company_income.csv
         dest:   data/conceptstocks_raw/raw_conceptstock_company_income.csv
-    repos: |
-        wenchiehlee-money/biztrends.TW
+    repos:
+      - wenchiehlee-money/biztrends.TW:main
