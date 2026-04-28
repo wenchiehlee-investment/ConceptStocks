@@ -1,5 +1,5 @@
-# .github/sync-to-Analyzer.yml
-groups:
+#.github/sync-to-Analyzer.yml
+group:
   - files:
       # No. 30-32: Concept stock prices
       - source: raw_conceptstock_daily.csv
@@ -24,5 +24,5 @@ groups:
       # Raw column definition document
       - source: raw_column_definition.md
         dest:   definitions/raw_column_definition_ConceptStocks.md
-    repos:
-      - wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer:main
+    repos: |
+      wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer:main

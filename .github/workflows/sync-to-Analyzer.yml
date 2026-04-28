@@ -34,7 +34,6 @@ jobs:
           COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
-          debug: true
 
       - name: Sync up to InvestorEvents
         uses: BetaHuhn/repo-file-sync-action@v1
@@ -44,7 +43,6 @@ jobs:
           COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
-          debug: true
 
       - name: Sync up to biztrends.TW
         uses: BetaHuhn/repo-file-sync-action@v1
@@ -54,4 +52,3 @@ jobs:
           COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
-          debug: true
