@@ -21,34 +21,32 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  sync-backup-workflow:
+  sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Sync up to Python-Actions.GoodInfo.Analyzer
-        uses: BetaHuhn/repo-file-sync-action@v1
+        uses: BetaHuhn/repo-file-sync-action@v1.1.9
         with:
           GH_PAT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_INVESTMENT }}
           CONFIG_PATH: .github/sync-to-Analyzer.yml
-          COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
 
       - name: Sync up to InvestorEvents
-        uses: BetaHuhn/repo-file-sync-action@v1
+        uses: BetaHuhn/repo-file-sync-action@v1.1.9
         with:
           GH_PAT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_INVESTMENT }}
           CONFIG_PATH: .github/sync-InvestorEvents.yml
-          COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
 
       - name: Sync up to biztrends.TW
-        uses: BetaHuhn/repo-file-sync-action@v1
+        uses: BetaHuhn/repo-file-sync-action@v1.1.9
         with:
           GH_PAT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_MONEY }}
           CONFIG_PATH: .github/sync-to-biztrends.yml
-          COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
