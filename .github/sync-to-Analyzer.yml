@@ -25,4 +25,4 @@ group:
       - source: raw_column_definition.md
         dest:   definitions/raw_column_definition_ConceptStocks.md
     repos: |
-      wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer:main
+      wenchiehlee-investment/Python-Actions.GoodInfo.Analyzer

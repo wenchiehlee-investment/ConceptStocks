@@ -5,4 +5,4 @@ group:
       - source: raw_conceptstock_company_income.csv
         dest:   data/conceptstocks_raw/raw_conceptstock_company_income.csv
     repos: |
-      wenchiehlee-money/biztrends.TW:main
+      wenchiehlee-money/biztrends.TW
