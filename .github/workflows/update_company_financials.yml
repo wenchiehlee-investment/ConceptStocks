@@ -109,4 +109,5 @@ jobs:
 
           TIMESTAMP=$(date -u +"%Y-%m-%d")
           git commit -m "Update company financials data ($TIMESTAMP)"
+          git pull --rebase
           git push
