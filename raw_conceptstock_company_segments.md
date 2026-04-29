@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-03-10
+> Last updated: 2026-04-29
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -15,14 +15,14 @@
 | AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | Third-Party Seller Services | $172.2B | FMP |
 | AVGO | Broadcom Inc. | FY2025 | Semiconductor solutions | $36.9B | SEC |
-| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $41.2B | SEC |
+| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
 | GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
 | HPE | Hewlett Packard Enterprise Co. | FY2025 | Server | $17.8B | SEC |
 | HPQ | HP Inc. | FY2025 | Personal Systems | $38.5B | SEC |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
 | MSFT | Microsoft Corporation | FY2025 | Productivity and Business Processes | $120.7B | FMP |
 | MU | Micron Technology, Inc. | FY2025 | Cloud Memory | $13.5B | SEC |
-| NVDA | NVIDIA Corporation | FY2026 | Data Center | $131.4B | FMP |
+| NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
 | ORCL | Oracle Corporation | FY2025 | Cloud and license | $49.2B | SEC |
 | QCOM | Qualcomm Inc. | FY2025 | Handsets | $30.9B | SEC |
 | WDC | Western Digital Corporation | FY2025 | Cloud | $8.3B | SEC |
@@ -128,12 +128,12 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Semiconductor solutions | $36.9B | $30.1B | $28.2B | $19.9B | x |
-| Infrastructure software | $27.0B | $21.5B | $7.6B | $5.6B | x |
+| Semiconductor solutions | $36.9B | $30.1B | $28.2B | x | x |
+| Infrastructure software | $27.0B | $21.5B | $7.6B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $63.9B | $51.6B | $35.8B | $25.5B | x |
+| **Segment Sum** | $63.9B | $51.6B | $35.8B | x | x |
 | **Total Revenue** | $63.9B | $51.6B | $35.8B | $33.2B | $27.4B |
-| **Difference** | ✓ | ✓ | ✓ | 23.2% | - |
+| **Difference** | ✓ | ✓ | ✓ | - | - |
 
 ---
 
@@ -143,15 +143,15 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | $41.2B | $43.6B | x | x | x |
-| Client Solutions Group | $37.5B | $48.4B | x | x | x |
-| Servers and networking | - | $27.1B | $17.6B | $20.4B | $17.9B |
-| Storage | - | $16.5B | $16.3B | $18.0B | $16.5B |
-| Services | - | x | $24.1B | $24.1B | $23.1B |
+| Infrastructure Solutions Group | $54.7B | $43.6B | x | x | x |
+| Client Solutions Group | $51.0B | $48.4B | x | x | x |
+| Servers and networking | $44.2B | $27.1B | $17.6B | $20.4B | $17.9B |
+| Storage | $16.6B | $16.5B | $16.3B | $18.0B | $16.5B |
+| Services | - | $23.1B | $24.1B | $24.1B | $23.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $78.7B | $135.6B | $58.0B | $62.4B | $57.4B |
-| **Total Revenue** | - | $102.3B | $102.3B | $102.3B | $101.2B |
-| **Difference** | - | 32.5% | 43.3% | 39.0% | 43.3% |
+| **Segment Sum** | $166.5B | $158.7B | $58.0B | $62.4B | $57.4B |
+| **Total Revenue** | $113.5B | $102.3B | $102.3B | $102.3B | $101.2B |
+| **Difference** | 46.7% | 55.2% | 43.3% | 39.0% | 43.3% |
 
 ---
 
@@ -178,7 +178,7 @@
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | UNITED STATES | $194.2B | $170.4B | $146.3B | $134.8B | $117.9B |
-| EMEA | $117.2B | $102.1B | $91.0B | $82.1B | $79.1B |
+| EMEA | $117.0B | $102.1B | $91.0B | $82.1B | $79.1B |
 | Asia Pacific | $67.7B | $56.8B | $51.5B | $47.0B | $46.1B |
 | Americas Excluding United States | $23.9B | $20.4B | $18.3B | $17.0B | $14.4B |
 
@@ -293,26 +293,26 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Data Center | $131.4B | $115.2B | $47.5B | $15.0B | $15.0B |
-| Gaming | $12.4B | $11.3B | $10.4B | $9.1B | $12.5B |
-| Professional Visualization | $1.9B | $1.9B | $1.6B | $1.5B | $2.1B |
-| Automotive | $1.7B | $1.7B | $1.1B | $903M | $566M |
-| OEM And Other | - | $389M | $306M | $455M | $1.2B |
+| Data Center | $193.7B | $115.2B | $47.5B | $15.0B | $15.0B |
+| Gaming | $16.0B | $11.3B | $10.4B | $9.1B | $12.5B |
+| Professional Visualization | $3.2B | $1.9B | $1.6B | $1.5B | $2.1B |
+| Automotive | $2.3B | $1.7B | $1.1B | $903M | $566M |
+| OEM And Other | $619M | $389M | $306M | $455M | $1.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $147.4B | $130.5B | $60.9B | $27.0B | $31.3B |
-| **Total Revenue** | - | $130.5B | $60.9B | $27.0B | $26.9B |
-| **Difference** | - | ✓ | ✓ | ✓ | 16.3% |
+| **Segment Sum** | $215.9B | $130.5B | $60.9B | $27.0B | $31.3B |
+| **Total Revenue** | $215.9B | $130.5B | $60.9B | $27.0B | $26.9B |
+| **Difference** | ✓ | ✓ | ✓ | ✓ | 16.3% |
 
 ### Geographic Segments
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
+| UNITED STATES | $149.6B | $61.4B | $27.0B | $8.3B | $4.3B |
+| TAIWAN, PROVINCE OF CHINA | $42.3B | $20.6B | $13.4B | $7.0B | $8.5B |
 | Taiwan | $42.3B | $23.6B | $14.9B | $7.0B | x |
+| CHINA | $19.7B | $17.1B | $10.3B | $5.8B | $7.1B |
 | China (including Hong Kong) | $19.7B | $25.0B | $12.3B | $5.8B | x |
-| CHINA | - | $17.1B | $10.3B | $5.8B | $7.1B |
-| Other Americas | - | $7.9B | $10.2B | $5.9B | $6.9B |
-| TAIWAN, PROVINCE OF CHINA | - | $20.6B | $13.4B | $7.0B | $8.5B |
-| UNITED STATES | - | $61.4B | $27.0B | $8.3B | $4.3B |
+| Other Americas | $4.3B | $7.9B | $10.2B | $5.9B | $6.9B |
 | Singapore | - | $23.7B | $6.8B | $2.3B | x |
 
 ---
