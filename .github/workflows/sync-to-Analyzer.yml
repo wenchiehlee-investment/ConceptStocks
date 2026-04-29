@@ -45,6 +45,15 @@ jobs:
           PR_LABELS: "automated-sync"
           SKIP_PR: true
 
+      - name: Sync up to InvestorConference
+        uses: BetaHuhn/repo-file-sync-action@v1
+        with:
+          GH_PAT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_MONEY }}
+          CONFIG_PATH: .github/sync-to-InvestorConference.yml
+          COMMIT_EACH_FILE: false
+          PR_LABELS: "automated-sync"
+          SKIP_PR: true
+
       - name: Sync up to biztrends.TW
         uses: BetaHuhn/repo-file-sync-action@v1
         with:
