@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 import urllib.request
+from datetime import datetime
 from typing import Dict, List
 
 import requests
@@ -37,6 +38,8 @@ OUTPUT_FIELDS = [
     "即將發布",
     "發布時間",
     "產品區段",
+    "download_timestamp",
+    "process_timestamp",
 ]
 
 CONCEPT_FALLBACKS: Dict[str, Dict[str, str]] = {
@@ -282,10 +285,13 @@ JSON keys（必填）：
 
 
 def write_metadata(path: str, rows: List[Dict[str, str]]) -> None:
+    process_timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=OUTPUT_FIELDS)
         writer.writeheader()
         for row in rows:
+            row.setdefault("download_timestamp", process_timestamp)
+            row.setdefault("process_timestamp", process_timestamp)
             writer.writerow({k: row.get(k, "-") for k in OUTPUT_FIELDS})
 
 

@@ -416,9 +416,11 @@ def generate_csv(data: list, output_path: str):
         print("  No data to write")
         return
 
+    process_timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
     fieldnames = [
         'symbol', 'company_name', 'fiscal_year', 'quarter',
-        'segment_name', 'revenue', 'end_date', 'is_calculated'
+        'segment_name', 'revenue', 'end_date', 'is_calculated',
+        'download_timestamp', 'process_timestamp'
     ]
 
     # Sort by symbol, fiscal_year, quarter, segment
@@ -436,6 +438,8 @@ def generate_csv(data: list, output_path: str):
         for row in data:
             # Ensure all fields exist
             row.setdefault('is_calculated', False)
+            row.setdefault('download_timestamp', process_timestamp)
+            row.setdefault('process_timestamp', process_timestamp)
             writer.writerow(row)
 
     print(f"  Wrote {len(data)} records to {output_path}")
