@@ -120,6 +120,8 @@ destination: https://raw.githubusercontent.com/wenchiehlee-investment/Python-Act
 | `revenue` | float | Segment revenue (USD) | Parsed | Raw value in USD; `null` if only % available |
 | `end_date` | date | Quarter end date | Parsed | `YYYY-MM-DD` |
 | `is_calculated` | boolean | Whether Q4 was calculated | System | `True` if Q4 = FY-(Q1+Q2+Q3) |
+| `download_timestamp` | datetime | Source data retrieval timestamp | System | UTC `YYYY-MM-DD HH:MM:SS` |
+| `process_timestamp` | datetime | CSV generation timestamp | System | UTC `YYYY-MM-DD HH:MM:SS` |
 
 ---
 
@@ -127,6 +129,19 @@ destination: https://raw.githubusercontent.com/wenchiehlee-investment/Python-Act
 **No:** 36
 **Source:** Manual entry from 10-K filings
 **Extraction Strategy:** Hand-curated data to fill gaps or fix errors in FMP/SEC automated parsing.
+
+### Columns
+
+| Column | Type | Description | Source Field | Notes |
+|--------|------|-------------|--------------|-------|
+| `symbol` | string | Company ticker | Manual | e.g., `NVDA` |
+| `fiscal_year` | integer | Fiscal year | Manual | e.g., `2025` |
+| `period` | string | Fiscal period | Manual | `annual` |
+| `segment_name` | string | Segment name | Manual | e.g., `Gaming` |
+| `segment_type` | string | Segment category | Manual | `product` or `geography` |
+| `revenue` | float | Segment revenue (USD) | Manual | Raw value in USD |
+| `source` | string | Source filing | Manual | e.g., `10-K` |
+| `notes` | string | Manual override rationale | Manual | Free text |
 
 ---
 
@@ -145,3 +160,6 @@ destination: https://raw.githubusercontent.com/wenchiehlee-investment/Python-Act
 | `CIK` | string | SEC CIK identifier | Metadata | e.g., `0001045810` |
 | `最新財報` | string | Latest released fiscal report | Metadata | e.g., `FY2026 Q3` |
 | `發布時間` | string | Expected release timing | Metadata | e.g., `2026年4月` |
+| `產品區段` | string | Product segment summary | Metadata | Free text |
+| `download_timestamp` | datetime | Source metadata retrieval timestamp | System | UTC `YYYY-MM-DD HH:MM:SS` |
+| `process_timestamp` | datetime | CSV generation timestamp | System | UTC `YYYY-MM-DD HH:MM:SS` |
