@@ -290,8 +290,8 @@ def write_metadata(path: str, rows: List[Dict[str, str]]) -> None:
         writer = csv.DictWriter(f, fieldnames=OUTPUT_FIELDS)
         writer.writeheader()
         for row in rows:
-            row.setdefault("download_timestamp", process_timestamp)
-            row.setdefault("process_timestamp", process_timestamp)
+            row["download_timestamp"] = process_timestamp
+            row["process_timestamp"] = process_timestamp
             writer.writerow({k: row.get(k, "-") for k in OUTPUT_FIELDS})
 
 
