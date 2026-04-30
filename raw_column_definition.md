@@ -142,6 +142,7 @@ destination: https://raw.githubusercontent.com/wenchiehlee-investment/Python-Act
 | `revenue` | float | Segment revenue (USD) | Manual | Raw value in USD |
 | `source` | string | Source filing | Manual | e.g., `10-K` |
 | `notes` | string | Manual override rationale | Manual | Free text |
+| `updated_timestamp` | datetime | Manual row update timestamp | Manual/System | UTC `YYYY-MM-DD HH:MM:SS` |
 
 ---
 
