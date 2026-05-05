@@ -60,6 +60,8 @@ jobs:
           GEMINI_API_KEY_5: ${{ secrets.GEMINI_API_KEY_5 }}
           GEMINI_API_KEY_6: ${{ secrets.GEMINI_API_KEY_6 }}
           GEMINI_API_KEY_7: ${{ secrets.GEMINI_API_KEY_7 }}
+          CODEX_API_URL: ${{ secrets.CODEX_API_URL }}
+          SERVER_API_KEY: ${{ secrets.SERVER_API_KEY }}
           AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
         run: |
           python3 scripts/update_concept_metadata.py --companyinfo-path raw_companyinfo.csv --keep-extra-concepts

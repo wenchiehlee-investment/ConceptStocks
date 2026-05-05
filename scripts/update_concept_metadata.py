@@ -269,9 +269,10 @@ JSON keys（必填）：
 - segments 用簡短逗號分隔
 """.strip()
 
-    obj = llm_client.generate_json(prompt)
+    # 啟用智慧路由：先嘗試透過伺服器端 (Codex/Gemini-CLI) 產生草稿並評審，若已晉升則直接回傳
+    obj = llm_client.generate_json_smart("ConceptStocks_Metadata", prompt, draft_provider="codex")
     if not obj:
-        raise RuntimeError(f"Gemini JSON parse failed for {concept_col}")
+        raise RuntimeError(f"SmartRoute JSON parse failed for {concept_col}")
 
     return {
         "公司名稱": normalize_generic(str(obj.get("company_name", ""))),
@@ -341,9 +342,8 @@ def main() -> int:
     llm_client = None
     if unresolved_without_fallback:
         try:
+            # 使用預設 Provider 鏈 (codex -> gemini -> mlx)
             llm_client = LLMClient(
-                providers=["gemini"],
-                model=args.model,
                 app_name="ConceptStocks",
             )
         except RuntimeError:
