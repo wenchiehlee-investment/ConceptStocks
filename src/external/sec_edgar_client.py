@@ -813,9 +813,21 @@ class SECEdgarClient:
             if not (has_revenue_header and has_large_numbers):
                 continue
 
-            # Find header row with years
+            # Find header row with years, scanning up to 3 rows for period label + year
             header_row_idx = None
             year_positions = []  # List of (column_index, year)
+
+            # Detect "Three Months" vs "Six/Nine Months" column groups.
+            # 10-Q tables often have multiple year columns: standalone quarter first,
+            # then YTD cumulative. We must prefer the standalone (Three Months) columns.
+            # Strategy: scan rows 0-4 for a period-label row ("Three Months"/"Six Months"),
+            # then the next row for year values. Mark each year column as standalone or YTD.
+            period_row_text = ""
+            for i, row in enumerate(table[:4]):
+                row_text = " ".join(str(c) for c in row).lower()
+                if "three month" in row_text or "six month" in row_text or "nine month" in row_text:
+                    period_row_text = row_text
+                    break
 
             for i, row in enumerate(table[:5]):
                 years_in_row = []
@@ -832,6 +844,26 @@ class SECEdgarClient:
 
             if header_row_idx is None:
                 continue
+
+            # If we found a period-label row, keep only standalone-quarter columns.
+            # "Three months" columns come before "Six/Nine months" columns in standard layout.
+            # Find the column index where YTD period starts and drop those columns.
+            if period_row_text and ("six month" in period_row_text or "nine month" in period_row_text):
+                # Find the split point: locate first "six months" or "nine months" token
+                # and determine which year_positions are before vs. after it.
+                for period_row in table[:4]:
+                    row_text_cells = [str(c).lower() for c in period_row]
+                    ytd_col = None
+                    for j, cell in enumerate(row_text_cells):
+                        if "six month" in cell or "nine month" in cell:
+                            ytd_col = j
+                            break
+                    if ytd_col is not None:
+                        # Keep only year columns before the YTD section
+                        standalone_positions = [(col, yr) for col, yr in year_positions if col < ytd_col]
+                        if standalone_positions:
+                            year_positions = standalone_positions
+                        break
 
             # Check if this table has "(in millions)" indicator
             is_millions = "(in millions" in table_text.lower() or "(dollars in millions" in table_text.lower()
