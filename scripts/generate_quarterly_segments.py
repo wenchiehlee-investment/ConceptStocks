@@ -928,8 +928,9 @@ def main():
     tsm_platform_symbols_with_data = []
     if not args.from_csv and QUARTERLY_6K_PLATFORM_SUPPORTED:
         print(f"  Fetching 6-K platform segments for: {', '.join(QUARTERLY_6K_PLATFORM_SUPPORTED)}")
-        # Use max(quarters*5, 120) to ensure we reach ~2 years back in TSMC's frequent 6-K filings
-        tsm_scan = max(quarters * 5, 120)
+        # Use max(quarters*5, 200) — TSMC files ~10 6-Ks/quarter (monthly revenue + FS),
+        # so 200 scans reaches ~4–5 years of quarterly FS data.
+        tsm_scan = max(quarters * 5, 200)
         tsm_segments = fetch_6k_platform_segments(
             QUARTERLY_6K_PLATFORM_SUPPORTED,
             quarters=tsm_scan,
