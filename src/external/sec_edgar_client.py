@@ -50,7 +50,7 @@ FISCAL_YEAR_END_MONTH = {
     "DELL": 1,   # Jan
     "ORCL": 5,   # May
     "MSFT": 6,   # Jun
-    "WDC": 6,    # Jun
+    "WDC": 7,    # Jul — 52-week FY ends first Friday of July; Q1 ends ~Oct, Q2 ~Jan, Q3 ~Apr
     "MU": 8,     # Aug
     "AAPL": 9,   # Sep
     "QCOM": 9,   # Sep
