@@ -235,6 +235,23 @@
 
 ---
 
+## TSM - Taiwan Semiconductor Manufacturing Company Limited
+
+| Segment | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 |
+|---------|------|------|------|------|------|------|------|------|------|------|------|------|
+| HPC | $18.7B | $18.7B | $18.1B | $15.0B | $14.3B | $12.0B | $10.9B | x | x | $7.2B | $7.0B | x |
+| Smartphone | $10.7B | $9.9B | $8.0B | $7.1B | $9.3B | $8.0B | $6.9B | x | x | $6.7B | $5.2B | x |
+| IoT | $1.8B | $1.8B | $1.4B | $1.2B | $1.3B | $1.6B | $1.2B | x | x | $1.5B | $1.2B | x |
+| Automotive | $1.6B | $1.7B | $1.4B | $1.3B | $1.2B | $1.1B | $1.0B | x | x | $896M | $1.2B | x |
+| DCE | $304M | $402M | $483M | $351M | $331M | $353M | $436M | x | x | $429M | $445M | x |
+| Others | $690M | $626M | $655M | $581M | $493M | $481M | $444M | x | x | $556M | $587M | x |
+|---------|------|------|------|------|------|------|------|------|------|------|------|------|
+| **Segment Sum** | $33.7B | $33.1B | $30.1B | $25.5B | $26.9B | $23.5B | $20.8B | x | x | $17.3B | $15.7B | x |
+| **Total Revenue** | $33.7B | $33.1B | $30.1B | $25.5B | $26.9B | $23.5B | $20.8B | $18.9B | $19.6B | $17.3B | $15.7B | $16.7B |
+| **Difference** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | - | - | ✓ | ✓ | - |
+
+---
+
 ## WDC - Western Digital Corporation
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 |
@@ -248,17 +265,5 @@
 | **Segment Sum** | $3.3B | $3.0B | $2.8B | x | x | $2.3B | $4.3B | $4.1B | x | x | x | $3.7B |
 | **Total Revenue** | - | - | $3.0B | $2.2B | $3.0B | $2.3B | $4.3B | $4.1B | $3.0B | $2.8B | $3.1B | $3.7B |
 | **Difference** | - | - | 7% | - | - | ✓ | ✓ | ✓ | - | - | - | ✓ |
-
----
-
-## TSM - Taiwan Semiconductor Manufacturing Company Limited
-
-> ⚠️ Platform segment % data (HPC, Smartphones, IoT, Automotive, etc.) is embedded
-> as chart images in the 6-K earnings presentation slides.
-> Segment % requires manual entry from the PDF presentation.
-
-| Metric | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 | 24Q4 | 24Q3 | 24Q2 | 24Q1 | 23Q4 | 23Q3 | 23Q2 | 23Q1 |
-|--------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
-| **Total Revenue** | - | - | - | $35.9B | $33.7B | $33.1B | $30.1B | $25.5B | $26.9B | $23.5B | $20.8B | $18.9B | $19.6B | $17.3B | $15.7B | $16.7B |
 
 ---

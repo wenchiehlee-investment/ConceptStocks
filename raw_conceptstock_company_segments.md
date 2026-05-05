@@ -20,12 +20,12 @@
 | HPE | Hewlett Packard Enterprise Co. | FY2025 | Server | $17.8B | SEC |
 | HPQ | HP Inc. | FY2025 | Personal Systems | $38.5B | SEC |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
-| MSFT | Microsoft Corporation | FY2025 | Productivity and Business Processes | $120.7B | FMP |
+| MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $102.1B | FMP |
 | MU | Micron Technology, Inc. | FY2025 | Cloud Memory | $13.5B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
 | ORCL | Oracle Corporation | FY2026 | Cloud | $24.1B | SEC |
 | QCOM | Qualcomm Inc. | FY2025 | Handsets | $30.9B | SEC |
-| WDC | Western Digital Corporation | FY2025 | Cloud | $8.3B | SEC |
+| WDC | Western Digital Corporation | FY2026 | Cloud | $8.2B | SEC |
 
 ---
 
@@ -244,22 +244,22 @@
 
 ### Product Segments
 
-| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
+| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Intelligent Cloud | $106.3B | $105.4B | $87.9B | $75.3B | x |
-| Productivity and Business Processes | $120.7B | $77.7B | $69.3B | $63.3B | x |
-| More Personal Computing | $54.8B | $62.1B | $54.7B | $59.7B | x |
-| Server Products And Tools | $98.4B | $91.1B | $80.0B | $67.3B | $52.6B |
-| Microsoft Office | $95.2B | $54.9B | $48.7B | $44.9B | $39.9B |
-| Gaming | $23.5B | $21.5B | $15.5B | $16.2B | $15.4B |
-| Windows | $22.3B | $23.2B | $21.5B | $24.8B | $22.5B |
-| Linked In Corporation | $17.8B | $16.4B | $15.1B | $13.8B | $10.3B |
-| Search And News Advertising | $13.9B | $12.6B | $12.2B | $11.6B | $8.5B |
-| Devices | $17.3B | $4.7B | $5.5B | $7.0B | $6.8B |
+| Intelligent Cloud | $98.5B | $106.3B | $105.4B | $87.9B | $75.3B |
+| Productivity and Business Processes | $102.1B | $120.7B | $77.7B | $69.3B | $63.3B |
+| More Personal Computing | $41.3B | $54.8B | $62.1B | $54.7B | $59.7B |
+| Server Products And Tools | - | $98.4B | $91.1B | $80.0B | $67.3B |
+| Microsoft Office | - | $95.2B | $54.9B | $48.7B | $44.9B |
+| Gaming | - | $23.5B | $21.5B | $15.5B | $16.2B |
+| Windows | - | $22.3B | $23.2B | $21.5B | $24.8B |
+| Linked In Corporation | - | $17.8B | $16.4B | $15.1B | $13.8B |
+| Search And News Advertising | - | $13.9B | $12.6B | $12.2B | $11.6B |
+| Devices | - | $17.3B | $4.7B | $5.5B | $7.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $570.2B | $469.6B | $410.4B | $383.9B | $155.9B |
-| **Total Revenue** | $281.7B | $245.1B | $211.9B | $198.3B | $168.1B |
-| **Difference** | 102.4% | 91.6% | 93.7% | 93.6% | 7.2% |
+| **Segment Sum** | $241.9B | $570.2B | $469.6B | $410.4B | $383.9B |
+| **Total Revenue** | - | $281.7B | $245.1B | $211.9B | $198.3B |
+| **Difference** | - | 102.4% | 91.6% | 93.7% | 93.6% |
 
 ### Geographic Segments
 
@@ -365,17 +365,17 @@
 
 ### Product Segments
 
-| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
+| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Cloud | $8.3B | $8.3B | $5.1B | x | x |
-| Client | $556M | $577M | $691M | x | x |
-| Consumer | $623M | $688M | $811M | x | x |
-| Flash | x | $6.7B | $6.1B | $6.1B | $9.8B |
-| HDD | x | $6.3B | $6.3B | $9.0B | $8.2B |
+| Cloud | $8.2B | $8.3B | $8.3B | $5.1B | x |
+| Client | $501M | $556M | $577M | $691M | x |
+| Consumer | $516M | $623M | $688M | $811M | x |
+| Flash | - | x | $6.7B | $6.1B | $6.1B |
+| HDD | - | x | $6.3B | $6.3B | $9.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $9.5B | $22.6B | $18.9B | $15.1B | $18.0B |
-| **Total Revenue** | $9.5B | $18.8B | $18.8B | $18.8B | $16.9B |
-| **Difference** | ✓ | 20.3% | ✓ | 19.6% | 6.2% |
+| **Segment Sum** | $9.2B | $9.5B | $22.6B | $18.9B | $15.1B |
+| **Total Revenue** | - | $9.5B | $18.8B | $18.8B | $18.8B |
+| **Difference** | - | ✓ | 20.3% | ✓ | 19.6% |
 
 ### Geographic Segments
 
