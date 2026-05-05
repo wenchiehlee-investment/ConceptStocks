@@ -18,6 +18,7 @@ import os
 import sys
 import time
 from datetime import datetime
+from itertools import combinations
 from typing import Dict, List, Any, Optional
 
 # Add parent directory to path for imports
