@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-04-29
+> Last updated: 2026-05-05
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -23,7 +23,7 @@
 | MSFT | Microsoft Corporation | FY2025 | Productivity and Business Processes | $120.7B | FMP |
 | MU | Micron Technology, Inc. | FY2025 | Cloud Memory | $13.5B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
-| ORCL | Oracle Corporation | FY2025 | Cloud and license | $49.2B | SEC |
+| ORCL | Oracle Corporation | FY2026 | Cloud | $24.1B | SEC |
 | QCOM | Qualcomm Inc. | FY2025 | Handsets | $30.9B | SEC |
 | WDC | Western Digital Corporation | FY2025 | Cloud | $8.3B | SEC |
 
@@ -190,14 +190,14 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Server | $17.8B | $16.3B | x | x | x |
-| Networking | $6.8B | $4.5B | x | x | x |
-| Hybrid Cloud | $5.8B | $5.4B | x | x | x |
-| Financial Services | $3.5B | $3.5B | x | x | x |
+| Server | $17.8B | $12.9B | x | x | x |
+| Networking | $6.8B | $3.3B | x | x | x |
+| Hybrid Cloud | $5.8B | $4.2B | x | x | x |
+| Financial Services | $3.5B | $2.6B | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $33.9B | $29.7B | x | x | x |
+| **Segment Sum** | $33.9B | $23.0B | x | x | x |
 | **Total Revenue** | $34.3B | $30.1B | $29.1B | $28.5B | $29.1B |
-| **Difference** | 1.1% | 1.4% | - | - | - |
+| **Difference** | 1.1% | 23.5% | - | - | - |
 
 ---
 
@@ -321,18 +321,18 @@
 
 ### Product Segments
 
-| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
+| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Cloud services and license support | $47.7B | $43.0B | $35.3B | $30.2B | $28.7B |
-| Cloud license and on-premise license | $4.4B | $5.1B | $5.8B | $5.9B | $5.4B |
-| Hardware | $2.9B | $3.1B | $3.3B | $3.2B | $3.4B |
-| Services | $5.2B | $5.4B | $5.6B | $3.2B | $3.0B |
-| Cloud | x | x | x | x | x |
-| Software | x | x | x | x | x |
+| Cloud services and license support | - | $47.7B | $43.0B | $35.3B | $30.2B |
+| Cloud license and on-premise license | - | $4.4B | $5.1B | $5.8B | $5.9B |
+| Hardware | $2.2B | $2.9B | $3.1B | $3.3B | $3.2B |
+| Services | $4.2B | $5.2B | $5.4B | $5.6B | $3.2B |
+| Cloud | $24.1B | x | x | x | x |
+| Software | $17.7B | x | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $60.3B | $56.7B | $50.0B | $42.4B | $40.5B |
-| **Total Revenue** | $57.4B | $53.0B | $50.0B | $42.4B | $40.5B |
-| **Difference** | 5.1% | 7.0% | ✓ | ✓ | ✓ |
+| **Segment Sum** | $48.2B | $60.3B | $56.7B | $50.0B | $42.4B |
+| **Total Revenue** | - | $57.4B | $53.0B | $50.0B | $42.4B |
+| **Difference** | - | 5.1% | 7.0% | ✓ | ✓ |
 
 ### Geographic Segments
 
