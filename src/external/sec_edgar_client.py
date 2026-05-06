@@ -39,6 +39,7 @@ COMPANY_CIK = {
     "HPQ": "0000047217",
     "AVGO": "0001730168",  # Broadcom Inc.
     "HPE": "0001645590",   # Hewlett Packard Enterprise Co.
+    "INTC": "0000050863",  # Intel Corporation
     # Foreign private issuers (file 20-F annual / 6-K quarterly)
     "TSM": "0001046179",   # Taiwan Semiconductor Manufacturing Company (TWSE: 2330)
 }
@@ -61,6 +62,7 @@ FISCAL_YEAR_END_MONTH = {
     "AMZN": 12,  # Dec
     "META": 12,  # Dec
     "AMD": 12,   # Dec
+    "INTC": 12,  # Dec (calendar year)
     "TSM": 12,   # Dec (calendar year) - TIFRS reporting
 }
 

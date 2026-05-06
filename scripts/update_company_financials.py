@@ -109,6 +109,7 @@ COMPANY_NAMES = {
     "HPQ": "HP Inc.",
     "AVGO": "Broadcom Inc.",
     "HPE": "Hewlett Packard Enterprise Co.",
+    "INTC": "Intel Corporation",
     "TSM": "Taiwan Semiconductor Manufacturing Company Limited",
 }
 
