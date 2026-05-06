@@ -29,6 +29,15 @@ on:
         description: "Single symbol (leave empty for all)"
         required: false
         type: string
+      period:
+        description: "Period to fetch"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - annual
+          - quarterly
 
 jobs:
   update:
@@ -56,10 +65,12 @@ jobs:
           TYPE="${{ github.event.inputs.type || 'all' }}"
           SOURCE="${{ github.event.inputs.source || 'all' }}"
           SYMBOL="${{ github.event.inputs.symbol || '' }}"
+          PERIOD="${{ github.event.inputs.period || 'all' }}"
 
           echo "type=$TYPE" >> $GITHUB_OUTPUT
           echo "source=$SOURCE" >> $GITHUB_OUTPUT
           echo "symbol=$SYMBOL" >> $GITHUB_OUTPUT
+          echo "period=$PERIOD" >> $GITHUB_OUTPUT
 
           if [ -z "$SYMBOL" ]; then
             echo "symbol_flag=--all" >> $GITHUB_OUTPUT
@@ -77,6 +88,7 @@ jobs:
             ${{ steps.params.outputs.symbol_flag }} \
             --type ${{ steps.params.outputs.type }} \
             --source ${{ steps.params.outputs.source }} \
+            --period ${{ steps.params.outputs.period }} \
             --years 10 \
             --sleep 1.5
 
