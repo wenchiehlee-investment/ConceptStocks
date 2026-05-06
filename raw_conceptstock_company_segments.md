@@ -95,9 +95,9 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| North America | x | $414.9B | $377.3B | x | x |
-| International | x | $154.6B | $139.7B | x | x |
-| AWS | x | $122.0B | $103.0B | x | x |
+| North America | x | $414.9B | $377.3B | $340.7B | x |
+| International | x | $154.6B | $139.7B | $125.4B | x |
+| AWS | x | $122.0B | $103.0B | $88.0B | x |
 | Online Stores | x | $247.0B | $231.9B | $220.0B | $222.1B |
 | Third-Party Seller Services | $172.2B | $156.1B | $140.1B | $117.7B | $103.4B |
 | Advertising Services | $68.6B | $56.2B | $46.9B | $37.7B | $31.2B |
@@ -106,9 +106,9 @@
 | Amazon Web Services | $128.7B | $107.6B | $90.8B | $80.1B | $62.2B |
 | Other Services | $5.9B | $5.4B | $5.0B | $4.2B | $2.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $447.6B | $1329.5B | $1194.8B | $514.0B | $469.8B |
+| **Segment Sum** | $447.6B | $1329.5B | $1194.8B | $1068.1B | $469.8B |
 | **Total Revenue** | $716.9B | $638.0B | $574.8B | $514.0B | $469.8B |
-| **Difference** | 37.6% | 108.4% | 107.9% | ✓ | ✓ |
+| **Difference** | 37.6% | 108.4% | 107.9% | 107.8% | ✓ |
 
 ### Geographic Segments
 
@@ -246,9 +246,9 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Intelligent Cloud | $98.5B | $106.3B | x | x | x |
-| Productivity and Business Processes | $102.1B | $120.7B | x | x | x |
-| More Personal Computing | $41.3B | $54.8B | x | x | x |
+| Intelligent Cloud | $98.5B | $106.3B | $81.1B | x | x |
+| Productivity and Business Processes | $102.1B | $120.7B | $59.1B | x | x |
+| More Personal Computing | $41.3B | $54.8B | $48.4B | x | x |
 | Server Products And Tools | - | $98.4B | $91.1B | $80.0B | $67.3B |
 | Microsoft Office | - | $95.2B | $54.9B | $48.7B | $44.9B |
 | Gaming | - | $23.5B | $21.5B | $15.5B | $16.2B |
@@ -257,9 +257,9 @@
 | Search And News Advertising | - | $13.9B | $12.6B | $12.2B | $11.6B |
 | Devices | - | $17.3B | $4.7B | $5.5B | $7.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $241.9B | $570.2B | $224.4B | $198.5B | $185.6B |
+| **Segment Sum** | $241.9B | $570.2B | $413.0B | $198.5B | $185.6B |
 | **Total Revenue** | - | $281.7B | $245.1B | $211.9B | $198.3B |
-| **Difference** | - | 102.4% | 8.5% | 6.3% | 6.4% |
+| **Difference** | - | 102.4% | 68.5% | 6.3% | 6.4% |
 
 ### Geographic Segments
 
