@@ -41,6 +41,7 @@ COMPANY_CIK = {
     "HPE": "0001645590",   # Hewlett Packard Enterprise Co.
     "INTC": "0000050863",  # Intel Corporation
     # Foreign private issuers (file 20-F annual / 6-K quarterly)
+    "ASML": "0000937966",  # ASML Holding N.V. (Netherlands)
     "TSM": "0001046179",   # Taiwan Semiconductor Manufacturing Company (TWSE: 2330)
 }
 
@@ -63,13 +64,14 @@ FISCAL_YEAR_END_MONTH = {
     "META": 12,  # Dec
     "AMD": 12,   # Dec
     "INTC": 12,  # Dec (calendar year)
+    "ASML": 12,  # Dec (calendar year) - Dutch IFRS reporting
     "TSM": 12,   # Dec (calendar year) - TIFRS reporting
 }
 
 # Companies that file 6-K (foreign private issuers) instead of 8-K / 10-Q
 # Income statements parsed from 6-K earnings conference presentation (Exhibit 99.2)
 # Platform segment % data is NOT available via text parsing (embedded as chart images)
-FOREIGN_FILERS_6K = {"TSM"}
+FOREIGN_FILERS_6K = {"TSM", "ASML"}
 
 # XBRL concepts for income statement metrics (US GAAP / XBRL filers only)
 INCOME_CONCEPTS = {

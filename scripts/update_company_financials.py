@@ -110,6 +110,7 @@ COMPANY_NAMES = {
     "AVGO": "Broadcom Inc.",
     "HPE": "Hewlett Packard Enterprise Co.",
     "INTC": "Intel Corporation",
+    "ASML": "ASML Holding N.V.",
     "TSM": "Taiwan Semiconductor Manufacturing Company Limited",
 }
 
