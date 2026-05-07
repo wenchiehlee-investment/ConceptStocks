@@ -211,6 +211,50 @@ class FMPClient:
 
         return results
 
+    def get_earnings(
+        self, symbol: str, limit: int = 20
+    ) -> List[Dict[str, Any]]:
+        """
+        Get earnings data including Non-GAAP EPS (as reported) and analyst estimates.
+
+        The FMP earnings endpoint returns the EPS that companies announce in their
+        press releases (Non-GAAP / adjusted), plus the analyst consensus estimate
+        and the surprise percentage.
+
+        Args:
+            symbol: Stock ticker symbol
+            limit: Number of quarters to fetch
+
+        Returns:
+            List of earnings records with keys:
+              fiscal_date_ending, period, non_gaap_eps, eps_estimate, eps_surprise_pct
+        """
+        url = (
+            f"{self.BASE_URL}/stable/earnings"
+            f"?symbol={symbol}&limit={limit}&apikey={self.api_key}"
+        )
+        data = self._fetch_json(url)
+        if not data or not isinstance(data, list):
+            return []
+
+        results = []
+        for item in data:
+            fiscal_date = item.get("fiscalDateEnding") or item.get("date")
+            period_raw = item.get("period", "")
+            # Normalise period: "Q1" / "Q2" / "Q3" / "Q4" / "FY"
+            period = period_raw.upper() if period_raw else ""
+
+            results.append({
+                "symbol": symbol,
+                "fiscal_date_ending": fiscal_date,
+                "period": period,
+                "non_gaap_eps": self._safe_float(item.get("actual")),
+                "eps_estimate": self._safe_float(item.get("estimated")),
+                "eps_surprise_pct": self._safe_float(item.get("surprisePercentage")),
+                "source_url": mask_api_key(url),
+            })
+        return results
+
     def _safe_float(self, value) -> Optional[float]:
         """Safely convert value to float."""
         if value is None or value == "None":

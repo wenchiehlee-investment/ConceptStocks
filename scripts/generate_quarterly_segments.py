@@ -902,6 +902,31 @@ def main():
         all_data = list(seen.values())
         print(f"  After deduplication: {len(all_data)} records")
 
+        # Remove obsolete combined segments when their individual components both exist.
+        # AMD changed reporting structure: "Client and Gaming" was the old combined segment;
+        # new filings report "Client" and "Gaming" separately.  XBRL includes both the old
+        # and new names in the same filing (for prior-year comparison), creating duplicates.
+        COMBINED_SEGMENT_SPLITS = {
+            'AMD': {'Client and Gaming': ('Client', 'Gaming')},
+        }
+        combined_removals = set()
+        by_sym_q = defaultdict(set)
+        for r in all_data:
+            by_sym_q[(r['symbol'], r['fiscal_year'], r['quarter'])].add(r['segment_name'])
+        for r in all_data:
+            splits = COMBINED_SEGMENT_SPLITS.get(r['symbol'], {})
+            if r['segment_name'] in splits:
+                parts = splits[r['segment_name']]
+                period_key = (r['symbol'], r['fiscal_year'], r['quarter'])
+                if all(p in by_sym_q[period_key] for p in parts):
+                    combined_removals.add((r['symbol'], r['fiscal_year'], r['quarter'], r['segment_name']))
+        if combined_removals:
+            before = len(all_data)
+            all_data = [r for r in all_data
+                        if (r['symbol'], r['fiscal_year'], r['quarter'], r['segment_name'])
+                        not in combined_removals]
+            print(f"  Removed {before - len(all_data)} obsolete combined segments (e.g. AMD 'Client and Gaming')")
+
         # Write CSV (before adding TSM platform data — need income_totals first)
         # TSM platform data is added below after loading income CSV
         generate_csv(all_data, csv_path)

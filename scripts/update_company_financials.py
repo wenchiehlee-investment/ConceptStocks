@@ -54,6 +54,9 @@ INCOME_FIELDNAMES = [
     "tax",
     "net_income",
     "eps",
+    "non_gaap_eps",
+    "eps_estimate",
+    "eps_surprise_pct",
     "rpo",
     "capex",
     "gross_margin",
@@ -581,6 +584,80 @@ def calculate_yoy(rows: List[Dict], value_field: str, yoy_field: str) -> List[Di
     return rows
 
 
+def _build_earnings_index(
+    symbols: List[str],
+    av_client,
+    fmp_client,
+    sleep: float = 1.0,
+) -> Dict[tuple, Dict]:
+    """Build earnings index keyed by (symbol, fiscal_year, period) from AV then FMP fallback."""
+    index: Dict[tuple, Dict] = {}
+
+    for symbol in symbols:
+        records = []
+
+        # Prefer Alpha Vantage (free, already integrated)
+        if av_client:
+            try:
+                time.sleep(sleep)
+                records = av_client.get_earnings(symbol)
+                if records:
+                    print(f"    Non-GAAP EPS via AlphaVantage: {symbol} ({len(records)} quarters)")
+            except Exception as e:
+                print(f"  AV earnings error for {symbol}: {e}", file=sys.stderr)
+
+        # Fallback to FMP if AV returned nothing
+        if not records and fmp_client:
+            try:
+                time.sleep(sleep)
+                records = fmp_client.get_earnings(symbol, limit=30)
+                if records:
+                    print(f"    Non-GAAP EPS via FMP fallback: {symbol} ({len(records)} quarters)")
+            except Exception as e:
+                print(f"  FMP earnings error for {symbol}: {e}", file=sys.stderr)
+
+        for r in records:
+            fd = r.get("fiscal_date_ending") or ""
+            fy = int(fd[:4]) if len(fd) >= 4 else None
+            period = r.get("period", "")
+            if fy and period:
+                index[(symbol, fy, period)] = r
+
+    return index
+
+
+def _merge_non_gaap_eps(
+    rows: List[Dict],
+    fmp_client,
+    symbols: List[str],
+    sleep: float = 1.0,
+    av_client=None,
+) -> None:
+    """Merge Non-GAAP EPS into income rows in-place.
+
+    Uses AlphaVantage (free) first; falls back to FMP if unavailable.
+    Matches on (symbol, fiscal_year, period). Skips rows that already have a value.
+    """
+    earnings_index = _build_earnings_index(symbols, av_client, fmp_client, sleep)
+
+    for row in rows:
+        if row.get("non_gaap_eps"):
+            continue
+        sym = row.get("symbol")
+        period = row.get("period")
+        fy_raw = row.get("fiscal_year")
+        for cast in (lambda x: x, int, str):
+            try:
+                hit = earnings_index.get((sym, cast(fy_raw), period))
+                if hit:
+                    row["non_gaap_eps"] = hit.get("non_gaap_eps")
+                    row["eps_estimate"] = hit.get("eps_estimate")
+                    row["eps_surprise_pct"] = hit.get("eps_surprise_pct")
+                    break
+            except (TypeError, ValueError):
+                continue
+
+
 def update_income_statements(
     symbols: List[str],
     sources: List[str],
@@ -652,6 +729,10 @@ def update_income_statements(
                 fmp_client, symbol, years, include_quarterly=include_quarterly
             )
             all_data.extend(fmp_data)
+
+    # Merge Non-GAAP EPS: AV (free) first, FMP as fallback
+    if av_client or fmp_client:
+        _merge_non_gaap_eps(all_data, fmp_client, symbols, sleep, av_client=av_client)
 
     # Merge with existing data (keyed by symbol, fiscal_year, period, source)
     for row in all_data:

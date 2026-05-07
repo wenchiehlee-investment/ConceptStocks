@@ -141,6 +141,55 @@ class AlphaVantageClient:
 
         return results
 
+    def get_earnings(
+        self, symbol: str
+    ) -> List[Dict[str, Any]]:
+        """
+        Get earnings data including Non-GAAP EPS (reportedEPS) and analyst estimates.
+
+        Alpha Vantage EARNINGS endpoint returns the EPS companies announce in their
+        press releases (Non-GAAP / adjusted), plus analyst consensus (estimatedEPS)
+        and surprise metrics. Free tier, 1 request per symbol.
+
+        Returns:
+            List of quarterly earnings records with keys:
+              fiscal_date_ending, period, non_gaap_eps, eps_estimate, eps_surprise_pct
+        """
+        url = f"{self.BASE_URL}?function=EARNINGS&symbol={symbol}&apikey={self.api_key}"
+        data = self._fetch_json(url)
+
+        if "Information" in data:
+            raise RuntimeError(f"API limit reached: {data['Information']}")
+        if "Error Message" in data:
+            raise RuntimeError(f"API error: {data['Error Message']}")
+
+        results = []
+        for report in data.get("quarterlyEarnings", []):
+            fiscal_date = report.get("fiscalDateEnding")
+            if not fiscal_date:
+                continue
+
+            month = int(fiscal_date[5:7])
+            quarter_map = {3: "Q1", 6: "Q2", 9: "Q3", 12: "Q4",
+                           1: "Q1", 2: "Q1", 4: "Q2", 5: "Q2",
+                           7: "Q3", 8: "Q3", 10: "Q4", 11: "Q4"}
+            period = quarter_map.get(month, "Q4")
+
+            reported = self._safe_float(report.get("reportedEPS"))
+            estimated = self._safe_float(report.get("estimatedEPS"))
+            surprise = self._safe_float(report.get("surprisePercentage"))
+
+            results.append({
+                "symbol": symbol,
+                "fiscal_date_ending": fiscal_date,
+                "period": period,
+                "non_gaap_eps": reported,
+                "eps_estimate": estimated,
+                "eps_surprise_pct": surprise,
+                "source_url": mask_api_key(url),
+            })
+        return results
+
     def _safe_float(self, value) -> Optional[float]:
         """Safely convert value to float."""
         if value is None or value == "None":
