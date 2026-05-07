@@ -8,6 +8,10 @@ If a segment has no data, it should display "x" instead of being omitted.
 # Unified product segments per company (A-Z order)
 # Combines segments from both FMP (annual) and SEC 8-K/10-Q (quarterly) sources
 UNIFIED_PRODUCT_SEGMENTS = {
+    'ARM': [
+        'Royalty',
+        'License and other',
+    ],
     'AAPL': [
         'iPhone',
         'Mac',

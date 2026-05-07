@@ -47,6 +47,7 @@ CONCEPT_TO_TICKER = {
     "Broadcom概念": ("AVGO", "Broadcom Inc."),
     "HPQ概念": ("HPQ", "HP Inc."),
     "HPE概念": ("HPE", "Hewlett Packard Enterprise Co."),
+    "ARM概念": ("ARM", "Arm Holdings plc"),
     # OpenAI is private
 }
 
