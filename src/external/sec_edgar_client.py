@@ -33,7 +33,8 @@ COMPANY_CIK = {
     "AAPL": "0000320193",
     "ORCL": "0001341439",
     "MU": "0000723125",
-    "WDC": "0000106040",
+    "WDC":  "0000106040",
+    "SNDK": "0002023554",  # Sandisk Corp (spun off from WDC Feb 2026, NASDAQ: SNDK)
     "QCOM": "0000804328",
     "DELL": "0001571996",
     "HPQ": "0000047217",
@@ -53,7 +54,8 @@ FISCAL_YEAR_END_MONTH = {
     "DELL": 1,   # Jan
     "ORCL": 5,   # May
     "MSFT": 6,   # Jun
-    "WDC": 7,    # Jul — 52-week FY ends first Friday of July; Q1 ends ~Oct, Q2 ~Jan, Q3 ~Apr
+    "WDC":  7,   # Jul — 52-week FY ends first Friday of July; Q1 ends ~Oct, Q2 ~Jan, Q3 ~Apr
+    "SNDK": 7,   # Jul — same fiscal calendar as WDC (spun off Feb 2026)
     "MU": 8,     # Aug
     "AAPL": 9,   # Sep
     "QCOM": 9,   # Sep

@@ -72,7 +72,7 @@ from src.segment_config import UNIFIED_PRODUCT_SEGMENTS
 
 
 # Companies with quarterly product segment data available from 10-Q parsing
-QUARTERLY_PRODUCT_SUPPORTED = ['AMD', 'ORCL', 'WDC']
+QUARTERLY_PRODUCT_SUPPORTED = ['AMD', 'ORCL', 'WDC', 'SNDK']
 
 # Companies with quarterly data from 8-K earnings press releases
 # Note: ORCL is in both 10-Q and 8-K lists - 10-Q for Q1-Q3, 8-K for Q4
@@ -98,7 +98,8 @@ COMPANY_NAMES = {
     'AAPL': 'Apple Inc.',
     'ORCL': 'Oracle Corporation',
     'MU': 'Micron Technology, Inc.',
-    'WDC': 'Western Digital Corporation',
+    'WDC':  'Western Digital Corporation',
+    'SNDK': 'Sandisk Corp',
     'DELL': 'Dell Technologies Inc.',
     'TSM': 'Taiwan Semiconductor Manufacturing Company Limited',
     'QCOM': 'Qualcomm Inc.',
