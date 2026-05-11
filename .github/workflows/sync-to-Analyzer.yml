@@ -15,6 +15,8 @@ on:
        - raw_conceptstock_company_segment_overrides.csv
        - raw_conceptstock_company_metadata.csv
        - raw_column_definition.md
+       - .github/sync-to-YahooFinance.yml
+       - .github/workflows/sync-to-Analyzer.yml
 
 concurrency:
   group: sync-analyzer
@@ -59,6 +61,15 @@ jobs:
         with:
           GH_PAT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_MONEY }}
           CONFIG_PATH: .github/sync-to-biztrends.yml
+          COMMIT_EACH_FILE: false
+          PR_LABELS: "automated-sync"
+          SKIP_PR: true
+
+      - name: Sync up to Yahoo.Finance
+        uses: BetaHuhn/repo-file-sync-action@v1
+        with:
+          GH_PAT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE }}
+          CONFIG_PATH: .github/sync-to-YahooFinance.yml
           COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true

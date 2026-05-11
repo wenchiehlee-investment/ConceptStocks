@@ -1,0 +1,9 @@
+# .github/sync-to-YahooFinance.yml
+group:
+  - files:
+      - source: raw_conceptstock_company_metadata.csv
+        dest:   raw_conceptstock_company_metadata.csv
+      - source: raw_column_definition.md
+        dest:   definitions/raw_column_definition_ConceptStocks.md
+    repos: |
+      wenchiehlee/Yahoo.Finance
