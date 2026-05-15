@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-05-06
+> Last updated: 2026-05-15
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -17,7 +17,7 @@
 | AVGO | Broadcom Inc. | FY2025 | Semiconductor solutions | $36.9B | SEC |
 | DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
 | GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
-| HPE | Hewlett Packard Enterprise Co. | FY2025 | Server | $17.8B | SEC |
+| HPE | Hewlett Packard Enterprise Co. | FY2025 | Server | $13.5B | SEC |
 | HPQ | HP Inc. | FY2025 | Personal Systems | $38.5B | SEC |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
 | MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $102.1B | FMP |
@@ -68,12 +68,12 @@
 | Gaming | $3.9B | $2.6B | $6.2B | $6.8B | $5.6B |
 | Embedded | $3.5B | $3.6B | $5.3B | $4.6B | $246M |
 | Computing and Graphics | x | x | x | x | $9.3B |
-| Enterprise, Embedded and Semi-Custom | x | x | x | x | $4.9B |
+| Enterprise, Embedded and Semi-Custom | x | x | x | x | x |
 | Client and Gaming | $14.6B | $8.5B | $9.9B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $33.0B |
+| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $28.1B |
 | **Total Revenue** | $34.6B | $25.8B | $23.6B | $23.6B | $16.4B |
-| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 100.7% |
+| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 71.1% |
 
 ### Geographic Segments
 
@@ -128,12 +128,12 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Semiconductor solutions | $36.9B | $30.1B | $28.2B | x | x |
-| Infrastructure software | $27.0B | $21.5B | $7.6B | x | x |
+| Semiconductor solutions | $36.9B | $22.7B | x | x | x |
+| Infrastructure software | $27.0B | $16.9B | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $63.9B | $51.6B | $35.8B | x | x |
+| **Segment Sum** | $63.9B | $39.6B | x | x | x |
 | **Total Revenue** | $63.9B | $51.6B | $35.8B | $33.2B | $27.4B |
-| **Difference** | ✓ | ✓ | ✓ | - | - |
+| **Difference** | ✓ | 23.2% | - | - | - |
 
 ---
 
@@ -143,15 +143,15 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | $54.7B | $43.6B | x | x | x |
-| Client Solutions Group | $51.0B | $48.4B | x | x | x |
+| Infrastructure Solutions Group | $54.7B | x | x | x | x |
+| Client Solutions Group | $51.0B | x | x | x | x |
 | Servers and networking | $44.2B | $27.1B | $17.6B | $20.4B | $17.9B |
 | Storage | $16.6B | $16.5B | $16.3B | $18.0B | $16.5B |
 | Services | - | $23.1B | $24.1B | $24.1B | $23.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $166.5B | $158.7B | $58.0B | $62.4B | $57.4B |
+| **Segment Sum** | $166.5B | $66.7B | $58.0B | $62.4B | $57.4B |
 | **Total Revenue** | $113.5B | $102.3B | $102.3B | $102.3B | $101.2B |
-| **Difference** | 46.7% | 55.2% | 43.3% | 39.0% | 43.3% |
+| **Difference** | 46.7% | 34.8% | 43.3% | 39.0% | 43.3% |
 
 ---
 
@@ -190,14 +190,14 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Server | $17.8B | $12.9B | x | x | x |
-| Networking | $6.8B | $3.3B | x | x | x |
-| Hybrid Cloud | $5.8B | $4.2B | x | x | x |
-| Financial Services | $3.5B | $2.6B | x | x | x |
+| Server | $13.5B | x | x | x | x |
+| Networking | $5.7B | x | x | x | x |
+| Hybrid Cloud | $4.4B | x | x | x | x |
+| Financial Services | $2.6B | x | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $33.9B | $23.0B | x | x | x |
+| **Segment Sum** | $26.2B | x | x | x | x |
 | **Total Revenue** | $34.3B | $30.1B | $29.1B | $28.5B | $29.1B |
-| **Difference** | 1.1% | 23.5% | - | - | - |
+| **Difference** | 23.5% | - | - | - | - |
 
 ---
 
@@ -207,12 +207,12 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Personal Systems | $38.5B | $36.2B | $35.7B | $44,011 | $43,332 |
-| Printing | $16.8B | $17.4B | $18.0B | $18,902 | $20,128 |
+| Personal Systems | $38.5B | $27.4B | $35,684 | $44,011 | $43,332 |
+| Printing | $16.8B | $13.0B | $18,029 | $18,902 | $20,128 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $55.3B | $53.6B | $53.7B | $62,913 | $63,460 |
+| **Segment Sum** | $55.3B | $40.4B | $53,713 | $62,913 | $63,460 |
 | **Total Revenue** | $55.3B | $62.9B | $63.5B | $63.5B | $63.5B |
-| **Difference** | ✓ | 14.8% | 15.4% | 100.0% | 100.0% |
+| **Difference** | ✓ | 35.8% | 100.0% | 100.0% | 100.0% |
 
 ---
 
@@ -246,9 +246,9 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Intelligent Cloud | $98.5B | $106.3B | $105.4B | $87.9B | $75.3B |
-| Productivity and Business Processes | $102.1B | $120.7B | $77.7B | $69.3B | $63.3B |
-| More Personal Computing | $41.3B | $54.8B | $62.1B | $54.7B | $59.7B |
+| Intelligent Cloud | $98.5B | $106.3B | $105.4B | x | x |
+| Productivity and Business Processes | $102.1B | $120.7B | $77.7B | x | x |
+| More Personal Computing | $41.3B | $54.8B | $62.1B | x | x |
 | Server Products And Tools | - | $98.4B | $91.1B | $80.0B | $67.3B |
 | Microsoft Office | - | $95.2B | $54.9B | $48.7B | $44.9B |
 | Gaming | - | $23.5B | $21.5B | $15.5B | $16.2B |
@@ -257,9 +257,9 @@
 | Search And News Advertising | - | $13.9B | $12.6B | $12.2B | $11.6B |
 | Devices | - | $17.3B | $4.7B | $5.5B | $7.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $241.9B | $570.2B | $469.6B | $410.4B | $383.9B |
+| **Segment Sum** | $241.9B | $570.2B | $469.6B | $198.5B | $185.6B |
 | **Total Revenue** | - | $281.7B | $245.1B | $211.9B | $198.3B |
-| **Difference** | - | 102.4% | 91.6% | 93.7% | 93.6% |
+| **Difference** | - | 102.4% | 91.6% | 6.3% | 6.4% |
 
 ### Geographic Segments
 
