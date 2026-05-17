@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,6 +52,8 @@ jobs:
           python3 scripts/update_conceptstocks.py --sync-concepts
 
       - name: Update concept metadata
+        id: update_metadata
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
@@ -65,6 +68,39 @@ jobs:
           AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
         run: |
           python3 scripts/update_concept_metadata.py --companyinfo-path raw_companyinfo.csv --keep-extra-concepts
+
+      - name: Create issue if metadata failed
+        if: steps.update_metadata.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          EXISTING=$(gh issue list --repo ${{ github.repository }} --state open --label "gemini-auth" --json number --jq 'length')
+          if [ "$EXISTING" -eq "0" ]; then
+            gh issue create \
+              --repo ${{ github.repository }} \
+              --title "🔐 Gemini CLI token 需要重新認證" \
+              --label "gemini-auth" \
+              --body "## 問題
+          \`update_concept_metadata\` 步驟失敗，SmartRoute \`/smart/exec\` 回傳 500。
+          Gemini CLI 的 OAuth token 可能遺失或失效。
+
+          ## 解決步驟
+          在**有瀏覽器的筆電**上執行：
+
+          \`\`\`bash
+          gemini auth login
+          \`\`\`
+
+          完成後把 token 複製到 NAS：
+          \`\`\`bash
+          scp -r ~/.gemini/ <nas_user>@<nas_ip>:/volume1/docker/Llm-Cli-APIServer/gemini-auth/
+          docker restart llm-cli-api-server
+          \`\`\`
+
+          完成後請關閉此 Issue。
+
+          > 觸發 workflow：[${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          fi
 
       - name: Commit and push
         run: |
