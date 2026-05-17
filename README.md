@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-05-04 11:00:22 CST
+Update time: 2026-05-17 06:49:08 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -21,15 +21,18 @@ Update time: 2026-05-04 11:00:22 CST
 | AMD概念 | Advanced Micro Devices | AMD | 0000002488 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Data Center, Client, Gaming, Embedded |
 | Apple概念 | Apple Inc. | AAPL | 0000320193 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | iPhone, Mac, iPad, Services, Wearables |
 | Oracle概念 | Oracle Corporation | ORCL | 0001341439 | FY2026 Q2 | FY2026 Q3 | 2026年3月 | Cloud services, Hardware, Services |
-| Micro概念 | Micron Technology | MU | 0000723125 | FY2026 Q1 | FY2026 Q2 | 2026年3月 | Cloud Memory, Mobile and Client, Core Data Center |
-| SanDisk概念 | Western Digital | WDC | 0000106040 | FY2026 Q2 | FY2026 Q3 | 2026年4月 | Cloud, Client, Consumer, Flash, HDD |
+| Micron概念 | Micron Technology, Inc. | MU | 0000723125 | FY2026 Q2 | FY2026 Q3 | 2026年6月 | DRAM記憶體,NAND快閃記憶體,HBM,SSD,資料中心與AI記憶體 |
+| SanDisk概念 | Sandisk Corp | SNDK | 0002023554 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | Datacenter, Edge, Consumer |
 | Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
 | Lenovo概念 | Lenovo Group ADR | LNVGY | 0000932477 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
 | Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Servers and networking, Storage |
 | HPQ概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
 | HPE概念 | Hewlett Packard Enterprise Co. | HPE | 0001645590 | FY2025 Q4 | FY2026 Q1 | 2026年3月 | Compute, Storage, Intelligent Edge, Financial Services |
+| Intel概念 | Intel Corporation | INTC | 0000050863 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | Client Computing Group, Data Center and AI, Intel Foundry, All other |
+| ASML概念 | ASML Holding N.V. | ASML | 0000937966 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | EUV光刻系統, DUV光刻系統, 量測與檢測, Installed Base Management |
+| ARM概念 | Arm Holdings plc | ARM | 0001986278 | FY2025 Q4 | FY2026 Q1 | 2025年7月 | Royalty, License and other |
 
-> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 18 個）
+> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 21 個）
 > 概念 metadata：`raw_conceptstock_company_metadata.csv`
 
 
