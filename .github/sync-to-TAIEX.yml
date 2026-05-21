@@ -1,0 +1,17 @@
+# .github/sync-to-TAIEX.yml
+group:
+  - files:
+      # No. 34: Company income statement
+      - source: raw_conceptstock_company_income.csv
+        dest:   data/ConceptStocks/raw_conceptstock_company_income.csv
+      # No. 35: Quarterly product segment revenue
+      - source: raw_conceptstock_company_quarterly_segments.csv
+        dest:   data/ConceptStocks/raw_conceptstock_company_quarterly_segments.csv
+      # No. 37: Company metadata
+      - source: raw_conceptstock_company_metadata.csv
+        dest:   data/ConceptStocks/raw_conceptstock_company_metadata.csv
+      # Raw column definition document
+      - source: raw_column_definition.md
+        dest:   data/ConceptStocks/raw_column_definition_ConceptStocks.md
+    repos: |
+      wenchiehlee-money/TAIEX.TW
