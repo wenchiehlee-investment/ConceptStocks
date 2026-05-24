@@ -8,7 +8,7 @@ group:
       - source: raw_conceptstock_company_quarterly_segments.csv
         dest:   data/ConceptStocks/raw_conceptstock_company_quarterly_segments.csv
       # Raw column definition document for synced ConceptStocks files
-      - source: raw_column_definition.md
+      - source: raw_column_definition_ConceptStocks.md
         dest:   data/ConceptStocks/raw_column_definition_ConceptStocks.md
     repos: |
       wenchiehlee-money/biztrends.TW

@@ -11,7 +11,8 @@ group:
       - source: raw_conceptstock_company_metadata.csv
         dest:   data/ConceptStocks/raw_conceptstock_company_metadata.csv
       # Raw column definition document
-      - source: raw_column_definition.md
-        dest:   data/ConceptStocks/raw_column_definition_ConceptStocks.md
+      - source: raw_column_definition_ConceptStocks.md
+        dest:   definitions/raw_column_definition_ConceptStocks.md
+
     repos: |
       wenchiehlee-money/TAIEX.TW

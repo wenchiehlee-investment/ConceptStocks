@@ -3,7 +3,7 @@ group:
   - files:
       - source: raw_conceptstock_company_metadata.csv
         dest:   data/conceptstocks_raw/raw_conceptstock_company_metadata.csv
-      - source: raw_column_definition.md
+      - source: raw_column_definition_ConceptStocks.md
         dest:   data/conceptstocks_raw/raw_column_definition_ConceptStocks.md
     repos: |
       wenchiehlee/Yahoo.Finance
