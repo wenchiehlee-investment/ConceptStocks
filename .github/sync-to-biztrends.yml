@@ -7,6 +7,19 @@ group:
       # No. 35: Quarterly product segment revenue, used by biztrends.TW Sankey revenue sizing
       - source: raw_conceptstock_company_quarterly_segments.csv
         dest:   data/ConceptStocks/raw_conceptstock_company_quarterly_segments.csv
+      # Company metadata
+      - source: raw_conceptstock_company_metadata.csv
+        dest:   data/ConceptStocks/raw_conceptstock_company_metadata.csv
+      # Segment overrides
+      - source: raw_conceptstock_company_segment_overrides.csv
+        dest:   data/ConceptStocks/raw_conceptstock_company_segment_overrides.csv
+      # Price data
+      - source: raw_conceptstock_daily.csv
+        dest:   data/ConceptStocks/raw_conceptstock_daily.csv
+      - source: raw_conceptstock_monthly.csv
+        dest:   data/ConceptStocks/raw_conceptstock_monthly.csv
+      - source: raw_conceptstock_weekly.csv
+        dest:   data/ConceptStocks/raw_conceptstock_weekly.csv
       # Raw column definition document for synced ConceptStocks files
       - source: raw_column_definition_ConceptStocks.md
         dest:   data/ConceptStocks/raw_column_definition_ConceptStocks.md
