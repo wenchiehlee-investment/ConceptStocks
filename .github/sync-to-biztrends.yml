@@ -4,6 +4,8 @@ group:
       # No. 34: Company income statement, including capex used by biztrends.TW CSP index
       - source: raw_conceptstock_company_income.csv
         dest:   data/ConceptStocks/raw_conceptstock_company_income.csv
+      - source: raw_conceptstock_company_revenue.csv
+        dest:   data/ConceptStocks/raw_conceptstock_company_revenue.csv
       # No. 35: Quarterly product segment revenue, used by biztrends.TW Sankey revenue sizing
       - source: raw_conceptstock_company_quarterly_segments.csv
         dest:   data/ConceptStocks/raw_conceptstock_company_quarterly_segments.csv
