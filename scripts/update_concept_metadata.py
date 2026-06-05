@@ -8,7 +8,7 @@ import subprocess
 import sys
 import time
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from typing import Dict, List
 
 import requests
@@ -286,7 +286,7 @@ JSON keys（必填）：
 
 
 def write_metadata(path: str, rows: List[Dict[str, str]]) -> None:
-    process_timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    process_timestamp = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S CST")
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=OUTPUT_FIELDS)
         writer.writeheader()
