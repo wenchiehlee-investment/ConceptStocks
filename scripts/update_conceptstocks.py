@@ -902,6 +902,11 @@ def parse_args() -> argparse.Namespace:
         default="",
         help="Optional CSV path for Yahoo-vs-Alpha verification summary.",
     )
+    parser.add_argument(
+        "--ignore-errors",
+        action="store_true",
+        help="Continue updating other tickers if one fails, and exit with 0 if at least one ticker succeeds.",
+    )
     return parser.parse_args()
 
 
@@ -984,27 +989,35 @@ def main() -> int:
 
     cadences = ["daily", "weekly", "monthly"] if args.cadence == "all" else [args.cadence]
     verification_rows: List[Dict[str, object]] = []
+    failed_tickers: List[Tuple[str, str, str]] = []
 
     for cadence in cadences:
         for i, (ticker, name) in enumerate(tickers.items()):
             if i > 0 or cadence != cadences[0]:
                 time.sleep(args.sleep)
-            verify_summary = update_for_ticker(
-                ticker=ticker,
-                name=name,
-                cadence=cadence,
-                api_key=api_key,
-                out_dir=args.out_dir,
-                provider=args.provider,
-                daily_outputsize=daily_outputsize,
-                start_date=start_date,
-                end_date=end_date,
-                verify_against_alphavantage=args.verify_against_alphavantage,
-                verify_close_tolerance=args.verify_close_tolerance,
-            )
-            if verify_summary is not None:
-                verification_rows.append(verify_summary)
-            print(f"Updated {cadence} for {ticker}")
+            try:
+                verify_summary = update_for_ticker(
+                    ticker=ticker,
+                    name=name,
+                    cadence=cadence,
+                    api_key=api_key,
+                    out_dir=args.out_dir,
+                    provider=args.provider,
+                    daily_outputsize=daily_outputsize,
+                    start_date=start_date,
+                    end_date=end_date,
+                    verify_against_alphavantage=args.verify_against_alphavantage,
+                    verify_close_tolerance=args.verify_close_tolerance,
+                )
+                if verify_summary is not None:
+                    verification_rows.append(verify_summary)
+                print(f"Updated {cadence} for {ticker}")
+            except Exception as e:
+                if args.ignore_errors:
+                    print(f"Error updating {cadence} for {ticker}: {e}", file=sys.stderr)
+                    failed_tickers.append((ticker, cadence, str(e)))
+                else:
+                    raise
 
         if args.all:
             removed = prune_inactive_tickers(args.out_dir, cadence, list(tickers.keys()))
@@ -1031,6 +1044,17 @@ def main() -> int:
         if args.verify_strict and mismatch_tickers:
             print("Verification strict mode failed due to mismatches above tolerance.", file=sys.stderr)
             return 2
+
+    if failed_tickers:
+        print("\n=== Update Failures ===", file=sys.stderr)
+        for t, c, err in failed_tickers:
+            print(f"  - {t} ({c}): {err}", file=sys.stderr)
+        print("=======================\n", file=sys.stderr)
+        
+        total_attempts = len(tickers) * len(cadences)
+        if len(failed_tickers) >= total_attempts:
+            print("All ticker updates failed. Exiting with non-zero code.", file=sys.stderr)
+            return 1
 
     return 0
 
