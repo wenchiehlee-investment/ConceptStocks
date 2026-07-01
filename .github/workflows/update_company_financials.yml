@@ -2,9 +2,8 @@ name: Update Company Financials
 
 on:
   schedule:
-    # Quarterly updates - after earnings season
-    # Feb 15, May 15, Aug 15, Nov 15 at 00:00 UTC
-    - cron: "0 0 15 2,5,8,11 *"
+    # Monthly updates on the 15th at 00:00 UTC
+    - cron: "0 0 15 * *"
   workflow_dispatch:
     inputs:
       type:
