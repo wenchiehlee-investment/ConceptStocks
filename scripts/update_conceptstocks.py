@@ -285,9 +285,9 @@ def merge_and_recalc(
 ) -> List[Dict[str, object]]:
     date_col = DATE_LABEL[cadence]
     now = datetime.now()
-    download_ts = now.strftime("%Y-%m-%d %H:%M:%S")
-    process_ts = now.strftime("%Y-%m-%d %H:%M:%S")
-    stage1_ts = now.strftime("%Y-%m-%d %H:%M:%S.%f")
+    download_ts = now.strftime("%Y-%m-%d %H:%M:%S CST")
+    process_ts = now.strftime("%Y-%m-%d %H:%M:%S CST")
+    stage1_ts = now.strftime("%Y-%m-%d %H:%M:%S.%f CST")
     for r in new_rows:
         key = (ticker, r["date_key"])
         existing[key] = {

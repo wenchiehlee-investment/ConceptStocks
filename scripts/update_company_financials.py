@@ -163,9 +163,9 @@ def get_timestamps() -> Dict[str, str]:
     """Get current timestamps for CSV metadata."""
     now = datetime.now()
     return {
-        "download_timestamp": now.strftime("%Y-%m-%d %H:%M:%S"),
-        "process_timestamp": now.strftime("%Y-%m-%d %H:%M:%S"),
-        "stage1_process_timestamp": now.strftime("%Y-%m-%d %H:%M:%S.%f"),
+        "download_timestamp": now.strftime("%Y-%m-%d %H:%M:%S CST"),
+        "process_timestamp": now.strftime("%Y-%m-%d %H:%M:%S CST"),
+        "stage1_process_timestamp": now.strftime("%Y-%m-%d %H:%M:%S.%f CST"),
     }
 
 

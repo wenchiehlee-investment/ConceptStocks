@@ -417,7 +417,7 @@ def generate_csv(data: list, output_path: str):
         print("  No data to write")
         return
 
-    process_timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+    process_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S CST")
     fieldnames = [
         'symbol', 'company_name', 'fiscal_year', 'quarter',
         'segment_name', 'revenue', 'end_date', 'is_calculated',
