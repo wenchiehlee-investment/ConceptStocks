@@ -2,8 +2,11 @@ name: Update Company Financials
 
 on:
   schedule:
-    # Monthly updates on the 15th at 00:00 UTC
-    - cron: "0 0 15 * *"
+    # Daily updates at 00:00 UTC (was monthly on the 15th -- caused up to a
+    # month of lag between a company's actual SEC filing and this repo
+    # picking it up, e.g. MU's FY2026 Q3 10-Q filed 2026-06-25 wasn't due
+    # to be fetched until the next scheduled run on 2026-07-15)
+    - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
       type:
