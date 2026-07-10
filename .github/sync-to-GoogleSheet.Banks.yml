@@ -1,0 +1,12 @@
+#.github/sync-to-GoogleSheet.Banks.yml
+group:
+  - files:
+      # Used by GoogleSheet.Banks fugle_stock_advisor.py for the ADR/概念股 tailwind score
+      - source: raw_companyinfo.csv
+        dest:   data/ConceptStocks/raw_companyinfo.csv
+      - source: raw_conceptstock_company_metadata.csv
+        dest:   data/ConceptStocks/raw_conceptstock_company_metadata.csv
+      - source: raw_conceptstock_daily.csv
+        dest:   data/ConceptStocks/raw_conceptstock_daily.csv
+    repos: |
+      WJLEE1020/GoogleSheet.Banks

@@ -14,8 +14,10 @@ on:
        - raw_conceptstock_company_quarterly_segments.csv
        - raw_conceptstock_company_segment_overrides.csv
        - raw_conceptstock_company_metadata.csv
+       - raw_companyinfo.csv
        - raw_column_definition.md
        - .github/sync-to-YahooFinance.yml
+       - .github/sync-to-GoogleSheet.Banks.yml
        - .github/workflows/sync-to-Analyzer.yml
 
 concurrency:
@@ -29,6 +31,7 @@ jobs:
       SYNC_PAT_INVESTMENT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_INVESTMENT }}
       SYNC_PAT_MONEY: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_MONEY }}
       SYNC_PAT_YAHOO: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE }}
+      SYNC_PAT_WJLEE1020: ${{ secrets.REPO_FILE_SYNC_WJLEE1020_MONEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -89,6 +92,16 @@ jobs:
         with:
           GH_PAT: ${{ env.SYNC_PAT_MONEY }}
           CONFIG_PATH: .github/sync-to-TAIEX.yml
+          COMMIT_EACH_FILE: false
+          PR_LABELS: "automated-sync"
+          SKIP_PR: true
+
+      - name: Sync up to GoogleSheet.Banks
+        if: env.SYNC_PAT_WJLEE1020 != ''
+        uses: BetaHuhn/repo-file-sync-action@v1
+        with:
+          GH_PAT: ${{ env.SYNC_PAT_WJLEE1020 }}
+          CONFIG_PATH: .github/sync-to-GoogleSheet.Banks.yml
           COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
