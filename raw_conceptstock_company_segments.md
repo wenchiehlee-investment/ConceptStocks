@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-07-09
+> Last updated: 2026-07-10
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -23,7 +23,7 @@
 | MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $102.1B | FMP |
 | MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $26.8B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
-| ORCL | Oracle Corporation | FY2026 | Cloud | $34.0B | SEC |
+| ORCL | Oracle Corporation | FY2026 | Cloud and software | $58.5B | SEC |
 | QCOM | Qualcomm Inc. | FY2025 | Handsets | $30.9B | SEC |
 | WDC | Western Digital Corporation | FY2026 | Cloud | $8.2B | SEC |
 
@@ -327,20 +327,20 @@
 | Cloud license and on-premise license | - | $4.4B | $5.1B | $5.8B | $5.9B |
 | Hardware | $3.1B | $2.9B | $3.1B | $3.3B | $3.2B |
 | Services | $5.7B | $5.2B | $5.4B | $5.6B | $3.2B |
-| Cloud | $34.0B | x | x | x | x |
-| Software | $24.5B | x | x | x | x |
+| Cloud | $34.0B | x | $19.8B | x | x |
+| Software | $24.5B | x | $24.7B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $67.4B | $60.3B | $56.7B | $50.0B | $42.4B |
+| **Segment Sum** | $67.4B | $60.3B | $101.1B | $50.0B | $42.4B |
 | **Total Revenue** | $67.4B | $57.4B | $53.0B | $50.0B | $42.4B |
-| **Difference** | ✓ | 5.1% | 7.0% | ✓ | ✓ |
+| **Difference** | ✓ | 5.1% | 90.9% | ✓ | ✓ |
 
 ### Geographic Segments
 
-| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
+| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Americas | $36.3B | $33.1B | $31.2B | $23.7B | $21.8B |
-| EMEA | $14.0B | $13.0B | $12.1B | $12.0B | $11.9B |
-| Asia Pacific | $7.0B | $6.8B | $6.6B | $6.8B | $6.8B |
+| Americas | $44.5B | $36.3B | $33.1B | $31.2B | $23.7B |
+| EMEA | $15.3B | $14.0B | $13.0B | $12.1B | $12.0B |
+| Asia Pacific | $7.6B | $7.0B | $6.8B | $6.6B | $6.8B |
 
 ---
 
