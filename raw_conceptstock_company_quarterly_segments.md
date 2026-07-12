@@ -1,6 +1,6 @@
 # Quarterly Product Segment Revenue
 
-> Last updated: 2026-07-11
+> Last updated: 2026-07-12
 > Data source: SEC EDGAR 10-Q/10-K filings
 > Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)
 > Legend: `-` = not yet released, `x` = released but not available
