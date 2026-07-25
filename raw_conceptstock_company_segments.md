@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-07-24
+> Last updated: 2026-07-25
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -15,12 +15,12 @@
 | AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | Third-Party Seller Services | $172.2B | FMP |
 | AVGO | Broadcom Inc. | FY2025 | N/A | - | SEC |
-| DELL | Dell Technologies Inc. | FY2026 | Servers and networking | $44.2B | SEC |
+| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
 | GOOGL | Alphabet Inc. | FY2025 | Google Search & Other | $224.5B | FMP |
 | HPE | Hewlett Packard Enterprise Co. | FY2025 | N/A | - | SEC |
 | HPQ | HP Inc. | FY2025 | Personal Systems | $38.5B | SEC |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
-| MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $102.1B | FMP |
+| MSFT | Microsoft Corporation | FY2025 | Server Products And Tools | $98.4B | FMP |
 | MU | Micron Technology, Inc. | FY2025 | Cloud Memory | $13.5B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
 | ORCL | Oracle Corporation | FY2026 | Cloud and software | $58.5B | SEC |
@@ -68,12 +68,12 @@
 | Gaming | $3.9B | $2.6B | $6.2B | $6.8B | $5.6B |
 | Embedded | $3.5B | $3.6B | $5.3B | $4.6B | $246M |
 | Computing and Graphics | x | x | x | x | $9.3B |
-| Enterprise, Embedded and Semi-Custom | x | x | x | x | $4.9B |
+| Enterprise, Embedded and Semi-Custom | x | x | x | x | x |
 | Client and Gaming | $14.6B | $8.5B | $9.9B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $33.0B |
+| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $28.1B |
 | **Total Revenue** | $34.6B | $25.8B | $23.6B | $23.6B | $16.4B |
-| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 100.7% |
+| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 71.1% |
 
 ### Geographic Segments
 
@@ -95,9 +95,9 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| North America | x | $414.9B | x | x | x |
-| International | x | $154.6B | x | x | x |
-| AWS | x | $122.0B | x | x | x |
+| North America | x | x | x | x | x |
+| International | x | x | x | x | x |
+| AWS | x | x | x | x | x |
 | Online Stores | x | $247.0B | $231.9B | $220.0B | $222.1B |
 | Third-Party Seller Services | $172.2B | $156.1B | $140.1B | $117.7B | $103.4B |
 | Advertising Services | $68.6B | $56.2B | $46.9B | $37.7B | $31.2B |
@@ -106,9 +106,9 @@
 | Amazon Web Services | $128.7B | $107.6B | $90.8B | $80.1B | $62.2B |
 | Other Services | $5.9B | $5.4B | $5.0B | $4.2B | $2.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $447.6B | $1329.5B | $574.8B | $514.0B | $469.8B |
+| **Segment Sum** | $447.6B | $638.0B | $574.8B | $514.0B | $469.8B |
 | **Total Revenue** | $716.9B | $638.0B | $574.8B | $514.0B | $469.8B |
-| **Difference** | 37.6% | 108.4% | ✓ | ✓ | ✓ |
+| **Difference** | 37.6% | ✓ | ✓ | ✓ | ✓ |
 
 ### Geographic Segments
 
@@ -143,15 +143,15 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | - | x | x | x | x |
-| Client Solutions Group | - | x | x | x | x |
+| Infrastructure Solutions Group | $54.7B | $43.6B | x | x | x |
+| Client Solutions Group | $51.0B | $48.4B | x | x | x |
 | Servers and networking | $44.2B | $27.1B | $17.6B | $20.4B | $17.9B |
 | Storage | $16.6B | $16.5B | $16.3B | $18.0B | $16.5B |
 | Services | - | $23.1B | $24.1B | $24.1B | $23.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $60.8B | $66.7B | $58.0B | $62.4B | $57.4B |
+| **Segment Sum** | $166.5B | $158.7B | $58.0B | $62.4B | $57.4B |
 | **Total Revenue** | $113.5B | $102.3B | $102.3B | $102.3B | $101.2B |
-| **Difference** | 46.4% | 34.8% | 43.3% | 39.0% | 43.3% |
+| **Difference** | 46.7% | 55.2% | 43.3% | 39.0% | 43.3% |
 
 ---
 
@@ -244,22 +244,22 @@
 
 ### Product Segments
 
-| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
+| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Intelligent Cloud | $98.5B | $106.3B | $105.4B | $87.9B | $58.3B |
-| Productivity and Business Processes | $102.1B | $120.7B | $77.7B | $69.3B | $48.3B |
-| More Personal Computing | $41.3B | $54.8B | $62.1B | $54.7B | $46.4B |
-| Server Products And Tools | - | $98.4B | $91.1B | $80.0B | $67.3B |
-| Microsoft Office | - | $95.2B | $54.9B | $48.7B | $44.9B |
-| Gaming | - | $23.5B | $21.5B | $15.5B | $16.2B |
-| Windows | - | $22.3B | $23.2B | $21.5B | $24.8B |
-| Linked In Corporation | - | $17.8B | $16.4B | $15.1B | $13.8B |
-| Search And News Advertising | - | $13.9B | $12.6B | $12.2B | $11.6B |
-| Devices | - | $17.3B | $4.7B | $5.5B | $7.0B |
+| Intelligent Cloud | x | x | x | x | x |
+| Productivity and Business Processes | x | x | x | x | x |
+| More Personal Computing | x | x | x | x | x |
+| Server Products And Tools | $98.4B | $91.1B | $80.0B | $67.3B | $52.6B |
+| Microsoft Office | $95.2B | $54.9B | $48.7B | $44.9B | $39.9B |
+| Gaming | $23.5B | $21.5B | $15.5B | $16.2B | $15.4B |
+| Windows | $22.3B | $23.2B | $21.5B | $24.8B | $22.5B |
+| Linked In Corporation | $17.8B | $16.4B | $15.1B | $13.8B | $10.3B |
+| Search And News Advertising | $13.9B | $12.6B | $12.2B | $11.6B | $8.5B |
+| Devices | $17.3B | $4.7B | $5.5B | $7.0B | $6.8B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $241.9B | $570.2B | $469.6B | $410.4B | $338.6B |
-| **Total Revenue** | - | $281.7B | $245.1B | $211.9B | $198.3B |
-| **Difference** | - | 102.4% | 91.6% | 93.7% | 70.8% |
+| **Segment Sum** | $288.4B | $224.4B | $198.5B | $185.6B | $155.9B |
+| **Total Revenue** | $281.7B | $245.1B | $211.9B | $198.3B | $168.1B |
+| **Difference** | 2.4% | 8.5% | 6.3% | 6.4% | 7.2% |
 
 ### Geographic Segments
 
@@ -327,12 +327,12 @@
 | Cloud license and on-premise license | - | $4.4B | $5.1B | $5.8B | $5.9B |
 | Hardware | $3.1B | $2.9B | $3.1B | $3.3B | $3.2B |
 | Services | $5.7B | $5.2B | $5.4B | $5.6B | $3.2B |
-| Cloud | - | x | $19.8B | x | x |
-| Software | - | x | $24.7B | x | x |
+| Cloud | $34.0B | x | $19.8B | x | x |
+| Software | $24.5B | x | $24.7B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $8.8B | $60.3B | $101.1B | $50.0B | $42.4B |
+| **Segment Sum** | $67.3B | $60.3B | $101.1B | $50.0B | $42.4B |
 | **Total Revenue** | $67.4B | $57.4B | $53.0B | $50.0B | $42.4B |
-| **Difference** | 86.9% | 5.1% | 90.9% | ✓ | ✓ |
+| **Difference** | ✓ | 5.1% | 90.9% | ✓ | ✓ |
 
 ### Geographic Segments
 
