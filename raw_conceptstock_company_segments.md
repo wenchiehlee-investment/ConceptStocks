@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-07-29
+> Last updated: 2026-07-30
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -258,8 +258,8 @@
 | Devices | - | $17.3B | $4.7B | $5.5B | $7.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | **Segment Sum** | $241.9B | $570.2B | $413.0B | $198.5B | $185.6B |
-| **Total Revenue** | - | $281.7B | $245.1B | $211.9B | $198.3B |
-| **Difference** | - | 102.4% | 68.5% | 6.3% | 6.4% |
+| **Total Revenue** | $331.8B | $281.7B | $245.1B | $211.9B | $198.3B |
+| **Difference** | 27.1% | 102.4% | 68.5% | 6.3% | 6.4% |
 
 ### Geographic Segments
 
