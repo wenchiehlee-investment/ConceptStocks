@@ -106,6 +106,10 @@ python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily -
 
 If you add new concept columns, keep the naming pattern `X概念` and update this list.
 
+### Company financial data
+
+`raw_conceptstock_company_metadata.csv` is the tracked company universe. SEC CIK coverage is optional: US/SEC-supported companies can use `sec-edgar`, while exchange-suffixed listings such as `0981.HK` and `005930.KS` should be fetched through non-SEC providers such as FMP. Financial CSV `currency` values preserve the provider-reported native currency instead of assuming every non-Taiwan company reports in USD.
+
 ### Sync concept metadata with Gemini
 Use `concept.csv` concept columns (`*概念`) as source of truth (synced from external repo — see note above), then auto-fill metadata via Gemini:
 ```bash

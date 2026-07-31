@@ -10,6 +10,7 @@ import json
 import os
 import re
 import time
+import urllib.error
 import urllib.request
 from typing import Dict, List, Optional, Any
 from datetime import datetime
@@ -97,6 +98,7 @@ class FMPClient:
                         "segment_name": segment_name,
                         "segment_type": "product",
                         "revenue": self._safe_float(revenue),
+                        "currency": item.get("reportedCurrency") or item.get("currency") or "USD",
                         "source": "FMP",
                         "source_url": mask_api_key(url),
                     })
@@ -141,6 +143,7 @@ class FMPClient:
                         "segment_name": segment_name,
                         "segment_type": "geography",
                         "revenue": self._safe_float(revenue),
+                        "currency": item.get("reportedCurrency") or item.get("currency") or "USD",
                         "source": "FMP",
                         "source_url": mask_api_key(url),
                     })
@@ -205,6 +208,7 @@ class FMPClient:
                 "gross_margin": gross_margin,
                 "operating_margin": operating_margin,
                 "net_margin": net_margin,
+                "currency": report.get("reportedCurrency") or report.get("currency") or "USD",
                 "source": "FMP",
                 "source_url": mask_api_key(url),
             })
