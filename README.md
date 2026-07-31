@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-07-31 11:04:10 CST
+Update time: 2026-07-31 12:26:10 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -31,8 +31,11 @@ Update time: 2026-07-31 11:04:10 CST
 | Intel概念 | Intel Corporation | INTC | 0000050863 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | Client Computing Group, Data Center and AI, Intel Foundry, All other |
 | ASML概念 | ASML Holding N.V. | ASML | 0000937966 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | EUV光刻系統, DUV光刻系統, 量測與檢測, Installed Base Management |
 | ARM概念 | Arm Holdings plc | ARM | 0001986278 | FY2025 Q4 | FY2026 Q1 | 2025年7月 | Royalty, License and other |
+| 中芯國際概念 | Semiconductor Manufacturing International Corporation（中芯國際） | SMICY | 0001267482 | FY2026 Q1 | FY2026 Q2 | 2026年8月 | 晶圓代工,積體電路製造,測試與封裝 |
+| SamsungFoundry概念 | Samsung Electronics Co., Ltd. | SSNLF | 0000879316 | FY2026 Q2 | FY2026 Q3 | 2026年10月 | Device Solutions（Memory/Foundry/半導體）, Device eXperience, Samsung Display, Harman |
+| GlobalFoundries概念 | GlobalFoundries Inc. | GFS | 0001709048 | - | - | - | Wafer Foundry, Semiconductor Manufacturing Services |
 
-> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 21 個）
+> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 24 個）
 > 概念 metadata：`raw_conceptstock_company_metadata.csv`
 
 
