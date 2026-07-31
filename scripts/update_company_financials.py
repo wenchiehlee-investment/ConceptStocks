@@ -116,6 +116,7 @@ COMPANY_NAMES = {
     "INTC": "Intel Corporation",
     "ASML": "ASML Holding N.V.",
     "TSM": "Taiwan Semiconductor Manufacturing Company Limited",
+    "GFS": "GlobalFoundries Inc.",
 }
 
 

@@ -41,6 +41,7 @@ COMPANY_CIK = {
     "AVGO": "0001730168",  # Broadcom Inc.
     "HPE": "0001645590",   # Hewlett Packard Enterprise Co.
     "INTC": "0000050863",  # Intel Corporation
+    "GFS": "0001709048",   # GlobalFoundries Inc.
     # Foreign private issuers (file 20-F annual / 6-K quarterly)
     "ASML": "0000937966",  # ASML Holding N.V. (Netherlands)
     "ARM":  "0001986278",  # Arm Holdings plc (UK, NASDAQ: ARM) - FY ends March 31
@@ -67,6 +68,7 @@ FISCAL_YEAR_END_MONTH = {
     "META": 12,  # Dec
     "AMD": 12,   # Dec
     "INTC": 12,  # Dec (calendar year)
+    "GFS": 12,   # Dec (calendar year)
     "ASML": 12,  # Dec (calendar year) - Dutch IFRS reporting
     "ARM": 3,    # Mar - FY ends March 31 (UK fiscal year)
     "TSM": 12,   # Dec (calendar year) - TIFRS reporting
