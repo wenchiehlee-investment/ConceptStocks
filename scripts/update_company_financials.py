@@ -120,6 +120,7 @@ COMPANY_NAMES = {
     "TSM": "Taiwan Semiconductor Manufacturing Company Limited",
     "GFS": "GlobalFoundries Inc.",
     "0981.HK": "Semiconductor Manufacturing International Corporation",
+    "0992.HK": "Lenovo Group Limited",
     "005930.KS": "Samsung Electronics Co., Ltd.",
 }
 
