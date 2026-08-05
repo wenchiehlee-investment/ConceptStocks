@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-08-05 08:17:01 CST
+Update time: 2026-08-05 10:49:33 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -31,10 +31,8 @@ Update time: 2026-08-05 08:17:01 CST
 | Intel概念 | Intel Corporation | INTC | 0000050863 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | Client Computing Group, Data Center and AI, Intel Foundry, All other |
 | ASML概念 | ASML Holding N.V. | ASML | 0000937966 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | EUV光刻系統, DUV光刻系統, 量測與檢測, Installed Base Management |
 | ARM概念 | Arm Holdings plc | ARM | 0001986278 | FY2025 Q4 | FY2026 Q1 | 2025年7月 | Royalty, License and other |
-| NAND控制器概念 | Silicon Motion Technology Corporation | SIMO | 0001300962 | Q1 2024 | Q2 2024 | August 2024 | NAND Flash Controllers, SSD Solutions |
-| Marvell概念 | Marvell Technology, Inc. | MRVL | 0001095963 | FY2025 Q1 | FY2025 Q2 | 2024年8月 | 資料基礎設施半導體, 網路晶片, 儲存晶片, 運算 |
 
-> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 23 個）
+> 概念欄位來源：`raw_companyinfo.csv` 中以「概念」結尾的欄位（共 21 個）
 > 概念 metadata：`raw_conceptstock_company_metadata.csv`
 
 
