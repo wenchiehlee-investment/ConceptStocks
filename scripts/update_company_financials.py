@@ -15,11 +15,12 @@ Output files:
 import argparse
 import csv
 import os
+import re
 import sys
 import time
 from datetime import datetime
 from itertools import combinations
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Set
 
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -32,6 +33,7 @@ from src.external.fmp_client import FMPClient, load_api_key as load_fmp_key
 # Output file names
 OUTPUT_INCOME = "raw_conceptstock_company_income.csv"
 OUTPUT_REVENUE = "raw_conceptstock_company_revenue.csv"
+COMPANY_METADATA = "raw_conceptstock_company_metadata.csv"
 
 # Income statement CSV schema (Type 34)
 INCOME_FIELDNAMES = [
@@ -116,7 +118,45 @@ COMPANY_NAMES = {
     "INTC": "Intel Corporation",
     "ASML": "ASML Holding N.V.",
     "TSM": "Taiwan Semiconductor Manufacturing Company Limited",
+    "GFS": "GlobalFoundries Inc.",
+    "0981.HK": "Semiconductor Manufacturing International Corporation",
+    "0992.HK": "Lenovo Group Limited",
+    "005930.KS": "Samsung Electronics Co., Ltd.",
 }
+
+PRIVATE_OR_INVALID_TICKERS = {"", "-", "PRIVATE", "私人公司"}
+
+
+def load_company_universe(out_dir: str) -> Set[str]:
+    """Load tracked company tickers from concept metadata.
+
+    SEC CIK coverage is only one subset of the tracked company universe. Non-US
+    listings such as 0981.HK should still be accepted and routed to non-SEC
+    providers such as FMP.
+    """
+    metadata_path = os.path.join(out_dir, COMPANY_METADATA)
+    symbols: Set[str] = set()
+    if not os.path.exists(metadata_path):
+        return symbols
+
+    with open(metadata_path, newline="", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            symbol = (row.get("Ticker") or "").strip().upper()
+            if symbol in PRIVATE_OR_INVALID_TICKERS:
+                continue
+            symbols.add(symbol)
+            company_name = (row.get("公司名稱") or "").strip()
+            if company_name:
+                COMPANY_NAMES.setdefault(symbol, company_name)
+            cik = (row.get("CIK") or "").strip()
+            if cik.isdigit():
+                COMPANY_CIK.setdefault(symbol, cik.zfill(10))
+    return symbols
+
+
+def supports_sec_edgar(symbol: str) -> bool:
+    return symbol in COMPANY_CIK
 
 
 def load_env(path: str) -> Dict[str, str]:
@@ -276,7 +316,7 @@ def fetch_income_alphavantage(
                 "operating_margin": record.get("operating_margin"),
                 "net_margin": record.get("net_margin"),
                 "revenue_yoy_pct": None,
-                "currency": "USD",
+                "currency": record.get("currency", "USD"),
                 "source": "AlphaVantage",
                 "validation_status": None,
                 "file_type": "INCOME_STATEMENT",
@@ -330,7 +370,7 @@ def fetch_income_fmp(
                 "operating_margin": record.get("operating_margin"),
                 "net_margin": record.get("net_margin"),
                 "revenue_yoy_pct": None,
-                "currency": "USD",
+                "currency": record.get("currency", "USD"),
                 "source": "FMP",
                 "validation_status": None,
                 "file_type": "INCOME_STATEMENT",
@@ -341,6 +381,149 @@ def fetch_income_fmp(
         return results
     except Exception as e:
         print(f"  FMP error for {symbol}: {e}", file=sys.stderr)
+        return []
+
+
+
+YAHOO_INCOME_FIELDS = {
+    "total_revenue": ["Total Revenue", "TotalRevenue"],
+    "gross_profit": ["Gross Profit", "GrossProfit"],
+    "cost_of_revenue": ["Cost Of Revenue", "CostOfRevenue", "Cost Of Goods Sold"],
+    "operating_expenses": ["Operating Expense", "Operating Expenses", "Total Operating Expenses"],
+    "research_and_development": ["Research And Development", "Research Development", "Research Development Expense"],
+    "selling_and_marketing": ["Selling General And Administration", "Selling General Administrative"],
+    "general_and_administrative": ["General And Administrative Expense"],
+    "operating_income": ["Operating Income", "OperatingIncome"],
+    "other_income": ["Other Income Expense", "Other Non Operating Income Expenses"],
+    "income_before_tax": ["Pretax Income", "Income Before Tax"],
+    "tax": ["Tax Provision", "Income Tax Expense"],
+    "net_income": ["Net Income", "NetIncome", "Net Income Common Stockholders"],
+    "eps": ["Diluted EPS", "Basic EPS"],
+}
+
+
+def _yahoo_value(frame, column, names: List[str]) -> Optional[float]:
+    for name in names:
+        if name in frame.index:
+            return _safe_number(frame.at[name, column])
+    return None
+
+
+def _safe_number(value: Any) -> Optional[float]:
+    try:
+        if value is None:
+            return None
+        if hasattr(value, "isna") and value.isna():
+            return None
+        number = float(value)
+    except Exception:
+        return None
+    if number != number:
+        return None
+    return number
+
+
+def _date_to_quarter(date_text: str) -> str:
+    try:
+        month = int(date_text[5:7])
+    except Exception:
+        return "Q?"
+    return f"Q{((month - 1) // 3) + 1}"
+
+
+def _yahoo_currency(ticker_obj) -> str:
+    for attr_name in ("fast_info", "info"):
+        try:
+            data = getattr(ticker_obj, attr_name)
+            if callable(data):
+                data = data()
+            if isinstance(data, dict):
+                currency = data.get("financialCurrency") or data.get("currency")
+                if currency:
+                    return str(currency)
+        except Exception:
+            continue
+    return "USD"
+
+
+def fetch_income_yahoo(symbol: str, include_quarterly: bool = False) -> List[Dict[str, Any]]:
+    """Fetch income statement from Yahoo Finance through yfinance.
+
+    This is the no-key fallback for exchange-suffixed listings such as 0981.HK.
+    Yahoo does not provide the same source validation as SEC/FMP, but it enables
+    non-US competitors to flow into raw_conceptstock_company_income.csv.
+    """
+    try:
+        import yfinance as yf
+    except ImportError:
+        print("  Yahoo Finance error: missing dependency yfinance", file=sys.stderr)
+        return []
+
+    try:
+        ticker = yf.Ticker(symbol)
+        currency = _yahoo_currency(ticker)
+        frames = [("FY", ticker.income_stmt)]
+        if include_quarterly:
+            frames.append(("Q", ticker.quarterly_income_stmt))
+        timestamps = get_timestamps()
+        source_file = f"yfinance:{symbol}:income_stmt"
+        results: List[Dict[str, Any]] = []
+
+        for period_prefix, frame in frames:
+            if frame is None or getattr(frame, "empty", True):
+                continue
+            for column in frame.columns:
+                end_date = str(getattr(column, "date", lambda: column)())[:10]
+                if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", end_date):
+                    continue
+                fiscal_year = int(end_date[:4])
+                period = "FY" if period_prefix == "FY" else _date_to_quarter(end_date)
+                values = {field: _yahoo_value(frame, column, names) for field, names in YAHOO_INCOME_FIELDS.items()}
+                total_revenue = values.get("total_revenue")
+                gross_profit = values.get("gross_profit")
+                operating_income = values.get("operating_income")
+                net_income = values.get("net_income")
+                if total_revenue is None:
+                    continue
+                gross_margin = gross_profit / total_revenue if gross_profit is not None and total_revenue else None
+                operating_margin = operating_income / total_revenue if operating_income is not None and total_revenue else None
+                net_margin = net_income / total_revenue if net_income is not None and total_revenue else None
+                results.append({
+                    "symbol": symbol,
+                    "company_name": COMPANY_NAMES.get(symbol, symbol),
+                    "fiscal_year": fiscal_year,
+                    "end_date": end_date,
+                    "period": period,
+                    "total_revenue": total_revenue,
+                    "gross_profit": gross_profit,
+                    "cost_of_revenue": values.get("cost_of_revenue"),
+                    "operating_expenses": values.get("operating_expenses"),
+                    "research_and_development": values.get("research_and_development"),
+                    "selling_and_marketing": values.get("selling_and_marketing"),
+                    "general_and_administrative": values.get("general_and_administrative"),
+                    "amortization": None,
+                    "operating_income": operating_income,
+                    "other_income": values.get("other_income"),
+                    "income_before_tax": values.get("income_before_tax"),
+                    "tax": values.get("tax"),
+                    "net_income": net_income,
+                    "eps": values.get("eps"),
+                    "rpo": None,
+                    "gross_margin": gross_margin,
+                    "operating_margin": operating_margin,
+                    "net_margin": net_margin,
+                    "revenue_yoy_pct": None,
+                    "currency": currency,
+                    "source": "YahooFinance",
+                    "validation_status": "NO_CROSSCHECK",
+                    "file_type": "INCOME_STATEMENT",
+                    "source_file": source_file,
+                    "download_success": True,
+                    **timestamps,
+                })
+        return results
+    except Exception as e:
+        print(f"  Yahoo Finance error for {symbol}: {e}", file=sys.stderr)
         return []
 
 
@@ -472,7 +655,7 @@ def fetch_segments_fmp(
                 "segment_type": record.get("segment_type"),
                 "revenue": record.get("revenue"),
                 "revenue_yoy_pct": None,  # Calculate later
-                "currency": "USD",
+                "currency": record.get("currency", "USD"),
                 "source": "FMP",
                 "file_type": "SEGMENT_REVENUE",
                 "source_file": record.get("source_url", ""),
@@ -703,19 +886,22 @@ def update_income_statements(
 
         print(f"  Fetching {symbol}...")
 
-        # SEC EDGAR (primary)
+        # SEC EDGAR (primary for SEC-supported companies only)
         if "sec-edgar" in sources:
-            sec_data = fetch_income_sec_edgar(
-                sec_client, symbol, years, include_quarterly=include_quarterly
-            )
+            if supports_sec_edgar(symbol):
+                sec_data = fetch_income_sec_edgar(
+                    sec_client, symbol, years, include_quarterly=include_quarterly
+                )
 
-            # Cross-check with Alpha Vantage if enabled (annual only)
-            if cross_check and av_client:
-                time.sleep(sleep)
-                av_data = fetch_income_alphavantage(av_client, symbol)
-                sec_data = cross_check_income(sec_data, av_data)
+                # Cross-check with Alpha Vantage if enabled (annual only)
+                if cross_check and av_client:
+                    time.sleep(sleep)
+                    av_data = fetch_income_alphavantage(av_client, symbol)
+                    sec_data = cross_check_income(sec_data, av_data)
 
-            all_data.extend(sec_data)
+                all_data.extend(sec_data)
+            else:
+                print(f"    Skipping SEC EDGAR for {symbol}: no CIK metadata")
 
         # Alpha Vantage (standalone)
         if "alphavantage" in sources and av_client:
@@ -730,6 +916,11 @@ def update_income_statements(
                 fmp_client, symbol, years, include_quarterly=include_quarterly
             )
             all_data.extend(fmp_data)
+
+        # Yahoo Finance no-key fallback for exchange-suffixed/non-SEC listings.
+        if "yahoo" in sources:
+            yahoo_data = fetch_income_yahoo(symbol, include_quarterly=include_quarterly)
+            all_data.extend(yahoo_data)
 
     # Merge Non-GAAP EPS: AV (free) first, FMP as fallback
     if av_client or fmp_client:
@@ -804,10 +995,13 @@ def update_segment_revenue(
             )
             symbol_data.extend(segment_data)
 
-        # SEC EDGAR 10-K parsing only if FMP returned no data for this symbol
+        # SEC EDGAR 10-K parsing only if FMP returned no data and a CIK exists.
         if sec_client and not symbol_data:
-            sec_data = fetch_segments_sec_10k(sec_client, symbol, years=min(years, 5))
-            symbol_data.extend(sec_data)
+            if supports_sec_edgar(symbol):
+                sec_data = fetch_segments_sec_10k(sec_client, symbol, years=min(years, 5))
+                symbol_data.extend(sec_data)
+            else:
+                print(f"    Skipping SEC EDGAR segments for {symbol}: no CIK metadata")
 
         all_data.extend(symbol_data)
 
@@ -858,9 +1052,9 @@ def parse_args() -> argparse.Namespace:
     # Source selection
     parser.add_argument(
         "--source",
-        choices=["sec-edgar", "alphavantage", "fmp", "all"],
+        choices=["sec-edgar", "alphavantage", "fmp", "yahoo", "all"],
         default="all",
-        help="Data source to use (default: all)",
+        help="Data source to use (default: all). Use yahoo as the no-key fallback for exchange-suffixed listings.",
     )
 
     # Options
@@ -900,19 +1094,26 @@ def main() -> int:
     """Main entry point."""
     args = parse_args()
 
-    # Determine symbols to process
+    metadata_symbols = load_company_universe(args.out_dir)
+    known_symbols = set(COMPANY_CIK) | set(COMPANY_NAMES) | metadata_symbols
+
+    # Determine symbols to process. Metadata is the tracked universe; SEC CIKs are
+    # only the subset eligible for SEC EDGAR.
     if args.symbol:
         symbol = args.symbol.upper()
-        if symbol not in COMPANY_CIK:
-            print(f"Error: Unknown symbol {symbol}. Available: {', '.join(COMPANY_CIK.keys())}", file=sys.stderr)
+        if symbol not in known_symbols:
+            print(f"Error: Unknown symbol {symbol}. Available: {', '.join(sorted(known_symbols))}", file=sys.stderr)
             return 1
         symbols = [symbol]
     else:
-        symbols = list(COMPANY_CIK.keys())
+        symbols = sorted(metadata_symbols or set(COMPANY_CIK.keys()))
 
-    # Determine sources
+    # Determine sources. For all-source runs, add Yahoo only when at least one
+    # selected symbol has no SEC CIK, to avoid changing broad US refresh behavior.
     if args.source == "all":
         sources = ["sec-edgar", "alphavantage", "fmp"]
+        if any(not supports_sec_edgar(symbol) for symbol in symbols):
+            sources.append("yahoo")
     else:
         sources = [args.source]
 

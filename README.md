@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-07-16 10:33:33 CST
+Update time: 2026-08-04 10:52:15 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -24,7 +24,7 @@ Update time: 2026-07-16 10:33:33 CST
 | Micron概念 | Micron Technology, Inc. | MU | 0000723125 | FY2026 Q2 | FY2026 Q3 | 2026年6月 | DRAM記憶體,NAND快閃記憶體,HBM,SSD,資料中心與AI記憶體 |
 | SanDisk概念 | Sandisk Corp | SNDK | 0002023554 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | Datacenter, Edge, Consumer |
 | Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
-| Lenovo概念 | Lenovo Group ADR | LNVGY | 0000932477 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
+| Lenovo概念 | Lenovo Group Limited | LNVGY | 0000932477 | FY2025/26 Q4 | FY2026/27 Q1 | 2026年5月 | 智能設備(IDG), 基礎設施方案(ISG), 方案服務(SSG), AI PC, AI伺服器 |
 | Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Servers and networking, Storage |
 | HPQ概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
 | HPE概念 | Hewlett Packard Enterprise Co. | HPE | 0001645590 | FY2025 Q4 | FY2026 Q1 | 2026年3月 | Compute, Storage, Intelligent Edge, Financial Services |
@@ -102,6 +102,10 @@ python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily -
 ```
 
 If you add new concept columns, keep the naming pattern `X概念` and update this list.
+
+### Company financial data
+
+`raw_conceptstock_company_metadata.csv` is the tracked company universe. SEC CIK coverage is optional: US/SEC-supported companies can use `sec-edgar`, while exchange-suffixed listings such as `0981.HK` and `005930.KS` should be fetched through non-SEC providers such as FMP. Financial CSV `currency` values preserve the provider-reported native currency instead of assuming every non-Taiwan company reports in USD.
 
 ### Sync concept metadata with Gemini
 Use `concept.csv` concept columns (`*概念`) as source of truth (synced from external repo — see note above), then auto-fill metadata via Gemini:

@@ -41,7 +41,7 @@ CONCEPT_TO_TICKER = {
     "Micro概念": ("MU", "Micron Technology, Inc."),
     "SanDisk概念": ("WDC", "Western Digital Corporation"),
     "Qualcomm概念": ("QCOM", "Qualcomm Inc."),
-    "Lenovo概念": ("LNVGY", "Lenovo Group ADR"),
+    "Lenovo概念": ("0992.HK", "Lenovo Group Limited"),
     "TSMC概念": ("TSM", "Taiwan Semiconductor Manufacturing Company Limited"),
     "台積電概念": ("TSM", "Taiwan Semiconductor Manufacturing Company Limited"),
     "Broadcom概念": ("AVGO", "Broadcom Inc."),
@@ -53,7 +53,6 @@ CONCEPT_TO_TICKER = {
 
 # Normalize non-US/local listings into US tickers for provider consistency.
 TICKER_QUERY_OVERRIDES = {
-    "0992.HK": ("LNVGY", "Lenovo Group ADR"),
     "2330.TW": ("TSM", "Taiwan Semiconductor Manufacturing Company Limited"),
 }
 

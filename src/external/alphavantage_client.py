@@ -135,6 +135,7 @@ class AlphaVantageClient:
                     "gross_margin": gross_margin,
                     "operating_margin": operating_margin,
                     "net_margin": net_margin,
+                    "currency": report.get("reportedCurrency") or report.get("currency") or "USD",
                     "source": "AlphaVantage",
                     "source_url": mask_api_key(url),
                 })
