@@ -45,6 +45,8 @@ COMPANY_CIK = {
     "ASML": "0000937966",  # ASML Holding N.V. (Netherlands)
     "ARM":  "0001986278",  # Arm Holdings plc (UK, NASDAQ: ARM) - FY ends March 31
     "TSM": "0001046179",   # Taiwan Semiconductor Manufacturing Company (TWSE: 2330)
+    "SIMO": "0001322742",  # Silicon Motion Technology Corp.
+    "MRVL": "0001835632",  # Marvell Technology, Inc.
 }
 
 # Fiscal year end month for each company (used to calculate correct quarter from report date)
@@ -52,6 +54,7 @@ COMPANY_CIK = {
 FISCAL_YEAR_END_MONTH = {
     "NVDA": 1,   # Jan - FY ends in January
     "DELL": 1,   # Jan
+    "MRVL": 1,   # Jan (FY ends late Jan/early Feb)
     "ORCL": 5,   # May
     "MSFT": 6,   # Jun
     "WDC":  7,   # Jul — 52-week FY ends first Friday of July; Q1 ends ~Oct, Q2 ~Jan, Q3 ~Apr
@@ -70,12 +73,13 @@ FISCAL_YEAR_END_MONTH = {
     "ASML": 12,  # Dec (calendar year) - Dutch IFRS reporting
     "ARM": 3,    # Mar - FY ends March 31 (UK fiscal year)
     "TSM": 12,   # Dec (calendar year) - TIFRS reporting
+    "SIMO": 12,  # Dec (calendar year)
 }
 
 # Companies that file 6-K (foreign private issuers) instead of 8-K / 10-Q
 # Income statements parsed from 6-K earnings conference presentation (Exhibit 99.2)
 # Platform segment % data is NOT available via text parsing (embedded as chart images)
-FOREIGN_FILERS_6K = {"TSM", "ASML", "ARM"}
+FOREIGN_FILERS_6K = {"TSM", "ASML", "ARM", "SIMO"}
 
 # XBRL concepts for income statement metrics (US GAAP / XBRL filers only)
 INCOME_CONCEPTS = {
