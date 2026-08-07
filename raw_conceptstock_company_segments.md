@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-08-06
+> Last updated: 2026-08-07
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -14,10 +14,10 @@
 | AAPL | Apple Inc. | FY2025 | iPhone | $209.6B | FMP |
 | AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | Third-Party Seller Services | $172.2B | FMP |
-| AVGO | Broadcom Inc. | FY2025 | Semiconductor solutions | $36.9B | SEC |
+| AVGO | Broadcom Inc. | FY2025 | N/A | - | SEC |
 | DELL | Dell Technologies Inc. | FY2026 | Servers and networking | $44.2B | SEC |
 | GOOGL | Alphabet Inc. | FY2025 | Google Search & Other | $224.5B | FMP |
-| HPE | Hewlett Packard Enterprise Co. | FY2025 | Server | $17.8B | SEC |
+| HPE | Hewlett Packard Enterprise Co. | FY2025 | N/A | - | SEC |
 | HPQ | HP Inc. | FY2025 | N/A | - | SEC |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
 | MSFT | Microsoft Corporation | FY2026 | Product | $64.7B | FMP |
@@ -68,12 +68,12 @@
 | Gaming | $3.9B | $2.6B | $6.2B | $6.8B | $5.6B |
 | Embedded | $3.5B | $3.6B | $5.3B | $4.6B | $246M |
 | Computing and Graphics | x | x | x | x | $9.3B |
-| Enterprise, Embedded and Semi-Custom | x | x | x | x | $4.9B |
+| Enterprise, Embedded and Semi-Custom | x | x | x | x | x |
 | Client and Gaming | $14.6B | $8.5B | $9.9B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $33.0B |
+| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $28.1B |
 | **Total Revenue** | $34.6B | $25.8B | $23.6B | $23.6B | $16.4B |
-| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 100.7% |
+| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 71.1% |
 
 ### Geographic Segments
 
@@ -128,12 +128,12 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Semiconductor solutions | $36.9B | $30.1B | $21.1B | x | x |
-| Infrastructure software | $27.0B | $21.5B | $5.8B | x | x |
+| Semiconductor solutions | x | x | x | x | x |
+| Infrastructure software | x | x | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $63.9B | $51.6B | $26.9B | x | x |
+| **Segment Sum** | x | x | x | x | x |
 | **Total Revenue** | $63.9B | $51.6B | $35.8B | $33.2B | $27.4B |
-| **Difference** | ✓ | ✓ | 24.9% | - | - |
+| **Difference** | - | - | - | - | - |
 
 ---
 
@@ -190,14 +190,14 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Server | $17.8B | x | x | x | x |
-| Networking | $6.8B | x | x | x | x |
-| Hybrid Cloud | $5.8B | x | x | x | x |
-| Financial Services | $3.5B | x | x | x | x |
+| Server | x | x | x | x | x |
+| Networking | x | x | x | x | x |
+| Hybrid Cloud | x | x | x | x | x |
+| Financial Services | x | x | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $33.9B | x | x | x | x |
+| **Segment Sum** | x | x | x | x | x |
 | **Total Revenue** | $34.3B | $30.1B | $29.1B | $28.5B | $29.1B |
-| **Difference** | 1.1% | - | - | - | - |
+| **Difference** | - | - | - | - | - |
 
 ---
 
@@ -207,12 +207,12 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Personal Systems | x | $36.2B | $26.5B | $44,011 | $43,332 |
-| Printing | x | $17.4B | $13.4B | $18,902 | $20,128 |
+| Personal Systems | x | x | $35,684 | $44,011 | $43,332 |
+| Printing | x | x | $18,029 | $18,902 | $20,128 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | x | $53.6B | $39.9B | $62,913 | $63,460 |
+| **Segment Sum** | x | x | $53,713 | $62,913 | $63,460 |
 | **Total Revenue** | $55.3B | $62.9B | $63.5B | $63.5B | $63.5B |
-| **Difference** | - | 14.8% | 37.1% | 100.0% | 100.0% |
+| **Difference** | - | - | 100.0% | 100.0% | 100.0% |
 
 ---
 
@@ -327,12 +327,12 @@
 | Cloud license and on-premise license | - | $4.4B | $5.1B | $5.8B | $5.9B |
 | Hardware | $3.1B | $2.9B | $3.1B | $3.3B | $3.2B |
 | Services | $5.7B | $5.2B | $5.4B | $5.6B | $3.2B |
-| Cloud | $34.0B | x | $19.8B | x | x |
-| Software | $24.5B | x | $24.7B | x | x |
+| Cloud | - | x | $19.8B | x | x |
+| Software | - | x | $24.7B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $67.4B | $60.3B | $101.1B | $50.0B | $42.4B |
+| **Segment Sum** | $8.8B | $60.3B | $101.1B | $50.0B | $42.4B |
 | **Total Revenue** | $67.4B | $57.4B | $53.0B | $50.0B | $42.4B |
-| **Difference** | ✓ | 5.1% | 90.9% | ✓ | ✓ |
+| **Difference** | 86.9% | 5.1% | 90.9% | ✓ | ✓ |
 
 ### Geographic Segments
 
