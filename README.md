@@ -7,28 +7,28 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-08-26 09:15:08 CST
+Update time: 2026-08-27 19:19:17 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
-| TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
-| nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Data Center, Gaming, Automotive, Professional Visualization |
+| TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q3 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
+| nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | FY2026 Q3 | FY2027 Q3 | 2026年2月底 | Data Center, Gaming, Automotive, Professional Visualization |
 | Broadcom概念 | Broadcom Inc. | AVGO | 0001730168 | FY2025 Q4 | FY2026 Q1 | 2026年3月 | Networking, Server Storage, Broadband, Wireless, Industrial, Infrastructure Software |
-| Google概念 | Alphabet Inc. | GOOGL | 0001652044 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Google Cloud, Google Services |
-| Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | AWS, North America, International |
-| Meta概念 | Meta Platforms Inc. | META | 0001326801 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Family of Apps, Reality Labs |
+| Google概念 | Alphabet Inc. | GOOGL | 0001652044 | FY2025 Q4 | 2026 Q3 | 2026年4月 | Google Cloud, Google Services |
+| Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | FY2025 Q4 | 2026 Q3 | 2026年4月 | AWS, North America, International |
+| Meta概念 | Meta Platforms Inc. | META | 0001326801 | FY2025 Q4 | 2026 Q3 | 2026年4月 | Family of Apps, Reality Labs |
 | OpenAI概念 | OpenAI | - | 私人公司 | - | - | - | - |
-| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 | FY2026 Q2 | FY2026 Q3 | 2026年4月 | Intelligent Cloud, More Personal Computing, PBP |
-| AMD概念 | Advanced Micro Devices | AMD | 0000002488 | FY2025 Q4 | FY2026 Q1 | 2026年4月 | Data Center, Client, Gaming, Embedded |
-| Apple概念 | Apple Inc. | AAPL | 0000320193 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | iPhone, Mac, iPad, Services, Wearables |
+| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 | FY2026 Q2 | FY2027 Q1 | 2026年4月 | Intelligent Cloud, More Personal Computing, PBP |
+| AMD概念 | Advanced Micro Devices | AMD | 0000002488 | FY2025 Q4 | 2026 Q3 | 2026年4月 | Data Center, Client, Gaming, Embedded |
+| Apple概念 | Apple Inc. | AAPL | 0000320193 | FY2026 Q1 | FY2026 Q4 | 2026年4月 | iPhone, Mac, iPad, Services, Wearables |
 | Oracle概念 | Oracle Corporation | ORCL | 0001341439 | FY2026 Q2 | FY2026 Q3 | 2026年3月 | Cloud services, Hardware, Services |
 | Micron概念 | Micron Technology, Inc. | MU | 0000723125 | FY2026 Q2 | FY2026 Q3 | 2026年6月 | DRAM記憶體,NAND快閃記憶體,HBM,SSD,資料中心與AI記憶體 |
 | SanDisk概念 | Sandisk Corp | SNDK | 0002023554 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | Datacenter, Edge, Consumer |
-| Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q2 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
+| Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q4 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
 | Lenovo概念 | Lenovo Group ADR | LNVGY | 0000932477 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
-| Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2026 Q4 | 2026年2月底 | Servers and networking, Storage |
+| Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2027 Q2 | 2026年2月底 | Servers and networking, Storage |
 | HPQ概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q1 | 2026年2月底 | - |
 | HPE概念 | Hewlett Packard Enterprise Co. | HPE | 0001645590 | FY2025 Q4 | FY2026 Q1 | 2026年3月 | Compute, Storage, Intelligent Edge, Financial Services |
-| Intel概念 | Intel Corporation | INTC | 0000050863 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | Client Computing Group, Data Center and AI, Intel Foundry, All other |
+| Intel概念 | Intel Corporation | INTC | 0000050863 | FY2026 Q1 | 2026 Q3 | 2026年7月 | Client Computing Group, Data Center and AI, Intel Foundry, All other |
 | ASML概念 | ASML Holding N.V. | ASML | 0000937966 | FY2026 Q1 | FY2026 Q2 | 2026年7月 | EUV光刻系統, DUV光刻系統, 量測與檢測, Installed Base Management |
 | ARM概念 | Arm Holdings plc | ARM | 0001986278 | FY2025 Q4 | FY2026 Q1 | 2025年7月 | Royalty, License and other |
 
