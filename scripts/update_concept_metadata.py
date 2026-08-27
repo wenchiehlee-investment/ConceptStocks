@@ -22,6 +22,26 @@ for _llm_path in [
         break
 from llm import LLMClient
 
+# skill-stock-fiscal-quarter-resolve: deterministic FY/quarter resolution shared
+# with InvestorConference's ingest.py and InvestorEvents'/InvestorConference's
+# fetch_upcoming_earnings.py. Used below to keep 即將發布 in sync with real
+# calendar time instead of an LLM guess that gets frozen at first creation.
+_FISCAL_QUARTER_SKILL_SCRIPTS = os.path.join(
+    os.path.dirname(__file__), "..", "skills", "skill-stock-fiscal-quarter-resolve", "scripts"
+)
+if os.path.isdir(_FISCAL_QUARTER_SKILL_SCRIPTS):
+    sys.path.insert(0, os.path.abspath(_FISCAL_QUARTER_SKILL_SCRIPTS))
+try:
+    from fiscal_quarter import (
+        KNOWN_US_FISCAL_YEAR_START_MONTH,
+        KNOWN_US_CALENDAR_YEAR_EARNINGS,
+        resolve_fiscal_quarter,
+    )
+except ImportError:
+    KNOWN_US_FISCAL_YEAR_START_MONTH = {}
+    KNOWN_US_CALENDAR_YEAR_EARNINGS = set()
+    resolve_fiscal_quarter = None
+
 
 DEFAULT_COMPANYINFO_URL = (
     "https://raw.githubusercontent.com/"
@@ -285,6 +305,48 @@ JSON keys（必填）：
     }
 
 
+def apply_known_fiscal_calendar(row: Dict[str, str]) -> None:
+    """Override 即將發布 with a deterministic, date-derived label for tickers
+    skill-stock-fiscal-quarter-resolve recognizes.
+
+    This runs on every row, every invocation — including rows whose anchor
+    fields (公司名稱/CIK/Ticker) are cached and therefore skip the LLM refresh
+    entirely (see has_anchor_fields()). 即將發布 must track real calendar time;
+    it must not freeze at whatever the LLM guessed the first time this concept
+    was resolved. 最新財報 is intentionally left untouched here — deriving it
+    would need the most recent PAST earnings date (not just the next one
+    yfinance's .calendar exposes), which is a separate follow-up.
+    """
+    if resolve_fiscal_quarter is None:
+        return
+    ticker = normalize_ticker(row.get("Ticker", "-"))
+    if ticker == "-":
+        return
+    if ticker not in KNOWN_US_FISCAL_YEAR_START_MONTH and ticker not in KNOWN_US_CALENDAR_YEAR_EARNINGS:
+        return
+
+    try:
+        import yfinance as yf
+        cal = yf.Ticker(ticker).calendar or {}
+        earnings_dates = cal.get("Earnings Date") or []
+        if not earnings_dates:
+            return
+        next_date = min(earnings_dates)
+        date_str = next_date.isoformat()
+    except Exception as e:
+        print(f"  [FISCAL CALENDAR] {ticker}: yfinance calendar lookup failed: {e}", file=sys.stderr)
+        return
+
+    resolved = resolve_fiscal_quarter(ticker, date_str)
+    if resolved["confidence"] == "unknown":
+        return
+
+    old = row.get("即將發布", "-")
+    if old != resolved["label"]:
+        print(f"  [FISCAL CALENDAR] {ticker}: 即將發布 {old} -> {resolved['label']} (next earnings {date_str})")
+    row["即將發布"] = resolved["label"]
+
+
 def write_metadata(path: str, rows: List[Dict[str, str]]) -> None:
     process_timestamp = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S CST")
     with open(path, "w", newline="", encoding="utf-8") as f:
@@ -429,6 +491,13 @@ def main() -> int:
             output_rows.append(row)
         if extras:
             print(f"Kept {len(extras)} extra concepts not in companyinfo: {', '.join(extras)}")
+
+    # Refresh 即將發布 for known tickers regardless of whether the row above came
+    # from a fresh LLM call or cached/frozen anchor fields — see
+    # apply_known_fiscal_calendar()'s docstring for why this can't be folded
+    # into the has_anchor_fields() gate above.
+    for row in output_rows:
+        apply_known_fiscal_calendar(row)
 
     write_metadata(metadata_path, output_rows)
     print(
