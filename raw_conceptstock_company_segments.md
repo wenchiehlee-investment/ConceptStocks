@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-09-16
+> Last updated: 2026-09-17
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -143,15 +143,15 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | $54.7B | $43.6B | x | x | x |
-| Client Solutions Group | $51.0B | $48.4B | x | x | x |
+| Infrastructure Solutions Group | $54.7B | $34.4B | x | x | x |
+| Client Solutions Group | $51.0B | $36.4B | x | x | x |
 | Servers and networking | $44.2B | $27.1B | $17.6B | $20.4B | $17.9B |
 | Storage | $16.6B | $16.5B | $16.3B | $18.0B | $16.5B |
 | Services | - | $23.1B | $24.1B | $24.1B | $23.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $166.5B | $158.7B | $58.0B | $62.4B | $57.4B |
+| **Segment Sum** | $166.5B | $137.5B | $58.0B | $62.4B | $57.4B |
 | **Total Revenue** | $113.5B | $102.3B | $102.3B | $102.3B | $101.2B |
-| **Difference** | 46.7% | 55.2% | 43.3% | 39.0% | 43.3% |
+| **Difference** | 46.7% | 34.4% | 43.3% | 39.0% | 43.3% |
 
 ---
 
@@ -327,12 +327,12 @@
 | Cloud license and on-premise license | - | $4.4B | $5.1B | $5.8B | $5.9B |
 | Hardware | $3.1B | $2.9B | $3.1B | $3.3B | $3.2B |
 | Services | $5.7B | $5.2B | $5.4B | $5.6B | $3.2B |
-| Cloud | $34.0B | x | $19.8B | x | x |
+| Cloud | $38.4B | x | $19.8B | x | x |
 | Software | $24.5B | x | $24.7B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $67.4B | $60.3B | $101.1B | $50.0B | $42.4B |
+| **Segment Sum** | $71.8B | $60.3B | $101.1B | $50.0B | $42.4B |
 | **Total Revenue** | $67.4B | $57.4B | $53.0B | $50.0B | $42.4B |
-| **Difference** | ✓ | 5.1% | 90.9% | ✓ | ✓ |
+| **Difference** | 6.6% | 5.1% | 90.9% | ✓ | ✓ |
 
 ### Geographic Segments
 
