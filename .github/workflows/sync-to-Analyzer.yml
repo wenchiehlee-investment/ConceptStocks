@@ -17,7 +17,6 @@ on:
        - raw_companyinfo.csv
        - raw_column_definition.md
        - .github/sync-to-YahooFinance.yml
-       - .github/sync-to-GoogleSheet.Banks.yml
        - .github/workflows/sync-to-Analyzer.yml
 
 concurrency:
@@ -34,7 +33,7 @@ jobs:
       SYNC_PAT_WJLEE1020: ${{ secrets.REPO_FILE_SYNC_WJLEE1020_MONEY }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Sync up to Python-Actions.GoodInfo.Analyzer
         if: env.SYNC_PAT_INVESTMENT != ''
@@ -82,26 +81,6 @@ jobs:
         with:
           GH_PAT: ${{ env.SYNC_PAT_YAHOO }}
           CONFIG_PATH: .github/sync-to-YahooFinance.yml
-          COMMIT_EACH_FILE: false
-          PR_LABELS: "automated-sync"
-          SKIP_PR: true
-
-      - name: Sync up to TAIEX.TW
-        if: env.SYNC_PAT_MONEY != ''
-        uses: BetaHuhn/repo-file-sync-action@v1
-        with:
-          GH_PAT: ${{ env.SYNC_PAT_MONEY }}
-          CONFIG_PATH: .github/sync-to-TAIEX.yml
-          COMMIT_EACH_FILE: false
-          PR_LABELS: "automated-sync"
-          SKIP_PR: true
-
-      - name: Sync up to GoogleSheet.Banks
-        if: env.SYNC_PAT_WJLEE1020 != ''
-        uses: BetaHuhn/repo-file-sync-action@v1
-        with:
-          GH_PAT: ${{ env.SYNC_PAT_WJLEE1020 }}
-          CONFIG_PATH: .github/sync-to-GoogleSheet.Banks.yml
           COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
