@@ -1,6 +1,6 @@
 # Quarterly Product Segment Revenue
 
-> Last updated: 2026-09-30
+> Last updated: 2026-10-01
 > Data source: SEC EDGAR 10-Q/10-K filings
 > Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)
 > Legend: `-` = not yet released, `x` = released but not available
@@ -176,12 +176,12 @@
 
 | Segment | 26Q4 | 26Q3 | 26Q2 | 26Q1 | 25Q4 | 25Q3 | 25Q2 | 25Q1 |
 |---------|------|------|------|------|------|------|------|------|
-| Cloud Memory | - | $13.8B | $7.7B | $5.3B | $4.5B | x | x | x |
-| Mobile and Client | - | $11.5B | $7.7B | $4.3B | $3.8B | x | x | x |
-| Core Data Center | - | $11.5B | $5.7B | $2.4B | $1.6B | x | x | x |
-| Automotive and Edge | - | $4.6B | $2.7B | $1.7B | $1.4B | x | x | x |
+| Cloud Memory | $16.3B | $13.8B | $7.7B | $5.3B | $4.5B | x | x | x |
+| Mobile and Client | $13.1B | $11.5B | $7.7B | $4.3B | $3.8B | x | x | x |
+| Core Data Center | $18.0B | $11.5B | $5.7B | $2.4B | $1.6B | x | x | x |
+| Automotive and Edge | $6.8B | $4.6B | $2.7B | $1.7B | $1.4B | x | x | x |
 |---------|------|------|------|------|------|------|------|------|
-| **Segment Sum** | - | $41.4B | $23.9B | $13.6B | $11.3B | x | x | x |
+| **Segment Sum** | $54.2B | $41.4B | $23.9B | $13.6B | $11.3B | x | x | x |
 | **Total Revenue** | - | $41.5B | $23.9B | $13.6B | $13.6B | $9.3B | $8.1B | $8.7B |
 | **Difference** | - | ✓ | ✓ | ✓ | 17% | - | - | - |
 
