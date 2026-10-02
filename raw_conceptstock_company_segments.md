@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-10-01
+> Last updated: 2026-10-02
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -21,7 +21,7 @@
 | HPQ | HP Inc. | FY2026 | Personal Systems | $32.3B | SEC |
 | META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
 | MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $139.9B | FMP |
-| MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $26.8B | SEC |
+| MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $43.1B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
 | ORCL | Oracle Corporation | FY2026 | Cloud and software | $58.5B | SEC |
 | QCOM | Qualcomm Inc. | FY2026 | Handsets | $18.9B | SEC |
@@ -276,12 +276,12 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Cloud Memory | $26.8B | $13.5B | $3.8B | $1.9B | x |
-| Mobile and Client | $23.5B | $11.9B | $11.7B | $7.4B | x |
-| Core Data Center | $19.6B | $7.2B | $5.0B | $2.1B | x |
-| Automotive and Edge | $9.1B | $4.8B | $4.6B | $4.1B | x |
+| Cloud Memory | $43.1B | $13.5B | $3.8B | $1.9B | x |
+| Mobile and Client | $36.6B | $11.9B | $11.7B | $7.4B | x |
+| Core Data Center | $37.6B | $7.2B | $5.0B | $2.1B | x |
+| Automotive and Edge | $15.9B | $4.8B | $4.6B | $4.1B | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $78.9B | $37.4B | $25.1B | $15.5B | x |
+| **Segment Sum** | $133.2B | $37.4B | $25.1B | $15.5B | x |
 | **Total Revenue** | - | $37.4B | $30.8B | $30.8B | $30.8B |
 | **Difference** | - | ✓ | 18.5% | 49.5% | - |
 
