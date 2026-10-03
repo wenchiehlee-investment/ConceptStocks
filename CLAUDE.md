@@ -14,31 +14,31 @@ ConceptStocks 是一個概念股資料管線專案，用於收集並維護美國
 ### 股價資料更新
 ```bash
 # 更新單一股票的所有週期資料
-python scripts/update_conceptstocks.py --ticker NVDA --cadence all
+uv run python scripts/update_conceptstocks.py --ticker NVDA --cadence all
 
 # 更新所有股票的週線資料
-python scripts/update_conceptstocks.py --all --cadence weekly
+uv run python scripts/update_conceptstocks.py --all --cadence weekly
 
 # 僅同步概念對照表
-python scripts/update_conceptstocks.py --sync-concepts
+uv run python scripts/update_conceptstocks.py --sync-concepts
 ```
 
 ### 公司財務資料更新
 ```bash
 # 從 SEC EDGAR 更新所有公司的損益表（含 Alpha Vantage 交叉驗證）
-python scripts/update_company_financials.py --all --type income --source sec-edgar
+uv run python scripts/update_company_financials.py --all --type income --source sec-edgar
 
 # 包含季度資料（FY + Q1-Q3）
-python scripts/update_company_financials.py --all --type income --source sec-edgar --period all
+uv run python scripts/update_company_financials.py --all --type income --source sec-edgar --period all
 
 # 僅季度資料
-python scripts/update_company_financials.py --symbol MSFT --type income --source sec-edgar --period quarterly
+uv run python scripts/update_company_financials.py --symbol MSFT --type income --source sec-edgar --period quarterly
 
 # 從 FMP 更新單一公司的分項營收
-python scripts/update_company_financials.py --symbol MSFT --type revenue --source fmp
+uv run python scripts/update_company_financials.py --symbol MSFT --type revenue --source fmp
 
 # 更新所有資料（所有來源）
-python scripts/update_company_financials.py --all --type all --source all
+uv run python scripts/update_company_financials.py --all --type all --source all
 
 # 可用的 type: income, revenue, all
 # 可用的 source: sec-edgar, alphavantage, fmp, all

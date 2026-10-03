@@ -31,25 +31,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout llm library
-        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          repository: wenchiehlee/llm
-          path: llm
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install -e llm
+        run: uv sync
 
       - name: Sync concepts
         run: |
-          python3 scripts/update_conceptstocks.py --sync-concepts
+          uv run python scripts/update_conceptstocks.py --sync-concepts
 
       - name: Update concept metadata
         id: update_metadata
@@ -63,11 +56,10 @@ jobs:
           GEMINI_API_KEY_5: ${{ secrets.GEMINI_API_KEY_5 }}
           GEMINI_API_KEY_6: ${{ secrets.GEMINI_API_KEY_6 }}
           GEMINI_API_KEY_7: ${{ secrets.GEMINI_API_KEY_7 }}
-          CODEX_API_URL: ${{ secrets.CODEX_API_URL }}
           CODEX_API_KEY: ${{ secrets.CODEX_API_KEY }}
           AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
         run: |
-          python3 scripts/update_concept_metadata.py --companyinfo-path raw_companyinfo.csv --keep-extra-concepts
+          uv run python scripts/update_concept_metadata.py --companyinfo-path raw_companyinfo.csv --keep-extra-concepts
 
       - name: Create issue if metadata failed
         if: steps.update_metadata.outcome == 'failure'
@@ -124,14 +116,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+        run: uv sync
 
       - name: Update data
         env:
@@ -156,15 +148,15 @@ jobs:
           echo "CADENCE=$CADENCE" >> "$GITHUB_ENV"
 
           if [ "$CADENCE" = "daily" ]; then
-            START_DATE=$(python3 -c "import csv, os; from datetime import datetime, timedelta; p='raw_conceptstock_daily.csv'; fb=(datetime.utcnow()-timedelta(days=7)).strftime('%Y-%m-%d'); md=max((datetime.strptime(r.get('交易日期'),'%Y-%m-%d').date() for r in csv.DictReader(open(p, newline='', encoding='utf-8')) if r.get('交易日期')), default=None) if os.path.exists(p) else None; print(md.strftime('%Y-%m-%d') if md else fb)")
+            START_DATE=$(uv run python -c "import csv, os; from datetime import datetime, timedelta; p='raw_conceptstock_daily.csv'; fb=(datetime.utcnow()-timedelta(days=7)).strftime('%Y-%m-%d'); md=max((datetime.strptime(r.get('交易日期'),'%Y-%m-%d').date() for r in csv.DictReader(open(p, newline='', encoding='utf-8')) if r.get('交易日期')), default=None) if os.path.exists(p) else None; print(md.strftime('%Y-%m-%d') if md else fb)")
             echo "Daily incremental start date: $START_DATE"
-            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date "$START_DATE" --ignore-errors
+            uv run python scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date "$START_DATE" --ignore-errors
           elif [ "$CADENCE" = "weekly" ]; then
-            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence weekly --ignore-errors
+            uv run python scripts/update_conceptstocks.py --provider yahoo --all --cadence weekly --ignore-errors
           elif [ "$CADENCE" = "monthly" ]; then
-            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence monthly --ignore-errors
+            uv run python scripts/update_conceptstocks.py --provider yahoo --all --cadence monthly --ignore-errors
           else
-            python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence "$CADENCE" --ignore-errors
+            uv run python scripts/update_conceptstocks.py --provider yahoo --all --cadence "$CADENCE" --ignore-errors
           fi
 
       - name: Commit and push

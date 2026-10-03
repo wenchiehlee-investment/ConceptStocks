@@ -5,3 +5,5 @@ src/__pycache__/
 .claude/
 
 .env*
+
+.venv/

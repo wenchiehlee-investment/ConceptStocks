@@ -93,12 +93,12 @@ Notes:
 ### Updating data
 Use the updater script to refresh a single ticker or all tickers. Examples:
 ```
-python3 scripts/update_conceptstocks.py --ticker NVDA --cadence all
-python3 scripts/update_conceptstocks.py --all --cadence weekly
-python3 scripts/update_conceptstocks.py --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12
-python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12
-python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12 --verify-against-alphavantage
-python3 scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12 --verify-against-alphavantage --verify-strict --verify-close-tolerance 0.05 --verify-report yahoo_alpha_verify_2025-02-01_2026-02-12.csv
+uv run python scripts/update_conceptstocks.py --ticker NVDA --cadence all
+uv run python scripts/update_conceptstocks.py --all --cadence weekly
+uv run python scripts/update_conceptstocks.py --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12
+uv run python scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12
+uv run python scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12 --verify-against-alphavantage
+uv run python scripts/update_conceptstocks.py --provider yahoo --all --cadence daily --start-date 2025-02-01 --end-date 2026-02-12 --verify-against-alphavantage --verify-strict --verify-close-tolerance 0.05 --verify-report yahoo_alpha_verify_2025-02-01_2026-02-12.csv
 ```
 
 If you add new concept columns, keep the naming pattern `X概念` and update this list.
@@ -110,7 +110,7 @@ If you add new concept columns, keep the naming pattern `X概念` and update thi
 ### Sync concept metadata with Gemini
 Use `concept.csv` concept columns (`*概念`) as source of truth (synced from external repo — see note above), then auto-fill metadata via Gemini:
 ```bash
-python3 scripts/update_concept_metadata.py
+uv run python scripts/update_concept_metadata.py
 ```
 Environment variable:
 - `GEMINI_API_KEY`
@@ -139,5 +139,5 @@ Data sources by company:
 
 ### Updating quarterly segments
 ```bash
-python scripts/generate_quarterly_segments.py --years 5
+uv run python scripts/generate_quarterly_segments.py --years 5
 ```
