@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-10-06 15:07:19 CST
+Update time: 2026-10-07 15:33:33 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q3 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -21,7 +21,7 @@ Update time: 2026-10-06 15:07:19 CST
 | AMD概念 | Advanced Micro Devices | AMD | 0000002488 | FY2025 Q4 | 2026 Q3 | 2026年4月 | Data Center, Client, Gaming, Embedded |
 | Apple概念 | Apple Inc. | AAPL | 0000320193 | FY2026 Q1 | FY2026 Q4 | 2026年4月 | iPhone, Mac, iPad, Services, Wearables |
 | Oracle概念 | Oracle Corporation | ORCL | 0001341439 | FY2026 Q2 | FY2026 Q3 | 2026年3月 | Cloud services, Hardware, Services |
-| Micron概念 | Micron Technology, Inc. | MU | 0000723125 | FY2026 Q2 | FY2026 Q3 | 2026年6月 | DRAM記憶體,NAND快閃記憶體,HBM,SSD,資料中心與AI記憶體 |
+| Micron概念 | - | - | - | - | - | - | - |
 | SanDisk概念 | Sandisk Corp | SNDK | 0002023554 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | Datacenter, Edge, Consumer |
 | Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q4 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
 | Lenovo概念 | Lenovo Group ADR | LNVGY | 0000932477 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
