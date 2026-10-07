@@ -186,10 +186,14 @@ def load_existing_metadata(path: str) -> Dict[str, Dict[str, str]]:
     with open(path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            concept = (row.get("概念欄位") or "").strip()
-            if not concept:
+            concept_text = (row.get("概念欄位") or "").strip()
+            if not concept_text:
                 continue
-            existing[concept] = {k: (row.get(k) or "").strip() for k in OUTPUT_FIELDS}
+            normalized = {k: (row.get(k) or "").strip() for k in OUTPUT_FIELDS}
+            for concept in re.split(r"[；;]", concept_text):
+                concept = concept.strip()
+                if concept:
+                    existing[concept] = normalized.copy()
     return existing
 
 
@@ -347,6 +351,33 @@ def apply_known_fiscal_calendar(row: Dict[str, str]) -> None:
     row["即將發布"] = resolved["label"]
 
 
+def deduplicate_metadata_rows(rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    """Keep one row per company identity while retaining all concept memberships."""
+    merged: Dict[str, Dict[str, str]] = {}
+    order: List[str] = []
+    for row in rows:
+        cik = normalize_cik(row.get("CIK", ""))
+        ticker = normalize_ticker(row.get("Ticker", ""))
+        identity = f"cik:{cik}" if cik and cik != "-" else f"ticker:{ticker}"
+        if identity not in merged:
+            merged[identity] = row.copy()
+            order.append(identity)
+            continue
+        target = merged[identity]
+        for field in ("概念欄位", "產品區段"):
+            values = []
+            for value in (target.get(field, ""), row.get(field, "")):
+                for item in re.split(r"[；;,]", value or ""):
+                    item = item.strip()
+                    if item and item != "-" and item not in values:
+                        values.append(item)
+            target[field] = "；".join(values) if values else "-"
+        for field in OUTPUT_FIELDS[1:]:
+            if (not target.get(field) or target.get(field) == "-") and row.get(field) not in (None, "", "-"):
+                target[field] = row[field]
+    return [merged[key] for key in order]
+
+
 def write_metadata(path: str, rows: List[Dict[str, str]]) -> None:
     process_timestamp = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S CST")
     with open(path, "w", newline="", encoding="utf-8") as f:
@@ -499,10 +530,11 @@ def main() -> int:
     for row in output_rows:
         apply_known_fiscal_calendar(row)
 
+    output_rows = deduplicate_metadata_rows(output_rows)
     write_metadata(metadata_path, output_rows)
     print(
         f"Metadata written: {metadata_path} "
-        f"(concepts={len(output_rows)}, reused={reused_count}, refreshed={refreshed_count}, fallback={fallback_count})"
+        f"(companies={len(output_rows)}, reused={reused_count}, refreshed={refreshed_count}, fallback={fallback_count})"
     )
 
     if not args.skip_readme_update:
