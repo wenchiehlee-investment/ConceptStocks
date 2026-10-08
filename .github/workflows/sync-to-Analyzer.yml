@@ -33,7 +33,7 @@ jobs:
       SYNC_PAT_WJLEE1020: ${{ secrets.REPO_FILE_SYNC_WJLEE1020_MONEY }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Sync up to Python-Actions.GoodInfo.Analyzer
         if: env.SYNC_PAT_INVESTMENT != ''
