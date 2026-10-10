@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-10-09
+> Last updated: 2026-10-10
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -282,8 +282,8 @@
 | Automotive and Edge | $15.9B | $4.8B | $4.6B | $4.1B | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | **Segment Sum** | $133.2B | $37.4B | $25.1B | $15.5B | x |
-| **Total Revenue** | - | $37.4B | $30.8B | $30.8B | $30.8B |
-| **Difference** | - | ✓ | 18.5% | 49.5% | - |
+| **Total Revenue** | $133.2B | $37.4B | $30.8B | $30.8B | $30.8B |
+| **Difference** | ✓ | ✓ | 18.5% | 49.5% | - |
 
 ---
 
