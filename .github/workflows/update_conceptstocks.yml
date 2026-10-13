@@ -171,3 +171,11 @@ jobs:
           git commit -m "Update concept stock ${CADENCE} data"
           git pull --rebase
           git push
+      - name: Sync updated CSVs to biztrends.TW
+        uses: BetaHuhn/repo-file-sync-action@v1
+        with:
+          GH_PAT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_MONEY }}
+          CONFIG_PATH: .github/sync-to-biztrends.yml
+          COMMIT_EACH_FILE: false
+          SKIP_PR: true
+
