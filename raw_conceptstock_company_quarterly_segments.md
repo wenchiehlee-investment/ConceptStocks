@@ -1,6 +1,6 @@
 # Quarterly Product Segment Revenue
 
-> Last updated: 2026-10-15
+> Last updated: 2026-10-16
 > Data source: SEC EDGAR 10-Q/10-K filings
 > Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)
 > Legend: `-` = not yet released, `x` = released but not available
@@ -263,7 +263,7 @@
 | Others | - | - | $834M | $792M | $690M | $626M | $655M | $581M | $493M | $481M | $444M | x | x | $556M | $587M | x |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
 | **Segment Sum** | - | - | $40.2B | $35.9B | $33.7B | $33.1B | $30.1B | $25.5B | $26.9B | $23.5B | $20.8B | x | x | $17.3B | $15.7B | x |
-| **Total Revenue** | - | - | $40.2B | $35.9B | $33.7B | $33.1B | $30.1B | $25.5B | $26.9B | $23.5B | $20.8B | $18.9B | $19.6B | $17.3B | $15.7B | $16.7B |
+| **Total Revenue** | - | $46.7B | $40.2B | $35.9B | $33.7B | $33.1B | $30.1B | $25.5B | $26.9B | $23.5B | $20.8B | $18.9B | $19.6B | $17.3B | $15.7B | $16.7B |
 | **Difference** | - | - | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | - | - | ✓ | ✓ | - |
 
 ---
