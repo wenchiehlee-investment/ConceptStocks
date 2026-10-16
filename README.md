@@ -7,10 +7,10 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-10-15 13:24:55 CST
+Update time: 2026-10-16 13:20:47 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
-| TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q3 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
+| TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q4 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
 | nVidia概念 | NVIDIA Corporation | NVDA | 0001045810 | FY2026 Q3 | FY2027 Q3 | 2026年2月底 | Data Center, Gaming, Automotive, Professional Visualization |
 | Broadcom概念 | Broadcom Inc. | AVGO | 0001730168 | FY2025 Q4 | FY2026 Q4 | 2026年3月 | Networking, Server Storage, Broadband, Wireless, Industrial, Infrastructure Software |
 | Google概念 | Alphabet Inc. | GOOGL | 0001652044 | FY2025 Q4 | 2026 Q3 | 2026年4月 | Google Cloud, Google Services |
