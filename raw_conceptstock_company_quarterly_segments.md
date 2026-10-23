@@ -1,6 +1,6 @@
 # Quarterly Product Segment Revenue
 
-> Last updated: 2026-10-22
+> Last updated: 2026-10-23
 > Data source: SEC EDGAR 10-Q/10-K filings
 > Format: Columns show YYQn (e.g., 26Q1 = FY2026 Q1)
 > Legend: `-` = not yet released, `x` = released but not available
@@ -146,8 +146,8 @@
 | Reality Labs | - | $443M | $431M | $402M | $955M | $470M | $370M | $412M | $1.1B | $270M | $353M | x |
 |---------|------|------|------|------|------|------|------|------|------|------|------|------|
 | **Segment Sum** | - | $64.6B | $60.8B | $56.3B | $59.9B | $51.2B | $47.5B | $42.3B | $48.4B | $40.6B | $39.1B | x |
-| **Total Revenue** | - | - | $60.8B | $56.3B | $59.9B | $51.2B | $47.5B | $42.3B | $48.4B | $40.6B | $39.1B | $28.6B |
-| **Difference** | - | - | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | - |
+| **Total Revenue** | - | $64.6B | $60.8B | $56.3B | $59.9B | $51.2B | $47.5B | $42.3B | $48.4B | $40.6B | $39.1B | $28.6B |
+| **Difference** | - | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | - |
 
 ---
 

@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-10-22
+> Last updated: 2026-10-23
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -19,7 +19,7 @@
 | GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
 | HPE | Hewlett Packard Enterprise Co. | FY2026 | Networking | $8.3B | SEC |
 | HPQ | HP Inc. | FY2026 | Personal Systems | $32.3B | SEC |
-| META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
+| META | Meta Platforms, Inc. | FY2026 | Family of Apps | $180.4B | FMP |
 | MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $139.9B | FMP |
 | MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $43.1B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
@@ -220,14 +220,14 @@
 
 ### Product Segments
 
-| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
+| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Family of Apps | $198.8B | $162.4B | $133.0B | $133.0B | $115.7B |
-| Reality Labs | $2.2B | $2.1B | $1.9B | $2.2B | $2.3B |
+| Family of Apps | $180.4B | $198.8B | $162.4B | $133.0B | $133.0B |
+| Reality Labs | $1.3B | $2.2B | $2.1B | $1.9B | $2.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $201.0B | $164.5B | $134.9B | $135.2B | $117.9B |
-| **Total Revenue** | $201.0B | $164.5B | $134.9B | $117.9B | $117.9B |
-| **Difference** | ✓ | ✓ | ✓ | 14.6% | ✓ |
+| **Segment Sum** | $181.7B | $201.0B | $164.5B | $134.9B | $135.2B |
+| **Total Revenue** | - | $201.0B | $164.5B | $134.9B | $117.9B |
+| **Difference** | - | ✓ | ✓ | ✓ | 14.6% |
 
 ### Geographic Segments
 
