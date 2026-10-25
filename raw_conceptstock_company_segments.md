@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-10-24
+> Last updated: 2026-10-25
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -15,17 +15,17 @@
 | AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | North America | $347.4B | FMP |
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
-| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
-| GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
-| HPE | Hewlett Packard Enterprise Co. | FY2026 | Networking | $8.3B | SEC |
+| DELL | Dell Technologies Inc. | FY2026 | Servers and networking | $44.2B | SEC |
+| GOOGL | Alphabet Inc. | FY2025 | Google Services | $265.5B | FMP |
+| HPE | Hewlett Packard Enterprise Co. | FY2025 | N/A | - | SEC |
 | HPQ | HP Inc. | FY2026 | Personal Systems | $32.3B | SEC |
-| META | Meta Platforms, Inc. | FY2026 | Family of Apps | $180.4B | FMP |
-| MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $139.9B | FMP |
+| META | Meta Platforms, Inc. | FY2025 | Family of Apps | $198.8B | FMP |
+| MSFT | Microsoft Corporation | FY2026 | Product | $64.7B | FMP |
 | MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $43.1B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
 | ORCL | Oracle Corporation | FY2026 | Cloud and software | $58.5B | SEC |
-| QCOM | Qualcomm Inc. | FY2026 | Handsets | $18.9B | SEC |
-| WDC | Western Digital Corporation | FY2026 | Cloud | $8.2B | SEC |
+| QCOM | Qualcomm Inc. | FY2025 | Handsets | $30.9B | SEC |
+| WDC | Western Digital Corporation | FY2025 | Cloud | $8.3B | SEC |
 
 ---
 
@@ -68,12 +68,12 @@
 | Gaming | $3.9B | $2.6B | $6.2B | $6.8B | $5.6B |
 | Embedded | $3.5B | $3.6B | $5.3B | $4.6B | $246M |
 | Computing and Graphics | x | x | x | x | $9.3B |
-| Enterprise, Embedded and Semi-Custom | x | x | x | x | $4.9B |
+| Enterprise, Embedded and Semi-Custom | x | x | x | x | x |
 | Client and Gaming | $14.6B | $8.5B | $9.9B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $33.0B |
+| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $28.1B |
 | **Total Revenue** | $34.6B | $25.8B | $23.6B | $23.6B | $16.4B |
-| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 100.7% |
+| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 71.1% |
 
 ### Geographic Segments
 
@@ -143,15 +143,15 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | $54.7B | $34.4B | x | x | x |
-| Client Solutions Group | $51.0B | $36.4B | x | x | x |
+| Infrastructure Solutions Group | - | x | x | x | x |
+| Client Solutions Group | - | x | x | x | x |
 | Servers and networking | $44.2B | $27.1B | $17.6B | $20.4B | $17.9B |
 | Storage | $16.6B | $16.5B | $16.3B | $18.0B | $16.5B |
 | Services | - | $23.1B | $24.1B | $24.1B | $23.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $166.5B | $137.5B | $58.0B | $62.4B | $57.4B |
+| **Segment Sum** | $60.8B | $66.7B | $58.0B | $62.4B | $57.4B |
 | **Total Revenue** | $113.5B | $102.3B | $102.3B | $102.3B | $101.2B |
-| **Difference** | 46.7% | 34.4% | 43.3% | 39.0% | 43.3% |
+| **Difference** | 46.4% | 34.8% | 43.3% | 39.0% | 43.3% |
 
 ---
 
@@ -162,16 +162,16 @@
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Google Cloud | $58.7B | $43.2B | $33.1B | $26.3B | $19.2B |
-| Google Services | $342.8B | x | x | x | x |
+| Google Services | $265.5B | x | x | x | x |
 | Google Search & Other | $224.5B | $198.1B | $175.0B | $162.4B | $149.0B |
 | YouTube Ads | $40.4B | $36.1B | $31.5B | $29.2B | $28.8B |
 | Google Subscriptions | $46.2B | $40.3B | $34.7B | $29.1B | $28.0B |
 | Google Network | $29.8B | $30.4B | $31.3B | $32.8B | $31.7B |
 | Other Bets | $1.9B | $1.6B | $1.5B | $1.1B | $753M |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $744.3B | $349.8B | $307.2B | $280.9B | $257.5B |
+| **Segment Sum** | $667.0B | $349.8B | $307.2B | $280.9B | $257.5B |
 | **Total Revenue** | $402.8B | $350.0B | $307.4B | $282.8B | $257.6B |
-| **Difference** | 84.8% | ✓ | ✓ | ✓ | ✓ |
+| **Difference** | 65.6% | ✓ | ✓ | ✓ | ✓ |
 
 ### Geographic Segments
 
@@ -188,16 +188,16 @@
 
 ### Product Segments
 
-| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
+| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Server | - | $17.8B | x | x | x |
-| Networking | $8.3B | $6.8B | x | x | x |
-| Hybrid Cloud | - | $5.8B | x | x | x |
-| Financial Services | - | $3.5B | x | x | x |
+| Server | x | x | x | x | x |
+| Networking | x | x | x | x | x |
+| Hybrid Cloud | x | x | x | x | x |
+| Financial Services | x | x | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $8.3B | $33.9B | x | x | x |
-| **Total Revenue** | - | $34.3B | $30.1B | $29.1B | $28.5B |
-| **Difference** | - | 1.1% | - | - | - |
+| **Segment Sum** | x | x | x | x | x |
+| **Total Revenue** | $34.3B | $30.1B | $29.1B | $28.5B | $29.1B |
+| **Difference** | - | - | - | - | - |
 
 ---
 
@@ -220,14 +220,14 @@
 
 ### Product Segments
 
-| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
+| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Family of Apps | $180.4B | $198.8B | $162.4B | $133.0B | $133.0B |
-| Reality Labs | $1.3B | $2.2B | $2.1B | $1.9B | $2.2B |
+| Family of Apps | $198.8B | $162.4B | $133.0B | $133.0B | $115.7B |
+| Reality Labs | $2.2B | $2.1B | $1.9B | $2.2B | $2.3B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $181.7B | $201.0B | $164.5B | $134.9B | $135.2B |
-| **Total Revenue** | - | $201.0B | $164.5B | $134.9B | $117.9B |
-| **Difference** | - | ✓ | ✓ | ✓ | 14.6% |
+| **Segment Sum** | $201.0B | $164.5B | $134.9B | $135.2B | $117.9B |
+| **Total Revenue** | $201.0B | $164.5B | $134.9B | $117.9B | $117.9B |
+| **Difference** | ✓ | ✓ | ✓ | 14.6% | ✓ |
 
 ### Geographic Segments
 
@@ -246,9 +246,9 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Intelligent Cloud | $137.8B | $106.3B | $105.4B | $87.9B | x |
-| Productivity and Business Processes | $139.9B | $120.7B | $77.7B | $69.3B | x |
-| More Personal Computing | $54.2B | $54.8B | $62.1B | $54.7B | x |
+| Intelligent Cloud | - | x | x | x | x |
+| Productivity and Business Processes | - | x | x | x | x |
+| More Personal Computing | - | x | x | x | x |
 | Server Products And Tools | - | $98.4B | $91.1B | $80.0B | $67.3B |
 | Microsoft Office | - | $95.2B | $54.9B | $48.7B | $44.9B |
 | Gaming | - | $23.5B | $21.5B | $15.5B | $16.2B |
@@ -257,9 +257,9 @@
 | Search And News Advertising | - | $13.9B | $12.6B | $12.2B | $11.6B |
 | Devices | - | $17.3B | $4.7B | $5.5B | $7.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $331.9B | $570.2B | $469.6B | $410.4B | $185.6B |
+| **Segment Sum** | - | $288.4B | $224.4B | $198.5B | $185.6B |
 | **Total Revenue** | $331.8B | $281.7B | $245.1B | $211.9B | $198.3B |
-| **Difference** | ✓ | 102.4% | 91.6% | 93.7% | 6.4% |
+| **Difference** | - | 2.4% | 8.5% | 6.3% | 6.4% |
 
 ### Geographic Segments
 
@@ -328,11 +328,11 @@
 | Hardware | $3.1B | $2.9B | $3.1B | $3.3B | $3.2B |
 | Services | $5.7B | $5.2B | $5.4B | $5.6B | $3.2B |
 | Cloud | $38.4B | x | $19.8B | x | x |
-| Software | $24.5B | x | $24.7B | x | x |
+| Software | $24.3B | x | $24.7B | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $71.8B | $60.3B | $101.1B | $50.0B | $42.4B |
+| **Segment Sum** | $71.5B | $60.3B | $101.1B | $50.0B | $42.4B |
 | **Total Revenue** | $67.4B | $57.4B | $53.0B | $50.0B | $42.4B |
-| **Difference** | 6.6% | 5.1% | 90.9% | ✓ | ✓ |
+| **Difference** | 6.2% | 5.1% | 90.9% | ✓ | ✓ |
 
 ### Geographic Segments
 
@@ -348,16 +348,16 @@
 
 ### Product Segments
 
-| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
+| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Handsets | $18.9B | $30.9B | $27.8B | $24.9B | $22.6B |
-| Automotive | $4.0B | $4.7B | $4.0B | $2.9B | $1.9B |
-| IoT | $5.2B | $6.2B | $6.6B | $5.4B | $5.9B |
-| Licensing | - | $5.6B | $5.6B | $6.2B | $5.8B |
+| Handsets | $30.9B | $27.8B | $24.9B | $22.6B | $25.0B |
+| Automotive | $4.7B | $4.0B | $2.9B | $1.9B | $1.4B |
+| IoT | $6.2B | $6.6B | $5.4B | $5.9B | $6.9B |
+| Licensing | $5.6B | $5.6B | $6.2B | $5.8B | $7.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $28.2B | $47.4B | $44.0B | $39.4B | $36.2B |
-| **Total Revenue** | - | $44.3B | $44.2B | $44.2B | $44.2B |
-| **Difference** | - | 7.1% | ✓ | 10.9% | 18.2% |
+| **Segment Sum** | $47.4B | $44.0B | $39.4B | $36.2B | $40.4B |
+| **Total Revenue** | $44.3B | $44.2B | $44.2B | $44.2B | $33.6B |
+| **Difference** | 7.1% | ✓ | 10.9% | 18.2% | 20.3% |
 
 ---
 
@@ -365,17 +365,17 @@
 
 ### Product Segments
 
-| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
+| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Cloud | $8.2B | $8.3B | $8.3B | $5.1B | - |
-| Client | $501M | $556M | $577M | $691M | - |
-| Consumer | $516M | $623M | $688M | $811M | - |
-| Flash | - | - | $6.7B | $6.1B | $6.1B |
-| HDD | - | - | $6.3B | $6.3B | $9.0B |
+| Cloud | $8.3B | $8.3B | $5.1B | - | - |
+| Client | $556M | $577M | $691M | - | - |
+| Consumer | $623M | $688M | $811M | - | - |
+| Flash | - | $6.7B | $6.1B | $6.1B | $9.8B |
+| HDD | - | $6.3B | $6.3B | $9.0B | $8.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $9.2B | $9.5B | $22.6B | $18.9B | $15.1B |
-| **Total Revenue** | - | $9.5B | $18.8B | $18.8B | $18.8B |
-| **Difference** | - | ✓ | 20.3% | ✓ | 19.6% |
+| **Segment Sum** | $9.5B | $22.6B | $18.9B | $15.1B | $18.0B |
+| **Total Revenue** | $9.5B | $18.8B | $18.8B | $18.8B | $16.9B |
+| **Difference** | ✓ | 20.3% | ✓ | 19.6% | 6.2% |
 
 ### Geographic Segments
 
