@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-10-28 15:06:51 CST
+Update time: 2026-10-29 15:10:24 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q4 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -17,7 +17,7 @@ Update time: 2026-10-28 15:06:51 CST
 | Amazon概念 | Amazon.com Inc. | AMZN | 0001018724 | FY2025 Q4 | 2026 Q3 | 2026年4月 | AWS, North America, International |
 | Meta概念 | Meta Platforms Inc. | META | 0001326801 | FY2025 Q4 | 2026 Q3 | 2026年4月 | Family of Apps, Reality Labs |
 | OpenAI概念 | OpenAI | - | 私人公司 | - | - | - | - |
-| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 | FY2026 Q2 | FY2027 Q1 | 2026年4月 | Intelligent Cloud, More Personal Computing, PBP |
+| Microsoft概念 | Microsoft Corporation | MSFT | 0000789019 | FY2026 Q2 | FY2027 Q2 | 2026年4月 | Intelligent Cloud, More Personal Computing, PBP |
 | AMD概念 | Advanced Micro Devices | AMD | 0000002488 | FY2025 Q4 | 2026 Q3 | 2026年4月 | Data Center, Client, Gaming, Embedded |
 | Apple概念 | Apple Inc. | AAPL | 0000320193 | FY2026 Q1 | FY2026 Q4 | 2026年4月 | iPhone, Mac, iPad, Services, Wearables |
 | Oracle概念 | Oracle Corporation | ORCL | 0001341439 | FY2026 Q2 | FY2026 Q3 | 2026年3月 | Cloud services, Hardware, Services |
