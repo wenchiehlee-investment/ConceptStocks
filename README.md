@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-10-29 15:10:24 CST
+Update time: 2026-10-30 15:05:45 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q4 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -28,7 +28,7 @@ Update time: 2026-10-29 15:10:24 CST
 | Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2027 Q3 | 2026年2月底 | Servers and networking, Storage |
 | HPQ概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q4 | 2026年2月底 | - |
 | HPE概念 | Hewlett Packard Enterprise Co. | HPE | 0001645590 | FY2025 Q4 | FY2026 Q3 | 2026年3月 | Compute, Storage, Intelligent Edge, Financial Services |
-| Intel概念 | Intel Corporation | INTC | 0000050863 | FY2026 Q1 | 2026 Q3 | 2026年7月 | Client Computing Group, Data Center and AI, Intel Foundry, All other |
+| Intel概念 | Intel Corporation | INTC | 0000050863 | FY2026 Q1 | 2026 Q4 | 2026年7月 | Client Computing Group, Data Center and AI, Intel Foundry, All other |
 | ASML概念 | ASML Holding N.V. | ASML | 0000937966 | FY2026 Q1 | 2026 Q3 | 2026年7月 | EUV光刻系統, DUV光刻系統, 量測與檢測, Installed Base Management |
 | ARM概念 | Arm Holdings plc | ARM | 0001986278 | FY2025 Q4 | FY2026 Q1 | 2025年7月 | Royalty, License and other |
 
