@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-10-29
+> Last updated: 2026-10-30
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -16,7 +16,7 @@
 | AMZN | Amazon.com, Inc. | FY2025 | North America | $347.4B | FMP |
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
 | DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
-| GOOGL | Alphabet Inc. | FY2025 | Google Services | $342.8B | FMP |
+| GOOGL | Alphabet Inc. | FY2026 | Google Services | $280.4B | FMP |
 | HPE | Hewlett Packard Enterprise Co. | FY2026 | Networking | $8.3B | SEC |
 | HPQ | HP Inc. | FY2026 | Personal Systems | $32.3B | SEC |
 | META | Meta Platforms, Inc. | FY2026 | Family of Apps | $180.4B | FMP |
@@ -159,19 +159,19 @@
 
 ### Product Segments
 
-| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
+| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Google Cloud | $58.7B | $43.2B | $33.1B | $26.3B | $19.2B |
-| Google Services | $342.8B | x | x | x | x |
-| Google Search & Other | $224.5B | $198.1B | $175.0B | $162.4B | $149.0B |
-| YouTube Ads | $40.4B | $36.1B | $31.5B | $29.2B | $28.8B |
-| Google Subscriptions | $46.2B | $40.3B | $34.7B | $29.1B | $28.0B |
-| Google Network | $29.8B | $30.4B | $31.3B | $32.8B | $31.7B |
-| Other Bets | $1.9B | $1.6B | $1.5B | $1.1B | $753M |
+| Google Cloud | - | $58.7B | $43.2B | $33.1B | $26.3B |
+| Google Services | $280.4B | $342.8B | x | x | x |
+| Google Search & Other | - | $224.5B | $198.1B | $175.0B | $162.4B |
+| YouTube Ads | - | $40.4B | $36.1B | $31.5B | $29.2B |
+| Google Subscriptions | - | $46.2B | $40.3B | $34.7B | $29.1B |
+| Google Network | - | $29.8B | $30.4B | $31.3B | $32.8B |
+| Other Bets | - | $1.9B | $1.6B | $1.5B | $1.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $744.3B | $349.8B | $307.2B | $280.9B | $257.5B |
-| **Total Revenue** | $402.8B | $350.0B | $307.4B | $282.8B | $257.6B |
-| **Difference** | 84.8% | ✓ | ✓ | ✓ | ✓ |
+| **Segment Sum** | $280.4B | $744.3B | $349.8B | $307.2B | $280.9B |
+| **Total Revenue** | - | $402.8B | $350.0B | $307.4B | $282.8B |
+| **Difference** | - | 84.8% | ✓ | ✓ | ✓ |
 
 ### Geographic Segments
 
