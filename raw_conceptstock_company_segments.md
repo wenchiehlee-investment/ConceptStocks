@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-10-30
+> Last updated: 2026-10-31
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -13,7 +13,7 @@
 |--------|---------|----|--------------------|---------|--------|
 | AAPL | Apple Inc. | FY2026 | iPhone | $196.5B | FMP |
 | AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
-| AMZN | Amazon.com, Inc. | FY2025 | North America | $347.4B | FMP |
+| AMZN | Amazon.com, Inc. | FY2025 | North America | $460.3B | FMP |
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
 | DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
 | GOOGL | Alphabet Inc. | FY2026 | Google Services | $280.4B | FMP |
@@ -95,9 +95,9 @@
 
 | Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| North America | $347.4B | $414.9B | $377.3B | $340.7B | x |
-| International | $132.7B | $154.6B | $139.7B | $125.4B | x |
-| AWS | $115.4B | $122.0B | $103.0B | $88.0B | x |
+| North America | $460.3B | $414.9B | $377.3B | $340.7B | x |
+| International | $175.8B | $154.6B | $139.7B | $125.4B | x |
+| AWS | $161.4B | $122.0B | $103.0B | $88.0B | x |
 | Online Stores | x | $247.0B | $231.9B | $220.0B | $222.1B |
 | Third-Party Seller Services | $172.2B | $156.1B | $140.1B | $117.7B | $103.4B |
 | Advertising Services | $68.6B | $56.2B | $46.9B | $37.7B | $31.2B |
@@ -106,9 +106,9 @@
 | Amazon Web Services | $128.7B | $107.6B | $90.8B | $80.1B | $62.2B |
 | Other Services | $5.9B | $5.4B | $5.0B | $4.2B | $2.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $1043.1B | $1329.5B | $1194.8B | $1068.1B | $469.8B |
+| **Segment Sum** | $1245.1B | $1329.5B | $1194.8B | $1068.1B | $469.8B |
 | **Total Revenue** | $716.9B | $638.0B | $574.8B | $514.0B | $469.8B |
-| **Difference** | 45.5% | 108.4% | 107.9% | 107.8% | ✓ |
+| **Difference** | 73.7% | 108.4% | 107.9% | 107.8% | ✓ |
 
 ### Geographic Segments
 
