@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-02
+> Last updated: 2026-11-03
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -42,8 +42,8 @@
 | Wearables, Home and Accessories | $27.3B | $35.7B | $37.0B | $39.8B | $41.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | **Segment Sum** | $364.4B | $416.2B | $391.0B | $383.3B | $394.3B |
-| **Total Revenue** | - | $416.2B | $394.3B | $394.3B | $394.3B |
-| **Difference** | - | ✓ | ✓ | 2.8% | ✓ |
+| **Total Revenue** | $478.8B | $416.2B | $394.3B | $394.3B | $394.3B |
+| **Difference** | 23.9% | ✓ | ✓ | 2.8% | ✓ |
 
 ### Geographic Segments
 
