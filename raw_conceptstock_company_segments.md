@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-03
+> Last updated: 2026-11-04
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -11,7 +11,7 @@
 
 | Symbol | Company | FY | Top Segment | Revenue | Source |
 |--------|---------|----|--------------------|---------|--------|
-| AAPL | Apple Inc. | FY2026 | iPhone | $196.5B | FMP |
+| AAPL | Apple Inc. | FY2026 | iPhone | $254.1B | FMP |
 | AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | North America | $460.3B | FMP |
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
@@ -35,15 +35,15 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| iPhone | $196.5B | $209.6B | $201.2B | $200.6B | $205.5B |
-| Mac | $27.1B | $33.7B | $30.0B | $29.4B | $40.2B |
-| iPad | $21.7B | $28.0B | $26.7B | $28.3B | $29.3B |
-| Services | $91.7B | $109.2B | $96.2B | $85.2B | $78.1B |
-| Wearables, Home and Accessories | $27.3B | $35.7B | $37.0B | $39.8B | $41.2B |
+| iPhone | $254.1B | $209.6B | $201.2B | $200.6B | $205.5B |
+| Mac | $37.9B | $33.7B | $30.0B | $29.4B | $40.2B |
+| iPad | $27.9B | $28.0B | $26.7B | $28.3B | $29.3B |
+| Services | $123.3B | $109.2B | $96.2B | $85.2B | $78.1B |
+| Wearables, Home and Accessories | $35.6B | $35.7B | $37.0B | $39.8B | $41.2B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $364.4B | $416.2B | $391.0B | $383.3B | $394.3B |
+| **Segment Sum** | $478.8B | $416.2B | $391.0B | $383.3B | $394.3B |
 | **Total Revenue** | $478.8B | $416.2B | $394.3B | $394.3B | $394.3B |
-| **Difference** | 23.9% | ✓ | ✓ | 2.8% | ✓ |
+| **Difference** | ✓ | ✓ | ✓ | 2.8% | ✓ |
 
 ### Geographic Segments
 
