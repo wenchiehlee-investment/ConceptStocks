@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-11-04 16:18:06 CST
+Update time: 2026-11-05 16:25:10 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q4 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
@@ -23,7 +23,7 @@ Update time: 2026-11-04 16:18:06 CST
 | Oracle概念 | Oracle Corporation | ORCL | 0001341439 | FY2026 Q2 | FY2026 Q3 | 2026年3月 | Cloud services, Hardware, Services |
 | Micron概念 | - | - | - | - | - | - | - |
 | SanDisk概念 | Sandisk Corp | SNDK | 0002023554 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | Datacenter, Edge, Consumer |
-| Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2026 Q4 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
+| Qualcomm概念 | Qualcomm Inc. | QCOM | 0000804328 | FY2026 Q1 | FY2027 Q1 | 2026年4月 | Handsets, IoT, Licensing, Automotive |
 | Lenovo概念 | Lenovo Group ADR | LNVGY | 0000932477 | FY2026 Q3 | FY2026 Q4 | 2026年5月 | - |
 | Dell概念 | Dell Technologies | DELL | 0001571996 | FY2026 Q3 | FY2027 Q3 | 2026年2月底 | Servers and networking, Storage |
 | HPQ概念 | HP Inc. | HPQ | 0000047217 | FY2025 Q4 | FY2026 Q4 | 2026年2月底 | - |
