@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-04
+> Last updated: 2026-11-05
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -24,7 +24,7 @@
 | MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $43.1B | SEC |
 | NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
 | ORCL | Oracle Corporation | FY2026 | Cloud and software | $58.5B | SEC |
-| QCOM | Qualcomm Inc. | FY2026 | Handsets | $18.9B | SEC |
+| QCOM | Qualcomm Inc. | FY2026 | N/A | - | SEC |
 | WDC | Western Digital Corporation | FY2026 | Cloud | $8.2B | SEC |
 
 ---
@@ -350,14 +350,14 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Handsets | $18.9B | $30.9B | $27.8B | $24.9B | $22.6B |
-| Automotive | $4.0B | $4.7B | $4.0B | $2.9B | $1.9B |
-| IoT | $5.2B | $6.2B | $6.6B | $5.4B | $5.9B |
+| Handsets | $24,072 | $30.9B | $27.8B | $24.9B | $22.6B |
+| Automotive | $6,004 | $4.7B | $4.0B | $2.9B | $1.9B |
+| IoT | $7,132 | $6.2B | $6.6B | $5.4B | $5.9B |
 | Licensing | - | $5.6B | $5.6B | $6.2B | $5.8B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $28.2B | $47.4B | $44.0B | $39.4B | $36.2B |
-| **Total Revenue** | - | $44.3B | $44.2B | $44.2B | $44.2B |
-| **Difference** | - | 7.1% | ✓ | 10.9% | 18.2% |
+| **Segment Sum** | $37,208 | $47.4B | $44.0B | $39.4B | $36.2B |
+| **Total Revenue** | $44.3B | $44.3B | $44.2B | $44.2B | $44.2B |
+| **Difference** | 100.0% | 7.1% | ✓ | 10.9% | 18.2% |
 
 ---
 
