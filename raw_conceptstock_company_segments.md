@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-05
+> Last updated: 2026-11-06
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -12,7 +12,7 @@
 | Symbol | Company | FY | Top Segment | Revenue | Source |
 |--------|---------|----|--------------------|---------|--------|
 | AAPL | Apple Inc. | FY2026 | iPhone | $254.1B | FMP |
-| AMD | Advanced Micro Devices, Inc. | FY2025 | Data Center | $16.6B | FMP |
+| AMD | Advanced Micro Devices, Inc. | FY2026 | Data Center | $21.0B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | North America | $460.3B | FMP |
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
 | DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
@@ -61,19 +61,19 @@
 
 ### Product Segments
 
-| Segment | FY2025 | FY2024 | FY2023 | FY2022 | FY2021 |
+| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Data Center | $16.6B | $12.6B | $12.6B | $6.5B | $6.0B |
-| Client | $10.6B | $7.1B | $4.7B | $6.2B | $6.9B |
-| Gaming | $3.9B | $2.6B | $6.2B | $6.8B | $5.6B |
-| Embedded | $3.5B | $3.6B | $5.3B | $4.6B | $246M |
-| Computing and Graphics | x | x | x | x | $9.3B |
-| Enterprise, Embedded and Semi-Custom | x | x | x | x | $4.9B |
-| Client and Gaming | $14.6B | $8.5B | $9.9B | x | x |
+| Data Center | $21.0B | $16.6B | $12.6B | $12.6B | $6.5B |
+| Client | $8.9B | $10.6B | $7.1B | $4.7B | $6.2B |
+| Gaming | $2.3B | $3.9B | $2.6B | $6.2B | $6.8B |
+| Embedded | $3.0B | $3.5B | $3.6B | $5.3B | $4.6B |
+| Computing and Graphics | - | x | x | x | x |
+| Enterprise, Embedded and Semi-Custom | - | x | x | x | x |
+| Client and Gaming | - | $14.6B | $8.5B | $9.9B | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $49.2B | $34.2B | $38.7B | $24.1B | $33.0B |
-| **Total Revenue** | $34.6B | $25.8B | $23.6B | $23.6B | $16.4B |
-| **Difference** | 42.0% | 32.8% | 64.0% | 1.9% | 100.7% |
+| **Segment Sum** | $35.2B | $49.2B | $34.2B | $38.7B | $24.1B |
+| **Total Revenue** | - | $34.6B | $25.8B | $23.6B | $23.6B |
+| **Difference** | - | 42.0% | 32.8% | 64.0% | 1.9% |
 
 ### Geographic Segments
 
