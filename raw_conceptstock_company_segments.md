@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-06
+> Last updated: 2026-11-07
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -246,9 +246,9 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Intelligent Cloud | $137.8B | $106.3B | $105.4B | $87.9B | x |
-| Productivity and Business Processes | $139.9B | $120.7B | $77.7B | $69.3B | x |
-| More Personal Computing | $54.2B | $54.8B | $62.1B | $54.7B | x |
+| Intelligent Cloud | $137.8B | $106.3B | $105.4B | $67.6B | x |
+| Productivity and Business Processes | $139.9B | $120.7B | $77.7B | $52.8B | x |
+| More Personal Computing | $54.2B | $54.8B | $62.1B | $41.4B | x |
 | Server Products And Tools | - | $98.4B | $91.1B | $80.0B | $67.3B |
 | Microsoft Office | - | $95.2B | $54.9B | $48.7B | $44.9B |
 | Gaming | - | $23.5B | $21.5B | $15.5B | $16.2B |
@@ -257,9 +257,9 @@
 | Search And News Advertising | - | $13.9B | $12.6B | $12.2B | $11.6B |
 | Devices | - | $17.3B | $4.7B | $5.5B | $7.0B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $331.9B | $570.2B | $469.6B | $410.4B | $185.6B |
+| **Segment Sum** | $331.9B | $570.2B | $469.6B | $360.3B | $185.6B |
 | **Total Revenue** | $331.8B | $281.7B | $245.1B | $211.9B | $198.3B |
-| **Difference** | ✓ | 102.4% | 91.6% | 93.7% | 6.4% |
+| **Difference** | ✓ | 102.4% | 91.6% | 70.0% | 6.4% |
 
 ### Geographic Segments
 
