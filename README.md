@@ -7,7 +7,7 @@ This repository uses the GoodInfo company dataset to tag **concept themes**. A c
 
 ### Concept columns (end with 「概念」)
 
-Update time: 2026-11-07 14:52:55 CST
+Update time: 2026-11-08 15:02:30 CST
 | 概念欄位 | 公司名稱 | Ticker | CIK | 最新財報 | 即將發布 | 發布時間 | 產品區段 |
 |----------|----------|--------|-----|----------|----------|----------|----------|
 | TSMC概念 | Taiwan Semiconductor Manufacturing Company Limited | TSM | 0001046179 | FY2025 Q4 | 2026 Q4 | 2026年4月 | HPC, Smartphones, IoT, Automotive, DCE, Others |
