@@ -29,7 +29,6 @@ jobs:
     env:
       SYNC_PAT_INVESTMENT: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_INVESTMENT }}
       SYNC_PAT_MONEY: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE_MONEY }}
-      SYNC_PAT_YAHOO: ${{ secrets.REPO_FILE_SYNC_WENCHIEHLEE }}
       SYNC_PAT_WJLEE1020: ${{ secrets.REPO_FILE_SYNC_WJLEE1020_MONEY }}
     steps:
       - name: Checkout repository
@@ -76,15 +75,10 @@ jobs:
           SKIP_PR: true
 
       - name: Sync up to Yahoo.Finance
-        if: env.SYNC_PAT_YAHOO != ''
         uses: BetaHuhn/repo-file-sync-action@v1
         with:
-          GH_PAT: ${{ env.SYNC_PAT_YAHOO }}
+          GH_PAT: ${{ secrets.REPO_FILE_SYNC_ZHONGZHENG782_INVESTMENT }}  # Yahoo.Finance lives in ZhongZheng782
           CONFIG_PATH: .github/sync-to-YahooFinance.yml
           COMMIT_EACH_FILE: false
           PR_LABELS: "automated-sync"
           SKIP_PR: true
-
-      - name: Skip Yahoo sync notice
-        if: env.SYNC_PAT_YAHOO == ''
-        run: echo "::warning::REPO_FILE_SYNC_WENCHIEHLEE is not configured; skipping Yahoo.Finance sync."
