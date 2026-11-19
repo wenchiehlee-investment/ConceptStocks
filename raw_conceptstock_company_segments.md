@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-18
+> Last updated: 2026-11-19
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -22,7 +22,7 @@
 | META | Meta Platforms, Inc. | FY2026 | Family of Apps | $180.4B | FMP |
 | MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $139.9B | FMP |
 | MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $43.1B | SEC |
-| NVDA | NVIDIA Corporation | FY2026 | Data Center | $193.7B | FMP |
+| NVDA | NVIDIA Corporation | FY2027 | Data Center | $271.8B | FMP |
 | ORCL | Oracle Corporation | FY2026 | Cloud and software | $58.5B | SEC |
 | QCOM | Qualcomm Inc. | FY2026 | N/A | - | SEC |
 | WDC | Western Digital Corporation | FY2026 | Cloud | $8.2B | SEC |
@@ -291,17 +291,17 @@
 
 ### Product Segments
 
-| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
+| Segment | FY2027 | FY2026 | FY2025 | FY2024 | FY2023 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Data Center | $193.7B | $115.2B | $47.5B | $15.0B | $15.0B |
-| Gaming | $16.0B | $11.3B | $10.4B | $9.1B | $12.5B |
-| Professional Visualization | $3.2B | $1.9B | $1.6B | $1.5B | $2.1B |
-| Automotive | $2.3B | $1.7B | $1.1B | $903M | $566M |
-| OEM And Other | $619M | $389M | $306M | $455M | $1.2B |
+| Data Center | $271.8B | $193.7B | $115.2B | $47.5B | $15.0B |
+| Gaming | - | $16.0B | $11.3B | $10.4B | $9.1B |
+| Professional Visualization | - | $3.2B | $1.9B | $1.6B | $1.5B |
+| Automotive | - | $2.3B | $1.7B | $1.1B | $903M |
+| OEM And Other | - | $619M | $389M | $306M | $455M |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $215.9B | $130.5B | $60.9B | $27.0B | $31.3B |
-| **Total Revenue** | $215.9B | $130.5B | $60.9B | $27.0B | $26.9B |
-| **Difference** | ✓ | ✓ | ✓ | ✓ | 16.3% |
+| **Segment Sum** | $271.8B | $215.9B | $130.5B | $60.9B | $27.0B |
+| **Total Revenue** | - | $215.9B | $130.5B | $60.9B | $27.0B |
+| **Difference** | - | ✓ | ✓ | ✓ | ✓ |
 
 ### Geographic Segments
 
