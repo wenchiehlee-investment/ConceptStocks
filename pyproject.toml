@@ -2,11 +2,14 @@
 name = "concept-stocks"
 version = "0.1.0"
 description = "Maintain concept-stock market and financial datasets"
-requires-python = ">=3.11"
+requires-python = ">=3.11.5"
 dependencies = [
     "requests>=2.28.0",
     "yfinance>=0.2.40",
     "llm",
+    "certifi>=2026.10.18",
+    "pyasn1>=0.6.5",
+    "soupsieve>=4.0.0",
 ]
 
 [tool.uv.sources]
