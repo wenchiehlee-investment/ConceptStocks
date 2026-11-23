@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-22
+> Last updated: 2026-11-23
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -15,7 +15,7 @@
 | AMD | Advanced Micro Devices, Inc. | FY2026 | Data Center | $21.0B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | North America | $460.3B | FMP |
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
-| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
+| DELL | Dell Technologies Inc. | FY2026 | Servers and networking | $44.2B | SEC |
 | GOOGL | Alphabet Inc. | FY2026 | Google Services | $280.4B | FMP |
 | HPE | Hewlett Packard Enterprise Co. | FY2026 | Networking | $8.3B | SEC |
 | HPQ | HP Inc. | FY2026 | Personal Systems | $32.3B | SEC |
@@ -143,15 +143,15 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | $54.7B | $34.4B | x | x | x |
-| Client Solutions Group | $51.0B | $36.4B | x | x | x |
+| Infrastructure Solutions Group | - | x | x | x | x |
+| Client Solutions Group | - | x | x | x | x |
 | Servers and networking | $44.2B | $27.1B | $17.6B | $20.4B | $17.9B |
 | Storage | $16.6B | $16.5B | $16.3B | $18.0B | $16.5B |
 | Services | - | $23.1B | $24.1B | $24.1B | $23.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $166.5B | $137.5B | $58.0B | $62.4B | $57.4B |
+| **Segment Sum** | $60.8B | $66.7B | $58.0B | $62.4B | $57.4B |
 | **Total Revenue** | $113.5B | $102.3B | $102.3B | $102.3B | $101.2B |
-| **Difference** | 46.7% | 34.4% | 43.3% | 39.0% | 43.3% |
+| **Difference** | 46.4% | 34.8% | 43.3% | 39.0% | 43.3% |
 
 ---
 
