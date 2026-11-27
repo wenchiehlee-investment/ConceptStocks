@@ -1,6 +1,6 @@
 # Annual Product Segment Revenue
 
-> Last updated: 2026-11-24
+> Last updated: 2026-11-27
 > Data sources: FMP (annual segments), SEC EDGAR 10-K (ORCL/MU/WDC)
 > Coverage: 5 fiscal years
 > Format: Single table per company with segments as rows, years as columns
@@ -17,7 +17,7 @@
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
 | DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
 | GOOGL | Alphabet Inc. | FY2026 | Google Services | $280.4B | FMP |
-| HPE | Hewlett Packard Enterprise Co. | FY2026 | Networking | $8.3B | SEC |
+| HPE | Hewlett Packard Enterprise Co. | FY2026 | Networking | $11.4B | SEC |
 | HPQ | HP Inc. | FY2026 | Personal Systems | $32.3B | SEC |
 | META | Meta Platforms, Inc. | FY2026 | Family of Apps | $180.4B | FMP |
 | MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $139.9B | FMP |
@@ -191,13 +191,13 @@
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | Server | - | $17.8B | x | x | x |
-| Networking | $8.3B | $6.8B | x | x | x |
+| Networking | $11.4B | $6.8B | x | x | x |
 | Hybrid Cloud | - | $5.8B | x | x | x |
 | Financial Services | - | $3.5B | x | x | x |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $8.3B | $33.9B | x | x | x |
-| **Total Revenue** | - | $34.3B | $30.1B | $29.1B | $28.5B |
-| **Difference** | - | 1.1% | - | - | - |
+| **Segment Sum** | $11.4B | $33.9B | x | x | x |
+| **Total Revenue** | $46.7B | $34.3B | $30.1B | $29.1B | $28.5B |
+| **Difference** | 75.6% | 1.1% | - | - | - |
 
 ---
 
@@ -211,8 +211,8 @@
 | Printing | $12.3B | $16.8B | $17.4B | $18,029 | $18,902 |
 |---------|-------:|-------:|-------:|-------:|-------:|
 | **Segment Sum** | $44.6B | $55.3B | $53.6B | $53,713 | $62,913 |
-| **Total Revenue** | - | $55.3B | $62.9B | $63.5B | $63.5B |
-| **Difference** | - | ✓ | 14.8% | 100.0% | 100.0% |
+| **Total Revenue** | $16.0B | $55.3B | $62.9B | $63.5B | $63.5B |
+| **Difference** | 178.7% | ✓ | 14.8% | 100.0% | 100.0% |
 
 ---
 
