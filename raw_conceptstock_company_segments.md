@@ -15,10 +15,10 @@
 | AMD | Advanced Micro Devices, Inc. | FY2026 | Data Center | $21.0B | FMP |
 | AMZN | Amazon.com, Inc. | FY2025 | North America | $460.3B | FMP |
 | AVGO | Broadcom Inc. | FY2026 | Semiconductor solutions | $48.4B | SEC |
-| DELL | Dell Technologies Inc. | FY2026 | Infrastructure Solutions Group | $54.7B | SEC |
+| DELL | Dell Technologies Inc. | FY2027 | Infrastructure Solutions Group | $115.7B | SEC |
 | GOOGL | Alphabet Inc. | FY2026 | Google Services | $280.4B | FMP |
 | HPE | Hewlett Packard Enterprise Co. | FY2026 | Networking | $11.4B | SEC |
-| HPQ | HP Inc. | FY2026 | Personal Systems | $32.3B | SEC |
+| HPQ | HP Inc. | FY2026 | Personal Systems | $44.1B | SEC |
 | META | Meta Platforms, Inc. | FY2026 | Family of Apps | $180.4B | FMP |
 | MSFT | Microsoft Corporation | FY2026 | Productivity and Business Processes | $139.9B | FMP |
 | MU | Micron Technology, Inc. | FY2026 | Cloud Memory | $43.1B | SEC |
@@ -141,17 +141,17 @@
 
 ### Product Segments
 
-| Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
+| Segment | FY2027 | FY2026 | FY2025 | FY2024 | FY2023 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Infrastructure Solutions Group | $54.7B | $34.4B | x | x | x |
-| Client Solutions Group | $51.0B | $36.4B | x | x | x |
-| Servers and networking | $44.2B | $27.1B | $17.6B | $20.4B | $17.9B |
-| Storage | $16.6B | $16.5B | $16.3B | $18.0B | $16.5B |
-| Services | - | $23.1B | $24.1B | $24.1B | $23.1B |
+| Infrastructure Solutions Group | $115.7B | $54.7B | $34.4B | x | x |
+| Client Solutions Group | $42.5B | $51.0B | $36.4B | x | x |
+| Servers and networking | - | $44.2B | $27.1B | $17.6B | $20.4B |
+| Storage | - | $16.6B | $16.5B | $16.3B | $18.0B |
+| Services | - | - | $23.1B | $24.1B | $24.1B |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $166.5B | $137.5B | $58.0B | $62.4B | $57.4B |
-| **Total Revenue** | $113.5B | $102.3B | $102.3B | $102.3B | $101.2B |
-| **Difference** | 46.7% | 34.4% | 43.3% | 39.0% | 43.3% |
+| **Segment Sum** | $158.2B | $166.5B | $137.5B | $58.0B | $62.4B |
+| **Total Revenue** | - | $113.5B | $102.3B | $102.3B | $102.3B |
+| **Difference** | - | 46.7% | 34.4% | 43.3% | 39.0% |
 
 ---
 
@@ -207,12 +207,12 @@
 
 | Segment | FY2026 | FY2025 | FY2024 | FY2023 | FY2022 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| Personal Systems | $32.3B | $38.5B | $36.2B | $35,684 | $44,011 |
-| Printing | $12.3B | $16.8B | $17.4B | $18,029 | $18,902 |
+| Personal Systems | $44.1B | $38.5B | $36.2B | $35,684 | $44,011 |
+| Printing | $16.6B | $16.8B | $17.4B | $18,029 | $18,902 |
 |---------|-------:|-------:|-------:|-------:|-------:|
-| **Segment Sum** | $44.6B | $55.3B | $53.6B | $53,713 | $62,913 |
+| **Segment Sum** | $60.7B | $55.3B | $53.6B | $53,713 | $62,913 |
 | **Total Revenue** | $16.0B | $55.3B | $62.9B | $63.5B | $63.5B |
-| **Difference** | 178.7% | ✓ | 14.8% | 100.0% | 100.0% |
+| **Difference** | 279.3% | ✓ | 14.8% | 100.0% | 100.0% |
 
 ---
 
